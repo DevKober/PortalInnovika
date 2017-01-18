@@ -1,0 +1,1168 @@
+﻿@model PortalInnovika.Models.ProyectoDetalle
+
+<link href="~/Content/kendo/2013.1.319/kendo.common.min.css" rel="stylesheet" />
+<link href="~/Content/kendo/2013.1.319/kendo.blueopal.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.9.1.min.js"></script>
+<script src="~/Scripts/kendo/2013.1.319/kendo.web.min.js"></script>
+<script src="~/Content/jquery.formatCurrency-1.4.0.js"></script>
+<link href="~/Content/bootstrap/bootstrap.css" rel="stylesheet" />
+
+@{
+    if (!User.Identity.IsAuthenticated)
+    {
+        //Response.Redirect("~/Home/NoAutorizado");
+        Response.Redirect("~/Account/Login");
+    }
+}
+
+@{
+    ViewBag.Title = "EdicionProyecto";
+    //var encModel = Json.Encode(Model);
+}
+
+@{
+    Layout = null;
+}
+
+@Html.Hidden("Proyecto", Model.IdProyecto)
+@Html.Hidden("Articulos", Model.Articulos)
+@Html.Hidden("EsExpress", Model.Proyecto.EsExpress)
+@Html.Hidden("ValidaTiempsEntrega", Model.Proyecto.ValidaTiempsEntrega)
+@Html.Hidden("ProyArtic", 0)
+@*@Html.Hidden("ReferenciaCliente", Model.Proyecto.ReferenciaCliente)*@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Dashboard</title>
+            
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    
+    
+@*    <script src="~/Scripts/jquery-1.9.1.min.js"></script>    
+    <link href="~/Content/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2013.1.319/kendo.common.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2013.1.319/kendo.blueopal.min.css" rel="stylesheet" />
+    <script src="~/Scripts/kendo/2013.1.319/kendo.web.min.js"></script>*@
+
+</head>
+<body>
+    <header>
+        <div style="width: 70%; min-width:925px; display: table; margin: 0 auto;">
+            <div class="float-left">
+                <img src="~/Images/InnovikaLogo.bmp" alt="--" />        
+            </div>
+            <div style="width: 100%; padding-left:5px; margin-bottom:1px; overflow:auto; color:white; background-color:#555; border: solid thin; border-radius:3px; border-color:gray;">
+                <div style="float:left;">
+                    <h5>Detalle de proyecto: @Model.IdProyecto</h5>
+                </div>
+                <div style="float:left; color:#ff6a00; padding-left:20px">
+                    <h5 id="lblEsExpress"></h5>
+                </div>
+                
+                <div style="float:right; margin: 6px;">
+                    <button id="btnHistorial">Ver historial</button>
+                    @*<a href="@Url.Action("Historial", "Home", new { "proyecto" = proyecto })" target="_blank">Link Text</a>*@
+                </div>
+
+                <div id="btnExcel" style="float:right; margin-top: 6px; margin-left:2px">                    
+                    <img src="/Images/XLS-SHORT.png" style="width:28px; height:25px"/>
+                </div>
+                <div id="btnPdf" style="float:right; margin-top: 6px;">
+                    <img src="/Images/PDF-SHORT.png" style="width:28px; height:25px"/>
+                </div>
+            </div>                       
+        
+@*<div id="loader" style="position:absolute; top:50%; left:50%; z-index:1000; width:64px; height:64px; border:solid; border-radius:3px; border-width:2px; border-color:cadetblue;">
+    <img src="~/Images/loader5.gif" />
+</div>*@
+
+            
+            <div id="winContainer">
+            <div id="edicionArticulo"></div>     
+            </div>                            
+                                                                               
+            @using (Html.BeginForm("ModificaProyecto", "Home"))
+            {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            <fieldset>
+                @*<legend>Detalle del proyecto: @Model.IdProyecto</legend>*@
+
+                @Html.HiddenFor(model => model.Proyecto.IdProyecto)
+                @Html.HiddenFor(model => model.Proyecto.Usuario)
+                @Html.HiddenFor(model => model.Proyecto.ClienteERP)
+                @Html.HiddenFor(model => model.Proyecto.TmRegistrado)
+                @Html.HiddenFor(model => model.Proyecto.UltimoSeguimiento)
+                @Html.HiddenFor(model => model.Proyecto.Estatus)  
+                
+                
+                @Html.HiddenFor(model => model.Proyecto.Direccion)              
+                @Html.HiddenFor(model => model.Proyecto.Poblacion)
+                @Html.HiddenFor(model => model.Proyecto.Colonia)
+                @Html.HiddenFor(model => model.Proyecto.CodigoPostal)
+                @Html.HiddenFor(model => model.Proyecto.Estado)
+                @Html.HiddenFor(model => model.Proyecto.Pais)
+                @Html.HiddenFor(model => model.Proyecto.Telefono)
+                @Html.HiddenFor(model => model.Proyecto.FormaDeEnvio)
+                @*@Html.HiddenFor(model => model.Proyecto.EsExpress)*@
+                @Html.HiddenFor(model => model.Proyecto.Observaciones)  
+                @*@Html.HiddenFor(model => model.Proyecto.ValidaTiempsEntrega)*@  
+                @*@Html.HiddenFor(model => model.Proyecto.ReferenciaCliente)*@                               
+                @*@Html.HiddenFor(model => model.Proyecto.Vendedor)*@
+                @foreach (var a in Model.Articulos)
+                {
+                    @Html.HiddenFor(i => @a.IdArticulo)
+                    @Html.HiddenFor(i => @a.Proyecto)
+
+                    @Html.HiddenFor(i => @a.CodigoADNJaladera)
+                    @Html.HiddenFor(i => @a.ADNJaladera)
+                    @Html.HiddenFor(i => @a.ADNJaladeraBase)
+                    @Html.HiddenFor(i => @a.ADNJaladeraOpcion)
+                    @Html.HiddenFor(i => @a.ADNVariante)  
+                    
+                    @Html.HiddenFor(i => @a.PrecioJaladera)                  
+                    @Html.HiddenFor(i => @a.PrecioListaJaladera)
+                    @Html.HiddenFor(i => @a.DescuentoJaladera)
+                }                                            
+
+                <div style="background-color:ButtonFace; border: solid thin; border-color:darkgray; border-radius:3px; overflow:auto; margin-bottom:5px">
+                <div style="float:left; margin:5px; width:200px">            
+                    @Html.EditorFor(model => model.Proyecto.TieneMuebles)
+                    Proyecto con muebles
+                </div>
+
+                <div style="float:left; margin:5px; width:200px">            
+                    @Html.EditorFor(m => m.Proyecto.Exhibicion)
+                    Marcar como exhibición
+                </div>
+                    
+                <div style="float:left; margin:5px; width:200px">
+                    @Html.EditorFor(m => m.Proyecto.EsExpress)
+                    Pedido express
+                </div>
+
+                <div style="float:left; margin:5px;">
+                    Ref. p/cliente: 
+                    @Html.EditorFor(model => model.Proyecto.ReferenciaCliente, new { id = "edtReferencia", style = "width:350px" })    
+                    @Html.HiddenFor(model => model.Proyecto.ReferenciaCliente)      
+                    @Html.HiddenFor(model => model.Proyecto.ValidaTiempsEntrega)           
+                </div>
+@*                <div style="float:right; margin:5px;">
+                    Vendedor: 
+                    @Html.EditorFor(m => m.Proyecto.Vendedor)      
+                    @Html.HiddenFor(model => model.Proyecto.Vendedor)              
+                </div>*@
+                </div>
+
+                <div id="listaArticulos"></div>
+
+                @*@foreach (var a in Model.Articulos)
+                {
+                    <tr>
+                        <td>Alto: </td>
+                        <td>@Html.EditorFor(i => @a.Alto)</td>
+                        <td>Ancho: </td>
+                        <td>@Html.EditorFor(i => @a.Ancho)</td>
+                        <td>Cantidad: </td>
+                        <td>@Html.EditorFor(i => @a.Cantidad)</td>
+                    </tr>
+                }*@
+                
+                
+                <div style="background-color:ButtonFace; border: solid thin; border-color:darkgray; border-radius:3px;">                    
+                     
+                    @*@Html.EditorFor(model => model.ArticulosVM)*@
+
+
+                </div>
+                <div>
+                    @*@Html.EditorFor(model => model.ProyNotas)*@
+                </div>
+
+                <p>                                     
+                    <input id="btnNuevo" type="button" value="Agregar" />
+                    <input id="btnModificar" type="submit" value="Modificar" />
+                    <input id="btnDuplicar" type="submit" value="Duplicar" />
+                    <input id="btnEliminar" type="submit" value="Eliminar" />
+                    <input type="submit" id="btnGuardarCerrar" value="Guardar y cerrar" />
+                </p>
+            </fieldset>
+            }
+        </div>
+    </header>
+
+<div class="float-left" style="width: 70%; display: table; margin: 0 auto;">
+     <div id="articulos_"></div>    
+</div>    
+
+<div class="content-wrapper" style="width: 70%; min-width:925px; display: table; margin: 0 auto; font-size:12px; background-color:aliceblue">
+    <div style="overflow:auto; padding:4px; border: solid thin; border-color:darkgray; border-radius:3px;">
+        <div id="contenido" class="k-content" style="margin-bottom:4px; float:left; width:72%; font-size:12px; background-color:aliceblue;">
+            
+            <div style="height:105px; background-color:aliceblue;"></div>
+            <div style="float:right; background-color:aliceblue;">
+                <div style="padding:2px; width:305px; color:red; font-weight:bold; font-size:12px;">Los precios están sujetos a cambio sin previo aviso</div>
+            </div>
+
+        </div>
+
+        <div style="float:right; min-width:250px; padding:5px; margin-left:5px; background-color:ButtonFace; border: solid thin; border-color:darkgray; border-radius:3px; font-size:14px;">            
+            
+            <div style="overflow:auto; border-bottom:solid thin; border-bottom-color:darkgray">
+                <div style="float:left; padding:2px; width:100px; font-weight:bold;">Importe:</div>
+                <div id="valorImporte" style="float:right; padding:2px"></div>
+            </div>
+            <div style="overflow:auto; border-bottom:solid thin; border-bottom-color:darkgray">
+                <div style="float:left; padding:2px; width:100px; font-weight:bold;">Descuento:</div>
+                <div id="valorDescuento" style="float:right; padding:2px"></div>
+            </div>
+            <div style="overflow:auto; border-bottom:solid thin; border-bottom-color:darkgray">
+                <div style="float:left; padding:2px; width:100px; font-weight:bold;">Subtotal:</div>
+                <div id="valorSubtotal" style="float:right; padding:2px"></div>
+            </div>
+            <div style="overflow:auto; border-bottom:solid thin; border-bottom-color:darkgray">
+                <div style="float:left; padding:2px; width:100px; font-weight:bold;">IVA:</div>
+                <div id="valorIva" style="float:right; padding:2px"></div>
+            </div>
+            <div style="overflow:auto;">
+                <div style="float:left; padding:2px; width:100px; font-weight:bold;">Total:</div>
+                <div id="valorTotal" style="float:right; padding:2px"></div>
+            </div>            
+        </div>
+    </div>
+</div>
+
+<div class="content-wrapper" style="width: 70%; min-width:925px; display: table; margin: 0 auto;">
+    @*@Html.ActionLink("Regresar a proyectos", "Dashboard")*@
+
+    @*<input id="btnBack" type="button" value="Regresar a proyectos" />*@
+</div>
+
+<script>
+    $(function () {       
+        $("#loader").hide();       
+
+        var mfAncho = 0;
+        var mfAlto = 0;
+
+        //$("#ReferenciaCliente").value = $("input[name='Proyecto.ReferenciaCliente']").value;
+        //alert("@Model.Proyecto.ReferenciaCliente");
+        //SI NO ESTA EN ESTADO DE COTIZACION O RECHAZADO NO PERMITIR MODIFICAR NADA
+        var esEditable;
+        $.when(EsEditable()).done(function (a) {
+            //alert("esEditable: " + esEditable);
+            if (esEditable == false) {
+                $("#btnModificar").attr("disabled", "disabled");
+                $("#btnDuplicar").attr("disabled", "disabled");
+                $("#btnEliminar").attr("disabled", "disabled");
+                $("#btnNuevo").attr("disabled", "disabled");
+                $("input[name='Proyecto.TieneMuebles']").attr("disabled", "disabled");
+                $("input[name='Proyecto.Exhibicion']").attr("disabled", "disabled");
+                //$("input[name='Proyecto.ReferenciaCliente']").attr("disabled", "disabled");
+                //$("input[name='Proyecto.Vendedor']").attr("disabled", "disabled");
+            }
+            else {
+                @*$("input[name='Proyecto.ReferenciaCliente']").focusout(function () {
+                    var data = "@Model.Proyecto";
+                    
+                    var jData = JSON.stringify(data);
+                    alert(jData);
+                    $.ajax({
+                        url: "/Home/GuardaEncabezado",
+                        data: jData, 
+                        contentType: "application/json",                        
+                        success: function (d) {
+                            alert("ok");
+                        },
+                        error: function (e) {
+                            alert(e);
+                        }
+                    });
+                });*@
+            }
+        });
+        function EsEditable() {
+            return $.ajax({
+                url: "/Editor/EsEditable?proyecto=" + getParameterByName('proy'),
+                success: function (data) {
+                    esEditable = data;
+                },
+                error: function () {
+                    alert("error en funcion EsEditable");
+                }
+            })
+        }
+        
+        $("#Proyecto_Exhibicion").click(function () {
+            if ($("#Proyecto_Exhibicion").is(":checked")) {
+                //alert("Checked");
+                $("#loader").show();
+
+                $.ajax({
+                    url: "/Editor/AplicarDescExhibicion?proyecto=" + getParameterByName('proy'),
+                    success: function (data) {
+                        $("#loader").hide();
+                        document.location.reload();
+                        //alert("El proyecto sera solicitado para exhibicion. Un agente validara el proyecto");
+                    }
+                });
+            }
+            else {
+                //alert("Unchecked");
+                $("#loader").show();
+                $.ajax({
+                    url: "/Editor/QuitarDescExhibicion?proyecto=" + getParameterByName('proy'),
+                    success: function (data) {
+                        $("#loader").hide();
+                        document.location.reload();
+                    }
+                });
+            }
+        });
+
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+            return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+
+        var proyecto = getParameterByName('proy');
+        var idArticulo = document.getElementById("ProyArtic").value;
+
+        $("#btnExcel").click(function () {
+            window.open("/Editor/ExportaProyectoExcel2?proyecto=" + proyecto, "_self");
+            //alert("exportar a excel");
+            //$.when(expExcel()).done(function () {
+
+            //});
+            //function expExcel() {
+            //    return $.ajax({
+            //        url: "/Editor/ExportaProyectoExcel?proyecto=" + proyecto                    
+            //    });
+            //}
+        });
+        $("#btnExcel").hover(function () {
+            $("#btnExcel").css('cursor', 'pointer');
+        }).mouseout(function () {
+            $("#btnExcel").css('cursor', 'default');
+        });
+
+        $("#btnPdf").click(function () {
+            //alert("exportar a pdf");
+            window.open("/Editor/ExportaProyectoPdf?proyecto=" + proyecto, "_self");
+
+        }).hover(function () {
+            $("#btnPdf").css("cursor", "pointer");
+        }).mouseout(function () {
+            $("#btnPdf").css("cursor", "default");
+        });
+
+        $("#btnHistorial").click(function () {
+            //alert("va a abrir historial");
+            //window.open("/Editor/GetHistorial?proyecto=" + proyecto, "_blank", "toolbar=no, scrollbars=yes, resizable=no, top=100, left=300, width=600, height=500");
+
+            window.open("/Home/Historial?proyecto=" + proyecto, "_blank", "toolbar=no, scrollbars=yes, resizable=no, top=100, left=300, width=600, height=500");
+            //window.open("@Url.Action("Historial", "Home", new { proyecto = Model.IdProyecto })", "_blank", "toolbar=no, scrollbars=yes, resizable=no, top=100, left=300, width=600, height=500");
+        });
+
+        $.when(GetTotales(proyecto)).done(function(a) {
+            //alert("ya estan los totales");
+        });
+        function GetTotales(proyecto) {
+            return $.ajax({
+                url: "/Editor/GetTotales?proyecto=" + proyecto,
+                success: function (data) {
+                    $("#valorImporte").html(data.Importe).formatCurrency();
+                    $("#valorDescuento").html(data.Descuento).formatCurrency();
+                    $("#valorIva").html(data.IVA).formatCurrency();
+                    $("#valorSubtotal").html(data.Subtotal).formatCurrency();
+                    $("#valorTotal").html(data.Total).formatCurrency();
+                }
+            });
+        }        
+
+        var esExpress = document.getElementById("EsExpress").value;
+        //alert(esExpress);
+        if (esExpress == "True") {
+            $("#lblEsExpress").html("<h5>Proyecto Express</h5>");
+        }
+
+        var dsArts = new kendo.data.DataSource({
+            pageSize: 20,
+            transport: {
+                read: {
+                    cache: false,
+                    url: "/Home/GetArticulosPorProyecto",
+                    data: { proyecto: proyecto },
+                    type: "GET",
+                    dataType: "json"
+                }
+            }
+        });
+        $("#listaArticulos").kendoGrid({
+            pageable: {
+                buttonCount: 10,
+                pageSizes: [20, 30, 40],
+                messages: {
+                    display: "{0} - {1} de {2} elementos", //{0} is the index of the first record on the page, {1} - index of the last record on the page, {2} is the total amount of records
+                    empty: "No hay elementos para mostrar",
+                    page: "Página",
+                    of: "de {0}", //{0} is total amount of pages
+                    itemsPerPage: "Renglones por página",
+                    first: "Ir a la primer página",
+                    previous: "Ir a la página anterior",
+                    next: "Ir a la siguiente página",
+                    last: "Ir a la utlima página",
+                    refresh: "Refrescar"
+                }
+            },
+            //filterable: true,
+
+            selectable: "single",
+            navigatable: true,
+            //scrollable: { virtual: true },
+            columns: [
+                { field: "Cantidad", title: "Cantidad", width: 25, attributes: { style: "text-align: right;" }, headerAttributes: { style: "text-align: center;" } },
+                { field: "Ancho", title: "Ancho", width: 25, attributes: { style: "text-align: right;" }, headerAttributes: { style: "text-align: center;" } },
+                { field: "Alto", title: "Alto", width: 25, attributes: { style: "text-align: right;" }, headerAttributes: { style: "text-align: center;" } },
+                { field: "Descripcion", title: "Descripcion", width: 200, headerAttributes: { style: "text-align: center;" } },
+                { field: "Importe", title: "Importe", format: "{0:c}", width: 40, attributes: { style: "text-align: right;" }, headerAttributes: { style: "text-align: center;" } }
+            ],
+            //heigth: 500,
+            resizable: true,
+            dataSource: dsArts,
+            //pageSize: 10,
+            change: onChangeArts,
+            dataBound: function (e) {
+                var grid = $("#listaArticulos").data("kendoGrid");
+                grid.select("tr:eq(1)");
+                return false;
+            }
+        });
+
+        function onChangeArts()
+        {
+            var data = dsArts.view();
+            idArticulo = $.map(this.select(), function (item) {
+                return data[$(item).index()].IdArticulo;
+            });
+            var cadenaCosto = $.map(this.select(), function (item) {
+                return data[$(item).index()].Descripcion.substring(0,5);
+            });
+            
+            //alert(cadenaCosto);
+            if (cadenaCosto == "COSTO" || (esEditable == false)) {
+                $("#btnModificar").attr("disabled", "disabled");
+                $("#btnDuplicar").attr("disabled", "disabled");
+                $("#btnEliminar").attr("disabled", "disabled");
+                if (esEditable == false) {
+                    $("#btnNuevo").attr("disabled", "disabled");
+                    $("input[name='Proyecto.TieneMuebles']").attr("disabled", "disabled");
+                    $("input[name='Proyecto.Exhibicion']").attr("disabled", "disabled");
+                    //$("input[name='Proyecto.ReferenciaCliente']").attr("disabled", "disabled");
+                    $("input[name='Proyecto.Vendedor']").attr("disabled", "disabled");
+                }
+            } else {
+                $("#btnModificar").removeAttr("disabled");
+                $("#btnDuplicar").removeAttr("disabled");
+                $("#btnEliminar").removeAttr("disabled");
+                $("#btnNuevo").removeAttr("disabled");
+                $("input[name='Proyecto.TieneMuebles']").removeAttr("disabled");
+                $("input[name='Proyecto.Exhibicion']").removeAttr("disabled");
+                //$("input[name='Proyecto.ReferenciaCliente']").removeAttr("disabled");
+                $("input[name='Proyecto.Vendedor']").removeAttr("disabled");
+            }
+
+            document.getElementById("ProyArtic").value = idArticulo;            
+        }
+
+        //$("#btnNuevo").click(function () {
+        //    var win = $("#edicionArticulo").data("kendoWindow");
+        //    win.refresh({
+        //        url: "/Home/EdicionArticulo",
+        //        data: { proy: proyecto, articulo: 0 }
+        //    });
+        //    win.center();
+        //    win.open();            
+        //    return false;
+        //});
+        $("#btnNuevo").click(function () {
+            //$("#edicionArticulo").kendoWindow({
+            //    actions: ["Close"],
+            //    modal: false,
+            //    pinned: false,
+            //    position: {
+            //        top: 100,
+            //        left: 200
+            //    },
+            //    width: "880px",
+            //    height: "600px",
+            //    //content: "/Home/EdicionArticulo?proy=" + proyecto,
+            //    //title: "Proyecto: " + proyecto,
+            //    visible: false,
+            //    close: function (e) {                
+            //        //location.reload();
+            //        dsArts.read();
+            //        //$("#winContainer").append('<div id="edicionArticulo"></div>');
+            //    }
+            //});  
+
+            var win = $("#edicionArticulo").data("kendoWindow");
+            win.refresh({
+                url: "/Home/EdicionArticulo?proy=" + proyecto + "&articulo=0"
+            });            
+            win.center();
+            win.open();            
+            
+            return false;
+        });
+
+        $("#btnModificar").click(function () {           
+            var win = $("#edicionArticulo").data("kendoWindow");
+            win.refresh({
+                url: "/Home/EdicionArticulo?proy=" + proyecto + "&articulo=" + idArticulo
+                //data: { proy: proyecto, articulo: idArticulo }
+            });
+            win.center();
+            win.open();
+            return false;
+        });
+
+        $("#btnDuplicar").click(function () {
+            //DUPLICAR EL ARTICULO
+            $.ajax({
+                url: "/Editor/DuplicarArticulo?articulo=" + idArticulo,
+                success: function (data) {
+                    document.location.reload();
+                },
+                error: function (data) {
+                    //alert("Error al duplicar el articulo seleccionado");
+                }
+            });
+            return false;
+        });
+
+        $("#btnEliminar").click(function () {
+            var r = confirm("¿Esta seguro de eliminar el articulo seleccionado?");
+            if (r == true) {
+                $.ajax({
+                    url: "/Home/BorraArticulo?IdArticulo=" + idArticulo + "&Proyecto=" + proyecto,
+                    success: function (data) {
+                        document.location.reload(); //href = '/Home/Dashboard';
+                    },
+                    error: function (data) {
+                        alert("Error al eliminar el articulo seleccionado");
+                    }
+                });
+            }
+            return false;
+        });
+
+        $("#tsAcumulados").kendoTabStrip({
+            animation: {
+                open: {
+                    effects: "fadeIn"
+                }
+            }
+        });
+
+        var dsAcs = new kendo.data.DataSource({
+            pageSize: 5,
+            transport: {
+                read: {
+                    cache: false,
+                    url: "/Home/GetAcumulados",
+                    data: { proyecto: proyecto },
+                    type: "GET",
+                    dataType: "json"
+                }
+            }
+        });
+        $("#gridAcumulados").kendoGrid({
+            selectable: "single",
+            scrollable: { virtual: true },
+            columns: [
+                { field: "Descripcion", title: "Descripción", width: 210 },
+                { field: "Total", title: "Total", width: 55 },
+                { field: "Importe", title: "Importe", format: "{0:c}",  width: 50 },
+                { field: "Piezas", title: "Piezas", width: 50}
+            ],
+            //heigth: 500,
+            resizable: true,
+            dataSource: dsAcs
+        });
+        //dsAcs.read();
+
+        $("#edicionArticulo").kendoWindow({
+            //actions: ["Close"],
+            modal: false,
+            pinned: false,
+            position: {
+                top: 100,
+                left: 200
+            },
+            width: "880px",
+            height: "600px",
+            //content: "/Home/EdicionArticulo?proy=" + proyecto,
+            //title: "Proyecto: " + proyecto,
+            visible: false,
+            close: function (e) {
+                @*var d = JSON.stringify("@Model");
+                var p = JSON.stringify("@Model.Proyecto");
+                //alert(p);
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/ModificaProyecto",                                
+                    data: encModel,
+                    contentType: 'application/json',
+                    success: function() {
+                        alert("success");
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });*@
+                location.reload();
+                //dsArts.read();                
+            }
+        });        
+
+        $("#btnGuardarCerrar").click(function () {
+            //VALIDA SI APLICA QUE APAREZCA EL MENSAJE DE ADVENTA            
+            var v = "@Model.Proyecto.Vendedor" || 0;
+            //if(v == 0)
+            //{
+            //    //alert("capture su numero de vendedor");
+            //    window.open("/Home/PopUpAdvt", "_blank", "toolbar=no, scrollbars=no, resizable=no, top=100, left=630, width=630, height=500");
+            //}            
+        });
+
+        
+
+        $("#edicionArticulo").data().kendoWindow.bind("refresh", function (e) {
+            var win = this;
+            
+            $("#btnCerrar").click(function () {
+                win.close();
+            });
+
+            $("#btnGuardar").click(function () {
+                //alert("ya entro a GuardaArticulo()");
+                var proy = document.getElementById("Proyecto").value;
+                var vDescripcion = "";
+                
+                if (document.getElementById("capturaAltoMultiplo").value == 0) {
+                    var vAlto = $("#alto").data("kendoNumericTextBox").value();
+                }
+                else if (document.getElementById("capturaAltoMultiplo").value == 1) {
+                    var vAlto = $("#comboAltoMultiplo").data("kendoDropDownList").value();               //tag-ui
+                }
+
+                var vAncho = $("#ancho").data("kendoNumericTextBox").value();
+
+                //EN CASO DE QUE EL ARTICULO TENGA MEDIDAS FIJAS SE PROCEDE A TOMARLAS PARA EL ANCHO Y ALTO
+                var mfija = document.getElementById("medidaFijaSel").value;                
+                if (mfija.length > 1) {                   
+                    $.when(ObtenMedidaFija(mfija)).done(function () {
+                        vAncho = mfAncho;
+                        vAlto = mfAlto;                        
+                    });
+                }
+
+                var vCantidad = $("#cantidad").data("kendoNumericTextBox").value();
+                var vUnidad = "";
+                var vPrecio = 0;
+                var cTipo = "";
+                var cBase = "";
+                var cColor = "";
+                var cVeta = "";
+                var cCubrecanto = "";
+                var cVariante = "";
+                var cTieneOrificios = 0;
+                var cADNOrificios = "";
+                var cOrificiosDistCanto = 0;
+                var cOrificiosCuantos = 0;
+                var cCodigoADNOrificios = "";
+
+                var cJaladera = document.getElementById("ADNJaladera").value;
+                //alert(cJaladera);
+                var cTieneJaladera = 0;
+                var cPosicionJaladera = "";
+                var cJaladeraOpcion = "X";
+                var cJaladeraBase = "";
+                var cUnidadJaladera = "";
+                var cADNJaladera = "";
+                if ((cJaladera != "") && (cJaladera != "XX")) {
+                    cTieneJaladera = 1;
+                    cPosicionJaladera = document.getElementById("ADNPosicionJaladera").value;
+                    cJaladeraBase = document.getElementById("ADNJaladeraBase").value;
+                    //cADNJaladera = "JA" + cJaladeraBase + cJaladera + "X";  //esta version es para jaladeras con un caracter
+                    cADNJaladera = "JA" + cJaladeraBase + cJaladera; //esta version es para jaladeras con dos caracteres
+                }
+                //alert("adn: " + document.getElementById("adn").value + " jaladera: " + document.getElementById("jaladeraSel").value);
+                $.when(getDatosArt()).done(function (a) {
+                    $.when(getUnidadJaladera()).done(function (a) {
+                        //alert("unidad de jaladera: " + cUnidadJaladera);
+                        var hoy = new Date();
+                        var mes = hoy.getMonth();
+                        var dia = hoy.getDay();
+                        var anio = hoy.getFullYear();
+
+                        //LOGICA PARA ORIFICIOS DE MARCO DE ALUMINIO
+                        if (cTipo == "MA") {
+                            cTieneOrificios = 1;
+                            cOrificiosDistCanto = 74;
+                            cADNOrificios = cVariante;
+
+                            if (cVeta == "H") {
+                                if (vAncho <= 900) {
+                                    cOrificiosCuantos = 2;
+                                } else if (vAncho <= 1600) {
+                                    cOrificiosCuantos = 3;
+                                } else if (vAncho <= 2000) {
+                                    cOrificiosCuantos = 4;
+                                } else if (vAncho <= 2400) {
+                                    cOrificiosCuantos = 5;
+                                } else {
+                                    cOrificiosCuantos = 5;
+                                }
+                            } else if ((cVeta == "V") || (cVeta == "X")) {
+                                if (vAlto <= 900) {
+                                    cOrificiosCuantos = 2;
+                                } else if (vAlto <= 1600) {
+                                    cOrificiosCuantos = 3;
+                                } else if (vAlto <= 2000) {
+                                    cOrificiosCuantos = 4;
+                                } else if (vAlto <= 2400) {
+                                    cOrificiosCuantos = 5;
+                                } else {
+                                    cOrificiosCuantos = 5;
+                                }
+                            }
+                            //alert("veta: "+ cVeta + " vAlto: " + vAlto + " vAncho: " + vAncho + " orificios: " + cOrificiosCuantos);
+                            cCodigoADNOrificios = cADNOrificios + cOrificiosDistCanto.toString() + "X" + cOrificiosCuantos;
+                        }
+                        var jArt = {
+                            //"IdArticulo": 0,                            
+                            "Proyecto": proy,
+                            "CodigoADNInterno": document.getElementById("adn").value,
+                            "Descripcion": vDescripcion,
+                            "Alto": vAlto,
+                            "Ancho": vAncho,
+                            "Cantidad": vCantidad,
+                            "Unidad": vUnidad,
+                            "PrecioListaPrincipal": vPrecio,
+                            "ADNTipo": cTipo,
+                            "ADNBase": cBase,
+                            "ADNColor": cColor,
+                            "ADNVeta": cVeta,
+                            "ADNCubrecanto": cCubrecanto,
+                            "ADNVariante": cVariante,
+                            "tieneJaladera": cTieneJaladera,
+                            "ADNJaladera": cJaladera,
+                            "UnidadJaladera": cUnidadJaladera,
+                            "ADNJaladeraBase": cJaladeraBase,
+                            "ADNJaladeraOpcion": cJaladeraOpcion,
+                            "ADNPosicionJaladera": cPosicionJaladera,
+                            //"CodigoADNJaladera": cADNJaladera,
+                            "tieneVidrio": 0,
+                            "tieneProtecta": 0,
+                            "tieneOrificios": cTieneOrificios,
+                            "ADNOrificios": cADNOrificios,
+                            "OrificiosDistCanto": cOrificiosDistCanto,
+                            "OrificiosCuantos": cOrificiosCuantos,
+                            //"CodigoADNOrificios": cCodigoADNOrificios,
+                            "EsConceptoDeProyecto": 0,
+                            "TmUltimoCambio": anio.toString() + "-" + mes.toString() + "-" + dia.toString(),
+                            "ADNVidrioBase": "",
+                            "ADNVidrioColor": ""
+                        };
+                        //jArt = JSON.stringify(jArt);
+                        var vidVent = document.getElementById("vidrioSel").value;
+                        if (vidVent.length > 1) {
+                            jArt.tieneVidrio = 1;
+                            jArt.ADNVidrioBase = "VD";
+                            jArt.ADNVidrioColor = vidVent;
+                            //alert("VD" + jArt.ADNVidrioBase + jArt.ADNVidrioColor);
+                        }
+
+                        var edicion = document.getElementById("EsEdicion").value;
+                        if (edicion == 1) {
+                            jArt.IdArticulo = document.getElementById("IdArticulo").value;
+                        }
+
+                        var postData = {};
+                        postData.jArticulo = jArt;
+                        postData.EsEdicion = edicion;
+                        postData = JSON.stringify(postData);
+                        //alert("EsEdicion: " + postData.EsEdicion + " jArticulo: " + jArt);
+                        $.ajax({
+                            url: "/Editor/AgregarArticulo",
+                            data: postData,
+                            type: "POST",
+                            contentType: "application/json",
+                            success: function () {
+                                win.close();                                
+                            },
+                            error: function (e) {
+                                alert("error al guardar el proyecto: " + proy);
+                            }
+                        });
+                    });
+                    function getUnidadJaladera() {
+                        return $.ajax({
+                            url: "/Editor/GetUnidadJaladera?codigo=" + cADNJaladera,
+                            success: function (data) {
+                                cUnidadJaladera = data;
+                                //alert(data);
+                            }
+                        });
+                    }
+
+                });
+                function getDatosArt() {
+                                            //alert($("#adn").val);
+                    return $.ajax({
+                        url: "/Editor/GetDatosArticulo?codigo=" + document.getElementById("adn").value,
+                        success: function (data) {                            
+                            vDescripcion = data.Descripcion1,
+                            vUnidad = data.Unidad,
+                            vPrecio = data.PrecioLista,
+                            cTipo = data.Tipo,
+                            cBase = data.Base,
+                            cColor = data.Color,
+                            cVeta = data.Veta,
+                            cCubrecanto = data.Cubrecanto,
+                            cVariante = data.Variante
+                        },
+                        error: function (e) {
+                            alert("Error al obtener datos del artículo");
+                        }
+                    });
+                }
+
+                function ObtenMedidaFija(m) {
+                    return $.ajax({
+                        url: "/Editor/GetAnchoAltoFijo?medida=" + m,
+                        success: function (data) {
+                            mfAncho = data.Ancho;
+                            mfAlto = data.Alto;
+                        },
+                        error: function (e) {
+                            alert("error al obtener ancho y alto de medida fija");
+                        }
+                    })
+                }
+                
+            });
+            $("#btnGuardarDuplicar").click(function () {
+                //alert(document.getElementById("adn").value + "&jaladera=" + document.getElementById("jaladeraSel").value);
+                //alert($("#CodigoADNInterno").val() + "&jaladera=" + $("#CodigoADNJaladera").val());
+                $("#loader").show();
+                var proy = document.getElementById("Proyecto").value;
+                var vDescripcion = "";
+                var vAlto = $("#alto").data("kendoNumericTextBox").value();
+                var vAncho = $("#ancho").data("kendoNumericTextBox").value();
+                var vCantidad = $("#cantidad").data("kendoNumericTextBox").value();
+                var vUnidad = "";
+                var vPrecio = 0;
+                var cTipo = "";
+                var cBase = "";
+                var cColor = "";
+                var cVeta = "";
+                var cCubrecanto = "";
+                var cVariante = "";
+                var cTieneOrificios = 0;
+                var cADNOrificios = "";
+                var cOrificiosDistCanto = 0;
+                var cOrificiosCuantos = 0;
+                var cCodigoADNOrificios = "";
+
+                //var cTieneVidrio = document.getElementById("tieneVidrio").value;
+                //var cADNVidrioBase = document.getElementById("ADNVidrioBase").value;
+                //var cADNVidrioColor = document.getElementById("ADNVidrioColor").value;
+
+                var cJaladera = document.getElementById("ADNJaladera").value;
+                //alert(cJaladera);
+                var cTieneJaladera = 0;
+                var cPosicionJaladera = "";
+                var cJaladeraOpcion = "X";
+                var cJaladeraBase = "";
+                var cUnidadJaladera = "";
+                var cADNJaladera = "";
+                if ((cJaladera != "") && (cJaladera != "XX")) {
+                    cTieneJaladera = 1;
+                    cPosicionJaladera = document.getElementById("ADNPosicionJaladera").value;
+                    cJaladeraBase = document.getElementById("ADNJaladeraBase").value;
+                    //cADNJaladera = "JA" + cJaladeraBase + cJaladera + "X"; //esta version es para jaladeras con un caracter
+                    cADNJaladera = "JA" + cJaladeraBase + cJaladera; //esta version es para jaladeras con dos caracteres
+                }
+                //alert("adn: " + document.getElementById("adn").value + " jaladera: " + document.getElementById("jaladeraSel").value);                                     
+                //alert("va a entrar a getDatosArt");
+                $.when(getDatosArt()).done(function (a) {
+                    //alert("ya hizo getDatosArt()");
+                    $.when(getUnidadJaladera()).done(function (a) {
+                        //alert("unidad de jaladera: " + cUnidadJaladera);
+                        var hoy = new Date();
+                        var mes = hoy.getMonth();
+                        var dia = hoy.getDay();
+                        var anio = hoy.getFullYear();
+
+                        //LOGICA PARA ORIFICIOS DE MARCO DE ALUMINIO
+                        if (cTipo == "MA") {
+                            cTieneOrificios = 1;
+                            cOrificiosDistCanto = 74;
+                            cADNOrificios = cVariante;
+
+                            if (cVeta == "H") {
+                                if (vAncho <= 900) {
+                                    cOrificiosCuantos = 2;
+                                } else if (vAncho <= 1600) {
+                                    cOrificiosCuantos = 3;
+                                } else if (vAncho <= 2000) {
+                                    cOrificiosCuantos = 4;
+                                } else if (vAncho <= 2400) {
+                                    cOrificiosCuantos = 5;
+                                } else {
+                                    cOrificiosCuantos = 5;
+                                }
+                            } else if ((cVeta == "V") || (cVeta == "X")) {
+                                if (vAlto <= 900) {
+                                    cOrificiosCuantos = 2;
+                                } else if (vAlto <= 1600) {
+                                    cOrificiosCuantos = 3;
+                                } else if (vAlto <= 2000) {
+                                    cOrificiosCuantos = 4;
+                                } else if (vAlto <= 2400) {
+                                    cOrificiosCuantos = 5;
+                                } else {
+                                    cOrificiosCuantos = 5;
+                                }
+                            }
+                            //alert("veta: "+ cVeta + " vAlto: " + vAlto + " vAncho: " + vAncho + " orificios: " + cOrificiosCuantos);
+                            cCodigoADNOrificios = cADNOrificios + cOrificiosDistCanto.toString() + "X" + cOrificiosCuantos;
+                        }
+
+                        var jArt = {
+                            //"IdArticulo": 0,
+                            "Proyecto": proy,
+                            "CodigoADNInterno": document.getElementById("adn").value,
+                            "Descripcion": vDescripcion,
+                            "Alto": vAlto,
+                            "Ancho": vAncho,
+                            "Cantidad": vCantidad,
+                            "Unidad": vUnidad,
+                            "PrecioListaPrincipal": vPrecio,
+                            "ADNTipo": cTipo,
+                            "ADNBase": cBase,
+                            "ADNColor": cColor,
+                            "ADNVeta": cVeta,
+                            "ADNCubrecanto": cCubrecanto,
+                            "ADNVariante": cVariante,
+                            "tieneJaladera": cTieneJaladera,
+                            "ADNJaladera": cJaladera,
+                            "UnidadJaladera": cUnidadJaladera,
+                            "ADNJaladeraBase": cJaladeraBase,
+                            "ADNJaladeraOpcion": cJaladeraOpcion,
+                            "ADNPosicionJaladera": cPosicionJaladera,
+                            //"CodigoADNJaladera": cADNJaladera,
+                            "tieneVidrio": 0,
+                            "tieneProtecta": 0,
+                            "tieneOrificios": cTieneOrificios,
+                            "ADNOrificios": cADNOrificios,
+                            "OrificiosDistCanto": cOrificiosDistCanto,
+                            "OrificiosCuantos": cOrificiosCuantos,
+                            //"CodigoADNOrificios": cCodigoADNOrificios,
+                            "EsConceptoDeProyecto": 0,
+                            "TmUltimoCambio": anio.toString() + "-" + mes.toString() + "-" + dia.toString(),
+                            "ADNVidrioBase": "",
+                            "ADNVidrioColor": ""
+                        };
+                        //jArt = JSON.stringify(jArt);
+                        var vidVent = document.getElementById("vidrioSel").value;
+                        if (vidVent.length > 1) {
+                            jArt.tieneVidrio = 1;
+                            jArt.ADNVidrioBase = "VD";
+                            jArt.ADNVidrioColor = vidVent;
+                            //alert("VD" + jArt.ADNVidrioBase + jArt.ADNVidrioColor);
+                        }
+
+                        var edicion = document.getElementById("EsEdicion").value;
+                        if (edicion == 1) {
+                            jArt.IdArticulo = document.getElementById("IdArticulo").value;
+                        }
+
+                        var postData = {};
+                        postData.jArticulo = jArt;
+                        postData.EsEdicion = edicion;
+                        postData = JSON.stringify(postData);
+                        //alert("guardado 1:   " + postData);
+                        $.ajax({
+                            url: "/Editor/AgregarArticulo",
+                            data: postData,
+                            type: "POST",
+                            contentType: "application/json",
+                            success: function () {
+                                //alert("ya hizo el guardado normal");
+                                
+                                postData = JSON.parse(postData);
+                                postData.jArticulo = jArt;
+                                postData.EsEdicion = 1;
+                                postData = JSON.stringify(postData);
+                                //postData = JSON.stringify(postData);
+                                //alert("EsEdicion: " + postData.EsEdicion);
+                                //alert("guardado 2:   " + postData);
+                                $.ajax({
+                                    url: "/Editor/AgregarArticulo", //Aqui duplica
+                                    data: postData,
+                                    type: "POST",
+                                    contentType: "application/json",
+                                    success: function () {          //Aqui actualiza la edicion con el nuevo
+                                        //alert("ya duplicó");
+                                        $.ajax({
+                                            url: "/Editor/GetUltimoArticulo?proy=" + proyecto,
+                                            success: function (data) {
+                                                alert("el nuevo articulo es: " + data);
+                                                $("#loader").hide();
+                                                alert("Ahora puede capturar los datos del articulo copiado");
+                                            }
+                                        });
+                                    },
+                                    error: function (e) {
+                                        $("#loader").hide();
+                                        //alert("error al duplicar el articulo");
+                                    }
+                                });
+                            },
+                            error: function (e) {
+                                $("#loader").hide();
+                                alert("error al guardar el proyecto: " + proy);
+                            }
+                        });
+                    });
+                    function getUnidadJaladera() {
+                        return $.ajax({
+                            url: "/Editor/GetUnidadJaladera?codigo=" + cADNJaladera,
+                            success: function (data) {
+                                cUnidadJaladera = data;
+                                //alert(data);
+                            }
+                        });
+                    }
+
+
+
+                });
+                var getDatosArtURL = "";
+                if ($("#edicion").val() == 1)
+                {
+                    getDatosArtURL = "/Editor/GetDatosArticulo?codigo=" + document.getElementById("adn").value + "&jaladera=" + document.getElementById("jaladeraSel").value;
+                }
+                else
+                {
+                    getDatosArtURL = "/Editor/GetDatosArticulo?codigo=" + $("#CodigoADNInterno").val() + "&jaladera=" + $("#CodigoADNJaladera").val();
+                }
+               //alert(getDatosArtURL);
+                function getDatosArt() {
+                                          //  alert($("#adn").val);
+                    return $.ajax({
+                        //url: "/Editor/GetDatosArticulo?codigo=" + document.getElementById("adn").value + "&jaladera=" + document.getElementById("jaladeraSel").value,
+                        url: "/Editor/GetDatosArticulo?codigo=" + document.getElementById("adn").value,
+                        //url: getDatosArtURL,
+                        success: function (data) {
+                            vDescripcion = data.Descripcion1,
+                            vUnidad = data.Unidad,
+                            vPrecio = data.PrecioLista,
+                            cTipo = data.Tipo,
+                            cBase = data.Base,
+                            cColor = data.Color,
+                            cVeta = data.Veta,
+                            cCubrecanto = data.Cubrecanto,
+                            cVariante = data.Variante
+                        },
+                        error: function (e) {
+                            alert("Error al obtener datos del artículo");
+                        }
+                    });
+                }
+            });
+            $("#loader").hide();
+        });
+
+        function GuardarArticulo(modoGuardar) {
+
+        }
+
+        $("a.delete").click(OnDeleteClick);
+
+        function OnDeleteClick(e) {
+            var idArt = e.target.id;
+            var ok = confirm("¿Esta seguro de borrar este registro?");
+
+            if (ok) {
+                $.ajax({
+                    url: "/Home/BorraArticulo",
+                    type: "POST",
+                    data: { IdArticulo: idArt, Proyecto: document.getElementById("Proyecto").value },
+                    dataType: "json",
+                    success: function (result) {
+                        location.reload();
+                    }
+                });
+            }
+            return false;
+        }               
+
+        $("#btnBack").click(function () {
+            document.location.href = '/Home/Dashboard';
+        });
+        //function getParameterByName(name) {
+        //    name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+        //    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        //        results = regex.exec(location.search);
+        //    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        //}
+
+        //var proy = getParameterByName('proy');
+        
+        //$("#articulos").kendoGrid({
+        //    selectable: "single",            
+        //    scrollable: { virtual: true },
+        //    navigatable: true,
+        //    resizable: true,
+        //    columns: [
+        //                { field: "Descripcion", title: "Articulo", width: 310 },
+        //                { field: "Alto", title: "Alto", width: 55 },
+        //                { field: "Ancho", title: "Ancho", width: 50 },
+        //                { field: "Cantidad", title: "Cantidad", width: 50 }
+        //    ],
+        //    filterable: true,
+        //    dataSource: new kendo.data.DataSource({
+        //        pageSize: 12,
+        //        transport: {
+        //            read: {
+        //                cache: false,
+        //                url: "/Home/GetArticulosPorProyecto",
+        //                data: { proyecto: proy },
+        //                type: "GET",
+        //                dataType: "json"
+        //            }
+        //        }
+        //    })
+        //});
+    });
+</script>    
+    
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+</body>
+   
+</html>

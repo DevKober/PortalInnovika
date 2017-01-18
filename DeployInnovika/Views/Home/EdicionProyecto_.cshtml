@@ -1,0 +1,77 @@
+﻿@model PortalInnovika.Models.Proyecto
+
+@{
+    ViewBag.Title = "EdicionProyecto";
+}
+
+<h2>EdicionProyecto</h2>
+
+@using (Html.BeginForm("Edit", "Home"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Proyecto</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IdProyecto)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IdProyecto)
+            @Html.ValidationMessageFor(model => model.IdProyecto)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ReferenciaCliente)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ReferenciaCliente)
+            @Html.ValidationMessageFor(model => model.ReferenciaCliente)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Exhibicion)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Exhibicion)
+            @Html.ValidationMessageFor(model => model.Exhibicion)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Observaciones)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Observaciones)
+            @Html.ValidationMessageFor(model => model.Observaciones)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EsExpress)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EsExpress)
+            @Html.ValidationMessageFor(model => model.EsExpress)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TieneMuebles)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TieneMuebles)
+            @Html.ValidationMessageFor(model => model.TieneMuebles)
+        </div>
+
+        <p>
+            <input type="submit" value="Guardar" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

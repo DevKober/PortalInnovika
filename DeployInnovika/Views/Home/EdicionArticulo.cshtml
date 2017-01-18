@@ -1,0 +1,2390 @@
+﻿@model PortalInnovika.Models.ProyArticulo
+
+@{
+    Layout = null;
+}
+
+<script src="~/Scripts/jquery-1.9.1.min.js"></script>
+<script src="~/Scripts/kendo/2013.1.319/kendo.web.min.js"></script>
+@*<link href="~/Content/bootstrap/bootstrap.css" rel="stylesheet" />*@
+<link href="~/Content/kendo/2013.1.319/kendo.all.min.css" rel="stylesheet" />
+<link href="~/Content/kendo/2013.1.319/kendo.common.min.css" rel="stylesheet" />
+<link href="~/Content/kendo/2013.1.319/kendo.blueopal.min.css" rel="stylesheet" />
+
+@{
+    if (ViewBag.Modo == "edicion")
+    {
+        @Html.HiddenFor(model => model.IdArticulo)
+        @Html.HiddenFor(model => model.Cantidad)
+        @Html.HiddenFor(model => model.Alto)
+        @Html.HiddenFor(model => model.Ancho)
+        @Html.HiddenFor(model => model.CodigoADNInterno)
+        @Html.HiddenFor(model => model.ADNJaladera)
+        @Html.HiddenFor(model => model.ADNJaladeraBase)
+        @Html.HiddenFor(model => model.ADNJaladeraOpcion)
+        @Html.HiddenFor(model => model.ADNPosicionJaladera)
+        @Html.HiddenFor(model => model.CodigoADNJaladera)
+        @Html.HiddenFor(model => model.CodigoADNOrificios)
+        @Html.HiddenFor(model => model.tieneJaladera)
+        @Html.HiddenFor(model => model.tieneVidrio)
+        @Html.HiddenFor(model => model.ADNVidrioBase)
+        @Html.HiddenFor(model => model.ADNVidrioColor)
+        
+    }    
+}
+
+
+@Html.Hidden("EsEdicion", 0)
+@Html.Hidden("adn", "")
+@Html.Hidden("paso", 0)
+@Html.Hidden("tipo", "tipos")
+@Html.Hidden("Proyecto", Model.Proyecto)
+
+@Html.Hidden("ADNJaladera", "")
+@Html.Hidden("ADNJaladeraBase", "")
+@Html.Hidden("ADNPosicionJaladera", "")
+
+@Html.Hidden("tieneVidrio", 0)
+@Html.Hidden("ADNVidrioBase", "")
+@Html.Hidden("ADNVidrioColor", "")
+@Html.Hidden("CodigoADNVidrio", "")
+
+@Html.Hidden("ADNOrificios", "")
+@Html.Hidden("OrificiosCuantos", 0)
+@Html.Hidden("CodigoADNOrificios", "")
+@Html.Hidden("OrificiosDistCanto", 0)
+@Html.Hidden("CodigoADNOrificios", "")
+@Html.Hidden("capturaAltoMultiplo", 0)
+@Html.Hidden("medidaFijaSel", 0)
+@Html.Hidden("ADNVidrioBase", "")
+@Html.Hidden("ADNVidrioColor", "")
+@Html.Hidden("vidrioSel", 0)
+@*@Html.ValueFor(x => x.Proyecto)*@
+
+<div id="etiquetaPaso"></div>
+
+<div id="winJaladera">
+</div>
+
+<div style="float:left">
+    <div id="srchDiv" style="padding: 3px; overflow: auto; background-color:#555; color:white;">
+        <input id="edtSearch" /> <button id="btnBuscar" style="height:22px">Buscar</button>     
+    </div>
+
+    <div id="selector" style="overflow-x:scroll;"></div>
+    <div>
+        <button id="cambiaDs" style="width:100%; height:30px;">Seleccionar elemento</button>
+    </div>
+    <div>
+        <div id="etiqueta" style="float:left; background-color: ButtonFace; border:solid; border-width:thin; border-color:cadetblue; margin-top:5px; padding:3px; max-width:250px; min-width:250px; min-height:22px"></div>
+        @*<div><button id="btnSelJaladera" style="margin-left:10px; margin-top:5px;">Seleccionar jaladera</button></div>*@
+        <div id="msgCompletado" style="float:right; padding:6px; height:27px; border:thin; border-color:darkgreen; background-color:lightgreen">
+            Captura de articulo completada
+        </div>
+    </div>
+</div>                
+
+<div style="float:right; border:solid; border-color:cadetblue; border-width:thin; padding:3px; min-height:300px; min-width:110px">
+    <div id="pasos" style="float:right; max-width:107px"></div>
+</div>
+
+<div id="loader" style="position:absolute; top:50%; left:50%; z-index:1000; width:64px; height:64px; border:solid; border-radius:3px; border-width:1px; border-color:cadetblue;">
+    <img src="~/Images/loader5.gif" />
+</div>
+
+<div id="contenido" class="k-content" style="margin-bottom:4px">
+    <div id="tabstrip">
+        <ul id="tabList">
+            <li class="k-state-active">
+                Medidas
+            </li>
+            <li>
+                Seleccion de jaladera
+            </li>
+            <li></li>
+            <li id="vidVentanasLi">
+                Selección de vidrio para ventana
+            </li>
+        </ul>
+        <div>
+            <div id="medidas" style="max-height:250px;">                                
+                <div id="divMedidas" style="width:300px; display: inline-block; min-height:200px; max-width:300px; padding: 5px; border: thin solid; border-color: cadetblue; border-radius: 3px;">
+                    @*CANTIDAD*@
+                    <div style="margin:3px;">
+                        <div style="float:left; width:65px; padding:5px 0px 0px 0px">Cantidad: </div>
+                        <div style="float:left; width:92px"><input id="cantidad" type="number" style="width:90px" /> </div>                        
+                    </div>                    
+                    @*ANCHO*@
+                    <div style="height:30px"></div>
+                    <div style="margin:3px;">
+                        <div style="float:left; width:65px; padding:5px 0px 0px 0px">Ancho: </div>
+                        <div id="anchoContn" style="float:left; width:92px"> <input id="ancho" type="number" style="width:90px" /> </div>
+                        <div id="lblAnchoMaxMin" style="float:left; margin-left:12px; z-index:100"></div>
+                    </div>
+                    @*ALTO*@
+                    <div style="height:30px"></div>
+                    <div id="altoEspacio" style="margin:3px;">
+                        <div style="float:left; width:65px; padding:5px 0px 0px 0px">Alto: </div>
+                        <div id="altoContn" style="float:left; width:92px"> <input id="alto" type="number" style="width:90px" /> </div>
+                        <div id="lblAltoMaxMin" style="float:left; margin-left:12px; z-index:100"></div>
+                    </div>
+                    <div style="height:31px"></div>
+                    <div id="divMultiplo" style="margin:3px;">
+                        <div style="float:left; width:65px; padding:5px 0px 0px 0px">Estandar: </div>
+                        <div style="float:left; width:92px"><input id="comboMultiplo" data-type="number" style="width:90px;" /> </div>
+                        <div id="lblMultiplo" style="float:left; margin-left:12px; z-index:100"></div>
+                    </div>
+                    <div style="height:31px"></div>
+                    <div id="divAltoMultiplo" style="margin:3px;">
+                        <div style="float:left; width:65px; padding:5px 0px 0px 0px">Alto: </div>
+                        <div style="float:left; width:92px"><input id="comboAltoMultiplo" data-type="number" style="width:90px;" /> </div>                        
+                    </div>
+                    @*AQUI VA LA PARTE PARA SELECCION DE MEDIDAS FIJAS*@
+                    <div id="divMedidasFijas" style="margin:3px;">
+                        <div style="float:left; width:65px; padding:5px 0px 0px 0px">Medida: </div>
+                        <div style="float:left; width:105px"><input id="comboMedidasFijas" data-type="number" style="width:100px;" /> </div>                        
+                    </div>
+
+                    @*--*@
+                </div>
+                <div id="divImagen" style="width:345px; height:200px; float:right; padding: 3px; border: thin solid; border-color: cadetblue; border-radius: 3px;">
+                   <div style="margin-left:30%;"><h6>Imagen de referencia</h6></div>
+                   <div id="divImagenResultante" style="width:200px; margin-left:auto; margin-right:auto; position:relative;">
+                       
+                   </div>
+                </div>
+            </div>            
+        </div>
+        <div>
+            <div id="jaladeras">
+                @*@Html.Partial("EdicionJaladera")*@
+                <div id="listaJal" style="z-index:auto"></div>
+                <div style="width:600px; overflow:auto;">
+                    <div style="float:left; width:152px;">
+                        <div style="width:151px; background-color:#555; border-radius:2px; padding:2px; margin-top:5px;">
+                          <div style="width:150px; color:white;">Tipo de jaladera</div>
+                        </div>
+                        <div id="listaTipoJal"></div>
+                    </div>
+                    <div style="float:left; width:152px;">
+                        <div style="width:152px; background-color:#555; border-radius:2px; padding:2px; margin-top:5px;">
+                          <div style="width:150px; color:white;">Posición de jaladera</div>
+                        </div>
+                        <div id="listaPosJal"></div>                        
+                    </div>
+
+@*                    <div style="float:left; width:170px; margin-left:5px;">
+                        <div style="margin-top:5px">Tipo de jaladera</div>
+                        <div id="listaTipoJal2"></div>
+                    </div>*@
+                    <div id="msgJaladeras" style="float:left; width: 290px; margin-left: 5px; text-align:center; margin-top:5px; min-height:120px; border: thin solid; border-color: cadetblue; border-radius: 3px; background-color:#cccccc">
+
+                    </div>
+                    
+                </div>                
+
+            </div>
+        </div>
+        <div></div>
+        <div id="vidVentanasContainer">
+            <div id="lvSelVidrio" style="z-index:auto; max-height:250px;"></div>
+        </div>
+
+    </div>
+</div>
+
+<div style="clear:both;">
+    <div style="padding:5px; border: solid thin; border-color:lightblue; overflow:auto; margin-top:6px;">        
+        <button id="btnCerrar" style="float:right; margin:4px; height:22px">Cerrar</button>
+        <button id="btnGuardar" style="float:right; margin:4px; height:22px">Guardar</button>          
+        <button id="btnGuardarDuplicar" style="float:right; margin:4px; height:22px">Guardar y duplicar</button>
+        @*<div id="msgCompletado" style="float:right; padding:6px; height:27px; border:thin; border-color:darkgreen; background-color:lightgreen">
+            Captura de articulo completada
+        </div>*@
+        @*<button id="btnToggleVentanas" style="float:right; margin:4px; height:22px">toggle ventanas</button>*@
+    </div>
+</div>
+
+<script type="text/x-kendo-template" id="templateTipos">
+        <div class="product">
+            @*<img src="../Images/tipos/#= RutaImagen #.png" alt="#: Nombre # image" />*@
+            <img src="../Images/tipos/#= Codigo #.png" alt="#: Nombre # image" />
+            <h3>#:Nombre#</h3>            
+        </div>
+</script>
+<script type="text/x-kendo-template" id="templateBases">
+        <div class="product">
+            <img src="../Images/bases/#= CodigoArmado #.png" alt="#: Nombre # image" />
+            @*<img src="../Images/bases/#= RutaImagen #" alt="#: Nombre # image" />*@
+            <h3>#:Nombre#</h3>            
+        </div>
+</script>
+<script type="text/x-kendo-template" id="templateColores">
+        <div class="product">
+            <img src="../Images/colores/#= Codigo #.png" alt="#: Nombre # image" />
+            @*<img src="../Images/colores/#= RutaImagen #" alt="#: Nombre # image" />*@
+            <h3>#:Nombre#</h3>            
+        </div>
+</script>
+<script type="text/x-kendo-template" id="templateVetas">
+        <div class="product">
+            <img src="../Images/vetas/#= Codigo #.png" alt="#: Nombre # image" />
+            @*<img src="../Images/vetas/#= RutaImagen #" alt="#: Nombre # image" />*@
+            <h3>#:Nombre#</h3>            
+        </div>
+</script>|
+<script type="text/x-kendo-template" id="templateCubrecantos">
+        <div class="product">
+            <img src="../Images/cubrecantos/#= Codigo #.png" alt="#: Nombre # image" />
+            @*<img src="../Images/cubrecantos/#= RutaImagen #" alt="#: Nombre # image" />*@
+            <h3>#:Nombre#</h3>            
+        </div>
+</script>
+<script type="text/x-kendo-template" id="templateVariantes">
+        <div class="product">
+            <img src="../Images/variantes/#= Codigo #.png" alt="#: Nombre # image" />
+            @*<img src="../Images/variantes/#= RutaImagen #" alt="#: Nombre # image" />*@
+            <h3>#:Nombre#</h3>            
+        </div>
+</script>
+<script type="text/x-kendo-template" id="templateJaladeras">
+        <div id="#:Codigo#" class="product">
+            <img src="../Images/jaladeras/#= Codigo #.png" alt="#: Nombre # image" />
+            @*<img src="../Images/jaladeras/#= RutaImagen #" alt="#: Nombre # image" />*@
+            <h3>#:Nombre#</h3>            
+        </div>
+</script>
+<script type="text/x-kendo-template" id="templateJaladerasTipo">
+        <div id="#:Base#" style="width:120px; height:30px; padding:3px;">            
+            <h6>#:Nombre#</h6>            
+        </div>
+</script>
+<script type="text/x-kendo-template" id="templateJaladerasPos">
+        <div id="#:Codigo#" style="width:120px; height:30px; padding:3px;">            
+            <h6>#:Nombre#</h6>            
+        </div>
+</script>
+<script type="text/x-kendo-template" id="templateVidrioVentana">
+        <div id="#:Codigo#" class="product">    
+            <img src="../Images/colores/#= Codigo #.png" alt="#: Nombre # image" />        
+            <h6>#:Nombre#</h6>            
+        </div>    
+</script>
+
+@*@Html.ValueFor(x => x.Proyecto)*@
+
+@{
+    ViewBag.Title = "EdicionArticulo";
+    if (ViewBag.Modo == "edicion")
+    {        
+        <script>            
+            var al = document.getElementById("Alto").value;
+            var an = document.getElementById("Ancho").value;
+            var codigoAdnInterno = document.getElementById("CodigoADNInterno").value;
+
+            document.getElementById("EsEdicion").value = 1;
+            $("#etiqueta").text("Código de articulo: " + codigoAdnInterno);
+
+            $("#alto").width(90).kendoNumericTextBox({
+                value: al,
+                //min: altoMin,
+                //max: altoMax,
+                format: "#",
+                options: {
+                    enabled: true
+                }
+            });
+
+            $("#ancho").width(90).kendoNumericTextBox({
+                value: an,
+                //min: anchoMin,
+                //max: anchoMax,
+                format: "#",
+                options: {
+                    enabled: true
+                }
+            });           
+
+
+        </script>
+    }
+}
+
+<script>
+    $(function () {
+        $(".k-window-titlebar").attr("style", "margin-top: -19px; height: 26px;");
+        //$("#edicionArticulo").data("kendoWindow").attr("style", "margin-top: -19px; height: 22px;");
+
+        $("#loader").hide();
+        var tipo = document.getElementById("tipo").value;
+        template = $("#templateTipos").html();
+        templateVidVent = $("#templateVidrioVentana").html();
+        $("#etiquetaPaso").html("<h4>Selección de " + tipo + "</h4>");
+        $("#alto").width(90).kendoNumericTextBox();
+        $("#ancho").width(90).kendoNumericTextBox();
+        $("#cantidad").width(90).kendoNumericTextBox({ format: "#", min: 1, value: 1 });
+        $("#btnGuardar").attr("disabled", "disabled");
+        $("#btnGuardarDuplicar").attr("disabled", "disabled");
+        $("#msgCompletado").hide();
+        var sublinea = "";
+        var posicion = "";
+        var codigo = "";
+        var nombreElemento = "";
+        $("#msgJaladeras").html("");
+        var tipoML = "";
+
+
+        var adn = "";
+        if (document.getElementById("EsEdicion").value == 1) {
+            adn = document.getElementById("CodigoADNInterno").value;
+            $("#adn").val(document.getElementById("CodigoADNInterno").value);
+            //ActualizaMultiplos();
+        }
+
+        var selected = "";
+        var elementos = {};
+        var vidVentanasItems = {};
+        var dataJaladeras = {};
+        var dataTiposJal = {};
+        var dataPosJal = {};
+        var UltimoPaso = 0;
+        var hayJaladerasDisponibles = false;
+        var jaladeraSel = "";
+        var altoMin = 0;
+        var altoMax = 0;
+        var anchoMin = 0;
+        var anchoMax = 0;
+        var multiplo70 = 0;
+        var multiplo72 = 0;
+        var multiplo76 = 0;
+        var multiplo80 = 0;
+        var incrementoMultiplo = 1;
+        var guardarJaladera = 0;
+        var orientacionVeta = "V";
+        var medidasFijas = {};
+
+        var data = ["70", "72", "76", "80"];
+        $("#comboMultiplo").kendoComboBox({
+            dataSource: data,
+            change: function (e) {
+                ActualizaMultiplos();
+            }
+        });
+
+        $("#divMedidasFijas").hide();
+
+        var selVentanaActive = true;
+        
+        function ActivaSelVidrio() {
+            var tstrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+            tstrip.append([{
+                text: "Selección de vidrio para ventana"
+            }]);
+            $("#tabstrip-3").attr("aria-expanded", "false");
+            $("#tabstrip-3").css("display", "none");
+            selVentanaActive = true;
+            tstrip.select = tsOnSelect;
+            
+            //$("#lvSelVidrio").kendoListView({
+            //    navigatable: true,
+            //    selectable: true,
+            //    template: "<li>${FirstName} ${LastName}</li>",
+            //    dataSource: {
+            //        data: [
+            //            {
+            //                FirstName: "Joe",
+            //                LastName: "Smith"
+            //            },
+            //            {
+            //                FirstName: "Jane",
+            //                LastName: "Smith"
+            //            }]
+            //    }
+            //});
+        }
+
+        function DesactivaSelVidrio() {
+            var tstrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+            tstrip.remove("#vidVentanasLi");
+            tstrip.remove("li:last");
+            selVentanaActive = false;
+        }
+         
+        function toggleSelVentana() {
+            if (selVentanaActive == true) {                
+                var tstrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+                tstrip.remove("#vidVentanasLi");
+                tstrip.remove("li:last");
+                selVentanaActive = false;
+                
+            }
+            else {
+                var tstrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+                tstrip.append([{
+                    text: "Selección de vidro para ventana",
+                    content: "<div id='vidVentanasLi'>Vidrios</div>"
+                }]);
+                selVentanaActive = true;
+            }
+        }
+
+        $("#btnToggleVentanas").click(function () {
+            toggleSelVentana();
+        });
+
+        //INICIALIZA EL TAB DESACTIVADO
+        toggleSelVentana();
+
+        var combobox = $("#comboMultiplo").data("kendoComboBox");
+        combobox.select(combobox.ul.children().eq(0));       
+
+        $("#divMultiplo").hide();
+        $("#divAltoMultiplo").hide();
+
+        //var combo = $("#comboMultiplo").data("kendoComboBox");
+        //combo.dataSource.data = ["Eaea", "Test", "This is a test"];
+
+        //CONFIGURACION DE MEDIDAS
+        //*************************************************
+        var altostep = $("#alto").data("kendoNumericTextBox");
+        
+        function RefrescaMedidas(codigo) {
+            //alert("Esta dentro de Refresca - altoMax: " + altoMax + "  altoMin: " + altoMin + "  anchoMax: " + anchoMax + "  anchoMin: " + anchoMin);                   
+            //alert("Refrescando medidas");
+
+            //var accion = "/Editor/GetMaxMin?codigo=" + codigo + "&posicion=";
+            //$.when(getMaxMin(codigoBK, posJal)).done(function () {
+            //    //
+            //});
+            //function getMaxMin(codigoBK, posJal) {
+            //    return $.ajax({
+            //        url: accion,
+            //        success: function (data) {
+            //            //alert("al-max: " + data.AltoMax + "  al-min: " + data.AltoMin + "  an-max: " + data.AnchoMax + "  an-min: " + data.AnchoMin);
+            //            $("#lblAltoMaxMin").empty();
+            //            $("#lblAltoMaxMin").html("<div style='font-size:9px; z-index:100'>Alto máximo: " + data.AltoMax + "<br />Alto minimo: " + data.AltoMin + "</div>");
+            //            var alto = $("#alto").data("kendoNumericTextBox");
+            //            //alto.value(data.AltoMin);
+            //            alto.min(data.AltoMin);
+            //            alto.max(data.AltoMax);
+
+            //            $("#lblAnchoMaxMin").empty();
+            //            $("#lblAnchoMaxMin").html("<div style='font-size:9px; z-index:100'>Ancho máximo: " + data.AnchoMax + "<br />Ancho minimo: " + data.AnchoMin + "</div>");
+            //            var ancho = $("#ancho").data("kendoNumericTextBox");
+            //            //ancho.value(data.AnchoMin);
+            //            ancho.max(data.AnchoMax);
+            //            ancho.min(data.AnchoMin);
+            //        },
+            //        error: function (e) {
+            //            alert("Error al determinar maximos y minimos");
+            //        }
+            //    });
+            //}
+
+            //alert("incremento: " + incrementoMultiplo);
+            function SpinEvent() {
+                //alert(incrementoValue);
+                altostep.step(incrementoMultiplo);
+                //this.value(this.value() + incrementoMultiplo);                
+            }           
+
+            $("#altoContn").empty();
+            $("#altoContn").append('<input id="alto" type="number" style="width:90px" />');
+            $("#alto").width(90).kendoNumericTextBox({
+                value: altoMin,
+                min: altoMin,
+                max: altoMax,
+                step: incrementoMultiplo,
+                format: "#",
+                options: {
+                    enabled: true
+                },
+                spin: SpinEvent,
+                change: altoChange
+            });
+
+            var inp = $("#alto").data("kendoNumericTextBox");
+            if (incrementoMultiplo > 1) {
+                //inp.element.unbind("keydown");
+                $("#alto").attr("readonly", "readonly");
+                inp.element.unbind("keypress");
+            }
+            //$("#alto").data("kendoNumericTextBox").setOptions({ max: altoMax, min: altoMin });
+            //if (tipo == "tipos") {
+            //    $("#alto").data("kendoNumericTextBox").unbind("spin");
+            //}            
+
+            function altoChange() {
+                //alert("altoChange min: " + altoMin);
+            }
+
+            altostep.step(incrementoMultiplo);
+            $("#lblMultiplo").html("<div style='font-size:9px; z-index:100'>Multiplo: " + incrementoMultiplo + "</div>");
+
+            $("#lblAltoMaxMin").empty();
+            $("#lblAltoMaxMin").html("<div style='font-size:9px; z-index:100'>Alto máximo: " + altoMax + "<br />Alto minimo: " + altoMin + "</div>");
+            //$("#alto").attr("style", "width:100px");
+
+            $("#anchoContn").empty();
+            $("#anchoContn").append('<input id="ancho" type="number" style="width:90px" />');
+            $("#ancho").width(90).kendoNumericTextBox({
+                min: anchoMin,
+                max: anchoMax,
+                value: anchoMin,
+                step: 1,
+                format: "#",
+                options: {
+                    enabled: true
+                }
+            });
+
+            //$("#ancho").data("kendoNumericTextBox").setOptions({ max: anchoMax, min: anchoMin });                      
+
+            $("#lblAnchoMaxMin").empty();
+            $("#lblAnchoMaxMin").html("<div style='font-size:9px; z-index:100'>Ancho máximo: " + anchoMax + "<br />Ancho minimo: " + anchoMin + "</div>");
+            //alert("altoMax: " + altoMax + "  altoMin: " + altoMin + "  anchoMax: " + anchoMax + "  anchoMin: " + anchoMin);
+            //alert("anchomax: " + anchoMax + "   altomax: " + altoMax);
+            //alert("ya refresco las medidas. incrementoMultiplo: " + incrementoMultiplo);
+            //alert("altoMin= " + $("#alto").data("kendoNumericTextBox").min() + " altoMax= " + $("#alto").data("kendoNumericTextBox").max() + " anchoMin= " + $("#ancho").data("kendoNumericTextBox").min() + " anchoMax= " + $("#ancho").data("kendoNumericTextBox").max());
+        }
+        //-------------------------------------------------------------------
+        //-------------------------------------------------------------------
+        
+        //STACK DE BOTONES DINAMICOS DE PASOS DE SELECCION   
+        //************************************************
+        function Botonizar() {
+            $("#btnTipo").click(function () {
+                $("#divTipo").remove();
+                $("#divBase").remove();
+                $("#divColor").remove();
+                $("#divVeta").remove();
+                $("#divCubrecanto").remove();
+                $("#divVariante").remove();
+                $("#divJaladera").remove();
+                //adn = adn.substring(0, 2);                    
+                codigo = ""; //adn.substring(0, 2);
+                adn = "";
+                tipo = "tipos";
+
+                //QUITA EL MENSAJE DE CAPTURA COMPLETADA
+                $("#btnGuardar").attr("disabled", "disabled");
+                $("#btnGuardarDuplicar").attr("disabled", "disabled");
+                $("#msgCompletado").hide();
+
+                template = $("#templateTipos").html();
+
+                //OCULTA LA SELECCION DE MEDIDAS FIJAS
+                $("#divMedidasFijas").hide();
+                //
+
+                //RESET DE MINIMO DE CANTIDAD EN CASO DE QUE PREVIAMENTE EL TIPO FUERA CANTO (CUYO LIMITE DE CANTIDAD INFERIOR ES 20)
+                var cantidad = $("#cantidad").data("kendoNumericTextBox");
+                //cantidad.value(1);
+                cantidad.min(1);                
+
+                incrementoMultiplo = 1;                
+                
+                $("#alto").data("kendoNumericTextBox").destroy();
+                $("#ancho").data("kendoNumericTextBox").destroy();
+                $("#alto").width(90).kendoNumericTextBox();
+                $("#ancho").width(90).kendoNumericTextBox();
+                //$("#alto").data("kendoNumericTextBox").setOptions({ max: altoMax, min: altoMin });
+                //$("#ancho").data("kendoNumericTextBox").setOptions({ max: anchoMax, min: anchoMin });
+               
+                //var mAlto = $("#alto").data("kendoNumericTextBox");
+                //var mAncho = $("#ancho").data("kendoNumericTextBox");
+                //mAlto.value(1);                
+                //mAncho.value(1);
+                
+                //alert("altoMin= " + $("#alto").data("kendoNumericTextBox").min() + " altoMax= " + $("#alto").data("kendoNumericTextBox").max() + " anchoMin= " + $("#ancho").data("kendoNumericTextBox").min() + " anchoMax= " + $("#ancho").data("kendoNumericTextBox").max());                
+                $.when(ElementosIniciales()).done(function (a) {
+                    $("#loader").hide();
+                    template = $("#templateTipos").html();
+                    ds = new kendo.data.DataSource({
+                        data: elementos
+                    });
+                    //$("#selector").empty();
+                    refresca(ds);
+                    $("#cambiaDs").removeAttr("disabled");
+                    //alert("esta saliendo de ElementosSiguientes()");
+                    $("#divMultiplo").hide();
+                    $("#divAltoMultiplo").hide();
+                    $("#altoEspacio").show();
+                    document.getElementById("capturaAltoMultiplo").value = 0;
+                });
+            });
+            $("#btnBase").click(function () {
+                $("#divBase").remove();
+                $("#divColor").remove();
+                $("#divVeta").remove();
+                $("#divCubrecanto").remove();
+                $("#divVariante").remove();
+                $("#divJaladera").remove();
+                codigo = adn.substring(0, 2);
+                adn = adn.substring(0, 2);;
+                tipo = "base";
+
+                //QUITA EL MENSAJE DE CAPTURA COMPLETADA
+                $("#btnGuardar").attr("disabled", "disabled");
+                $("#btnGuardarDuplicar").attr("disabled", "disabled");
+                $("#msgCompletado").hide();
+
+                template = $("#templateBases").html();
+
+                //$("#cambiaDs").click();
+                $.when(ElementosSiguientes()).done(function (a) {
+                    $("#loader").hide();
+                    template = $("#templateBases").html();
+                    ds = new kendo.data.DataSource({
+                        data: elementos
+                    });
+                    refresca(ds);
+                    $("#cambiaDs").removeAttr("disabled");
+
+                    $("#divMultiplo").hide();
+                    $("#divAltoMultiplo").hide();
+                    $("#altoEspacio").show();
+                    document.getElementById("capturaAltoMultiplo").value = 0;
+
+                });
+            });
+            $("#btnColor").click(function () {
+                $("#divColor").remove();
+                $("#divVeta").remove();
+                $("#divCubrecanto").remove();
+                $("#divVariante").remove();
+                $("#divJaladera").remove();
+                codigo = adn.substring(2, 4);
+                adn = adn.substring(0, 4);
+                tipo = "color";
+
+                //QUITA EL MENSAJE DE CAPTURA COMPLETADA
+                $("#btnGuardar").attr("disabled", "disabled");
+                $("#btnGuardarDuplicar").attr("disabled", "disabled");
+                $("#msgCompletado").hide();
+
+                template = $("#templateColores").html();
+                $.when(ElementosSiguientes()).done(function (a) {
+                    $("#loader").hide();
+                    template = $("#templateColores").html();
+                    ds = new kendo.data.DataSource({
+                        data: elementos
+                    });
+                    refresca(ds);
+                    $("#cambiaDs").removeAttr("disabled");
+                });
+            });
+            $("#btnVeta").click(function () {
+                $("#divVeta").remove();
+                $("#divCubrecanto").remove();
+                $("#divVariante").remove();
+                $("#divJaladera").remove();
+                codigo = adn.substring(4, 6);
+                adn = adn.substring(0, 6);
+                tipo = "veta";
+
+                //QUITA EL MENSAJE DE CAPTURA COMPLETADA
+                $("#btnGuardar").attr("disabled", "disabled");
+                $("#btnGuardarDuplicar").attr("disabled", "disabled");
+                $("#msgCompletado").hide();
+
+                //template = $("#templateVetas").html();
+                $.when(ElementosSiguientes()).done(function (a) {
+                    $("#loader").hide();                    
+                    template = $("#templateVetas").html();
+                    ds = new kendo.data.DataSource({
+                        data: elementos
+                    });
+                    refresca(ds);
+                    $("#cambiaDs").removeAttr("disabled");
+                });
+            });
+            $("#btnCubrecanto").click(function () {
+                $("#divCubrecanto").remove();
+                $("#divVariante").remove();
+                $("#divJaladera").remove();
+                codigo = adn.substring(6, 7);
+                adn = adn.substring(0, 7);
+                tipo = "cubrecanto";
+
+                //QUITA EL MENSAJE DE CAPTURA COMPLETADA
+                $("#btnGuardar").attr("disabled", "disabled");
+                $("#btnGuardarDuplicar").attr("disabled", "disabled");
+                $("#msgCompletado").hide();
+
+                template = $("#templateCubrecantos").html();
+
+                $.when(ElementosSiguientes()).done(function (a) {
+                    $("#loader").hide();
+                    template = $("#templateCubrecantos").html();
+                    ds = new kendo.data.DataSource({
+                        data: elementos
+                    });
+                    refresca(ds);
+                    $("#cambiaDs").removeAttr("disabled");
+                });
+            });
+            $("#btnVariante").click(function () {                
+                $("#divVariante").remove();
+                $("#divJaladera").remove();
+                codigo = adn.substring(7, 10);
+                adn = adn.substring(0, 10);
+                tipo = "variante";
+
+                //QUITA EL MENSAJE DE CAPTURA COMPLETADA
+                $("#cambiaDs").removeAttr("disabled");
+                $("#btnGuardar").attr("disabled", "disabled");
+                $("#btnGuardarDuplicar").attr("disabled", "disabled");
+                $("#msgCompletado").hide();
+
+                //template = $("#templateVariantes").html();
+                $.when(ElementosSiguientes()).done(function (a) {
+                    $("#loader").hide();
+                    template = $("#templateVariantes").html();
+                    ds = new kendo.data.DataSource({
+                        data: elementos
+                    });
+                    refresca(ds);
+                    $("#cambiaDs").removeAttr("disabled");
+                });
+            });
+        }
+        //---------------------------------------------------------
+        //---------------------------------------------------------
+
+        //CONFIGURACION DE JALADERAS
+        //*************************************************
+        function RefrescaJaladeras(base, color) {            
+            var dsj = new kendo.data.DataSource({});
+            var dsTipoJal = new kendo.data.DataSource({});
+            var dsPosJal = new kendo.data.DataSource({});
+
+            alert("RefrescaJaladeras: " + base + " - " + color);
+
+            $.when(ObtieneJaladeras(base, color)).done(function (a) {
+                dsj = new kendo.data.DataSource({
+                    data: dataJaladeras
+                });
+
+                $("#listaJal").empty();
+                $("#listaJal").kendoListView({
+                    navigatable: true,
+                    dataSource: dsj,
+                    template: kendo.template($("#templateJaladeras").html()),
+                    selectable: true,
+                    change: onChangeJal,
+                    dataBound: onDataBoundJal
+                });
+                function onChangeJal() {
+                    var data = dsj.view();
+                    jaladeraSel = $.map(this.select(), function (item) {
+                        return data[$(item).index()].Codigo;
+                    });
+                    document.getElementById("ADNJaladera").value = jaladeraSel;
+
+                    //alert(jaladeraSel);
+                    RefrescaJaladerasTipos();
+                    RefrescaJaladerasPosicion();
+
+                    //REVISA SI SE CUMPLEN LAS REGLAS DE MEDIDAS PARA SELECCIONAR LA JALADERA ACTUAL                    
+                        $.ajax({
+                            url: "/Editor/GetReglasMedidaJaladeras?jaladera=" + jaladeraSel,
+                            dataType: "json",
+                            success: function (data) {
+                                //alert(jaladeraSel);
+                                if (adn.substring(0, 2) == "PU") {
+                                    //alert(jaladeraSel);
+                                    //alert($("#alto").data("kendoNumericTextBox").value() + " < " + data.PuertaAltoMin);                                
+                                    if ($("#alto").data("kendoNumericTextBox").value() < data.PuertaAltoMin) {
+                                        var msgContenido = "<div style='padding: 5px; font-size:14px; color: red;'>Restricciones de medidas impiden que se aplique esta jaladera</div>";
+                                        if (document.getElementById("ADNPosicionJaladera").value == "V") {
+                                            msgContenido += "<div style='padding: 5px; font-size:12px; color: red;'>Ancho minimo para la jaladera seleccionada: " + data.PuertaAnchoMin + "</div>";
+                                            msgContenido += "<div style='padding: 5px; font-size:12px; color: red;'>Alto minimo para la jaladera seleccionada: " + data.PuertaAltoMin + "</div>";
+                                            $("#msgJaladeras").html(msgContenido);
+                                            guardarJaladera = 0;
+                                         }
+                                        else if ((document.getElementById("ADNPosicionJaladera").value == "H") || (document.getElementById("ADNPosicionJaladera").value == "C")) {
+                                            msgContenido += "<div style='padding: 5px; font-size:12px; color: red;'>Ancho minimo para la jaladera seleccionada: " + data.PuertaAltoMin + "</div>";
+                                            msgContenido += "<div style='padding: 5px; font-size:12px; color: red;'>Alto minimo para la jaladera seleccionada: " + data.PuertaAnchoMin + "</div>";
+                                            $("#msgJaladeras").html(msgContenido);
+                                            guardarJaladera = 0;
+                                        }
+                                    }
+                                    else {
+                                        $("#msgJaladeras").html("");
+                                        guardarJaladera = 1;
+                                    }
+                                    
+                                    //alert(data.Estatus);
+                                    if (data.Estatus == 0) {
+                                        $("#msgJaladeras").empty();
+                                    }
+                                }
+                                if (adn.substring(0, 2) == "FR") {
+
+                                }
+                                //$("#msgJaladeras").html("");                                
+                            },
+                            error: function (e) {
+                                alert("error al obtener regla de medidas para jaladera");
+                            }
+                        });
+
+                }
+
+                function onDataBoundJal() {
+                    var ed = document.getElementById("EsEdicion").value;                    
+                    if (ed == 0) {
+                        this.select(this.element.children().first());
+                    }
+                    else {
+                        //alert(this.element.children().first().html());
+                        //alert(this.element.children().filter("#E").html());
+                        var jal = document.getElementById("ADNJaladera").value;
+                        this.select(this.element.children().filter("#" + jal));
+                    }
+                }
+                dsj.read();
+                if (!hayJaladerasDisponibles) {
+                    $("#msgJaladeras").html("<h4>No hay jaladeras disponibles para la base seleccionada</h4>");
+                } else {
+                    $("#msgJaladeras").html("");
+                }
+
+                function RefrescaJaladerasTipos() {
+                    $.when(ObtieneTiposJal()).done(function (a) {
+                        dsTipoJal = new kendo.data.DataSource({
+                            data: dataTiposJal
+                        });
+                        $("#listaTipoJal").empty();
+                        $("#listaTipoJal").kendoListView({
+                            dataSource: dsTipoJal,
+                            selectable: true,
+                            template: kendo.template($("#templateJaladerasTipo").html()),
+                            change: onChangeJalTipo,
+                            dataBound: onDataBoundJalTipo
+                        });
+                        dsTipoJal.read();
+
+                        //$("#listaTipoJal2").kendoDropDownList({
+                        //    dataSource: dsTipoJal,
+                        //    dataTextField: "Nombre",
+                        //    dataValueField: "Codigo"
+                        //});
+                    });
+                    function onChangeJalTipo() {
+                        var data = dsTipoJal.view();
+                        document.getElementById("ADNJaladeraBase").value = $.map(this.select(), function (item) {
+                            return data[$(item).index()].Base;
+                        });
+
+                        //alert(document.getElementById("ADNJaladeraBase").value);
+                    }
+                    function onDataBoundJalTipo() {
+                        var ed = document.getElementById("EsEdicion").value;
+                        if (ed == 0) {
+                            this.select(this.element.children().first());
+                        }
+                        else {
+                            //var jalt = document.getElementById("ADNJaladeraBase").value;
+                            //this.select(this.element.children().filter("#" + jalt));
+                            this.select(this.element.children().first());
+                        }
+                    }
+                    function ObtieneTiposJal() {
+                        return $.ajax({
+                            url: "/Editor/GetJaladeraTipo?codigo=" + jaladeraSel,
+                            success: function (data) {
+                                dataTiposJal = data.TiposJaladera;                                
+                            }
+                        });
+                    }
+                }
+
+                function RefrescaJaladerasPosicion() {
+                    //[NRB: 23-05-2016] SIC SOLICITÓ NUEVA REGLA PARA QUE LA SELECCION DE APERTURA Y ABATIBLE TENGAN INGERENCIA EN LA POSICION DE LA JALADERA
+                    //alert("adn: " + adn);
+                    var vte = "";
+                    if (adn.length == 12) {
+                        vte = adn.substring(10, 12);
+                    }
+                    //alert(vte);
+                    //-------------------------------------------------------------------------
+
+                    $.when(ObtienePosJal(vte)).done(function (a) {
+                        dsPosJal = new kendo.data.DataSource({
+                            data: dataPosJal
+                        });
+                        $("#listaPosJal").empty();
+                        $("#listaPosJal").kendoListView({
+                            dataSource: dsPosJal,
+                            selectable: true,
+                            template: kendo.template($("#templateJaladerasPos").html()),
+                            change: onChangeJalPos,
+                            dataBound: onDataBoundJalPos
+                        });
+                        dsPosJal.read();
+                        //alert("aqui va: " + adn);
+                    });
+                    function onChangeJalPos() {
+                        var data = dsPosJal.view();
+                        document.getElementById("ADNPosicionJaladera").value = $.map(this.select(), function (item) {
+                            return data[$(item).index()].Codigo;
+                        });
+
+                        //REVISA SI SE CUMPLEN LAS REGLAS DE MEDIDAS PARA SELECCIONAR LA JALADERA ACTUAL                        
+                            $.ajax({
+                                url: "/Editor/GetReglasMedidaJaladeras?jaladera=" + jaladeraSel,
+                                dataType: "json",
+                                success: function (data) {
+                                    if (adn.substring(0, 2) == "PU") {
+                                        //alert(jaladeraSel);
+                                        //alert($("#alto").data("kendoNumericTextBox").value() + " < " + data.PuertaAltoMin);
+                                        if ($("#alto").data("kendoNumericTextBox").value() < data.PuertaAltoMin) {
+                                            var msgContenido = "<div style='padding: 5px; font-size:14px; color: red;'>Restricciones de medidas impiden que se aplique esta jaladera</div>";
+                                            if (document.getElementById("ADNPosicionJaladera").value == "V") {
+                                                msgContenido += "<div style='padding: 5px; font-size:12px; color: red;'>Ancho minimo para la jaladera seleccionada: " + data.PuertaAnchoMin + "</div>";
+                                                msgContenido += "<div style='padding: 5px; font-size:12px; color: red;'>Alto minimo para la jaladera seleccionada: " + data.PuertaAltoMin + "</div>";
+                                                $("#msgJaladeras").html(msgContenido);
+                                            }
+                                            else if ((document.getElementById("ADNPosicionJaladera").value == "H") || (document.getElementById("ADNPosicionJaladera").value == "C")) {
+                                                msgContenido += "<div style='padding: 5px; font-size:12px; color: red;'>Ancho minimo para la jaladera seleccionada: " + data.PuertaAltoMin + "</div>";
+                                                msgContenido += "<div style='padding: 5px; font-size:12px; color: red;'>Alto minimo para la jaladera seleccionada: " + data.PuertaAnchoMin + "</div>";
+                                                $("#msgJaladeras").html(msgContenido);
+                                            }
+                                        }
+                                        else {
+                                            $("#msgJaladeras").html("");
+                                        }
+
+                                        //alert(data.Estatus);
+                                        if (data.Estatus == 0)
+                                        {
+                                            $("#msgJaladeras").empty();
+                                        }
+                                    }
+                                    if (adn.substring(0, 2) == "FR") {
+
+                                    }
+                                    //$("#msgJaladeras").html("");
+                                    
+                                },
+                                error: function (e) {
+                                    alert("error al obtener regla de medidas para jaladera");
+                                }
+                            });                        
+                    }
+                    function onDataBoundJalPos() {
+                        var ed = document.getElementById("EsEdicion").value;
+                        if (ed == 0) {
+                            this.select(this.element.children().first());
+                        }
+                        else {
+                            var jalp = document.getElementById("ADNPosicionJaladera").value;
+                            this.select(this.element.children().filter("#" + jalp));
+                        }
+                    }
+                    function ObtienePosJal(vte) {                        
+                        return $.ajax({                            
+                            //url: "/Editor/GetJaladeraPosicion?codigo=" + jaladeraSel,
+                            url: "/Editor/GetJaladeraPosicion?codigo=" + jaladeraSel + "&variante=" + vte,
+                            success: function (data) {
+                                dataPosJal = data.PosicionesJaladera;
+                            }
+                        });
+                    }
+                }
+
+            });
+            function ObtieneJaladeras(b, c) {
+                return $.ajax({
+                    url: "/Editor/GetJaladeras?codigo=" + b + "&color=" + c,
+                    success: function (data) {
+                        dataJaladeras = data.Elementos;
+                        hayJaladerasDisponibles = data.JaladerasDisponibles;
+                    }
+                });
+            }
+
+        }
+        //-----------------------------------------------------------------------
+        //-----------------------------------------------------------------------
+
+        //REFRESCADO DE ELEMENTOS DE SELECCION
+        //-----------------------------------------------------------------------
+        
+        function refresca(ds) {
+            $("#selector").kendoListView({
+                navigatable: true,
+                dataSource: ds,
+                template: kendo.template(template),
+                selectable: true,                
+                change: onChange,
+                dataBound: onDataBound
+            });
+            ds.read();
+            function onChange() {
+                var datasrc = $("#selector").data("kendoListView").dataSource;
+                var data = datasrc.view();
+                selected = $.map(this.select(), function (item) {
+                    return data[$(item).index()].Codigo;
+                });
+                codigo = selected;
+                
+                //var codPaja = "";
+
+                nombreElemento = $.map(this.select(), function (item) {
+                    //codPaja = data[$(item).index()].Codigo;
+                    return data[$(item).index()].Nombre;
+                });                
+                
+                if ((codigo == "PP")) {
+                    alert("Cualquier complemento en Paja a un pedido anterior, favor de comentarlo con tu SIC para asegurar que ambos sean del mismo tono");
+                }
+                //alert(codigo);
+                //AQUI VA LA VALIDACION DE REGLA PARA ALUMINIOS Y POSICIONES DE JALADERAS
+                if (adn.substring(0, 2) == 'MA') {
+                    if (codigo == 'A2') {
+                        ljp = $("#listaPosJal").data("kendoListView");
+                        ljp.dataSource.filter({ field: "Codigo", operator: "contains", value: "V" });
+                    }
+                    else if (codigo == 'S2') {
+                        ljp = $("#listaPosJal").data("kendoListView");
+                        ljp.dataSource.filter({ field: "Codigo", operator: "contains", value: "H" });
+                    }
+                    else if (codigo == 'XX') {
+                        ljp = $("#listaPosJal").data("kendoListView");
+                        ljp.dataSource.filter({});
+                    }
+                }
+            }
+            function onDataBound() {
+                this.select(this.element.children().first());
+            }
+            
+        }
+
+        //------------------------------------------------------------------------
+        //------------------------------------------------------------------------
+        $.when(ElementosIniciales()).done(function (a) {
+            $("#loader").hide();
+            var ds = new kendo.data.DataSource({
+                //pageSize: 7,
+                data: elementos
+            });
+            
+            $("#btnBuscar").click(function () {
+                buscar();
+            });
+
+            function buscar() {
+                var cadena = $('#edtSearch').val(); //document.getElementById("edtSearch").value;
+                //alert(cadena);
+                $filter = new Array();
+                $filter.push({ field: "Nombre", operator: "contains", value: $('#edtSearch').val() });
+                var lv = $("#selector").data("kendoListView");
+                lv.dataSource.filter($filter);
+                //ds.query({ filter: { field: "Nombre", operator: "startswith", value: cadena } });
+                //ds.filter({ field: "Codigo", operator: "contains", value: cadena });               
+                
+            }
+
+            $('#edtSearch').keyup(function (e) {
+                var code = e.which;
+                if (code == 13) {
+                    e.preventDefault();
+                    buscar();
+                }
+
+            });
+
+            //AQUI ESTABA REFRESCA ...
+
+            refresca(ds);
+
+            $("#cambiaDs").click(function () {
+                $("#cambiaDs").attr("disabled", "disabled");
+                
+                if (tipo == "tipos") {
+                    //$("#loader").attr("style","position:absolute; top:50%; left:50%; z-index:1000; width:69px; height:69px; border:solid; border-radius:3px; border-width:2px; border-color:cadetblue;");
+                    //$("#loader").show();
+                    tipo = "base";
+                    document.getElementById("tipo").value = "base";
+                    $("#pasos").append("<div id='divTipo'><button id='btnTipo' style='width:100px'>Tipo: " + nombreElemento + "</button></div>");
+                    template = $("#templateBases").html();
+                    $("#btnGuardar").attr("disabled", "disabled");
+                    $("#btnGuardarDuplicar").attr("disabled", "disabled");
+                    $("#msgCompletado").hide();
+
+                    //QUITA LA IMAGEN RESULTANTE QUE PUEDA ESTAR DESPLEGADA
+                    $("#divImagenResultante").remove("imgResult");
+                    $("#divImagenResultante").remove("colorResult");
+                } else if (tipo == "base") {
+                    //$("#loader").attr("style", "position:absolute; top:50%; left:50%; z-index:1000; width:69px; height:69px; border:solid; border-radius:3px; border-width:2px; border-color:cadetblue;");
+                    //$("#loader").show();
+                    //REFRESCA LAS JALADERAS PARA LA BASE SELECCIONADA                                       
+                    RefrescaJaladeras(codigo, "");
+                    tipo = "color";
+                    document.getElementById("tipo").value = "color";
+                    $("#pasos").append("<div id='divBase'><button id='btnBase' style='width:100px'>Base: " + nombreElemento + "</button></div>");
+                    template = $("#templateColores").html();
+                    $("#btnGuardar").attr("disabled", "disabled");
+                    $("#btnGuardarDuplicar").attr("disabled", "disabled");
+                    $("#msgCompletado").hide();
+
+                    //AÑADE IMAGEN RESULTANTE DE LA BASE SELECCIONADA
+                    var rutaimg = "<img id='imgResult' width='90' height='140' style='position:absolute; margin-left:50px; overflow:auto;' src='../Images/bases/" + adn + codigo + ".png'></img>";
+                    $("#divImagenResultante").html(rutaimg);
+
+                } else if (tipo == "color") {
+                    //$("#loader").attr("style", "position:absolute; top:50%; left:50%; z-index:1000; width:69px; height:69px; border:solid; border-radius:3px; border-width:2px; border-color:cadetblue;");
+                    //$("#loader").show();
+                    tipo = "veta";
+                   
+                    //alert(adn);
+                    alert(adn.substring(2, 4));
+                    RefrescaJaladeras(adn.substring(2,4), codigo);
+
+                    document.getElementById("tipo").value = "veta";
+                    $("#pasos").append("<div id='divColor'><button id='btnColor' style='width:100px'>Color: " + nombreElemento + "</button></div>");
+                    template = $("#templateVetas").html();
+                    $("#btnGuardar").attr("disabled", "disabled");
+                    $("#btnGuardarDuplicar").attr("disabled", "disabled");
+                    $("#msgCompletado").hide();
+
+                    //AÑADE LA IMAGEN Y EL COLOR RESULTANTES SEGUN LO SELECCIONADO
+                    $("#divImagenResultante").remove("imgResult");
+                    $("#divImagenResultante").remove("colorResult");
+                    var rutacolor = "<img id='colorResult' width='90' height='140' style='position:absolute; top: 0px; left: 0px; margin-left:50px; overflow:auto;' src='../Images/colores/" + codigo + ".png'></img>";
+                    $("#divImagenResultante").append(rutacolor);
+                    var img = "<img id='imgResult' width='90' height='140' style='position:absolute; top: 0px; left: 0px; z-index:1000; margin-left:50px; overflow:auto;' src='../Images/bases/" + adn.substring(0, 4) + ".png'></img>";
+                    $("#divImagenResultante").append(img);
+                    
+                } else if (tipo == "veta") {
+                    //$("#loader").attr("style", "position:absolute; top:50%; left:50%; z-index:1000; width:69px; height:69px; border:solid; border-radius:3px; border-width:2px; border-color:cadetblue;");
+                    //$("#loader").show();                    
+                    tipo = "cubrecanto";
+                    document.getElementById("tipo").value = "cubrecanto";
+                    $("#pasos").append("<div id='divVeta'><button id='btnVeta' style='width:100px'>Veta: " + nombreElemento + "</button></div>");
+                    template = $("#templateCubrecantos").html();
+                    $("#btnGuardar").attr("disabled", "disabled");
+                    $("#btnGuardarDuplicar").attr("disabled", "disabled");
+                    $("#msgCompletado").hide();
+
+                    //SI LA VETA SELECCIONADA ES HORIZONAL Y EXISTE UN COLOR EN LA IMAGEN RESULTANTE VOLTEA 90° EL COLOR
+                    var hayColor = document.getElementById("colorResult");
+                    if ((hayColor != null) && (codigo == "H")) {
+                                                
+                        $("#colorResult").css("-webkit-transform", "rotate(90deg)");
+                        $("#colorResult").css("-moz-transform", "rotate(90deg)");
+                        $("#colorResult").css("-o-transform", "rotate(90deg)");
+                        $("#colorResult").css("-ms-transform", "rotate(90deg)");
+                        $("#colorResult").css("transform", "rotate(90deg)");
+                        $("#colorResult").width(140);
+                        $("#colorResult").height(90);
+                        $("#colorResult").css("margin-left", "25px");
+                        $("#colorResult").css("margin-top", "25px");
+                        $("#colorResult").css("position", "absolute");
+                        orientacionVeta = "H";
+                        //$("#colorResult").css("top", "0px");
+                        //$("#colorResult").css("left", "0px");
+                        //$("#colorResult").css("overflow", "auto");
+                        //$("#imgResult").remove();
+                        //$("#imgResult").css("-webkit-transform", "rotate(90deg)");
+                        //$("#imgResult").css("-moz-transform", "rotate(90deg)");
+                        //$("#imgResult").css("-o-transform", "rotate(90deg)");
+                        //$("#imgResult").css("-ms-transform", "rotate(90deg)");
+                        //$("#imgResult").css("transform", "rotate(90deg)");
+                        //$("#imgResult").css("z-index", "1002");
+                        
+                        //-webkit-transform: rotate(90deg);
+                        //-moz-transform: rotate(90deg);
+                        //-o-transform: rotate(90deg);
+                        //-ms-transform: rotate(90deg);
+                        //transform: rotate(90deg);
+                    }
+                    else {
+                        orientacionVeta = "V";
+                        $("#colorResult").css("-webkit-transform", "rotate(180deg)");
+                        $("#colorResult").css("-moz-transform", "rotate(180deg)");
+                        $("#colorResult").css("-o-transform", "rotate(180deg)");
+                        $("#colorResult").css("-ms-transform", "rotate(180deg)");
+                        $("#colorResult").css("transform", "rotate(180deg)");
+                        $("#colorResult").width(90);
+                        $("#colorResult").height(140);
+                        $("#colorResult").css("margin-left", "50px");
+                        $("#colorResult").css("margin-top", "-1px");
+                        $("#colorResult").css("position", "absolute");
+                    }
+                } else if (tipo == "cubrecanto") {
+                    //$("#loader").attr("style", "position:absolute; top:50%; left:50%; z-index:1000; width:69px; height:69px; border:solid; border-radius:3px; border-width:2px; border-color:cadetblue;");
+                    //$("#loader").show();
+                    tipo = "variante";                    
+                    document.getElementById("tipo").value = "variante";
+                    $("#pasos").append("<div id='divCubrecanto'><button id='btnCubrecanto' style='width:100px'>Cubrecanto: " + nombreElemento + "</button></div>");
+                    template = $("#templateVariantes").html();                    
+                    $("#btnGuardar").attr("disabled", "disabled");
+                    $("#btnGuardarDuplicar").attr("disabled", "disabled");
+                    $("#msgCompletado").hide();
+                } else if (tipo == "variante") {
+                    //$("#loader").attr("style", "position:absolute; top:50%; left:50%; z-index:1000; width:69px; height:69px; border:solid; border-radius:3px; border-width:2px; border-color:cadetblue;");
+                    //$("#loader").show();                    
+                    tipo = "final";
+                    document.getElementById("tipo").value = "jaladera";
+                    $("#pasos").append("<div id='divVariante'><button id='btnVariante' style='width:100px'>Variante: " + nombreElemento + "</button></div>");
+                    template = $("#templateJaladeras").html();
+                    $("#btnGuardar").attr("disabled", "disabled");
+                    $("#btnGuardarDuplicar").attr("disabled", "disabled");
+                    $("#msgCompletado").hide();
+                }
+                else if (tipo == "jaladera") {
+                    //$("#loader").attr("style", "position:absolute; top:50%; left:50%; z-index:1000; width:69px; height:69px; border:solid; border-radius:3px; border-width:2px; border-color:cadetblue;");
+                    //$("#loader").show();
+                    tipo = "final";
+                    document.getElementById("tipo").value = "jaladera";
+                    $("#pasos").append("<div id='divJaladera'><button style='width:100px'>Jaladera: " + nombreElemento + "</button></div>");                    
+                }
+                
+                //alert("adn: " + adn + "  codigo: " + codigo);
+                if (adn.length < 12) {
+                    adn += codigo;
+                }
+                //alert("adn: " + adn + "  codigo: " + codigo);
+
+                $.when(ElementosSiguientes()).done(function (a) {
+                    $("#loader").hide();
+                    //ds = new kendo.data.DataSource({                        
+                    //    data: elementos
+                    //});
+                    //$("#selector").empty();
+                    //refresca();
+                    if (UltimoPaso == 1) {
+                        $("#cambiaDs").attr("disabled", "disabled");
+                        $("#btnGuardar").removeAttr("disabled");
+                        $("#btnGuardarDuplicar").removeAttr("disabled");
+                        $("#msgCompletado").show();                        
+                    }
+                    else {
+                        ds = new kendo.data.DataSource({
+                            data: elementos
+                        });
+                        $("#selector").empty();
+                        refresca(ds);
+                        $("#cambiaDs").removeAttr("disabled");
+                    }
+                    $("#loader").hide();
+                });
+
+                //AQUI ESTABA ELEMENTOS SIGUIENTES...
+
+                //AQUI ESTABA REFRESCA MEDIDAS...                             
+                                
+                Botonizar();
+                                
+            });                                  
+
+        });
+
+        function ActualizaMultiplos() {
+            //alert("/Editor/GetMaxMin?codigo=" + adn + "&posicion=" + adn.substring(6, 7));
+            $.ajax({
+                url: "/Editor/GetMaxMin?codigo=" + adn + "&posicion=" + adn.substring(6, 7),
+                success: function (data) {                    
+                    //altoMin = data.AltoMin;
+                    //altoMax = data.AltoMax;
+                    //anchoMin = data.AnchoMin; 
+                    //anchoMax = data.AnchoMax;
+                    sublinea = data.Sublinea;
+                    posicion = data.Posicion;
+                    multiplo70 = data.Multiplo70;
+                    multiplo72 = data.Multiplo72;
+                    multiplo76 = data.Multiplo76;
+                    multiplo80 = data.Multiplo80;                    
+                    
+                    var estSel = $("#comboMultiplo").data("kendoComboBox");
+                    //tag-ui
+                    $("#comboAltoMultiplo").kendoDropDownList({ 
+                        dataSource: {
+                            transport: {
+                                read: {
+                                    dataType: "json",
+                                    url: "/Editor/GetMultiplos?codigo=" + adn + "&estandar=" + estSel.value()
+                                }
+                            }
+                        }
+                        //index: 0
+                    });
+                    var cb = $("#comboAltoMultiplo").data("kendoComboBox");
+                    cb.datasource.read();                    
+
+                    if (data.Multiplo70 > 0) {
+                        $("#divMultiplo").show();                       
+                        $("#divAltoMultiplo").show();
+                        document.getElementById("capturaAltoMultiplo").value = 1;
+                        $("#altoEspacio").hide();
+                    }
+                    else {
+                        $("#divMultiplo").hide();
+                        $("#divAltoMultiplo").hide();
+                        $("#altoEspacio").show();
+                        document.getElementById("capturaAltoMultiplo").value = 0;
+                    }                                      
+                    
+                    if (estSel.value() == "70") {
+                        incrementoMultiplo = Math.ceil(multiplo70);
+                        //alert("actualizando multiplo a: " + incrementoMultiplo);
+                        if (adn.substring(2, 4) == "PY") {
+                            altoMin = 173;
+                        }
+                        if (adn.substring(2, 4) == "AO") {
+                            altoMin = 173;
+                        }
+                        if (adn.substring(2, 4) == "SR") {
+                            altoMin = 173;
+                        }
+                        if (adn.substring(2, 4) == "EV") {
+                            altoMin = 173;
+                        }
+                        if (adn.substring(2, 4) == "IM") {
+                            altoMin = 173;
+                        }
+                    }
+                    else if (estSel.value() == "72") {
+                        incrementoMultiplo = Math.ceil(multiplo72);
+                        //alert("actualizando multiplo a: " + incrementoMultiplo);
+                        if (adn.substring(2, 4) == "PY") {
+                            altoMin = 178;
+                        }
+                        if (adn.substring(2, 4) == "AO") {
+                            altoMin = 178;
+                        }
+                        if (adn.substring(2, 4) == "SR") {
+                            altoMin = 178;
+                        }
+                        if (adn.substring(2, 4) == "EV") {
+                            altoMin = 178;
+                        }
+                        if (adn.substring(2, 4) == "IM") {
+                            altoMin = 178;
+                        }
+                    }
+                    else if (estSel.value() == "76") {
+                        incrementoMultiplo = Math.ceil(multiplo76);
+                        //alert("actualizando multiplo a: " + incrementoMultiplo);
+                        if (adn.substring(2, 4) == "PY") {
+                            altoMin = 188;
+                        }
+                        if (adn.substring(2, 4) == "AO") {
+                            altoMin = 188;
+                        }
+                        if (adn.substring(2, 4) == "SR") {
+                            altoMin = 188;
+                        }
+                        if (adn.substring(2, 4) == "EV") {
+                            altoMin = 188;
+                        }
+                        if (adn.substring(2, 4) == "IM") {
+                            altoMin = 188;
+                        }
+                    }
+                    else if (estSel.value() == "80") {
+                        incrementoMultiplo = Math.ceil(multiplo80);
+                        //alert("actualizando multiplo a: " + incrementoMultiplo);
+                        if (adn.substring(2, 4) == "PY") {
+                            altoMin = 198;
+                        }
+                        if (adn.substring(2, 4) == "AO") {
+                            altoMin = 198;
+                        }
+                        if (adn.substring(2, 4) == "SR") {
+                            altoMin = 198;
+                        }
+                        if (adn.substring(2, 4) == "EV") {
+                            altoMin = 188;
+                        }
+                        if (adn.substring(2, 4) == "IM") {
+                            altoMin = 198;
+                        }
+                    }
+                    else {
+                        incrementoMultiplo = 1;
+                    }
+                    //alert(altoMin);  
+                    RefrescaMedidas(codigo); //alert("Ln: 1037");
+                    
+                },
+                error: function (e) {
+                    alert("error al actualizar multiplos");
+                }
+            });
+        }
+
+        function ElementosSiguientes() {
+            //alert("esta entrando en ElementosSiguientes()");
+            $("#loader").attr("style", "position:absolute; top:40%; left:50%; z-index:1000; width:64px; height:64px; border:solid; border-radius:3px; border-width:2px; border-color:cadetblue;");
+            $("#loader").show();
+            var accion = "";
+            if ((tipo == "cubrecanto") || (tipo == "variante")) {
+                accion = "/Editor/GetElementos?codigo=" + adn + "&tipo=" + tipo + "&sublinea=" + sublinea + "&posicion=" + posicion;
+            } else {
+                accion = "/Editor/GetElementos?codigo=" + adn + "&tipo=" + tipo + "&sublinea=" + "&posicion=";
+            }
+
+            return $.ajax({
+                url: accion,
+                success: function (data) {
+
+                    //TOMA EL TEMPLATE CORRECTO    
+                    if (data.NombrePaso == "veta") {
+                        template = $("#templateVetas").html();
+                        //alert("NombrePaso: " + data.NombrePaso);
+                    }
+                    if (data.NombrePaso == "cubrecanto") {
+                        template = $("#templateCubrecantos").html();
+                        //alert("NombrePaso: " + data.NombrePaso);
+                    }
+                    if (data.NombrePaso == "variante") {
+                        template = $("#templateVariantes").html();
+                        //alert("NombrePaso: " + data.NombrePaso);
+                    }
+                    //switch (data.NombrePaso) {
+                    //    //case "base":
+                    //    //    template = $("#templateBases").html();
+                    //    //    alert("NombrePaso: " + data.NombrePaso);
+                    //    //case "color":
+                    //    //    template = $("#templateColores").html();
+                    //    //    alert("NombrePaso: " + data.NombrePaso);
+                    //    case "veta":
+                    //        template = $("#templateVetas").html();
+                    //        alert("NombrePaso: " + data.NombrePaso);
+                    //    case "cubrecanto":
+                    //        template = $("#templateCubrecantos").html();
+                    //        alert("NombrePaso: " + data.NombrePaso);
+                    //    case "variante":
+                    //        template = $("#templateVariantes").html();
+                    //        alert("NombrePaso: " + data.NombrePaso);
+                    //    default:
+                    //        alert("NombrePaso: " + data.NombrePaso);
+                    //}
+
+                    elementos = data.Elementos;
+                    adn = data.Adn;
+                    document.getElementById("adn").value = adn;
+                    $("#etiqueta").text("Código de articulo: " + adn);
+                    $("#etiquetaPaso").html("<h4>Selección de " + data.NombrePaso + "</h4>");
+                    tipo = data.NombrePaso;
+                    if (data.UltimoPaso == 1) {
+                        UltimoPaso = 1;
+                    }
+                    else {                        
+                        UltimoPaso = 0;
+                    }
+
+                    if (tipo == "base") {
+
+                        template = $("#templateBases").html();
+                        if (adn.substring(0, 2) == "CA") {
+                            var cantidad = $("#cantidad").data("kendoNumericTextBox");
+                            cantidad.value(20);
+                            cantidad.min(20);
+                        }                                               
+
+                        //EN CASO DE QUE SE SELECCIONE VENTANA SE ACTIVA EL TAB DE SELECCION DE VIDRIO. DE LO CONTRARIO SE DESACTIVA EL TAB
+                        function countProperties(obj) {
+                            var count = 0;
+
+                            for (var prop in obj) {
+                                if (obj.hasOwnProperty(prop))
+                                    ++count;
+                            }
+
+                            return count;
+                        }
+
+                        if ((adn.substring(0, 2) == "VC") || (adn.substring(0, 2) == "VO") || (adn.substring(0, 2) == "VS") || (adn.substring(0, 2) == "VU")) {
+
+                            $("#tabstrip").append("<div id='vidVentanasContainer' style='overflow:auto;'><div id='lvSelVidrio' style='z-index:auto; min-height:100px;'></div></div>");
+                            //$("#vidVentanasContainer").append("<div id='lvSelVidrio' style='z-index:auto; min-height:100px;'></div>");
+
+                            //$("#lvSelVidrio").kendoListView({
+                            //    navigatable: true,
+                            //    selectable: true,
+                            //    template: templateVidrioVentana
+                            //    //dataSource: {
+                            //    //    data: [
+                            //    //        {
+                            //    //            Codigo: "Joe",
+                            //    //            Nomre: "Smith"
+                            //    //        },
+                            //    //        {
+                            //    //            Codigo: "Jane",
+                            //    //            Nombre: "Smith"
+                            //    //        }]
+                            //    //}
+                            //});
+
+                            //$("#vidVentanasContainer").hide();
+                            ActivaSelVidrio();
+
+                            RefrescaSelVidrio();
+                                                     
+                        }
+                        else {
+                            var ts = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+                            var c = countProperties(ts.items());
+                            //alert(c);
+                            if (c > 3) {
+                                $("#tabstrip-3").attr("aria-expanded", "false");
+                                $("#tabstrip-3").css("display", "none");
+                                //$("#vidVentanasLi").remove();
+                                DesactivaSelVidrio();
+                            }                            
+                        }
+
+                        //SI LA UNIDAD DE MEDIDA ES PZA. NO PERMITE ASIGNAR MEDIDAS
+                        $.ajax({
+                            url: "/Editor/GetUnidadMedida?codigo=" + adn.substring(0, 2),
+                            success: function (data) {
+                                if (data == "PZA") {
+                                    //$("#alto").attr("disabled", "disabled");
+                                    //$("#ancho").attr("disabled", "disabled");
+                                    $("#alto").data("kendoNumericTextBox").value(0);
+                                    $("#ancho").data("kendoNumericTextBox").value(0);
+
+                                    var al = $("#alto").data("kendoNumericTextBox");
+                                    al.enable(false);
+                                    var an = $("#ancho").data("kendoNumericTextBox");
+                                    an.enable(false);                                   
+                                }
+                                else if ((data == "ML") && (adn.substring(0, 2) == "AR")) {
+                                    $("#alto").removeAttr("disabled");
+                                    $("#ancho").removeAttr("disabled");
+
+                                    $("#ancho").data("kendoNumericTextBox").value(0);                                    
+
+                                    var al = $("#alto").data("kendoNumericTextBox");
+                                    al.enable(true);
+                                    var an = $("#ancho").data("kendoNumericTextBox");
+                                    an.enable(false);
+                                }
+                                else {
+                                    var al = $("#alto").data("kendoNumericTextBox");
+                                    al.enable(true);
+                                    var an = $("#ancho").data("kendoNumericTextBox");
+                                    an.enable(true);
+                                }
+                            }
+                        });
+                    }
+                    
+                    if (tipo == "color") {
+
+                        //EN CASO DE QUE SE SELECCIONE TIPO SCREEN SE ACTIVA LA SELECCIÓN DE MEDIDAS FIJAS                        
+                        if (adn.substring(0, 2) == "PV") {
+                            CargaMedidasFijas();
+                        }
+                        
+                        //
+                       
+                        template = $("#templateColores").html();
+                        $.ajax({
+                            url: "/Editor/GetMaxMin?codigo=" + adn + "&posicion=" + adn.substring(6, 7),
+                            success: function (data) {
+                                altoMin = data.AltoMin;
+                                altoMax = data.AltoMax;
+                                anchoMin = data.AnchoMin;
+                                anchoMax = data.AnchoMax; 
+                                sublinea = data.Sublinea;
+                                posicion = data.Posicion;
+                                multiplo70 = data.Multiplo70;
+                                multiplo72 = data.Multiplo72;
+                                multiplo76 = data.Multiplo76;
+                                multiplo80 = data.Multiplo80;
+
+                                var estSel = $("#comboMultiplo").data("kendoComboBox");
+                                
+                                //tag-ui
+                                $("#comboAltoMultiplo").kendoDropDownList({
+                                    dataSource: {
+                                        transport: {
+                                            read: {
+                                                dataType: "json",
+                                                url: "/Editor/GetMultiplos?codigo=" + adn + "&estandar=" + estSel.value()
+                                            }
+                                        }
+                                    }
+                                    //index: 0
+                                });
+                                
+                                if (data.Multiplo70 > 0) {                                
+                                    $("#divMultiplo").show();                                                               
+                                    $("#divAltoMultiplo").show();                                    
+                                    $("#altoEspacio").hide();
+                                    document.getElementById("capturaAltoMultiplo").value = 1;
+                                }
+                                else {
+                                    $("#divMultiplo").hide();
+                                    $("#divAltoMultiplo").hide();
+                                    $("#altoEspacio").show();
+                                    document.getElementById("capturaAltoMultiplo").value = 0;
+                                }
+                                
+                                if (estSel.value() == "70") {                                    
+                                    incrementoMultiplo = Math.round(multiplo70);
+                                }
+                                else if (estSel.value() == "72") {                                    
+                                    incrementoMultiplo = Math.round(multiplo72);
+                                }
+                                else if (estSel.value() == "76") {
+                                    incrementoMultiplo = Math.round(multiplo76);
+                                }
+                                else if (estSel.value() == "80") {
+                                    incrementoMultiplo = Math.round(multiplo80);
+                                }
+                                else {
+                                    incrementoMultiplo = 1;                                    
+                                }
+                                //alert("incremento antes de RefrescaMedidas(): " + incrementoMultiplo);
+                                if ((adn.substring(0, 2) != "AJ") && (adn.substring(0, 2) != "AR")) {
+                                    RefrescaMedidas(codigo); //alert("Ln: 1153");
+                                }
+                                
+                            }
+                        });
+
+                    }
+                    if (tipo == "veta") {
+
+                        //VALIDAR MEZCLAS DE PRODUCTOS PERMITIDAS
+                        $.ajax({
+                            url: "/Editor/ValidaMezcla?codigo=" + adn + "&proyecto=" + document.getElementById("Proyecto").value,
+                            success: function (d) {
+                                if (d == "ok") {
+                                    template = $("#templateVetas").html();
+                                    $.ajax({
+                                        url: "/Editor/GetMaxMin?codigo=" + adn + "&posicion=" + adn.substring(6, 7),
+                                        success: function (data) {
+                                            altoMin = data.AltoMin;
+                                            altoMax = data.AltoMax;
+                                            anchoMin = data.AnchoMin;
+                                            anchoMax = data.AnchoMax;
+                                            sublinea = data.Sublinea;
+                                            posicion = data.Posicion;
+                                            multiplo70 = data.Multiplo70;
+                                            multiplo72 = data.Multiplo72;
+                                            multiplo76 = data.Multiplo76;
+                                            multiplo80 = data.Multiplo80;
+                                            if (data.Multiplo70 > 0) {
+                                                $("#divMultiplo").show();
+                                            }
+                                            else {
+                                                $("#divMultiplo").hide();
+                                            }
+                                            var estSel = $("#comboMultiplo").data("kendoComboBox");
+                                            if (estSel.value() == "70") {
+                                                incrementoMultiplo = Math.round(multiplo70);
+                                            }
+                                            else if (estSel.value() == "72") {
+                                                incrementoMultiplo = Math.round(multiplo72);
+                                            }
+                                            else if (estSel.value() == "76") {
+                                                incrementoMultiplo = Math.round(multiplo76);
+                                            }
+                                            else if (estSel.value() == "80") {
+                                                incrementoMultiplo = Math.round(multiplo80);
+                                            }
+                                            else {
+                                                incrementoMultiplo = 1;
+                                            }
+                                            if ((adn.substring(0, 2) != "AJ") && (adn.substring(0, 2) != "AR")) {
+                                                RefrescaMedidas(codigo); //alert("Ln: 1199");
+                                            }
+                                        }
+                                    });
+                                }
+                                else {
+                                    alert("La combinación seleccionada para este articulo es de un tiempo de entrega diferente a lo seleccionado en otros articulos de este proyecto. Actualmente no se pueden seleccionar articulos con diferente tiempo de entrega.");
+                                    $("#btnColor").click();
+                                }
+
+                            }
+                        });                       
+                        
+                    }
+                    
+                    if ((tipo == "cubrecanto") || (tipo == "variante")) {
+
+                        //VALIDAR MEZCLAS DE PRODUCTOS PERMITIDAS
+                        $.ajax({
+                            url: "/Editor/ValidaMezcla?codigo=" + adn + "&proyecto=" + document.getElementById("Proyecto").value,
+                            success: function (d) {
+                                if (d == "ok") {
+                                    if (tipo == "cubrecantos") {
+                                        template = $("#templateCubrecantos").html();
+                                    }
+                                    if (tipo == "variantes") {
+                                        template = $("#templateVariantes").html();
+                                    }
+
+                                    $.ajax({
+                                        url: "/Editor/GetMaxMin?codigo=" + adn + "&posicion=" + adn.substring(6, 7),
+                                        success: function (data) {
+                                            //alert("posicion: " + adn.substring(6,7));
+                                            var ps = adn.substring(6, 7);
+                                            if (ps == "H") {
+                                                //alert("va a voltear max y min");
+                                                altoMin = data.AnchoMin;
+                                                altoMax = data.AnchoMax;
+                                                anchoMin = data.AltoMin;
+                                                anchoMax = data.AltoMax;
+                                            }
+                                            else {
+                                                altoMin = data.AltoMin;
+                                                altoMax = data.AltoMax;
+                                                anchoMin = data.AnchoMin;
+                                                anchoMax = data.AnchoMax;
+                                            }
+
+
+                                            sublinea = data.Sublinea;
+                                            posicion = data.Posicion;
+                                            multiplo70 = data.Multiplo70;
+                                            multiplo72 = data.Multiplo72;
+                                            multiplo76 = data.Multiplo76;
+                                            multiplo80 = data.Multiplo80;
+                                            if (data.Multiplo70 > 0) {
+                                                $("#divMultiplo").show();
+                                            }
+                                            else {
+                                                $("#divMultiplo").hide();
+                                            }
+                                            var estSel = $("#comboMultiplo").data("kendoComboBox");
+                                            if (estSel.value() == "70") {
+                                                incrementoMultiplo = Math.round(multiplo70);
+                                            }
+                                            else if (estSel.value() == "72") {
+                                                incrementoMultiplo = Math.round(multiplo72);
+                                            }
+                                            else if (estSel.value() == "76") {
+                                                incrementoMultiplo = Math.round(multiplo76);
+                                            }
+                                            else if (estSel.value() == "80") {
+                                                incrementoMultiplo = Math.round(multiplo80);
+                                            }
+                                            else {
+                                                incrementoMultiplo = 1;
+                                            }
+                                            if (adn.substring(0, 2) != "AJ") {
+                                                //alert("Va a refrescar medidas de " + codigo + " anchoMax: " + data.AnchoMax + " altoMax: " + data.AltoMax);                                    
+                                                RefrescaMedidas(codigo); //alert("Ln: 1256 " + " anchoMax: " + anchoMax + " altoMax: " + altoMax);
+                                            }
+                                        }
+                                    });
+
+                                    if ((adn.substring(0, 2) != "AJ") && (adn.substring(0, 2) != "AR")) {
+                                        RefrescaMedidas(codigo); //alert("Ln: 1262" + " anchoMax: " + anchoMax + " altoMax: " + altoMax);
+                                    }
+                                }
+                                else {
+                                    alert("La combinación seleccionada para este articulo es de un tiempo de entrega diferente a lo seleccionado en otros articulos de este proyecto. Actualmente no se pueden seleccionar articulos con diferente tiempo de entrega.");
+                                    $("#btnColor").click();
+                                }
+                            }
+                        });
+
+                        
+                    }
+
+                    //alert("Va saliendo de ElementosSiguientes()   adn: " + adn + " tipo: " + tipo + " codigo: " + codigo);                    
+
+                },
+                error: function (e) {
+                    alert("Error al cargar los siguiente elementos de seleccion");
+                }
+            });
+        }
+
+        function ElementosIniciales() {
+            if (document.getElementById("EsEdicion").value != 1) {
+                $("#loader").attr("style", "position:absolute; top:40%; left:50%; z-index:1000; width:64px; height:64px; border:solid; border-radius:3px; border-width:2px; border-color:cadetblue;");
+                $("#loader").show();
+                return $.ajax({
+                    url: "/Editor/GetElementos?codigo=" + adn + "&tipo=" + tipo + "&sublinea=" + "&posicion=",
+                    success: function (data) {
+                        elementos = data.Elementos;
+                        //alert("ya cargo el primer set de tipos");
+                    }
+                });
+            }
+        }
+
+        //EN CASO DE QUE SE ESTE MODIFICANDO ESTE ARTICULO
+        if (document.getElementById("EsEdicion").value == 1) {
+            $("#btnGuardar").removeAttr("disabled");
+            $("#btnGuardarDuplicar").removeAttr("disabled");
+            $("#cambiaDs").attr("disabled", "disabled");
+            $("#msgCompletado").hide();
+
+            var cant = document.getElementById("Cantidad").value;
+            var cantidad = $("#cantidad").data("kendoNumericTextBox");
+            cantidad.value(cant);
+
+            codigo = document.getElementById("CodigoADNInterno").value;
+            var codigoBK = codigo;
+            var base = codigo.substring(2, 4);
+            codigo = codigo.substring(0, 6);
+            $.when(RefrescaJaladeras(base, "")).done(function () {
+                codigo = codigoBK;                
+
+                var nomTipo = "";
+                var nomBase = "";
+                var nomColor = "";
+                var nomVeta = "";
+                var nomCubrecanto = "";
+                var nomVariante = "";
+
+                var tieneJal = document.getElementById("tieneJaladera").value;
+                if (tieneJal) {
+                    var posJal = document.getElementById("ADNPosicionJaladera").value;
+                    var accion = "/Editor/GetMaxMin?codigo=" + codigo + "&posicion=" + posJal;
+
+                }
+                else {
+                    var accion = "/Editor/GetMaxMin?codigo=" + codigo + "&posicion=";
+                }
+                
+                $.when(getMaxMin(codigoBK, posJal)).done(function () {
+                    //
+                });
+                function getMaxMin(codigoBK, posJal) {
+                    return $.ajax({
+                        url: accion,
+                        success: function (data) {
+                            //alert("al-max: " + data.AltoMax + "  al-min: " + data.AltoMin + "  an-max: " + data.AnchoMax + "  an-min: " + data.AnchoMin);
+                            $("#lblAltoMaxMin").empty();
+                            $("#lblAltoMaxMin").html("<div style='font-size:9px; z-index:100'>Alto máximo: " + data.AltoMax + "<br />Alto minimo: " + data.AltoMin + "</div>");
+                            var alto = $("#alto").data("kendoNumericTextBox");
+                            //alto.value(data.AltoMin);
+                            alto.min(data.AltoMin);
+                            alto.max(data.AltoMax);
+
+                            $("#lblAnchoMaxMin").empty();
+                            $("#lblAnchoMaxMin").html("<div style='font-size:9px; z-index:100'>Ancho máximo: " + data.AnchoMax + "<br />Ancho minimo: " + data.AnchoMin + "</div>");
+                            var ancho = $("#ancho").data("kendoNumericTextBox");
+                            //ancho.value(data.AnchoMin);
+                            ancho.max(data.AnchoMax);
+                            ancho.min(data.AnchoMin);
+                        },
+                        error: function (e) {
+                            alert("Error al determinar maximos y minimos");
+                        }
+                    });
+                }
+
+                $.when(bTipo(), bBase(), bColor(), bVeta(), bCubrecanto(), bVariante()).done(function () {
+                    $("#pasos").append("<div id='divTipo'><button id='btnTipo' style='width:100px'>Tipo: " + nomTipo + "</button></div>");
+                    $("#pasos").append("<div id='divBase'><button id='btnBase' style='width:100px'>Base: " + nomBase + "</button></div>");
+                    $("#pasos").append("<div id='divColor'><button id='btnColor' style='width:100px'>Color: " + nomColor + "</button></div>");
+                    $("#pasos").append("<div id='divVeta'><button id='btnVeta' style='width:100px'>Veta: " + nomVeta + "</button></div>");
+                    $("#pasos").append("<div id='divCubrecanto'><button id='btnCubrecanto' style='width:100px'>Cubrecanto: " + nomCubrecanto + "</button></div>");
+                    $("#pasos").append("<div id='divVariante'><button id='btnVariante' style='width:100px'>Variante: " + nomVariante + "</button></div>");
+                    Botonizar();
+                });
+                function bTipo() {                    
+                    return $.ajax({
+                        url: "/Editor/GetNomTipo?tipo=" + codigoBK.substring(0, 2),
+                        success: function (data) {
+                            nomTipo = data;                            
+                        },
+                        error: function (e) {
+                            alert("Error al crear botones");
+                        }
+                    });
+                }
+                
+                function bBase() {                    
+                    return $.ajax({
+                        url: "/Editor/GetNomBase?aBase=" + codigoBK.substring(2, 4),
+                        success: function (data) {
+                            nomBase = data;                            
+                        },
+                        error: function (e) {
+                            alert("Error al crear botones");
+                        }
+                    });
+                }
+                
+                function bColor() {                    
+                    return $.ajax({
+                        url: "/Editor/GetNomColor?color=" + codigoBK.substring(4, 6),
+                        success: function (data) {
+                            nomColor = data;                            
+                        },
+                        error: function (e) {
+                            alert("Error al crear botones");
+                        }
+                    });
+                }
+                                
+                function bVeta() {                    
+                    return $.ajax({
+                        url: "/Editor/GetNomVeta?veta=" + codigoBK.substring(6, 7),
+                        success: function (data) {
+                            nomVeta = data;                            
+                        },
+                        error: function (e) {
+                            alert("Error al crear botones");
+                        }
+                    });
+                }
+                
+                function bCubrecanto() {                    
+                    return $.ajax({
+                        url: "/Editor/GetNomCubrecanto?cubrecanto=" + codigoBK.substring(7, 9),
+                        success: function (data) {
+                            nomCubrecanto = data;                            
+                        },
+                        error: function (e) {
+                            alert("Error al crear botones");
+                        }
+                    });
+                }
+                
+                function bVariante() {                    
+                    return $.ajax({
+                        url: "/Editor/GetNomVariante?variante=" + codigoBK.substring(10, 12),
+                        success: function (data) {
+                            nomVariante = data;                            
+                        },
+                        error: function (e) {
+                            alert("Error al crear botones");
+                        }
+                    });
+                }
+                
+
+            });
+
+        }
+        if (document.getElementById("EsEdicion").value == 1) {            
+            $.ajax({
+                url: "/Editor/GetMaxMin?codigo=" + adn + "&posicion=" + adn.substring(6, 7),
+                success: function (data) {
+                    if (adn.substring(6, 7) == "H") {
+                        altoMin = data.AnchoMin;
+                        altoMax = data.AnchoMax;
+                        anchoMin = data.AltoMin;
+                        anchoMax = data.AltoMax;
+                    }
+                    else {
+                        altoMin = data.AltoMin;
+                        altoMax = data.AltoMax;
+                        anchoMin = data.AnchoMin;
+                        anchoMax = data.AnchoMax;
+                    }
+
+                    var alcb = $("#alto").data("kendoNumericTextBox").value();
+                    var ancb = $("#ancho").data("kendoNumericTextBox").value();
+                    //alert("alto: " + alcb + " ancho: " + ancb);
+
+                    $("#altoContn").empty();
+                    $("#altoContn").append('<input id="alto" type="number" style="width:90px" />');
+                    $("#alto").width(90).kendoNumericTextBox({
+                        value: alcb,
+                        min: altoMin,
+                        max: altoMax,
+                        step: incrementoMultiplo,
+                        format: "#",
+                        options: {
+                            enabled: true
+                        }
+                    });
+
+                    $("#anchoContn").empty();
+                    $("#anchoContn").append('<input id="ancho" type="number" style="width:90px" />');
+                    $("#ancho").width(90).kendoNumericTextBox({
+                        min: anchoMin,
+                        max: anchoMax,
+                        value: ancb,
+                        step: 1,
+                        format: "#",
+                        options: {
+                            enabled: true
+                        }
+                    });
+
+                    $("#lblAltoMaxMin").empty();
+                    $("#lblAltoMaxMin").html("<div style='font-size:9px; z-index:100'>Alto máximo: " + altoMax + "<br />Alto minimo: " + altoMin + "</div>");
+                    $("#lblAnchoMaxMin").empty();
+                    $("#lblAnchoMaxMin").html("<div style='font-size:9px; z-index:100'>Ancho máximo: " + anchoMax + "<br />Ancho minimo: " + anchoMin + "</div>");
+
+                    $.ajax({
+                        url: "/Editor/GetMaxMin?codigo=" + adn + "&posicion=" + adn.substring(6, 7),
+                        success: function (data) {
+                            //altoMin = data.AltoMin;
+                            //altoMax = data.AltoMax;
+                            //anchoMin = data.AnchoMin; 
+                            //anchoMax = data.AnchoMax;
+                            sublinea = data.Sublinea;
+                            posicion = data.Posicion;
+                            multiplo70 = data.Multiplo70;
+                            multiplo72 = data.Multiplo72;
+                            multiplo76 = data.Multiplo76;
+                            multiplo80 = data.Multiplo80;
+
+                            //alert("punto 1");
+
+                            var combobox = $("#comboMultiplo").data("kendoComboBox");
+                            combobox.select(combobox.ul.children().eq(0));
+                            var estSel = $("#comboMultiplo").data("kendoComboBox");
+
+                            //alert("punto 2");
+
+                            $("#comboAltoMultiplo").kendoDropDownList({
+                                dataSource: {
+                                    transport: {
+                                        read: {
+                                            dataType: "json",
+                                            url: "/Editor/GetMultiplos?codigo=" + adn + "&estandar=" + estSel.value()
+                                        }
+                                    }
+                                }
+                                //index: 0
+                            });
+
+                            //var cb = $("#comboAltoMultiplo").data("kendoComboBox");
+                            //cb.datasource.read();
+                            //alert("punto 3");
+                            if (data.Multiplo70 > 0) {
+                                //alert("data.Multiplo70 > 0");
+                                $("#divMultiplo").show();
+                                $("#divAltoMultiplo").show();
+                                document.getElementById("capturaAltoMultiplo").value = 1;
+                                $("#altoEspacio").hide();
+                            }
+                            else {
+                                //alert("data.Multiplo70 > 0 ELSE");
+                                $("#divMultiplo").hide();
+                                $("#divAltoMultiplo").hide();
+                                $("#altoEspacio").show();
+                                document.getElementById("capturaAltoMultiplo").value = 0;
+                            }
+                            //alert("punto 4");
+                        }
+                    });
+                }
+            });
+        }
+
+        //var vidVentanasItems = {};
+        function RefrescaSelVidrio() {
+
+            $.when(GetVidVentanas()).done(function () {
+                //alert("ya termino getvidventanas()");
+                var vDs = new kendo.data.DataSource({
+                    data: vidVentanasItems
+                });
+
+                $("#lvSelVidrio").kendoListView({
+                    navigatable: true,
+                    selectable: true,
+                    pageSize: 5,
+                    //template: templateVidVent,                    
+                    //dataSource: {
+                    //    data: vDs
+                    //},
+                    template: kendo.template($("#templateVidrioVentana").html()),
+                    change: function () {
+                        //handle event
+                        var index = this.select().index(),
+                        dataItem = this.dataSource.view()[index];
+                        //log("id: " + dataItem.id + ", text: " + dataItem.text);
+                        //alert(dataItem.Codigo);
+                        document.getElementById("vidrioSel").value = dataItem.Codigo;
+
+                        document.getElementById("tieneVidrio").value = true;
+                        document.getElementById("ADNVidrioBase").value = "VD";
+                        document.getElementById("ADNVidrioColor").value = dataItem.Codigo;
+                        //alert(document.getElementById("ADNVidrioColor").value);
+                    }
+                });
+                //vDs.read();
+                var lvv = $("#lvSelVidrio").data("kendoListView");
+                lvv.setDataSource(vDs);
+            });                                 
+        }
+
+        function GetVidVentanas() {
+            return $.ajax({
+                url: "/Editor/GetVidriosVentana",
+                success: function (datos) {
+                    //document.getElementById("vidVentanasItems").value = JSON.stringify(datos.Elementos);
+                    //vidVentanasItems = JSON.stringify(datos.Elementos);
+                    vidVentanasItems = datos.Elementos;
+                    //alert("vidVentanasItems" + vidVentanasItems);
+                },
+                error: function () {
+                    alert("error al cargar vidrios");
+                }
+            });
+        }
+
+        function leeMedidasFijas() {
+            
+            $.ajax({
+                url: "/Editor/GetMedidasFijas?tipo=PV" + "&bas=XX",
+                success: function (data) {
+                    medidasFijas = data;
+
+                    $("#comboMedidasFijas").kendoDropDownList({
+                        dataSource: medidasFijas,
+                        select: function (e) {
+                            var item = e.item;
+                            document.getElementById("medidaFijaSel").value = item.text();
+                            //alert(document.getElementById("medidaFijaSel").value);                            
+                        },
+                        dataBound: function (e) {  //SELECCIONA LA PRIMERA MEDIDA DEL COMBO EN FORMA PROGRAMATICA AL OBTENER LOS DATOS
+                            var item = e.item;
+                            document.getElementById("medidaFijaSel").value = medidasFijas[0];
+                            //alert(medidasFijas[0]);
+                        }
+                    });
+                },
+                error: function (e) {
+                    alert("error al leer medidas fijas");
+                }
+            });
+        }
+
+        function CargaMedidasFijas() {
+            $("#divMedidasFijas").show();
+            //alert("va a cargar medidas fijas");
+            leeMedidasFijas();                       
+        }
+        
+        
+    });
+
+    function tsOnSelect(e) {
+        //alert("'" + $(e.item).find("> .k-link").text().trim() + "'");
+        var i = $(e.item).find("> .k-link").text().trim();
+        if (i != "Selección de vidrio para ventana") {                  
+            //alert("no es");
+            $("#tabstrip-3").attr("aria-expanded", "false");
+            $("#tabstrip-3").css("display", "none");
+            $("#tabstrip-3").attr("aria-hidden", "true");
+            $("#tabstrip-3").removeClass("k-state-active");
+        }
+        else {
+            //alert("si es");
+            $("#tabstrip-3").addClass("k-state-active");
+            $("#tabstrip-3").css("display", "block");
+            $("#tabstrip-3").attr("aria-expanded", "true");
+            $("#tabstrip-2").attr("aria-hidden", "true");
+            $("#tabstrip-1").attr("aria-hidden", "true");
+            $("#tabstrip-3").removeAttr("aria-hidden");
+
+            //$("#tabstrip").append("<div id='vidVentanasContainer' style='overflow:auto;'><div id='lvSelVidrio' style='z-index:auto; min-width:100px; min-height:100px;'></div></div>");
+            //$("#vidrioVentanas").append("<div id='lvSelVidrio'></div>");
+
+            //$("#lvSelVidrio").kendoListView({
+            //    navigatable: true,
+            //    selectable: true,
+            //    //template: "<li>${FirstName} ${LastName}</li>",
+            //    template: templateVidrioVentana,
+            //    dataSource: {
+            //        data: [
+            //            {
+            //                Codigo: "Joe",
+            //                Nomre: "Smith"
+            //            },
+            //            {
+            //                Codigo: "Jane",
+            //                Nombre: "Smith"
+            //            }]
+            //    }
+            //});
+        }
+    }    
+
+    $("#tabstrip").kendoTabStrip({
+        animation: {
+            open: {
+                effects: "fadeIn"
+            }
+        },
+        select: tsOnSelect
+    });
+
+    //$("#btnSelJaladera").click(function () {
+    //    var win = $("#test", window.parent.document).data("kendoWindow");
+    //    win.refresh({
+    //        url: "/Home/EdicionJaladera"
+    //    });
+    //    win.center();
+    //    win.open();
+    //    return false;
+    //});
+
+    //$("#test", window.parent.document).kendoWindow({
+    //    actions: ["Close", "Minimize"],
+    //    modal: false,
+    //    pinned: false,
+    //    position: {
+    //        top: 150,
+    //        left: 200
+    //    },
+    //    width: "500px",
+    //    height: "400px",
+    //    visible: false
+    //});
+    
+</script>
+
+<style scoped>
+        #tabstrip {
+            padding: 5px;
+            min-width: 700px;
+            max-width: 700px;            
+        }
+        #contenido {
+            margin-top: 5px;
+            float:left;            
+            overflow:auto;
+        }
+        #lvSelVidrio {
+            min-height: 125px;
+            max-height: 125px;
+            overflow:scroll;
+        }
+        #jaladeras {
+            overflow:auto;
+        }
+        #listaJal {
+            min-height: 125px;
+            max-height: 125px;
+            overflow:scroll;
+        }
+        #listaTipoJal {
+            min-height: 100px;
+            max-height: 100px;
+            min-width:150px;
+            max-width:150px;
+            /*margin-top:5px;*/
+            margin-bottom:5px;
+            overflow:auto;
+            float:left;
+        }
+        #listaPosJal {
+            min-height: 100px;
+            max-height: 100px;
+            min-width:150px;
+            max-width:150px;
+            /*margin-top:5px;*/
+            margin-bottom:5px;            
+            overflow:auto;
+            float:right;
+        }
+
+        .demo-section {
+            padding: 5px;
+            width: 577px;
+        }
+        #selector {
+            padding: 5px;
+            margin-bottom: -1px;
+            min-width: 717px;
+            max-width: 717px;
+            min-height: 130px;
+            max-height: 130px;
+        }        
+        .product {
+            float: left;
+            position: relative;
+            width: 90px;
+            height: 110px;
+            margin: 0;
+            padding: 3px;
+        }
+        .product img {
+            width: 70px;
+            /*max-width: 70px;*/
+            height: 70px;
+            /*max-height: 70px;*/
+        }
+        .product h3 {
+            margin: 0;
+            padding: 3px 5px 0 0;
+            max-width: 96px;
+            overflow: hidden;
+            line-height: 1.1em;
+            font-size: .8em;
+            font-weight: normal;
+            text-transform: uppercase;
+            /*color: #555;*/
+        }
+        .product p {
+            visibility: hidden;
+        }
+        .product:hover p {
+            visibility: visible;
+            position: absolute;
+            width: 110px;
+            height: 110px;
+            top: 0;
+            margin: 0;
+            padding: 0;
+            line-height: 110px;
+            vertical-align: middle;
+            text-align: center;
+            color: #fff;
+            background-color: rgba(0,0,0,0.75);
+            transition: background .2s linear, color .2s linear;
+            -moz-transition: background .2s linear, color .2s linear;
+            -webkit-transition: background .2s linear, color .2s linear;
+            -o-transition: background .2s linear, color .2s linear;
+        }
+        .productBase img {
+            width: 70px;
+            height: 70px;
+        }
+        .productBase h3 {
+            margin: 0;
+            padding: 3px 5px 0 0;
+            max-width: 96px;
+            overflow: hidden;
+            line-height: 1.1em;
+            font-size: .8em;
+            font-weight: normal;
+            text-transform: uppercase;
+            /*color: #555;*/
+        }
+        .productBase p {
+            visibility: hidden;
+        }
+        .productBase:hover p {
+            visibility: visible;
+            position: absolute;
+            width: 110px;
+            height: 110px;
+            top: 0;
+            margin: 0;
+            padding: 0;
+            line-height: 110px;
+            vertical-align: middle;
+            text-align: center;
+            color: #fff;
+            background-color: rgba(0,0,0,0.75);
+            transition: background .2s linear, color .2s linear;
+            -moz-transition: background .2s linear, color .2s linear;
+            -webkit-transition: background .2s linear, color .2s linear;
+            -o-transition: background .2s linear, color .2s linear;
+        }
+        .k-listview:after {
+            content: ".";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+    </style>

@@ -1,0 +1,28 @@
+﻿@model PortalInnovika.Models.Proyecto
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DatosEmbarque</title>
+</head>
+<body>
+    <div style="overflow:auto; font-family:Helvetica, Arial; font-size:12px; background-color:aliceblue">
+        <div><h3>Información de embarque</h3></div>
+        <hr />
+        <div style="float:left; width:100px; font-weight:bold">Proyecto: </div><div>@Model.IdProyecto</div><br />
+        <div style="float:left; width:100px; font-weight:bold">Cotización: </div><div>@Model.CodigoInterno</div><br />
+        <div style="float:left; width:100px; font-weight:bold">Pedido: </div><div>@Model.PedidoInterno</div><br />
+        <div style="float:left; width:100px; font-weight:bold">Orden prod.: </div><div>@Model.OrdenProdInterna</div><br />
+        <div style="float:left; width:100px; font-weight:bold">Factura: </div><div>@Model.FacturaInterna</div><br />
+        <div style="float:left; width:100px; font-weight:bold">Lote prod.: </div><div>@Model.LoteProdInterno</div><br />
+        <div style="float:left; width:100px; font-weight:bold">Guía: </div><div>@Model.GuiaEmbarque</div><br />
+    </div>
+    <hr />
+</body>
+</html>

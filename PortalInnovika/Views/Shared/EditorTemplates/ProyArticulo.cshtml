@@ -1,0 +1,57 @@
+@model PortalInnovika.Models.ProyArticulo
+
+<div style="background-color: aliceblue; padding:4px">
+    @Html.HiddenFor(x => x.Proyecto)
+    @Html.HiddenFor(x => x.IdArticulo)
+
+    @Html.HiddenFor(x => x.Unidad)
+    @Html.HiddenFor(x => x.ADNTipo)
+    @Html.HiddenFor(x => x.ADNBase)
+    @Html.HiddenFor(x => x.ADNColor)
+    @Html.HiddenFor(x => x.ADNCubrecanto)
+    @Html.HiddenFor(x => x.ADNVeta)
+    @Html.HiddenFor(x => x.ADNVariante)
+    @Html.HiddenFor(x => x.CodigoADNInterno)
+    @Html.HiddenFor(x => x.tieneJaladera)
+    @Html.HiddenFor(x => x.tieneVidrio)
+    @Html.HiddenFor(x => x.tieneProtecta)
+    @Html.HiddenFor(x => x.tieneOrificios)
+    @Html.HiddenFor(x => x.ADNJaladeraBase)
+    @Html.HiddenFor(x => x.ADNJaladera)
+    @Html.HiddenFor(x => x.ADNJaladeraOpcion)
+    @Html.HiddenFor(x => x.ADNPosicionJaladera)
+    @Html.HiddenFor(x => x.ADNProtectaBase)
+    @Html.HiddenFor(x => x.ADNProtectaColor)
+    @Html.HiddenFor(x => x.ADNOrificios)
+    @Html.HiddenFor(x => x.TmUltimoCambio)
+    @Html.HiddenFor(x => x.EsConceptoDeProyecto)
+    @Html.HiddenFor(x => x.tieneColorExclusivo)      
+
+@*    <p>
+        @Html.LabelFor(x => x.Alto) : @Html.EditorFor(x => x.Alto) 
+        @Html.LabelFor(x => x.Ancho): @Html.EditorFor(x => x.Ancho) 
+        @Html.LabelFor(x => x.Cantidad): @Html.EditorFor(x => x.Cantidad)
+    </p>*@
+
+@*    <table>
+        <tr>
+            <td>Alto: </td>
+            <td>@Html.EditorFor(x => x.Alto)</td>
+            <td>Ancho: </td>
+            <td>@Html.EditorFor(x => x.Ancho)</td>
+            <td>Cantidad: </td>
+            <td>@Html.EditorFor(x => x.Cantidad)</td>
+        </tr>
+    </table>*@
+
+    <div style="overflow:auto;">
+        <div style="float:left;">Cantidad: </div>
+        <div style="float:left; margin-left:5px;">@Html.EditorFor(x => x.Cantidad)</div>
+
+        <div style="float:left; margin-left:15px">Alto: </div>
+        <div style="float:left; margin-left:5px">@Html.EditorFor(x => x.Alto)</div>
+
+        <div style="float:left; margin-left:15px"">Ancho: </div>
+        <div style="float:left; margin-left:5px">@Html.EditorFor(x => x.Ancho)</div>                   
+    </div>
+</div>

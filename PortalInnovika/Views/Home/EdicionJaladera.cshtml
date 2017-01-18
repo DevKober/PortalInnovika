@@ -1,0 +1,35 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+@{
+    ViewBag.Title = "EdicionJaladera";
+}
+
+<p>Edicion de jaladera</p>
+<p id="loc"></p>
+
+<div id="listaJal"></div>
+
+<script>
+    $(function () {
+        $("#listaJal").kendoListView({
+            navigatable: true,
+            dataSource: ds,
+            template: kendo.template(template),
+            selectable: true,
+            change: onChange,
+            dataBound: onDataBound
+        });
+    });
+    
+</script>
+
+<style scoped>
+    #listaJal {
+        max-width: 300px;
+        min-width: 300px;
+    }
+</style>

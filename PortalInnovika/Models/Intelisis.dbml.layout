@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 46.375" name="Intelisis">
+  <DataContextMoniker Name="/IntelisisDataContext" />
+  <nestedChildShapes>
+    <classShape Id="108497a7-234d-47a2-8076-95aa75d05d43" absoluteBounds="3.25, 0.875, 2, 45.2310205078125">
+      <DataClassMoniker Name="/IntelisisDataContext/Cte" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9a261fb7-60fd-40e6-9a2d-53d795a28db3" absoluteBounds="3.265, 1.335, 1.9700000000000002, 44.6710205078125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="dcc550cd-9d6d-4802-99e3-2990cc500276" absoluteBounds="0.75, 0.75, 2, 38.692771809895831">
+      <DataClassMoniker Name="/IntelisisDataContext/Art" />
+      <nestedChildShapes>
+        <elementListCompartment Id="45e86156-93b4-4f95-836f-5508b7068a0d" absoluteBounds="0.765, 1.21, 1.9700000000000002, 38.132771809895829" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="9243de62-3fb2-4b7b-a9a0-0935b4d34cd4" absoluteBounds="5.75, 1.25, 2, 5.4246240234375">
+      <DataClassMoniker Name="/IntelisisDataContext/Descuento" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9be11c09-ccdb-4675-bce0-cfc34112a524" absoluteBounds="5.765, 1.71, 1.9700000000000002, 4.8646240234375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

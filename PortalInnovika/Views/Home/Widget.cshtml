@@ -1,0 +1,450 @@
+﻿@model PortalInnovika.Models.UserProfile
+
+@Html.Hidden("Cliente", Model.ClienteERP.Trim())
+@Html.Hidden("Estatus", "")
+
+<link href="~/Content/kendo/2013.1.319/kendo.common.min.css" rel="stylesheet" />
+<link href="~/Content/kendo/2013.1.319/kendo.blueopal.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.9.1.min.js"></script>
+<script src="~/Scripts/kendo/2013.1.319/kendo.web.min.js"></script>
+<link href="~/Content/bootstrap/bootstrap.css" rel="stylesheet" />
+
+<script>
+    var msgPersonalizado = '@(ViewBag.msgPersonalizado)';
+    var msgInhabil = '@(ViewBag.msgInhabil)';
+</script>
+
+@*<div style="background-color:aliceblue; padding: 5px;  border-style: solid; border-width: thin;">
+    <span style="background-color: gray; padding: 5px">test...</span>
+</div>*@
+<div style="background-color: aliceblue; padding: 5px;  border: solid thin; border-color: aliceblue">
+<div class="navbar">
+    <div class="navbar-inner">
+        <div class="container">                             
+          @*<a id="todos" class="brand" href="#">Todos</a>*@
+          <ul class="nav">
+              <li><a id="todos" href="#">Todos</a></li>
+              <li><a id="preproduccion" href="#">Preproducción</a></li>
+              <li><a id="pagados" href="#">Pagados</a></li>
+              <li><a id="enproduccion" href="#">En producción</a></li>
+              <li><a id="facturados" href="#">Facturados</a></li>
+              <li><a id="terminados" href="#">Embarcados</a></li>
+              <li><a id="cancelados" href="#">Cancelados</a></li>              
+          </ul>
+
+        </div>
+    </div>
+</div>
+</div>
+<div class="content-wrapper" style="background-color: aliceblue; padding: 3px;  border-style: solid; border-width: thin; border-color: #94c0d2;">
+    <div id="proyectos" class="float-left-inn" style="font-size: 12px">
+
+    </div>
+
+    <div id="datosproy" class="float-right-inn" style="background-color: aliceblue; padding: 4px">
+
+    </div>
+
+    <div id="articulos" class="float-right-inn" style="font-size: 12px">
+        
+    </div>
+
+    <br class="clear-inn"/>
+
+</div>
+<div class="content-wrapper" style="background-color: aliceblue; padding: 3px;  border-style: solid; border-width: thin; border-color: #94c0d2;">
+    <div class="navbar-outer">
+        <div class="containter">
+            <button id="nvoProy" type="button" class="btn btn-navbar">
+                Nuevo        
+            </button>
+            <button id="btnCopiar" type="button" class="btn btn-navbar">
+                Copiar
+            </button>
+            <button id="btnEliminar" type="button" class="btn btn-navbar">
+                Eliminar
+            </button>
+            @*<button id="modProy" type="button" class="btn btn-navbar">
+                Modificar
+            </button>*@
+            <button id="btnConsultar" type="button" class="btn btn-navbar">
+                Consultar
+            </button>
+            <button id="btnSolicitar" type="button" class="btn btn-navbar">
+                Solicitar
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+
+        //TEMPORALMENTE SE DESHABILITA EL BOTON DE COPIAR
+        //$("#btnCopiar").attr("disabled", "disabled");
+        //
+
+        function ToJavaScriptDate(value) {
+            var pattern = /Date\(([^)]+)\)/;
+            var results = pattern.exec(value);
+            var dt = new Date(parseFloat(results[1]));
+            return dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear();            
+        }
+
+        var proyecto;
+        var cteHidden = document.getElementById('Cliente').value;
+        var statusHidden = "-";
+
+        var ds = new kendo.data.DataSource({
+            transport: {
+                read: { 
+                    url: "/Home/GetArticulosProyecto",
+                    data: {proyecto: proyecto}
+                }
+            }
+        });
+
+        //if (msgPersonalizado != null) {
+        //    alert(msgPersonalizado);
+        //}
+
+        //if (msgInhabil != null) {
+        //    alert(msgInhabil);
+        //}
+
+        ////MUESTRA MENSAJE PARAMETRIZADO EN CASO DE EXISTIR
+        //$.ajax({
+        //    url: "/Home/GetMensajePersonalizado",
+        //    success: function (data) {
+        //        if (data != "") {
+        //            alert(data);
+        //        }
+        //    }
+        //});
+
+        ////MUESTRA MENSAJE DE DIA INHABIL EN CASO DE EXISTIR
+        //$.ajax({
+        //    url: "/Home/GetMensajeInhabil",
+        //    success: function (data) {
+        //        if (data != "") {
+        //            alert(data);
+        //        }
+        //    }
+        //});
+
+        function refresca(proy) {
+            //GRID ARTICULOS
+            ////////////////                                         
+            var identificador = '';            
+            var entregaTentativa = '';
+            var fechaAprobado = '';
+            var fechaValidado = '';
+            var lote = '';
+            if (proy["Identificador"] == null) {
+                identificador = '';
+            }
+            else {
+                identificador = proy["Identificador"];
+            }
+
+            if (proy["LoteProdInterno"] == null) {
+                lote = '';
+            }
+            else {
+                lote = proy["LoteProdInterno"];
+            }
+
+            if (proy["TmAprobado"] == null) {
+                fechaAprobado = '';
+            }
+            else {
+                fechaAprobado = ToJavaScriptDate(proy["TmAprobado"]);
+            }
+            
+            if (proy["TmEntregaTentativa"] == null) {
+                entregaTentativa = '';                
+            }
+            else {
+                entregaTentativa = ToJavaScriptDate(proy["TmEntregaTentativa"]);
+            }
+
+            if (proy["TmValidado"] == null) {
+                fechaValidado = '';
+            }
+            else {
+                fechaValidado = ToJavaScriptDate(proy["TmValidado"]);
+            }
+            //alert(proy["TmEntregaTentativa"]);
+
+            var detalle = "<div style='overflow: auto; border: solid 1px; padding: 5px; border-color: #94c0d2;'>";
+            detalle += "<div class='float-left-inn' style='width:50%;'><h6><b>Proyecto: </b>" + proy["Proyecto"] + "</h6>";            
+            detalle += "<h6><b>Identificador: </b>" + identificador + "</h6>";
+
+            if ((proy["Estatus"] == "Facturado") || (proy["Estatus"] == "Embarcado")) {
+                //detalle += "<h6><b>Lote: </b>" + lote + "</h6>";
+                detalle += "<button id='btnEmbarque' onclick='DatosEmbarque(" + proy["Proyecto"] + ");' style='width:130px; height:22px; font-size: 10px; padding:4px;'>Datos de embarque</button>";
+            }
+
+            detalle += "</div>";
+            detalle += "<div style='margin: 2px'><h6><b>Fecha de validación: </b>" + fechaValidado + "</h6>";
+            detalle += "<h6><b>Entrega proyectada:</b> " + entregaTentativa + "</h6>";
+            if (proy["TieneMuebles"]) {
+                detalle += "<h6><b>PROYECTO DE MODULOS</b></h6>";
+            }
+            detalle += "</div>";
+            
+            detalle += "</div>";
+            $("#datosproy").html(detalle);
+
+            $("#articulos").kendoGrid({
+                selectable: "single",                
+                scrollable: { virtual: true },
+                
+                columns: [
+                    { field: "Cantidad", title: "Cantidad", width: 55, attributes: { style: "text-align: right;" }, headerAttributes: { style: "text-align: center;" } },
+                    { field: "Ancho", title: "Ancho", width: 50, attributes: { style: "text-align: right;" }, headerAttributes: { style: "text-align: center;" } },
+                    { field: "Alto", title: "Alto", width: 50, attributes: { style: "text-align: right;" }, headerAttributes: { style: "text-align: center;" } },
+                    { field: "Descripcion", title: "Articulo", width: 290, headerAttributes: { style: "text-align: center;" } }
+                ],
+                heigth: 500,
+                resizable: true,
+                dataSource: new kendo.data.DataSource({
+                    pageSize: 12,
+                    transport: {
+                        read: {
+                            cache: false,
+                            url: "/Home/GetArticulosProyecto",
+                            data: { proyecto: proy["Proyecto"] },
+                            type: "GET",
+                            dataType: "json"
+                        }
+                    }
+                })
+            });
+        }
+
+        function onChange(arg) {          
+            //p = this.dataItem(this.select()).Proyecto;    
+            $("#articulos").empty();
+            $("#datosproy").empty();
+            //$("#articulos").kendoGrid();
+            p = this.dataItem(this.select());
+            proyecto = p;
+            refresca(p);
+        }
+
+        //GRID PROYECTOS
+        ////////////////        
+
+        var gridProyectos = $("#proyectos").kendoGrid({
+            selectable: "single",
+            pageable: {
+                buttonCount: 5,
+                messages: {
+                    display: "{0} - {1} de {2} elementos", //{0} is the index of the first record on the page, {1} - index of the last record on the page, {2} is the total amount of records
+                    empty: "No hay elementos para mostrar",
+                    page: "Página",
+                    of: "de {0}", //{0} is total amount of pages
+                    itemsPerPage: "elementos por página",
+                    first: "Ir a la primer página",
+                    previous: "Ir a la página anterior",
+                    next: "Ir a la siguiente página",
+                    last: "Ir a la utlima página",
+                    refresh: "Refrescar"
+                }
+            },
+            scrollable: true,
+            navigatable: true,
+            resizable: true,
+            change: onChange,
+            columns: [
+                { field: "Proyecto", title: "Proyecto", width: 100, attributes: { style: "text-align: right;" }, headerAttributes: { style: "text-align: right;" } },
+                { field: "Identificador", title: "Ref. p/cliente", width: 200, headerAttributes: { style: "text-align: center;" } },
+                { field: "Estatus", title: "Estatus", width: 120 }
+            ],
+            //filterable: true,
+            dataSource: new kendo.data.DataSource({
+                pageSize: 15,
+                transport: {
+                    read: {
+                        url: "/Home/Get?status=" + statusHidden,
+                        data: { cliente: cteHidden }
+                    }
+                }
+            }),
+            dataBound: function (e) {
+                var grid = $("#proyectos").data("kendoGrid");
+                grid.select("tr:eq(1)");
+                return false;
+            }
+        });
+        //var grid = $("#proyectos").data("kendoGrid");
+        //grid.select("tr:eq(1)");
+
+
+        /*********************************
+        FILTROS DE ESTATUS DE PROYECTOS
+        *********************************/
+
+        //FILTRO TODOS
+        var todos = document.getElementById("todos");
+        todos.onclick = function () {
+            gridProyectos.data("kendoGrid").dataSource.filter({ field: "Estatus", operator: "contains", value: "o" });
+            var grid = $("#proyectos").data("kendoGrid");
+            grid.select("tr:eq(1)");
+            return false;
+        }
+
+        //FILTRO PRECOTIZADOS
+        var preprod = document.getElementById("preproduccion");
+        preprod.onclick = function () {
+            //gridProyectos.data("kendoGrid").dataSource.filter({ field: "Estatus", operator: "eq", value: "Precotizado" });
+            gridProyectos.data("kendoGrid").dataSource.filter({
+                field: "Estatus", operator: function (item) {
+                    var v = "Cotización|Recotización|En revisión|Rechazado|Por Pagar";
+                    return ((item == "Cotización") || (item == "Recotización") || (item == "En revisión") || (item == "Rechazado") || (item == "Por Pagar"));
+                }
+            });
+            var grid = $("#proyectos").data("kendoGrid");
+            grid.select("tr:eq(1)");
+            return false;
+        }
+
+        //FILTRO EN PRODUCCIÓN
+        var enprod = document.getElementById("enproduccion");
+        enprod.onclick = function () {
+            //gridProyectos.data("kendoGrid").dataSource.filter({ field: "Estatus", operator: "eq", value: "En Produccion" });
+            gridProyectos.data("kendoGrid").dataSource.filter({
+                field: "Estatus", operator: function (item) {
+                    var v = "Cotización|Recotización|En revisión|Rechazado|Por Pagar";
+                    return ((item == "En producción"));
+                }
+            });
+            var grid = $("#proyectos").data("kendoGrid");
+            grid.select("tr:eq(1)");
+            return false;
+        }
+
+        //FILTRO FACTURADOS
+        var facturados = document.getElementById("facturados");
+        facturados.onclick = function () {
+            gridProyectos.data("kendoGrid").dataSource.filter({ field: "Estatus", operator: "eq", value: "Facturado" });
+            var grid = $("#proyectos").data("kendoGrid");
+            grid.select("tr:eq(1)");
+            return false;
+        }
+
+        //FILTRO TERMINADOS
+        var terminados = document.getElementById("terminados");
+        terminados.onclick = function () {
+            gridProyectos.data("kendoGrid").dataSource.filter({ field: "Estatus", operator: "eq", value: "Embarcado" });
+            var grid = $("#proyectos").data("kendoGrid");
+            grid.select("tr:eq(1)");
+            return false;
+        }
+
+        //FILTRO CANCELADOS
+        var cancelados = document.getElementById("cancelados");
+        cancelados.onclick = function () {
+            gridProyectos.data("kendoGrid").dataSource.filter({ field: "Estatus", operator: "eq", value: "Cancelado" });
+            var grid = $("#proyectos").data("kendoGrid");
+            grid.select("tr:eq(1)");
+            return false;
+        }
+
+        //FILTRO PAGADOS
+        var pagados = document.getElementById("pagados");
+        pagados.onclick = function () {
+            gridProyectos.data("kendoGrid").dataSource.filter({ field: "Estatus", operator: "eq", value: "Pagado" });
+            var grid = $("#proyectos").data("kendoGrid");
+            grid.select("tr:eq(1)");
+            return false;
+        }
+
+        /*****************************
+        ACCIONES DE BOTONES INFERIORES
+        *****************************/
+        $("#nvoProy").click(function () {
+            //nuevoProyecto(); //ESTA FUNCION ESTA EN LA VISTA Dashboard.cshtml
+            //var proy = proyecto["Proyecto"];
+            $.ajax({
+                //url: "/Home/NuevoProyecto?proyecto=" + proy,
+                url: "/Home/NuevoProyecto",
+                success: function (data) {
+                    var proy = data;
+                    edicionProyecto(proy);
+                }
+                //,
+                //error: function (e) {
+                //    alert("Error al crear nuevo proyecto");
+                //}
+            });
+        });
+
+        //$("#modProy").click(function () {
+        //    var proy = proyecto["Proyecto"];
+        //    edicionProyecto(proy);
+        //});
+
+        $("#btnConsultar").click(function () {
+            var proy = proyecto["Proyecto"];
+            edicionProyecto(proy);
+        });
+
+        $("#btnSolicitar").click(function () {
+            var proy = proyecto["Proyecto"];
+            var estatus = proyecto["Estatus"];
+            //alert(estatus + ".");
+            if ((estatus == "Cotización") || (estatus == "Rechazado")) {
+                $.ajax({
+                    url: "/Home/SolicitarProyecto?proy=" + proy,
+                    success: function (data) {
+                        alert("El proyecto: " + proy + " ha sido solicitado");
+                        document.location.href = '/Home/Dashboard';
+                    },
+                    error: function (data) {
+                        alert("Error: " + data);
+                    }
+                });
+            }
+            else {
+                alert("Este proyecto ya ha sido solicitado");
+            }
+        });
+
+        $("#btnCopiar").click(function () {
+            var proy = proyecto["Proyecto"];
+            $.ajax({
+                url: "/Home/ClonaProyecto?proy=" + proy,
+                success: function (data) {
+                    alert("En caso de que alguna pieza incluida en este proyecto este descontinuada el nuevo proyecto aparecera sin esa(s) piezas. Favor de revisar antes de solicitar");
+                    document.location.href = '/Home/Dashboard';
+                },
+                error: function (data) {
+                    alert("Error al copiar el proyecto");
+                }
+            });
+        });
+
+        $("#btnEliminar").click(function () {
+            var r = confirm("¿Esta seguro de eliminar el proyecto seleccionado?");
+            if (r == true) {
+                var proy = proyecto["Proyecto"];
+                if ((proyecto["Estatus"] == "Cotización") || (proyecto["Estatus"] == "Rechazado")) {
+                    $.ajax({
+                        url: "/Home/EliminarProyecto?proy=" + proy,
+                        success: function (data) {
+                            document.location.href = '/Home/Dashboard';
+                        },
+                        error: function (e) {
+                            alert("Error al eliminar proyecto");
+                        }
+                    });
+                }
+                else {
+                    alert("Solo puede eliminar cotizaciones que no han sido solicitadas.");
+                }
+            }
+        });
+    });
+</script>

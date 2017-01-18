@@ -1,0 +1,74 @@
+﻿@model IEnumerable<PortalInnovika.Models.ProyArticulo>
+
+@{
+    ViewBag.Title = "Detalle";
+}
+
+<form method="get">
+    <input type="text" id="proyecto" size="40" name="proyecto" />
+    <input type="submit" value="Buscar" />
+</form>
+
+<h2>Detalle del proyecto: @Model.FirstOrDefault().Proyecto </h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table cellpadding="10">
+    <tr>
+        <th>
+            @*@Html.DisplayNameFor(model => model.CodigoADNInterno)*@
+            Código
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Unidad)*@
+            Unidad
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Cantidad)*@
+            Cantidad
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Alto)*@
+            Alto
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Ancho)*@
+            Ancho
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Importe)*@
+            Importe
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CodigoADNInterno)
+        </td>
+        <td>            
+            @Html.DisplayFor(modelItem => item.Unidad)
+        </td>
+        <td>            
+            @Html.DisplayFor(modelItem => item.Cantidad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Alto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ancho)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Importe)
+        </td>
+        <td>
+@*            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,77 @@
+﻿@model PortalInnovika.Models.RegisterModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    <h2>Create a new account.</h2>
+</hgroup>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <fieldset>
+        <legend>Registration Form</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.UserName)
+                @Html.TextBoxFor(m => m.UserName)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.ConfirmPassword)
+                @Html.PasswordFor(m => m.ConfirmPassword)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.ClienteERP)
+                @Html.TextBoxFor(m => m.ClienteERP)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.NombreCompleto)
+                @Html.TextBoxFor(m => m.NombreCompleto)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.AgenteServicio)
+                @Html.EditorFor(m => m.AgenteServicio)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.PuedeExpress)
+                @Html.EditorFor(m => m.PuedeExpress)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.FleteraId)
+                @Html.EditorFor(m => m.FleteraId)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.FleteAutomatico)
+                @Html.EditorFor(m => m.FleteAutomatico)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.ClienteMuebles)
+                @Html.EditorFor(m => m.ClienteMuebles)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.ZonaImpuesto)
+                @Html.TextBoxFor(m => m.ZonaImpuesto, new { id = "txtZonaImpuesto", Value= "16%" })
+            </li>
+            <li>
+                @Html.LabelFor(m => m.ListaPreciosEsp)
+                @Html.TextBoxFor(m => m.ListaPreciosEsp, new { id = "txtListaPreciosEsp", Value= "(Precio Lista)" })
+            </li>
+        </ol>
+        <input type="submit" value="Register" />
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,1825 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="InnovikaComModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ArtADNCodigos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tipo" Type="char" MaxLength="2" />
+    <Property Name="Base" Type="char" MaxLength="2" />
+    <Property Name="Color" Type="char" MaxLength="2" />
+    <Property Name="Veta" Type="char" MaxLength="1" />
+    <Property Name="Cubrecanto" Type="char" MaxLength="2" />
+    <Property Name="Jaladera" Type="char" MaxLength="1" />
+    <Property Name="PosicionJaladera" Type="char" MaxLength="1" />
+    <Property Name="Variante" Type="char" MaxLength="2" />
+    <Property Name="Codigo" Type="char" MaxLength="20" />
+    <Property Name="Descripcion1" Type="varchar" MaxLength="100" />
+    <Property Name="Descripcion2" Type="varchar" MaxLength="255" />
+    <Property Name="Impuesto1" Type="float" />
+    <Property Name="Unidad" Type="varchar" MaxLength="50" />
+    <Property Name="PrecioLista" Type="money" />
+    <Property Name="Precio2" Type="money" />
+    <Property Name="Precio3" Type="money" />
+    <Property Name="Precio4" Type="money" />
+    <Property Name="Precio5" Type="money" />
+    <Property Name="Precio6" Type="money" />
+    <Property Name="Precio7" Type="money" />
+    <Property Name="Precio8" Type="money" />
+    <Property Name="Precio9" Type="money" />
+    <Property Name="Precio10" Type="money" />
+    <Property Name="Factor" Type="float" />
+    <Property Name="Estatus" Type="char" MaxLength="1" />
+    <Property Name="PrecioAdjuntos" Type="money" />
+  </EntityType>
+  <EntityType Name="ArtBases">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="char" MaxLength="2" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Estatus" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="Linea" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="RutaImagen" Type="nvarchar" MaxLength="300" />
+    <Property Name="Orden" Type="int" />
+  </EntityType>
+  <EntityType Name="ArtColores">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="char" MaxLength="2" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Estatus" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="RutaImagen" Type="nvarchar" MaxLength="300" />
+    <Property Name="Linea" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Orden" Type="int" />
+    <Property Name="SubLinea" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Exclusividad" Type="bigint" />
+    <Property Name="Intercambiable" Type="bit" Nullable="false" />
+    <Property Name="tieneVeta" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ArtColoresExclusivos">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="char" MaxLength="6" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+    <Property Name="RutaImagen" Type="nvarchar" MaxLength="300" />
+    <Property Name="Orden" Type="int" />
+    <Property Name="tieneVeta" Type="bit" Nullable="false" />
+    <Property Name="Usuario" Type="int" Nullable="false" />
+    <Property Name="Estatus" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ArtCubrecantos">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="char" MaxLength="2" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Estatus" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="Linea" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="RutaImagen" Type="nvarchar" MaxLength="300" />
+    <Property Name="Orden" Type="int" />
+  </EntityType>
+  <EntityType Name="ArticulosAdjuntos">
+    <Key>
+      <PropertyRef Name="IdArticuloAdjunto" />
+    </Key>
+    <Property Name="IdArticuloAdjunto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CodigoADN" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="CodigoADNAdjunto" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Cantidad" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ArticulosFav">
+    <Key>
+      <PropertyRef Name="IdArtFavorito" />
+    </Key>
+    <Property Name="IdArtFavorito" Type="bigint" Nullable="false" />
+    <Property Name="Usuario" Type="int" Nullable="false" />
+    <Property Name="Articulo" Type="bigint" Nullable="false" />
+    <Property Name="FechaFavorito" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="ArtJaladeraPos">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Estatus" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="Orden" Type="int" />
+    <Property Name="RutaImagen" Type="nvarchar" MaxLength="300" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'InnovikaCom.dbo.ArtJaladeras' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ArtJaladeras">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="char" MaxLength="2" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Estatus" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="Linea" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="RutaImagen" Type="nvarchar" MaxLength="300" />
+    <Property Name="Orden" Type="int" />
+    <Property Name="PuertaAnchoMin" Type="int" />
+    <Property Name="PuertaAltoMin" Type="int" />
+    <Property Name="FrenteAnchoMin" Type="int" />
+    <Property Name="FrenteAltoMin" Type="int" />
+  </EntityType>
+  <EntityType Name="ArtLineas">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Estatus" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+    <Property Name="RutaImagen" Type="nvarchar" MaxLength="300" />
+    <Property Name="Orden" Type="int" />
+    <Property Name="Escalado" Type="bit" />
+    <Property Name="NivelEscalado" Type="int" />
+  </EntityType>
+  <EntityType Name="ArtSubLinea">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Estatus" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="RutaImagen" Type="varchar" MaxLength="300" />
+    <Property Name="Orden" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ArtTipos">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="char" MaxLength="2" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Estatus" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="Orden" Type="int" />
+    <Property Name="RutaImagen" Type="nvarchar" MaxLength="300" />
+    <Property Name="tieneVidrio" Type="bit" Nullable="false" />
+    <Property Name="EquivalenteM2" Type="bit" Nullable="false" />
+    <Property Name="MinimoCompra" Type="int" Nullable="false" />
+    <Property Name="EquivalenciaM2" Type="decimal" Precision="12" Scale="2" />
+  </EntityType>
+  <EntityType Name="ArtVariantes">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="char" MaxLength="2" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Estatus" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="Orden" Type="int" />
+    <Property Name="RutaImagen" Type="nvarchar" MaxLength="300" />
+  </EntityType>
+  <EntityType Name="ArtVetas">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Estatus" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="Orden" Type="int" />
+    <Property Name="RutaImagen" Type="nvarchar" MaxLength="300" />
+  </EntityType>
+  <EntityType Name="BasesJaladeras">
+    <Key>
+      <PropertyRef Name="IdBaseJaladera" />
+    </Key>
+    <Property Name="IdBaseJaladera" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Base" Type="char" MaxLength="2" Nullable="false" />
+    <Property Name="Jaladera" Type="char" MaxLength="2" />
+  </EntityType>
+  <EntityType Name="CapturasPagos">
+    <Key>
+      <PropertyRef Name="idCapturaPago" />
+    </Key>
+    <Property Name="idCapturaPago" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Proyecto" Type="int" Nullable="false" />
+    <Property Name="TmCaptura" Type="datetime" Nullable="false" />
+    <Property Name="TmPago" Type="datetime" Nullable="false" />
+    <Property Name="Folio" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Monto" Type="money" Nullable="false" />
+    <Property Name="Observaciones" Type="varchar" MaxLength="300" />
+  </EntityType>
+  <EntityType Name="CatalogoCiudades">
+    <Key>
+      <PropertyRef Name="CatalogoCiudadId" />
+    </Key>
+    <Property Name="CatalogoCiudadId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Estado" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="Ciudad" Type="nvarchar" MaxLength="3" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="40" />
+    <Property Name="Rango1" Type="nvarchar" MaxLength="5" />
+    <Property Name="Rango2" Type="nvarchar" MaxLength="5" />
+    <Property Name="Rango3" Type="nvarchar" MaxLength="5" />
+    <Property Name="Rango4" Type="nvarchar" MaxLength="5" />
+    <Property Name="Especial" Type="nvarchar" MaxLength="10" />
+    <Property Name="Marcado" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CatalogoEstados">
+    <Key>
+      <PropertyRef Name="Estado" />
+    </Key>
+    <Property Name="Estado" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="20" />
+    <Property Name="Abreviacion" Type="nvarchar" MaxLength="7" />
+    <Property Name="Especial" Type="nvarchar" MaxLength="10" />
+    <Property Name="Marcado" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Documentos">
+    <Key>
+      <PropertyRef Name="IdDocumento" />
+    </Key>
+    <Property Name="IdDocumento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="100" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="100" />
+    <Property Name="Linea" Type="nvarchar" MaxLength="10" />
+    <Property Name="Fecha" Type="datetime" />
+  </EntityType>
+  <EntityType Name="EstatusCatalogos">
+    <Key>
+      <PropertyRef Name="IdEstatus" />
+    </Key>
+    <Property Name="IdEstatus" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="EstatusProcesos">
+    <Key>
+      <PropertyRef Name="IdEstatus" />
+    </Key>
+    <Property Name="IdEstatus" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="EstatusProyectos">
+    <Key>
+      <PropertyRef Name="IdEstatusProy" />
+    </Key>
+    <Property Name="IdEstatusProy" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="40" Nullable="false" />
+    <Property Name="Orden" Type="int" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="200" />
+    <Property Name="NombreCliente" Type="nvarchar" MaxLength="40" />
+  </EntityType>
+  <EntityType Name="Exclusividades">
+    <Key>
+      <PropertyRef Name="IdExclusividad" />
+    </Key>
+    <Property Name="IdExclusividad" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Usuario" Type="int" Nullable="false" />
+    <Property Name="Caducidad" Type="smalldatetime" Nullable="false" />
+    <Property Name="LineaExclusiva" Type="nvarchar" MaxLength="10" />
+    <Property Name="BaseExclusiva" Type="char" MaxLength="2" />
+    <Property Name="ColorExclusivo" Type="char" MaxLength="2" />
+    <Property Name="CubrecantoExclusivo" Type="char" MaxLength="2" />
+    <Property Name="JaladeraExclusiva" Type="char" MaxLength="2" />
+  </EntityType>
+  <EntityType Name="FavArticulos">
+    <Key>
+      <PropertyRef Name="IdArticulo" />
+    </Key>
+    <Property Name="IdArticulo" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Favorito" Type="int" Nullable="false" />
+    <Property Name="Cantidad" Type="int" Nullable="false" />
+    <Property Name="Unidad" Type="varchar" MaxLength="10" />
+    <Property Name="ADNTipo" Type="char" MaxLength="2" Nullable="false" />
+    <Property Name="ADNBase" Type="char" MaxLength="2" />
+    <Property Name="ADNColor" Type="char" MaxLength="2" />
+    <Property Name="ADNCubrecanto" Type="char" MaxLength="2" />
+    <Property Name="ADNVeta" Type="char" MaxLength="1" />
+    <Property Name="ADNVariante" Type="char" MaxLength="2" />
+    <Property Name="CodigoADNBase" Type="varchar" MaxLength="13" StoreGeneratedPattern="Computed" />
+    <Property Name="CodigoADNInterno" Type="char" MaxLength="20" />
+    <Property Name="tieneJaladera" Type="bit" Nullable="false" />
+    <Property Name="tieneVidrio" Type="bit" Nullable="false" />
+    <Property Name="tieneProtecta" Type="bit" Nullable="false" />
+    <Property Name="tieneOrificios" Type="bit" Nullable="false" />
+    <Property Name="UnidadJaladera" Type="varchar" MaxLength="10" />
+    <Property Name="ADNJaladeraBase" Type="char" MaxLength="2" />
+    <Property Name="ADNJaladera" Type="char" MaxLength="2" />
+    <Property Name="ADNJaladeraOpcion" Type="char" MaxLength="1" />
+    <Property Name="ADNPosicionJaladera" Type="char" MaxLength="1" />
+    <Property Name="ADNVidrioBase" Type="char" MaxLength="2" />
+    <Property Name="ADNVidrioColor" Type="char" MaxLength="2" />
+    <Property Name="CodigoADNVidrio" Type="varchar" MaxLength="6" StoreGeneratedPattern="Computed" />
+    <Property Name="ADNProtectaBase" Type="char" MaxLength="2" />
+    <Property Name="ADNProtectaColor" Type="char" MaxLength="2" />
+    <Property Name="CodigoADNProtecta" Type="varchar" MaxLength="6" StoreGeneratedPattern="Computed" />
+    <Property Name="ADNOrificios" Type="char" MaxLength="2" />
+    <Property Name="OrificiosDistCanto" Type="smallint" />
+    <Property Name="OrificiosCuantos" Type="tinyint" />
+    <Property Name="CodigoADNOrificios" Type="char" MaxLength="6" StoreGeneratedPattern="Computed" />
+    <Property Name="Alto" Type="int" />
+    <Property Name="Ancho" Type="int" />
+    <Property Name="CodigoADNJaladera" Type="varchar" MaxLength="7" StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="Favoritos">
+    <Key>
+      <PropertyRef Name="IdFavorito" />
+    </Key>
+    <Property Name="IdFavorito" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Usuario" Type="int" Nullable="false" />
+    <Property Name="ClienteERP" Type="char" MaxLength="10" />
+    <Property Name="FechaFavorito" Type="smalldatetime" />
+    <Property Name="Exhibicion" Type="bit" />
+    <Property Name="Observaciones" Type="nvarchar(max)" />
+    <Property Name="Proyecto" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Fleteras">
+    <Key>
+      <PropertyRef Name="FleteraId" />
+    </Key>
+    <Property Name="FleteraId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+  <EntityType Name="JaladeraColorExcepciones">
+    <Key>
+      <PropertyRef Name="idJaladeraColor" />
+    </Key>
+    <Property Name="idJaladeraColor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Jaladera" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="Color" Type="varchar" MaxLength="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LineasUsuario">
+    <Key>
+      <PropertyRef Name="Usuario" />
+      <PropertyRef Name="Linea" />
+    </Key>
+    <Property Name="Usuario" Type="int" Nullable="false" />
+    <Property Name="Linea" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="UserProfile" Type="int" />
+  </EntityType>
+  <EntityType Name="MatrizFletes">
+    <Key>
+      <PropertyRef Name="ElementoMatrizId" />
+    </Key>
+    <Property Name="ElementoMatrizId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FleteraId" Type="int" Nullable="false" />
+    <Property Name="CatalogoCiudadId" Type="int" Nullable="false" />
+    <Property Name="PaqChicoM2" Type="money" Nullable="false" />
+    <Property Name="PaqMedioM2" Type="money" Nullable="false" />
+    <Property Name="PaqGrandeM2" Type="money" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MatrizFletes2">
+    <Key>
+      <PropertyRef Name="ElementoMatrizId" />
+    </Key>
+    <Property Name="ElementoMatrizId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FleteraId" Type="int" Nullable="false" />
+    <Property Name="CatalogoCiudadId" Type="int" Nullable="false" />
+    <Property Name="Caj_1_3" Type="money" Nullable="false" />
+    <Property Name="Caj_4_10" Type="money" Nullable="false" />
+    <Property Name="Caj_11_20" Type="money" Nullable="false" />
+    <Property Name="Caj_21up" Type="money" Nullable="false" />
+    <Property Name="Paq_1_3" Type="money" Nullable="false" />
+    <Property Name="Paq_4_10" Type="money" Nullable="false" />
+    <Property Name="Paq_11_20" Type="money" Nullable="false" />
+    <Property Name="Paq_21up" Type="money" Nullable="false" />
+    <Property Name="CostoM2" Type="money" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MaxMinAcabados">
+    <Key>
+      <PropertyRef Name="IdMaxMin" />
+    </Key>
+    <Property Name="IdMaxMin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Color" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="AnchoMax" Type="int" Nullable="false" />
+    <Property Name="AnchoMin" Type="int" Nullable="false" />
+    <Property Name="AltoMax" Type="int" Nullable="false" />
+    <Property Name="AltoMin" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MaxMinBaseColor">
+    <Key>
+      <PropertyRef Name="IdMaxMin" />
+    </Key>
+    <Property Name="IdMaxMin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Base" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="Color" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="AnchoMax" Type="int" Nullable="false" />
+    <Property Name="AnchoMin" Type="int" Nullable="false" />
+    <Property Name="AltoMax" Type="int" Nullable="false" />
+    <Property Name="AltoMin" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MaxMinColor">
+    <Key>
+      <PropertyRef Name="idRestriccionColor" />
+    </Key>
+    <Property Name="idRestriccionColor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Color" Type="char" MaxLength="2" Nullable="false" />
+    <Property Name="AnchoMax" Type="int" />
+    <Property Name="AnchoMin" Type="int" />
+    <Property Name="AltoMax" Type="int" />
+    <Property Name="AltoMin" Type="int" />
+  </EntityType>
+  <EntityType Name="MedidaReglas">
+    <Key>
+      <PropertyRef Name="idReglaMedida" />
+    </Key>
+    <Property Name="idReglaMedida" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tipo" Type="char" MaxLength="2" />
+    <Property Name="Base" Type="char" MaxLength="2" />
+    <Property Name="AnchoMax" Type="int" />
+    <Property Name="AnchoMin" Type="int" />
+    <Property Name="AltoMax" Type="int" />
+    <Property Name="AltoMin" Type="int" />
+    <Property Name="Multiplo70" Type="decimal" Precision="12" Scale="2" />
+    <Property Name="Multiplo72" Type="decimal" Precision="12" Scale="2" />
+    <Property Name="Multiplo76" Type="decimal" Precision="12" Scale="2" />
+    <Property Name="Multiplo80" Type="decimal" Precision="12" Scale="2" />
+    <Property Name="PosicionJaladeras" Type="varchar" MaxLength="15" />
+    <Property Name="EquivalenciaM2" Type="decimal" Precision="12" Scale="4" />
+    <Property Name="SubLinea" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="MedidasFijas">
+    <Key>
+      <PropertyRef Name="IdMedidaFija" />
+    </Key>
+    <Property Name="IdMedidaFija" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tipo" Type="char" MaxLength="2" Nullable="false" />
+    <Property Name="Base" Type="char" MaxLength="2" Nullable="false" />
+    <Property Name="Color" Type="char" MaxLength="2" Nullable="false" />
+    <Property Name="Veta" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="Cubrecanto" Type="char" MaxLength="2" Nullable="false" />
+    <Property Name="Variante" Type="char" MaxLength="2" Nullable="false" />
+    <Property Name="Ancho" Type="int" Nullable="false" />
+    <Property Name="Alto" Type="int" Nullable="false" />
+    <Property Name="Estatus" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="Medida" Type="varchar" MaxLength="61" StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="Multiplos">
+    <Key>
+      <PropertyRef Name="IdMultiplo" />
+    </Key>
+    <Property Name="IdMultiplo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tipo" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="Base" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="Estandar" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Medida" Type="int" Nullable="false" />
+    <Property Name="Linea" Type="varchar" MaxLength="50" />
+    <Property Name="Sublinea" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Noticias">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Titulo" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Mensaje" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Referencias" Type="nvarchar" MaxLength="50" />
+    <Property Name="URL" Type="nvarchar" MaxLength="100" />
+    <Property Name="Alta" Type="datetime" Nullable="false" />
+    <Property Name="Vencimiento" Type="datetime" />
+    <Property Name="Tipo" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="ClienteERP" Type="char" MaxLength="10" />
+    <Property Name="Leida" Type="bit" Nullable="false" />
+    <Property Name="Estatus" Type="char" MaxLength="1" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Oportunidades">
+    <Key>
+      <PropertyRef Name="IdOportunidad" />
+    </Key>
+    <Property Name="IdOportunidad" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Usuario" Type="int" Nullable="false" />
+    <Property Name="Caducidad" Type="smalldatetime" Nullable="false" />
+    <Property Name="LineaAbierta" Type="nvarchar" MaxLength="10" />
+    <Property Name="BaseAbierta" Type="char" MaxLength="2" />
+    <Property Name="ColorAbierto" Type="char" MaxLength="2" />
+    <Property Name="CubrecantoAbierto" Type="char" MaxLength="2" />
+    <Property Name="JaladeraAbierta" Type="char" MaxLength="2" />
+  </EntityType>
+  <EntityType Name="Parametros">
+    <Key>
+      <PropertyRef Name="NombreParametro" />
+    </Key>
+    <Property Name="NombreParametro" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ValorCadena" Type="nvarchar" MaxLength="500" />
+    <Property Name="ValorEntero" Type="int" />
+    <Property Name="ValorDecimal" Type="decimal" Precision="14" Scale="6" />
+    <Property Name="ValorDoble" Type="float" />
+    <Property Name="ValorTiempo" Type="datetime" />
+    <Property Name="ValorBooleano" Type="bit" />
+  </EntityType>
+  <EntityType Name="PaseHist">
+    <Key>
+      <PropertyRef Name="idPaseGuardado" />
+    </Key>
+    <Property Name="idPaseGuardado" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Usuario" Type="int" Nullable="false" />
+    <Property Name="TmAlta" Type="datetime" Nullable="false" />
+    <Property Name="PaseHash" Type="char" MaxLength="86" Nullable="false" />
+    <Property Name="PaseSalt" Type="char" MaxLength="5" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProyArticulos">
+    <Key>
+      <PropertyRef Name="IdArticulo" />
+    </Key>
+    <Property Name="IdArticulo" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Proyecto" Type="int" Nullable="false" />
+    <Property Name="Cantidad" Type="int" Nullable="false" />
+    <Property Name="Unidad" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="ADNTipo" Type="char" MaxLength="2" Nullable="false" />
+    <Property Name="ADNBase" Type="char" MaxLength="2" />
+    <Property Name="ADNColor" Type="char" MaxLength="2" />
+    <Property Name="ADNCubrecanto" Type="char" MaxLength="2" />
+    <Property Name="ADNVeta" Type="char" MaxLength="1" />
+    <Property Name="ADNVariante" Type="char" MaxLength="2" />
+    <Property Name="CodigoADNBase" Type="varchar" MaxLength="12" StoreGeneratedPattern="Computed" />
+    <Property Name="CodigoADNInterno" Type="char" MaxLength="20" />
+    <Property Name="tieneJaladera" Type="bit" Nullable="false" />
+    <Property Name="tieneVidrio" Type="bit" Nullable="false" />
+    <Property Name="tieneProtecta" Type="bit" Nullable="false" />
+    <Property Name="tieneOrificios" Type="bit" Nullable="false" />
+    <Property Name="UnidadJaladera" Type="varchar" MaxLength="10" />
+    <Property Name="ADNJaladeraBase" Type="char" MaxLength="2" />
+    <Property Name="ADNJaladera" Type="char" MaxLength="2" />
+    <Property Name="ADNJaladeraOpcion" Type="char" MaxLength="1" />
+    <Property Name="ADNPosicionJaladera" Type="char" MaxLength="1" />
+    <Property Name="ADNVidrioBase" Type="char" MaxLength="2" />
+    <Property Name="ADNVidrioColor" Type="char" MaxLength="2" />
+    <Property Name="CodigoADNVidrio" Type="varchar" MaxLength="6" StoreGeneratedPattern="Computed" />
+    <Property Name="ADNProtectaBase" Type="char" MaxLength="2" />
+    <Property Name="ADNProtectaColor" Type="char" MaxLength="2" />
+    <Property Name="CodigoADNProtecta" Type="varchar" MaxLength="6" StoreGeneratedPattern="Computed" />
+    <Property Name="ADNOrificios" Type="char" MaxLength="2" />
+    <Property Name="OrificiosDistCanto" Type="smallint" />
+    <Property Name="OrificiosCuantos" Type="tinyint" />
+    <Property Name="CodigoADNOrificios" Type="varchar" MaxLength="6" StoreGeneratedPattern="Computed" />
+    <Property Name="Alto" Type="int" />
+    <Property Name="Ancho" Type="int" />
+    <Property Name="AltoEstandar" Type="varchar" MaxLength="10" />
+    <Property Name="PrecioUnitario" Type="money" StoreGeneratedPattern="Computed" />
+    <Property Name="DescuentoUnitario" Type="money" StoreGeneratedPattern="Computed" />
+    <Property Name="IVAUnitario" Type="money" />
+    <Property Name="Importe" Type="money" StoreGeneratedPattern="Computed" />
+    <Property Name="PrecioPrincipal" Type="money" />
+    <Property Name="PrecioJaladera" Type="money" />
+    <Property Name="PrecioVidrio" Type="money" />
+    <Property Name="PrecioProtecta" Type="money" />
+    <Property Name="PrecioServicios" Type="money" />
+    <Property Name="DescuentoPrincipal" Type="money" />
+    <Property Name="DescuentoJaladera" Type="money" />
+    <Property Name="DescuentoProtecta" Type="money" />
+    <Property Name="DescuentoVidrio" Type="money" />
+    <Property Name="DescuentoServicios" Type="money" />
+    <Property Name="PrecioListaPrincipal" Type="money" />
+    <Property Name="PrecioListaJaladera" Type="money" />
+    <Property Name="PrecioListaVidrio" Type="money" />
+    <Property Name="PrecioListaPelicula" Type="money" />
+    <Property Name="PrecioListaServicios" Type="money" />
+    <Property Name="ArticuloPatron" Type="bigint" />
+    <Property Name="InstruccionesExtra" Type="nvarchar" MaxLength="100" />
+    <Property Name="DescuentoLineal" Type="decimal" Precision="12" Scale="2" />
+    <Property Name="MAIdEmpaque" Type="bigint" />
+    <Property Name="MAIdArmado" Type="bigint" />
+    <Property Name="TmUltimoCambio" Type="datetime" Nullable="false" />
+    <Property Name="PrecioAdjuntos" Type="money" />
+    <Property Name="EsConceptoDeProyecto" Type="bit" Nullable="false" />
+    <Property Name="TipoEmpaque" Type="nvarchar" MaxLength="3" />
+    <Property Name="tieneColorExclusivo" Type="bit" Nullable="false" />
+    <Property Name="ADNColorExclusivo" Type="nchar" MaxLength="10" />
+    <Property Name="PrecioColorExclusivo" Type="money" />
+    <Property Name="PrecioListaColorExclusivo" Type="money" />
+    <Property Name="CodigoADNJaladera" Type="varchar" MaxLength="6" StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="Proyectos">
+    <Key>
+      <PropertyRef Name="IdProyecto" />
+    </Key>
+    <Property Name="IdProyecto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Usuario" Type="int" Nullable="false" />
+    <Property Name="ClienteERP" Type="char" MaxLength="10" />
+    <Property Name="Estatus" Type="char" MaxLength="1" />
+    <Property Name="TmRegistrado" Type="datetime" />
+    <Property Name="TmSolicitado" Type="datetime" />
+    <Property Name="TmAprobado" Type="datetime" />
+    <Property Name="TmCerrado" Type="datetime" />
+    <Property Name="TmEntregaTentativa" Type="datetime" />
+    <Property Name="FechaRequerida" Type="datetime" />
+    <Property Name="CodigoInterno" Type="int" />
+    <Property Name="PedidoInterno" Type="int" />
+    <Property Name="OrdenProdInterna" Type="int" />
+    <Property Name="FacturaInterna" Type="int" />
+    <Property Name="ReferenciaCliente" Type="nvarchar" MaxLength="50" />
+    <Property Name="Exhibicion" Type="bit" Nullable="false" />
+    <Property Name="Observaciones" Type="nvarchar(max)" />
+    <Property Name="UserRevisado" Type="int" />
+    <Property Name="UserAprobado" Type="int" />
+    <Property Name="Subtotal" Type="money" />
+    <Property Name="UltimoSeguimiento" Type="datetime" />
+    <Property Name="PctDescuento" Type="decimal" Precision="8" Scale="4" />
+    <Property Name="Direccion" Type="varchar" MaxLength="100" />
+    <Property Name="Poblacion" Type="varchar" MaxLength="100" />
+    <Property Name="Colonia" Type="varchar" MaxLength="100" />
+    <Property Name="CodigoPostal" Type="varchar" MaxLength="5" />
+    <Property Name="Estado" Type="varchar" MaxLength="30" />
+    <Property Name="Pais" Type="varchar" MaxLength="30" />
+    <Property Name="Telefono" Type="varchar" MaxLength="100" />
+    <Property Name="EnvioOcurre" Type="bit" />
+    <Property Name="EnvioAsegurado" Type="bit" />
+    <Property Name="EntregaEnPlanta" Type="bit" />
+    <Property Name="EnvioCobrado" Type="bit" />
+    <Property Name="FormaDeEnvio" Type="varchar" MaxLength="50" />
+    <Property Name="GuiaEmbarque" Type="varchar" MaxLength="100" />
+    <Property Name="ExhibicionAprobado" Type="bit" />
+    <Property Name="LoteProdInterno" Type="varchar" MaxLength="50" />
+    <Property Name="SubLinea" Type="nvarchar" MaxLength="10" />
+    <Property Name="EsExpress" Type="bit" Nullable="false" />
+    <Property Name="ArticuloFlete" Type="bigint" />
+    <Property Name="ArticuloSeguro" Type="bigint" />
+    <Property Name="CostoPaqueteChico" Type="money" />
+    <Property Name="CostoPaqueteMediano" Type="money" />
+    <Property Name="CostoPaqueteGrande" Type="money" />
+    <Property Name="FleteraId" Type="int" />
+    <Property Name="Costo_1_3_c" Type="money" />
+    <Property Name="Costo_4_10_c" Type="money" />
+    <Property Name="Costo_11_20_c" Type="money" />
+    <Property Name="Costo_21up_c" Type="money" />
+    <Property Name="Costo_1_3_p" Type="money" />
+    <Property Name="Costo_4_10_p" Type="money" />
+    <Property Name="Costo_11_20_p" Type="money" />
+    <Property Name="Costo_21up_p" Type="money" />
+    <Property Name="CajasChicas" Type="int" />
+    <Property Name="CajasMedianas" Type="int" />
+    <Property Name="Paquetes" Type="int" />
+    <Property Name="Cilindros" Type="int" />
+    <Property Name="TieneMuebles" Type="bit" Nullable="false" />
+    <Property Name="Vendedor" Type="int" />
+    <Property Name="TmValidado" Type="datetime" />
+    <Property Name="ValidaTiempsEntrega" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProyNotas">
+    <Key>
+      <PropertyRef Name="IdNotaProyecto" />
+    </Key>
+    <Property Name="IdNotaProyecto" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Proyecto" Type="int" Nullable="false" />
+    <Property Name="Usuario" Type="int" Nullable="false" />
+    <Property Name="TmNota" Type="datetime" Nullable="false" />
+    <Property Name="Texto" Type="nvarchar" MaxLength="2000" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RoleName" />
+    </Key>
+    <Property Name="RoleName" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="NombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="PasswordHash" Type="char" MaxLength="86" Nullable="false" />
+    <Property Name="PasswordSalt" Type="char" MaxLength="5" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Comment" Type="text" />
+    <Property Name="Enabled" Type="bit" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="DateLastLogin" Type="datetime" />
+    <Property Name="DateLastActivity" Type="datetime" />
+    <Property Name="DateLastPasswordChange" Type="datetime" Nullable="false" />
+    <Property Name="LastUpdate" Type="datetime" Nullable="false" />
+    <Property Name="ClienteERP" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="AgenteServicio" Type="char" MaxLength="10" />
+    <Property Name="PuedeExpress" Type="bit" />
+    <Property Name="FleteraId" Type="int" />
+    <Property Name="FleteAutomatico" Type="bit" />
+    <Property Name="UltimaVisitaDocumentos" Type="datetime" />
+    <Property Name="ClienteMuebles" Type="bit" />
+    <Property Name="ZonaImpuesto" Type="varchar" MaxLength="30" />
+    <Property Name="ListaPreciosEsp" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="UsersInRoles">
+    <Key>
+      <PropertyRef Name="HashId" />
+    </Key>
+    <Property Name="HashId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="RoleName" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="webpages_Membership">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="ConfirmationToken" Type="nvarchar" MaxLength="128" />
+    <Property Name="IsConfirmed" Type="bit" />
+    <Property Name="LastPasswordFailureDate" Type="datetime" />
+    <Property Name="PasswordFailuresSinceLastSuccess" Type="int" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="PasswordChangedDate" Type="datetime" />
+    <Property Name="PasswordSalt" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="PasswordVerificationToken" Type="nvarchar" MaxLength="128" />
+    <Property Name="PasswordVerificationTokenExpirationDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="webpages_OAuthMembership">
+    <Key>
+      <PropertyRef Name="Provider" />
+      <PropertyRef Name="ProviderUserId" />
+    </Key>
+    <Property Name="Provider" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="ProviderUserId" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'InnovikaCom.dbo.vAcumuladosColor' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vAcumuladosColor">
+    <Key>
+      <PropertyRef Name="Nombre" />
+      <PropertyRef Name="Proyecto" />
+    </Key>
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Piezas" Type="int" />
+    <Property Name="Importe" Type="money" />
+    <Property Name="Metraje" Type="decimal" Precision="38" Scale="6" />
+    <Property Name="Proyecto" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'InnovikaCom.dbo.vArticulosFavoritos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vArticulosFavoritos">
+    <Key>
+      <PropertyRef Name="IdArticulo" />
+      <PropertyRef Name="Favorito" />
+      <PropertyRef Name="Cantidad" />
+      <PropertyRef Name="Descripcion" />
+    </Key>
+    <Property Name="IdArticulo" Type="bigint" Nullable="false" />
+    <Property Name="Favorito" Type="int" Nullable="false" />
+    <Property Name="Cantidad" Type="int" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="152" Nullable="false" />
+    <Property Name="Ancho" Type="int" />
+    <Property Name="Alto" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'InnovikaCom.dbo.vArticulosResumen' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vArticulosResumen">
+    <Key>
+      <PropertyRef Name="IdArticulo" />
+      <PropertyRef Name="Proyecto" />
+      <PropertyRef Name="Cantidad" />
+      <PropertyRef Name="Descripcion" />
+    </Key>
+    <Property Name="IdArticulo" Type="bigint" Nullable="false" />
+    <Property Name="Proyecto" Type="int" Nullable="false" />
+    <Property Name="Cantidad" Type="int" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="218" Nullable="false" />
+    <Property Name="PrecioUnitario" Type="money" />
+    <Property Name="Precio" Type="decimal" Precision="38" Scale="6" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'InnovikaCom.dbo.vExclusividades' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vExclusividades">
+    <Key>
+      <PropertyRef Name="IdExclusividad" />
+      <PropertyRef Name="Usuario" />
+      <PropertyRef Name="Caducidad" />
+      <PropertyRef Name="TipoComponente" />
+    </Key>
+    <Property Name="IdExclusividad" Type="bigint" Nullable="false" />
+    <Property Name="Usuario" Type="int" Nullable="false" />
+    <Property Name="Caducidad" Type="smalldatetime" Nullable="false" />
+    <Property Name="TipoComponente" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Codigo" Type="varchar" MaxLength="30" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+    <Property Name="RutaImagen" Type="nvarchar" MaxLength="300" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'InnovikaCom.dbo.vMatrizFleteras' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vMatrizFleteras">
+    <Key>
+      <PropertyRef Name="FleteraId" />
+      <PropertyRef Name="PaqChicoM2" />
+      <PropertyRef Name="PaqMedioM2" />
+      <PropertyRef Name="PaqGrandeM2" />
+      <PropertyRef Name="ElementoMatrizId" />
+      <PropertyRef Name="CatalogoCiudadId" />
+    </Key>
+    <Property Name="Estado" Type="nvarchar" MaxLength="20" />
+    <Property Name="Ciudad" Type="nvarchar" MaxLength="40" />
+    <Property Name="FleteraId" Type="int" Nullable="false" />
+    <Property Name="PaqChicoM2" Type="money" Nullable="false" />
+    <Property Name="PaqMedioM2" Type="money" Nullable="false" />
+    <Property Name="PaqGrandeM2" Type="money" Nullable="false" />
+    <Property Name="ElementoMatrizId" Type="int" Nullable="false" />
+    <Property Name="CatalogoCiudadId" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'InnovikaCom.dbo.vMetraje' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vMetraje">
+    <Key>
+      <PropertyRef Name="Proyecto" />
+      <PropertyRef Name="Metraje" />
+    </Key>
+    <Property Name="Proyecto" Type="int" Nullable="false" />
+    <Property Name="Metraje" Type="decimal" Precision="38" Scale="6" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'InnovikaCom.dbo.vMetrajeEquivalencia' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vMetrajeEquivalencia">
+    <Key>
+      <PropertyRef Name="Proyecto" />
+      <PropertyRef Name="Metraje" />
+    </Key>
+    <Property Name="Proyecto" Type="int" Nullable="false" />
+    <Property Name="Metraje" Type="decimal" Precision="38" Scale="2" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'InnovikaCom.dbo.vNotasProyecto' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vNotasProyecto">
+    <Key>
+      <PropertyRef Name="IdNotaProyecto" />
+      <PropertyRef Name="Proyecto" />
+      <PropertyRef Name="Usuario" />
+      <PropertyRef Name="NombreCompleto" />
+      <PropertyRef Name="UserName" />
+      <PropertyRef Name="TmNota" />
+      <PropertyRef Name="esNueva" />
+      <PropertyRef Name="Texto" />
+    </Key>
+    <Property Name="IdNotaProyecto" Type="bigint" Nullable="false" />
+    <Property Name="Proyecto" Type="int" Nullable="false" />
+    <Property Name="Usuario" Type="int" Nullable="false" />
+    <Property Name="NombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="TmNota" Type="datetime" Nullable="false" />
+    <Property Name="esNueva" Type="int" Nullable="false" />
+    <Property Name="Texto" Type="nvarchar" MaxLength="2000" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'InnovikaCom.dbo.vOportunidades' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vOportunidades">
+    <Key>
+      <PropertyRef Name="IdOportunidad" />
+      <PropertyRef Name="Usuario" />
+      <PropertyRef Name="Caducidad" />
+      <PropertyRef Name="TipoComponente" />
+    </Key>
+    <Property Name="IdOportunidad" Type="bigint" Nullable="false" />
+    <Property Name="Usuario" Type="int" Nullable="false" />
+    <Property Name="Caducidad" Type="smalldatetime" Nullable="false" />
+    <Property Name="TipoComponente" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Codigo" Type="varchar" MaxLength="30" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+    <Property Name="RutaImagen" Type="nvarchar" MaxLength="300" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'InnovikaCom.dbo.vProyectosAprobados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vProyectosAprobados">
+    <Key>
+      <PropertyRef Name="IdProyecto" />
+      <PropertyRef Name="Usuario" />
+    </Key>
+    <Property Name="IdProyecto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Usuario" Type="int" Nullable="false" />
+    <Property Name="TmRegistrado" Type="datetime" />
+    <Property Name="TmSolicitado" Type="datetime" />
+    <Property Name="ReferenciaCliente" Type="nvarchar" MaxLength="50" />
+    <Property Name="NumArticulos" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'InnovikaCom.dbo.vProyectosPorRevisar' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vProyectosPorRevisar">
+    <Key>
+      <PropertyRef Name="NomEstatus" />
+      <PropertyRef Name="IdProyecto" />
+      <PropertyRef Name="Usuario" />
+    </Key>
+    <Property Name="NomEstatus" Type="nvarchar" MaxLength="40" Nullable="false" />
+    <Property Name="Estatus" Type="char" MaxLength="1" />
+    <Property Name="IdProyecto" Type="int" Nullable="false" />
+    <Property Name="TmSolicitado" Type="datetime" />
+    <Property Name="NombreCliente" Type="varchar" MaxLength="213" />
+    <Property Name="PrecioTotal" Type="money" />
+    <Property Name="NumArticulos" Type="int" />
+    <Property Name="ReferenciaCliente" Type="nvarchar" MaxLength="73" />
+    <Property Name="Revisado" Type="varchar" MaxLength="100" />
+    <Property Name="UserAprobado" Type="int" />
+    <Property Name="UserRevisado" Type="int" />
+    <Property Name="Usuario" Type="int" Nullable="false" />
+    <Property Name="TmRegistrado" Type="datetime" />
+    <Property Name="TmEntregaTentativa" Type="datetime" />
+    <Property Name="CodigoInterno" Type="int" />
+    <Property Name="PedidoInterno" Type="int" />
+    <Property Name="OrdenProdInterna" Type="int" />
+    <Property Name="FacturaInterna" Type="int" />
+    <Property Name="LoteProdInterno" Type="varchar" MaxLength="50" />
+    <Property Name="GuiaEmbarque" Type="varchar" MaxLength="100" />
+    <Property Name="EsExpress" Type="bit" />
+    <Property Name="FleteAutomatico" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'InnovikaCom.dbo.vProyectosRegistrados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vProyectosRegistrados">
+    <Key>
+      <PropertyRef Name="IdProyecto" />
+      <PropertyRef Name="Usuario" />
+    </Key>
+    <Property Name="IdProyecto" Type="int" Nullable="false" />
+    <Property Name="Usuario" Type="int" Nullable="false" />
+    <Property Name="TmRegistrado" Type="datetime" />
+    <Property Name="ReferenciaCliente" Type="nvarchar" MaxLength="73" />
+    <Property Name="numArt" Type="int" />
+    <Property Name="PrecioTotal" Type="decimal" Precision="38" Scale="6" />
+    <Property Name="Estatus" Type="char" MaxLength="1" />
+    <Property Name="NomEstatus" Type="nvarchar" MaxLength="40" />
+    <Property Name="Direccion" Type="varchar" MaxLength="100" />
+    <Property Name="EnvioOcurre" Type="bit" />
+    <Property Name="Telefono" Type="varchar" MaxLength="100" />
+    <Property Name="Pais" Type="varchar" MaxLength="30" />
+    <Property Name="Estado" Type="varchar" MaxLength="30" />
+    <Property Name="CodigoPostal" Type="varchar" MaxLength="5" />
+    <Property Name="Colonia" Type="varchar" MaxLength="100" />
+    <Property Name="Poblacion" Type="varchar" MaxLength="100" />
+    <Property Name="EnvioAsegurado" Type="bit" />
+    <Property Name="FormaDeEnvio" Type="varchar" MaxLength="50" />
+    <Property Name="TmEntregaTentativa" Type="datetime" />
+    <Property Name="GuiaEmbarque" Type="varchar" MaxLength="100" />
+    <Property Name="EntregaEnPlanta" Type="bit" />
+    <Property Name="EnvioCobrado" Type="bit" />
+    <Property Name="LoteProdInterno" Type="varchar" MaxLength="50" />
+    <Property Name="EsExpress" Type="bit" />
+    <Property Name="FleteAutomatico" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'InnovikaCom.dbo.vProyectosSolicitados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vProyectosSolicitados">
+    <Key>
+      <PropertyRef Name="IdProyecto" />
+      <PropertyRef Name="Usuario" />
+    </Key>
+    <Property Name="IdProyecto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Usuario" Type="int" Nullable="false" />
+    <Property Name="TmRegistrado" Type="datetime" />
+    <Property Name="TmSolicitado" Type="datetime" />
+    <Property Name="ReferenciaCliente" Type="nvarchar" MaxLength="50" />
+    <Property Name="Estatus" Type="char" MaxLength="1" />
+    <Property Name="NumArticulos" Type="int" />
+    <Property Name="EsExpress" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'InnovikaCom.dbo.vUsuarios' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vUsuarios">
+    <Key>
+      <PropertyRef Name="RoleName" />
+      <PropertyRef Name="UserName" />
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="NombreCompleto" />
+      <PropertyRef Name="Email" />
+      <PropertyRef Name="Enabled" />
+      <PropertyRef Name="DateCreated" />
+      <PropertyRef Name="DateLastPasswordChange" />
+      <PropertyRef Name="LastUpdate" />
+      <PropertyRef Name="ClienteERP" />
+    </Key>
+    <Property Name="RoleName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="NombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Comment" Type="text" />
+    <Property Name="Enabled" Type="bit" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="DateLastLogin" Type="datetime" />
+    <Property Name="DateLastActivity" Type="datetime" />
+    <Property Name="DateLastPasswordChange" Type="datetime" Nullable="false" />
+    <Property Name="LastUpdate" Type="datetime" Nullable="false" />
+    <Property Name="ClienteERP" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="PasswordHash" Type="varchar" MaxLength="50" />
+    <Property Name="PerfilCompra" Type="varchar" MaxLength="20" />
+    <Property Name="CambiarPase" Type="bit" />
+    <Property Name="PuedeExpress" Type="bit" />
+    <Property Name="FleteAutomatico" Type="bit" />
+    <Property Name="FleteraId" Type="int" />
+    <Property Name="ClienteMuebles" Type="bit" />
+  </EntityType>
+  <Association Name="FK_ArtBases_EstatusCatalogos">
+    <End Role="EstatusCatalogos" Type="Self.EstatusCatalogos" Multiplicity="1" />
+    <End Role="ArtBases" Type="Self.ArtBases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstatusCatalogos">
+        <PropertyRef Name="IdEstatus" />
+      </Principal>
+      <Dependent Role="ArtBases">
+        <PropertyRef Name="Estatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArtColores_ArtSubLinea">
+    <End Role="ArtSubLinea" Type="Self.ArtSubLinea" Multiplicity="1" />
+    <End Role="ArtColores" Type="Self.ArtColores" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ArtSubLinea">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="ArtColores">
+        <PropertyRef Name="SubLinea" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArtColores_EstatusCatalogos">
+    <End Role="EstatusCatalogos" Type="Self.EstatusCatalogos" Multiplicity="1" />
+    <End Role="ArtColores" Type="Self.ArtColores" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstatusCatalogos">
+        <PropertyRef Name="IdEstatus" />
+      </Principal>
+      <Dependent Role="ArtColores">
+        <PropertyRef Name="Estatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArtColores_Exclusividades">
+    <End Role="Exclusividades" Type="Self.Exclusividades" Multiplicity="0..1" />
+    <End Role="ArtColores" Type="Self.ArtColores" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Exclusividades">
+        <PropertyRef Name="IdExclusividad" />
+      </Principal>
+      <Dependent Role="ArtColores">
+        <PropertyRef Name="Exclusividad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArtColoresExclusivos_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="ArtColoresExclusivos" Type="Self.ArtColoresExclusivos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="ArtColoresExclusivos">
+        <PropertyRef Name="Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArtCubrecantos_EstatusCatalogos">
+    <End Role="EstatusCatalogos" Type="Self.EstatusCatalogos" Multiplicity="1" />
+    <End Role="ArtCubrecantos" Type="Self.ArtCubrecantos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstatusCatalogos">
+        <PropertyRef Name="IdEstatus" />
+      </Principal>
+      <Dependent Role="ArtCubrecantos">
+        <PropertyRef Name="Estatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArticulosFavoritos_Articulos">
+    <End Role="ProyArticulos" Type="Self.ProyArticulos" Multiplicity="1" />
+    <End Role="ArticulosFav" Type="Self.ArticulosFav" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProyArticulos">
+        <PropertyRef Name="IdArticulo" />
+      </Principal>
+      <Dependent Role="ArticulosFav">
+        <PropertyRef Name="Articulo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArticulosFavoritos_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="ArticulosFav" Type="Self.ArticulosFav" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="ArticulosFav">
+        <PropertyRef Name="Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArtJaladeraPos_EstatusCatalogos">
+    <End Role="EstatusCatalogos" Type="Self.EstatusCatalogos" Multiplicity="1" />
+    <End Role="ArtJaladeraPos" Type="Self.ArtJaladeraPos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstatusCatalogos">
+        <PropertyRef Name="IdEstatus" />
+      </Principal>
+      <Dependent Role="ArtJaladeraPos">
+        <PropertyRef Name="Estatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArtJaladeras_EstatusCatalogos">
+    <End Role="EstatusCatalogos" Type="Self.EstatusCatalogos" Multiplicity="1" />
+    <End Role="ArtJaladeras" Type="Self.ArtJaladeras" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstatusCatalogos">
+        <PropertyRef Name="IdEstatus" />
+      </Principal>
+      <Dependent Role="ArtJaladeras">
+        <PropertyRef Name="Estatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArtLineas_EstatusCatalogos">
+    <End Role="EstatusCatalogos" Type="Self.EstatusCatalogos" Multiplicity="1" />
+    <End Role="ArtLineas" Type="Self.ArtLineas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstatusCatalogos">
+        <PropertyRef Name="IdEstatus" />
+      </Principal>
+      <Dependent Role="ArtLineas">
+        <PropertyRef Name="Estatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArtSubLinea_EstatusCatalogos">
+    <End Role="EstatusCatalogos" Type="Self.EstatusCatalogos" Multiplicity="1" />
+    <End Role="ArtSubLinea" Type="Self.ArtSubLinea" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstatusCatalogos">
+        <PropertyRef Name="IdEstatus" />
+      </Principal>
+      <Dependent Role="ArtSubLinea">
+        <PropertyRef Name="Estatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArtTipos_EstatusCatalogos">
+    <End Role="EstatusCatalogos" Type="Self.EstatusCatalogos" Multiplicity="1" />
+    <End Role="ArtTipos" Type="Self.ArtTipos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstatusCatalogos">
+        <PropertyRef Name="IdEstatus" />
+      </Principal>
+      <Dependent Role="ArtTipos">
+        <PropertyRef Name="Estatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArtVariantes_EstatusCatalogos">
+    <End Role="EstatusCatalogos" Type="Self.EstatusCatalogos" Multiplicity="1" />
+    <End Role="ArtVariantes" Type="Self.ArtVariantes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstatusCatalogos">
+        <PropertyRef Name="IdEstatus" />
+      </Principal>
+      <Dependent Role="ArtVariantes">
+        <PropertyRef Name="Estatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArtVetas_EstatusCatalogos">
+    <End Role="EstatusCatalogos" Type="Self.EstatusCatalogos" Multiplicity="1" />
+    <End Role="ArtVetas" Type="Self.ArtVetas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstatusCatalogos">
+        <PropertyRef Name="IdEstatus" />
+      </Principal>
+      <Dependent Role="ArtVetas">
+        <PropertyRef Name="Estatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CapturasPagos_Proyectos">
+    <End Role="Proyectos" Type="Self.Proyectos" Multiplicity="1" />
+    <End Role="CapturasPagos" Type="Self.CapturasPagos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proyectos">
+        <PropertyRef Name="IdProyecto" />
+      </Principal>
+      <Dependent Role="CapturasPagos">
+        <PropertyRef Name="Proyecto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CatalogoCiudades_CatalogoEstados">
+    <End Role="CatalogoEstados" Type="Self.CatalogoEstados" Multiplicity="1" />
+    <End Role="CatalogoCiudades" Type="Self.CatalogoCiudades" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CatalogoEstados">
+        <PropertyRef Name="Estado" />
+      </Principal>
+      <Dependent Role="CatalogoCiudades">
+        <PropertyRef Name="Estado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Exclusividades_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Exclusividades" Type="Self.Exclusividades" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Exclusividades">
+        <PropertyRef Name="Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FavArticulos_Favoritos">
+    <End Role="Favoritos" Type="Self.Favoritos" Multiplicity="1" />
+    <End Role="FavArticulos" Type="Self.FavArticulos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Favoritos">
+        <PropertyRef Name="IdFavorito" />
+      </Principal>
+      <Dependent Role="FavArticulos">
+        <PropertyRef Name="Favorito" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Favoritos_Usuarios">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Favoritos" Type="Self.Favoritos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Favoritos">
+        <PropertyRef Name="Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LineasUsuario_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="LineasUsuario" Type="Self.LineasUsuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="LineasUsuario">
+        <PropertyRef Name="Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MatrizFletes_CatalogoCiudades1">
+    <End Role="CatalogoCiudades" Type="Self.CatalogoCiudades" Multiplicity="1" />
+    <End Role="MatrizFletes" Type="Self.MatrizFletes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CatalogoCiudades">
+        <PropertyRef Name="CatalogoCiudadId" />
+      </Principal>
+      <Dependent Role="MatrizFletes">
+        <PropertyRef Name="CatalogoCiudadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MatrizFletes_Fleteras">
+    <End Role="Fleteras" Type="Self.Fleteras" Multiplicity="1" />
+    <End Role="MatrizFletes" Type="Self.MatrizFletes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fleteras">
+        <PropertyRef Name="FleteraId" />
+      </Principal>
+      <Dependent Role="MatrizFletes">
+        <PropertyRef Name="FleteraId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MatrizFletes2_CatalogoCiudades">
+    <End Role="CatalogoCiudades" Type="Self.CatalogoCiudades" Multiplicity="1" />
+    <End Role="MatrizFletes2" Type="Self.MatrizFletes2" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CatalogoCiudades">
+        <PropertyRef Name="CatalogoCiudadId" />
+      </Principal>
+      <Dependent Role="MatrizFletes2">
+        <PropertyRef Name="CatalogoCiudadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MatrizFletes2_Fleteras">
+    <End Role="Fleteras" Type="Self.Fleteras" Multiplicity="1" />
+    <End Role="MatrizFletes2" Type="Self.MatrizFletes2" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fleteras">
+        <PropertyRef Name="FleteraId" />
+      </Principal>
+      <Dependent Role="MatrizFletes2">
+        <PropertyRef Name="FleteraId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Oportunidades_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Oportunidades" Type="Self.Oportunidades" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Oportunidades">
+        <PropertyRef Name="Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PaseHist_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="PaseHist" Type="Self.PaseHist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="PaseHist">
+        <PropertyRef Name="Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProyArticulos_Proyectos">
+    <End Role="Proyectos" Type="Self.Proyectos" Multiplicity="1" />
+    <End Role="ProyArticulos" Type="Self.ProyArticulos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proyectos">
+        <PropertyRef Name="IdProyecto" />
+      </Principal>
+      <Dependent Role="ProyArticulos">
+        <PropertyRef Name="Proyecto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProyNotas_Proyecto">
+    <End Role="Proyectos" Type="Self.Proyectos" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ProyNotas" Type="Self.ProyNotas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proyectos">
+        <PropertyRef Name="IdProyecto" />
+      </Principal>
+      <Dependent Role="ProyNotas">
+        <PropertyRef Name="Proyecto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProyNotas_usuario">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="ProyNotas" Type="Self.ProyNotas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="ProyNotas">
+        <PropertyRef Name="Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Fleteras">
+    <End Role="Fleteras" Type="Self.Fleteras" Multiplicity="0..1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fleteras">
+        <PropertyRef Name="FleteraId" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="FleteraId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UsersInRoles_Roles">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UsersInRoles" Type="Self.UsersInRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleName" />
+      </Principal>
+      <Dependent Role="UsersInRoles">
+        <PropertyRef Name="RoleName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_UsersInRoles_Users' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_UsersInRoles_Users" />-->
+  <Function Name="spAltaCotizacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="iProyecto" Type="int" Mode="In" />
+    <Parameter Name="iUsuarioAprueba" Type="int" Mode="In" />
+    <Parameter Name="bCorrecto" Type="bit" Mode="InOut" />
+  </Function>
+  <Function Name="spCalculaPreciosProyecto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdProyecto" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spClienteSolicitaProyecto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDUSUARIO" Type="int" Mode="In" />
+    <Parameter Name="IDPROYECTO" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spClonaProyecto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="iProyecto" Type="int" Mode="In" />
+    <Parameter Name="iProyectoClonado" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="spCreaFavoritodesdeProyecto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="iProyecto" Type="int" Mode="In" />
+    <Parameter Name="nvcNombre" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="spCreaProyectodesdeFavorito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="iFavorito" Type="int" Mode="In" />
+    <Parameter Name="iProyecto" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="spDatosEmbarquexProyecto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="iProyecto" Type="int" Mode="In" />
+    <Parameter Name="iPiezas" Type="int" Mode="InOut" />
+    <Parameter Name="iBultos" Type="int" Mode="InOut" />
+    <Parameter Name="mMonto" Type="money" Mode="InOut" />
+    <Parameter Name="dtFechaEnvio" Type="datetime" Mode="InOut" />
+    <Parameter Name="dtFechaEntrega" Type="datetime" Mode="InOut" />
+    <Parameter Name="dtFechaForma" Type="datetime" Mode="InOut" />
+    <Parameter Name="vcFormaEmbarque" Type="varchar" Mode="InOut" />
+    <Parameter Name="vcObservaciones" Type="varchar" Mode="InOut" />
+    <Parameter Name="vcNumGuia" Type="varchar" Mode="InOut" />
+  </Function>
+  <Function Name="spEliminaCancelaProyecto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="iProyecto" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spEliminaFavorito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="iFavorito" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spEstatusProyectoxCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="cCliente" Type="char" Mode="In" />
+  </Function>
+  <Function Name="spEstatusProyectoxProyecto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="iProyecto" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spEstatusTodosProyectos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="spExcepcionDescuentoHeCa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="iProyecto" Type="int" Mode="In" />
+    <Parameter Name="bAplicaDescPuertas" Type="bit" Mode="InOut" />
+  </Function>
+  <Function Name="spGeneraSubCodigosArt" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="bCorrecto" Type="bit" Mode="InOut" />
+  </Function>
+  <EntityContainer Name="InnovikaComModelStoreContainer">
+    <EntitySet Name="ArtADNCodigos" EntityType="Self.ArtADNCodigos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ArtBases" EntityType="Self.ArtBases" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ArtColores" EntityType="Self.ArtColores" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ArtColoresExclusivos" EntityType="Self.ArtColoresExclusivos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ArtCubrecantos" EntityType="Self.ArtCubrecantos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ArticulosAdjuntos" EntityType="Self.ArticulosAdjuntos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ArticulosFav" EntityType="Self.ArticulosFav" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ArtJaladeraPos" EntityType="Self.ArtJaladeraPos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ArtLineas" EntityType="Self.ArtLineas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ArtSubLinea" EntityType="Self.ArtSubLinea" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ArtTipos" EntityType="Self.ArtTipos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ArtVariantes" EntityType="Self.ArtVariantes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ArtVetas" EntityType="Self.ArtVetas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BasesJaladeras" EntityType="Self.BasesJaladeras" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CapturasPagos" EntityType="Self.CapturasPagos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CatalogoCiudades" EntityType="Self.CatalogoCiudades" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CatalogoEstados" EntityType="Self.CatalogoEstados" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Documentos" EntityType="Self.Documentos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EstatusCatalogos" EntityType="Self.EstatusCatalogos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EstatusProcesos" EntityType="Self.EstatusProcesos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EstatusProyectos" EntityType="Self.EstatusProyectos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Exclusividades" EntityType="Self.Exclusividades" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FavArticulos" EntityType="Self.FavArticulos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Favoritos" EntityType="Self.Favoritos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Fleteras" EntityType="Self.Fleteras" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="JaladeraColorExcepciones" EntityType="Self.JaladeraColorExcepciones" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LineasUsuario" EntityType="Self.LineasUsuario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MatrizFletes" EntityType="Self.MatrizFletes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MatrizFletes2" EntityType="Self.MatrizFletes2" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MaxMinAcabados" EntityType="Self.MaxMinAcabados" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MaxMinBaseColor" EntityType="Self.MaxMinBaseColor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MaxMinColor" EntityType="Self.MaxMinColor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MedidaReglas" EntityType="Self.MedidaReglas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MedidasFijas" EntityType="Self.MedidasFijas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Multiplos" EntityType="Self.Multiplos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Noticias" EntityType="Self.Noticias" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Oportunidades" EntityType="Self.Oportunidades" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Parametros" EntityType="Self.Parametros" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PaseHist" EntityType="Self.PaseHist" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProyArticulos" EntityType="Self.ProyArticulos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Proyectos" EntityType="Self.Proyectos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProyNotas" EntityType="Self.ProyNotas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UsersInRoles" EntityType="Self.UsersInRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="webpages_Membership" EntityType="Self.webpages_Membership" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="webpages_OAuthMembership" EntityType="Self.webpages_OAuthMembership" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ArtJaladeras" EntityType="Self.ArtJaladeras" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[ArtJaladeras].[Codigo] AS [Codigo], 
+[ArtJaladeras].[Nombre] AS [Nombre], 
+[ArtJaladeras].[Estatus] AS [Estatus], 
+[ArtJaladeras].[Linea] AS [Linea], 
+[ArtJaladeras].[RutaImagen] AS [RutaImagen], 
+[ArtJaladeras].[Orden] AS [Orden], 
+[ArtJaladeras].[PuertaAnchoMin] AS [PuertaAnchoMin], 
+[ArtJaladeras].[PuertaAltoMin] AS [PuertaAltoMin], 
+[ArtJaladeras].[FrenteAnchoMin] AS [FrenteAnchoMin], 
+[ArtJaladeras].[FrenteAltoMin] AS [FrenteAltoMin]
+FROM [dbo].[ArtJaladeras] AS [ArtJaladeras]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vAcumuladosColor" EntityType="Self.vAcumuladosColor" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vAcumuladosColor].[Nombre] AS [Nombre], 
+[vAcumuladosColor].[Piezas] AS [Piezas], 
+[vAcumuladosColor].[Importe] AS [Importe], 
+[vAcumuladosColor].[Metraje] AS [Metraje], 
+[vAcumuladosColor].[Proyecto] AS [Proyecto]
+FROM [dbo].[vAcumuladosColor] AS [vAcumuladosColor]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vArticulosFavoritos" EntityType="Self.vArticulosFavoritos" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vArticulosFavoritos].[IdArticulo] AS [IdArticulo], 
+[vArticulosFavoritos].[Favorito] AS [Favorito], 
+[vArticulosFavoritos].[Cantidad] AS [Cantidad], 
+[vArticulosFavoritos].[Descripcion] AS [Descripcion], 
+[vArticulosFavoritos].[Ancho] AS [Ancho], 
+[vArticulosFavoritos].[Alto] AS [Alto]
+FROM [dbo].[vArticulosFavoritos] AS [vArticulosFavoritos]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vArticulosResumen" EntityType="Self.vArticulosResumen" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vArticulosResumen].[IdArticulo] AS [IdArticulo], 
+[vArticulosResumen].[Proyecto] AS [Proyecto], 
+[vArticulosResumen].[Cantidad] AS [Cantidad], 
+[vArticulosResumen].[Descripcion] AS [Descripcion], 
+[vArticulosResumen].[PrecioUnitario] AS [PrecioUnitario], 
+[vArticulosResumen].[Precio] AS [Precio]
+FROM [dbo].[vArticulosResumen] AS [vArticulosResumen]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vExclusividades" EntityType="Self.vExclusividades" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vExclusividades].[IdExclusividad] AS [IdExclusividad], 
+[vExclusividades].[Usuario] AS [Usuario], 
+[vExclusividades].[Caducidad] AS [Caducidad], 
+[vExclusividades].[TipoComponente] AS [TipoComponente], 
+[vExclusividades].[Codigo] AS [Codigo], 
+[vExclusividades].[Nombre] AS [Nombre], 
+[vExclusividades].[RutaImagen] AS [RutaImagen]
+FROM [dbo].[vExclusividades] AS [vExclusividades]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vMatrizFleteras" EntityType="Self.vMatrizFleteras" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vMatrizFleteras].[Estado] AS [Estado], 
+[vMatrizFleteras].[Ciudad] AS [Ciudad], 
+[vMatrizFleteras].[FleteraId] AS [FleteraId], 
+[vMatrizFleteras].[PaqChicoM2] AS [PaqChicoM2], 
+[vMatrizFleteras].[PaqMedioM2] AS [PaqMedioM2], 
+[vMatrizFleteras].[PaqGrandeM2] AS [PaqGrandeM2], 
+[vMatrizFleteras].[ElementoMatrizId] AS [ElementoMatrizId], 
+[vMatrizFleteras].[CatalogoCiudadId] AS [CatalogoCiudadId]
+FROM [dbo].[vMatrizFleteras] AS [vMatrizFleteras]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vMetraje" EntityType="Self.vMetraje" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vMetraje].[Proyecto] AS [Proyecto], 
+[vMetraje].[Metraje] AS [Metraje]
+FROM [dbo].[vMetraje] AS [vMetraje]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vMetrajeEquivalencia" EntityType="Self.vMetrajeEquivalencia" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vMetrajeEquivalencia].[Proyecto] AS [Proyecto], 
+[vMetrajeEquivalencia].[Metraje] AS [Metraje]
+FROM [dbo].[vMetrajeEquivalencia] AS [vMetrajeEquivalencia]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vNotasProyecto" EntityType="Self.vNotasProyecto" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vNotasProyecto].[IdNotaProyecto] AS [IdNotaProyecto], 
+[vNotasProyecto].[Proyecto] AS [Proyecto], 
+[vNotasProyecto].[Usuario] AS [Usuario], 
+[vNotasProyecto].[NombreCompleto] AS [NombreCompleto], 
+[vNotasProyecto].[UserName] AS [UserName], 
+[vNotasProyecto].[TmNota] AS [TmNota], 
+[vNotasProyecto].[esNueva] AS [esNueva], 
+[vNotasProyecto].[Texto] AS [Texto]
+FROM [dbo].[vNotasProyecto] AS [vNotasProyecto]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vOportunidades" EntityType="Self.vOportunidades" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vOportunidades].[IdOportunidad] AS [IdOportunidad], 
+[vOportunidades].[Usuario] AS [Usuario], 
+[vOportunidades].[Caducidad] AS [Caducidad], 
+[vOportunidades].[TipoComponente] AS [TipoComponente], 
+[vOportunidades].[Codigo] AS [Codigo], 
+[vOportunidades].[Nombre] AS [Nombre], 
+[vOportunidades].[RutaImagen] AS [RutaImagen]
+FROM [dbo].[vOportunidades] AS [vOportunidades]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vProyectosAprobados" EntityType="Self.vProyectosAprobados" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vProyectosAprobados].[IdProyecto] AS [IdProyecto], 
+[vProyectosAprobados].[Usuario] AS [Usuario], 
+[vProyectosAprobados].[TmRegistrado] AS [TmRegistrado], 
+[vProyectosAprobados].[TmSolicitado] AS [TmSolicitado], 
+[vProyectosAprobados].[ReferenciaCliente] AS [ReferenciaCliente], 
+[vProyectosAprobados].[NumArticulos] AS [NumArticulos]
+FROM [dbo].[vProyectosAprobados] AS [vProyectosAprobados]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vProyectosPorRevisar" EntityType="Self.vProyectosPorRevisar" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vProyectosPorRevisar].[NomEstatus] AS [NomEstatus], 
+[vProyectosPorRevisar].[Estatus] AS [Estatus], 
+[vProyectosPorRevisar].[IdProyecto] AS [IdProyecto], 
+[vProyectosPorRevisar].[TmSolicitado] AS [TmSolicitado], 
+[vProyectosPorRevisar].[NombreCliente] AS [NombreCliente], 
+[vProyectosPorRevisar].[PrecioTotal] AS [PrecioTotal], 
+[vProyectosPorRevisar].[NumArticulos] AS [NumArticulos], 
+[vProyectosPorRevisar].[ReferenciaCliente] AS [ReferenciaCliente], 
+[vProyectosPorRevisar].[Revisado] AS [Revisado], 
+[vProyectosPorRevisar].[UserAprobado] AS [UserAprobado], 
+[vProyectosPorRevisar].[UserRevisado] AS [UserRevisado], 
+[vProyectosPorRevisar].[Usuario] AS [Usuario], 
+[vProyectosPorRevisar].[TmRegistrado] AS [TmRegistrado], 
+[vProyectosPorRevisar].[TmEntregaTentativa] AS [TmEntregaTentativa], 
+[vProyectosPorRevisar].[CodigoInterno] AS [CodigoInterno], 
+[vProyectosPorRevisar].[PedidoInterno] AS [PedidoInterno], 
+[vProyectosPorRevisar].[OrdenProdInterna] AS [OrdenProdInterna], 
+[vProyectosPorRevisar].[FacturaInterna] AS [FacturaInterna], 
+[vProyectosPorRevisar].[LoteProdInterno] AS [LoteProdInterno], 
+[vProyectosPorRevisar].[GuiaEmbarque] AS [GuiaEmbarque], 
+[vProyectosPorRevisar].[EsExpress] AS [EsExpress], 
+[vProyectosPorRevisar].[FleteAutomatico] AS [FleteAutomatico]
+FROM [dbo].[vProyectosPorRevisar] AS [vProyectosPorRevisar]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vProyectosRegistrados" EntityType="Self.vProyectosRegistrados" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vProyectosRegistrados].[IdProyecto] AS [IdProyecto], 
+[vProyectosRegistrados].[Usuario] AS [Usuario], 
+[vProyectosRegistrados].[TmRegistrado] AS [TmRegistrado], 
+[vProyectosRegistrados].[ReferenciaCliente] AS [ReferenciaCliente], 
+[vProyectosRegistrados].[numArt] AS [numArt], 
+[vProyectosRegistrados].[PrecioTotal] AS [PrecioTotal], 
+[vProyectosRegistrados].[Estatus] AS [Estatus], 
+[vProyectosRegistrados].[NomEstatus] AS [NomEstatus], 
+[vProyectosRegistrados].[Direccion] AS [Direccion], 
+[vProyectosRegistrados].[EnvioOcurre] AS [EnvioOcurre], 
+[vProyectosRegistrados].[Telefono] AS [Telefono], 
+[vProyectosRegistrados].[Pais] AS [Pais], 
+[vProyectosRegistrados].[Estado] AS [Estado], 
+[vProyectosRegistrados].[CodigoPostal] AS [CodigoPostal], 
+[vProyectosRegistrados].[Colonia] AS [Colonia], 
+[vProyectosRegistrados].[Poblacion] AS [Poblacion], 
+[vProyectosRegistrados].[EnvioAsegurado] AS [EnvioAsegurado], 
+[vProyectosRegistrados].[FormaDeEnvio] AS [FormaDeEnvio], 
+[vProyectosRegistrados].[TmEntregaTentativa] AS [TmEntregaTentativa], 
+[vProyectosRegistrados].[GuiaEmbarque] AS [GuiaEmbarque], 
+[vProyectosRegistrados].[EntregaEnPlanta] AS [EntregaEnPlanta], 
+[vProyectosRegistrados].[EnvioCobrado] AS [EnvioCobrado], 
+[vProyectosRegistrados].[LoteProdInterno] AS [LoteProdInterno], 
+[vProyectosRegistrados].[EsExpress] AS [EsExpress], 
+[vProyectosRegistrados].[FleteAutomatico] AS [FleteAutomatico]
+FROM [dbo].[vProyectosRegistrados] AS [vProyectosRegistrados]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vProyectosSolicitados" EntityType="Self.vProyectosSolicitados" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vProyectosSolicitados].[IdProyecto] AS [IdProyecto], 
+[vProyectosSolicitados].[Usuario] AS [Usuario], 
+[vProyectosSolicitados].[TmRegistrado] AS [TmRegistrado], 
+[vProyectosSolicitados].[TmSolicitado] AS [TmSolicitado], 
+[vProyectosSolicitados].[ReferenciaCliente] AS [ReferenciaCliente], 
+[vProyectosSolicitados].[Estatus] AS [Estatus], 
+[vProyectosSolicitados].[NumArticulos] AS [NumArticulos], 
+[vProyectosSolicitados].[EsExpress] AS [EsExpress]
+FROM [dbo].[vProyectosSolicitados] AS [vProyectosSolicitados]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vUsuarios" EntityType="Self.vUsuarios" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vUsuarios].[RoleName] AS [RoleName], 
+[vUsuarios].[UserName] AS [UserName], 
+[vUsuarios].[UserId] AS [UserId], 
+[vUsuarios].[NombreCompleto] AS [NombreCompleto], 
+[vUsuarios].[Email] AS [Email], 
+[vUsuarios].[Comment] AS [Comment], 
+[vUsuarios].[Enabled] AS [Enabled], 
+[vUsuarios].[DateCreated] AS [DateCreated], 
+[vUsuarios].[DateLastLogin] AS [DateLastLogin], 
+[vUsuarios].[DateLastActivity] AS [DateLastActivity], 
+[vUsuarios].[DateLastPasswordChange] AS [DateLastPasswordChange], 
+[vUsuarios].[LastUpdate] AS [LastUpdate], 
+[vUsuarios].[ClienteERP] AS [ClienteERP], 
+[vUsuarios].[PasswordHash] AS [PasswordHash], 
+[vUsuarios].[PerfilCompra] AS [PerfilCompra], 
+[vUsuarios].[CambiarPase] AS [CambiarPase], 
+[vUsuarios].[PuedeExpress] AS [PuedeExpress], 
+[vUsuarios].[FleteAutomatico] AS [FleteAutomatico], 
+[vUsuarios].[FleteraId] AS [FleteraId], 
+[vUsuarios].[ClienteMuebles] AS [ClienteMuebles]
+FROM [dbo].[vUsuarios] AS [vUsuarios]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_ArtBases_EstatusCatalogos" Association="Self.FK_ArtBases_EstatusCatalogos">
+      <End Role="EstatusCatalogos" EntitySet="EstatusCatalogos" />
+      <End Role="ArtBases" EntitySet="ArtBases" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArtColores_ArtSubLinea" Association="Self.FK_ArtColores_ArtSubLinea">
+      <End Role="ArtSubLinea" EntitySet="ArtSubLinea" />
+      <End Role="ArtColores" EntitySet="ArtColores" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArtColores_EstatusCatalogos" Association="Self.FK_ArtColores_EstatusCatalogos">
+      <End Role="EstatusCatalogos" EntitySet="EstatusCatalogos" />
+      <End Role="ArtColores" EntitySet="ArtColores" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArtColores_Exclusividades" Association="Self.FK_ArtColores_Exclusividades">
+      <End Role="Exclusividades" EntitySet="Exclusividades" />
+      <End Role="ArtColores" EntitySet="ArtColores" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArtColoresExclusivos_Users" Association="Self.FK_ArtColoresExclusivos_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="ArtColoresExclusivos" EntitySet="ArtColoresExclusivos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArtCubrecantos_EstatusCatalogos" Association="Self.FK_ArtCubrecantos_EstatusCatalogos">
+      <End Role="EstatusCatalogos" EntitySet="EstatusCatalogos" />
+      <End Role="ArtCubrecantos" EntitySet="ArtCubrecantos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArticulosFavoritos_Articulos" Association="Self.FK_ArticulosFavoritos_Articulos">
+      <End Role="ProyArticulos" EntitySet="ProyArticulos" />
+      <End Role="ArticulosFav" EntitySet="ArticulosFav" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArticulosFavoritos_Users" Association="Self.FK_ArticulosFavoritos_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="ArticulosFav" EntitySet="ArticulosFav" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArtJaladeraPos_EstatusCatalogos" Association="Self.FK_ArtJaladeraPos_EstatusCatalogos">
+      <End Role="EstatusCatalogos" EntitySet="EstatusCatalogos" />
+      <End Role="ArtJaladeraPos" EntitySet="ArtJaladeraPos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArtJaladeras_EstatusCatalogos" Association="Self.FK_ArtJaladeras_EstatusCatalogos">
+      <End Role="EstatusCatalogos" EntitySet="EstatusCatalogos" />
+      <End Role="ArtJaladeras" EntitySet="ArtJaladeras" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArtLineas_EstatusCatalogos" Association="Self.FK_ArtLineas_EstatusCatalogos">
+      <End Role="EstatusCatalogos" EntitySet="EstatusCatalogos" />
+      <End Role="ArtLineas" EntitySet="ArtLineas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArtSubLinea_EstatusCatalogos" Association="Self.FK_ArtSubLinea_EstatusCatalogos">
+      <End Role="EstatusCatalogos" EntitySet="EstatusCatalogos" />
+      <End Role="ArtSubLinea" EntitySet="ArtSubLinea" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArtTipos_EstatusCatalogos" Association="Self.FK_ArtTipos_EstatusCatalogos">
+      <End Role="EstatusCatalogos" EntitySet="EstatusCatalogos" />
+      <End Role="ArtTipos" EntitySet="ArtTipos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArtVariantes_EstatusCatalogos" Association="Self.FK_ArtVariantes_EstatusCatalogos">
+      <End Role="EstatusCatalogos" EntitySet="EstatusCatalogos" />
+      <End Role="ArtVariantes" EntitySet="ArtVariantes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArtVetas_EstatusCatalogos" Association="Self.FK_ArtVetas_EstatusCatalogos">
+      <End Role="EstatusCatalogos" EntitySet="EstatusCatalogos" />
+      <End Role="ArtVetas" EntitySet="ArtVetas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CapturasPagos_Proyectos" Association="Self.FK_CapturasPagos_Proyectos">
+      <End Role="Proyectos" EntitySet="Proyectos" />
+      <End Role="CapturasPagos" EntitySet="CapturasPagos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CatalogoCiudades_CatalogoEstados" Association="Self.FK_CatalogoCiudades_CatalogoEstados">
+      <End Role="CatalogoEstados" EntitySet="CatalogoEstados" />
+      <End Role="CatalogoCiudades" EntitySet="CatalogoCiudades" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Exclusividades_Users" Association="Self.FK_Exclusividades_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Exclusividades" EntitySet="Exclusividades" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FavArticulos_Favoritos" Association="Self.FK_FavArticulos_Favoritos">
+      <End Role="Favoritos" EntitySet="Favoritos" />
+      <End Role="FavArticulos" EntitySet="FavArticulos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Favoritos_Usuarios" Association="Self.FK_Favoritos_Usuarios">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Favoritos" EntitySet="Favoritos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LineasUsuario_Users" Association="Self.FK_LineasUsuario_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="LineasUsuario" EntitySet="LineasUsuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MatrizFletes_CatalogoCiudades1" Association="Self.FK_MatrizFletes_CatalogoCiudades1">
+      <End Role="CatalogoCiudades" EntitySet="CatalogoCiudades" />
+      <End Role="MatrizFletes" EntitySet="MatrizFletes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MatrizFletes_Fleteras" Association="Self.FK_MatrizFletes_Fleteras">
+      <End Role="Fleteras" EntitySet="Fleteras" />
+      <End Role="MatrizFletes" EntitySet="MatrizFletes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MatrizFletes2_CatalogoCiudades" Association="Self.FK_MatrizFletes2_CatalogoCiudades">
+      <End Role="CatalogoCiudades" EntitySet="CatalogoCiudades" />
+      <End Role="MatrizFletes2" EntitySet="MatrizFletes2" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MatrizFletes2_Fleteras" Association="Self.FK_MatrizFletes2_Fleteras">
+      <End Role="Fleteras" EntitySet="Fleteras" />
+      <End Role="MatrizFletes2" EntitySet="MatrizFletes2" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Oportunidades_Users" Association="Self.FK_Oportunidades_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Oportunidades" EntitySet="Oportunidades" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PaseHist_Users" Association="Self.FK_PaseHist_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="PaseHist" EntitySet="PaseHist" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProyArticulos_Proyectos" Association="Self.FK_ProyArticulos_Proyectos">
+      <End Role="Proyectos" EntitySet="Proyectos" />
+      <End Role="ProyArticulos" EntitySet="ProyArticulos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProyNotas_Proyecto" Association="Self.FK_ProyNotas_Proyecto">
+      <End Role="Proyectos" EntitySet="Proyectos" />
+      <End Role="ProyNotas" EntitySet="ProyNotas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProyNotas_usuario" Association="Self.FK_ProyNotas_usuario">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="ProyNotas" EntitySet="ProyNotas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Fleteras" Association="Self.FK_Users_Fleteras">
+      <End Role="Fleteras" EntitySet="Fleteras" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UsersInRoles_Roles" Association="Self.FK_UsersInRoles_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="UsersInRoles" EntitySet="UsersInRoles" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

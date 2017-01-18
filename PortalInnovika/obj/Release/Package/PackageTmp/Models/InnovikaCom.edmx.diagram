@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ddc8072bc30f4f15b4c0a78405048541" Name="Diagram1" ZoomLevel="73">
+        <EntityTypeShape EntityType="InnovikaComModel.ArtADNCodigo" Width="1.5" PointX="12.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.ArtBas" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.ArtColore" Width="1.5" PointX="5.25" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.ArtColoresExclusivo" Width="1.5" PointX="3" PointY="49.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.ArtCubrecanto" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.ArticulosAdjunto" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.ArticulosFav" Width="1.5" PointX="12.25" PointY="26.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.ArtJaladeraPos" Width="1.5" PointX="3" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.ArtJaladera" Width="1.5" PointX="3" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.ArtLinea" Width="1.5" PointX="3" PointY="21.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.ArtSubLinea" Width="1.5" PointX="3" PointY="25.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.ArtTipos" Width="1.5" PointX="3" PointY="28.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.ArtVariante" Width="1.5" PointX="3" PointY="31.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.ArtVeta" Width="1.5" PointX="3" PointY="34.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.BasesJaladera" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.CapturasPago" Width="1.5" PointX="10" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.CatalogoCiudade" Width="1.5" PointX="15" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.CatalogoEstado" Width="1.5" PointX="12.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.Documento" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.EstatusCatalogo" Width="1.5" PointX="0.75" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.EstatusProceso" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.EstatusProyecto" Width="1.5" PointX="4.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.Exclusividade" Width="1.5" PointX="3" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.FavArticulo" Width="1.5" PointX="5.25" PointY="52.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.Favorito" Width="1.5" PointX="3" PointY="55" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.Fletera" Width="1.5" PointX="1.5" PointY="46.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.LineasUsuario" Width="1.5" PointX="3" PointY="59.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.MatrizFlete" Width="1.5" PointX="17.25" PointY="24.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.MatrizFletes2" Width="1.5" PointX="20.25" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.MaxMinColor" Width="1.5" PointX="9.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.MedidaRegla" Width="1.5" PointX="14.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.Noticia" Width="1.5" PointX="14.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.Oportunidade" Width="1.5" PointX="3" PointY="61.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.Parametro" Width="1.5" PointX="16.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.PaseHist" Width="1.5" PointX="3" PointY="64.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.ProyArticulo" Width="1.5" PointX="10" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.ProyNota" Width="1.5" PointX="10" PointY="25.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.Role" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.User" Width="1.5" PointX="0.75" PointY="37.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.UsersInRole" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.vArticulosFavorito" Width="1.5" PointX="16.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.vArticulosResuman" Width="1.5" PointX="12.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.vExclusividade" Width="1.5" PointX="16.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.vMatrizFletera" Width="1.5" PointX="17.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.vNotasProyecto" Width="1.5" PointX="18.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.vOportunidade" Width="1.5" PointX="18.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.vProyectosAprobado" Width="1.5" PointX="18.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.vProyectosPorRevisar" Width="1.5" PointX="18.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.vProyectosRegistrado" Width="1.5" PointX="20.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.vProyectosSolicitado" Width="1.5" PointX="14.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.vUsuario" Width="1.5" PointX="20.75" PointY="7.75" IsExpanded="true" />
+        <AssociationConnector Association="InnovikaComModel.FK_ArtBases_EstatusCatalogos" ManuallyRouted="false" />
+        <AssociationConnector Association="InnovikaComModel.FK_ArtColores_ArtSubLinea" ManuallyRouted="false" />
+        <AssociationConnector Association="InnovikaComModel.FK_ArtColores_EstatusCatalogos" ManuallyRouted="false" />
+        <AssociationConnector Association="InnovikaComModel.FK_ArtColores_Exclusividades" ManuallyRouted="false" />
+        <AssociationConnector Association="InnovikaComModel.FK_ArtColoresExclusivos_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="InnovikaComModel.FK_ArtCubrecantos_EstatusCatalogos" ManuallyRouted="false" />
+        <AssociationConnector Association="InnovikaComModel.FK_ArticulosFavoritos_Articulos" ManuallyRouted="false" />
+        <AssociationConnector Association="InnovikaComModel.FK_ArticulosFavoritos_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="InnovikaComModel.FK_ArtJaladeraPos_EstatusCatalogos" ManuallyRouted="false" />
+        <AssociationConnector Association="InnovikaComModel.FK_ArtJaladeras_EstatusCatalogos" ManuallyRouted="false" />
+        <AssociationConnector Association="InnovikaComModel.FK_ArtLineas_EstatusCatalogos" ManuallyRouted="false" />
+        <AssociationConnector Association="InnovikaComModel.FK_ArtSubLinea_EstatusCatalogos" ManuallyRouted="false" />
+        <AssociationConnector Association="InnovikaComModel.FK_ArtTipos_EstatusCatalogos" ManuallyRouted="false" />
+        <AssociationConnector Association="InnovikaComModel.FK_ArtVariantes_EstatusCatalogos" ManuallyRouted="false" />
+        <AssociationConnector Association="InnovikaComModel.FK_ArtVetas_EstatusCatalogos" ManuallyRouted="false" />
+        <AssociationConnector Association="InnovikaComModel.FK_CatalogoCiudades_CatalogoEstados" ManuallyRouted="false" />
+        <AssociationConnector Association="InnovikaComModel.FK_MatrizFletes_CatalogoCiudades1" ManuallyRouted="false" />
+        <AssociationConnector Association="InnovikaComModel.FK_MatrizFletes2_CatalogoCiudades" ManuallyRouted="false" />
+        <AssociationConnector Association="InnovikaComModel.FK_Exclusividades_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="InnovikaComModel.FK_FavArticulos_Favoritos" ManuallyRouted="false" />
+        <AssociationConnector Association="InnovikaComModel.FK_Favoritos_Usuarios" ManuallyRouted="false" />
+        <AssociationConnector Association="InnovikaComModel.FK_MatrizFletes_Fleteras" ManuallyRouted="false" />
+        <AssociationConnector Association="InnovikaComModel.FK_MatrizFletes2_Fleteras" ManuallyRouted="false" />
+        <AssociationConnector Association="InnovikaComModel.FK_Users_Fleteras" ManuallyRouted="false" />
+        <AssociationConnector Association="InnovikaComModel.FK_LineasUsuario_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="InnovikaComModel.FK_Oportunidades_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="InnovikaComModel.FK_PaseHist_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="InnovikaComModel.FK_ProyNotas_usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="InnovikaComModel.FK_UsersInRoles_Roles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="InnovikaComModel.webpages_Membership" Width="1.5" PointX="6.0740830740305052" PointY="1.8240922399908734" />
+        <EntityTypeShape EntityType="InnovikaComModel.webpages_OAuthMembership" Width="1.5" PointX="8.25" PointY="6.125" />
+        <EntityTypeShape EntityType="InnovikaComModel.vAcumuladosColor" Width="1.5" PointX="3.8439339678007807" PointY="6.0668491004346166" />
+        <EntityTypeShape EntityType="InnovikaComModel.vMetraje" Width="1.5" PointX="6.25" PointY="28.625" />
+        <EntityTypeShape EntityType="InnovikaComModel.vMetrajeEquivalencia" Width="1.5" PointX="8" PointY="28.625" />
+        <EntityTypeShape EntityType="InnovikaComModel.Multiplos" Width="1.5" PointX="2.5738195136998869" PointY="14.042556352001874" />
+        <EntityTypeShape EntityType="InnovikaComModel.MedidasFija" Width="1.5" PointX="7.5" PointY="58.5" />
+        <EntityTypeShape EntityType="InnovikaComModel.Proyecto" Width="1.5" PointX="7.25" PointY="6.375" />
+        <AssociationConnector Association="InnovikaComModel.FK_CapturasPagos_Proyectos" />
+        <AssociationConnector Association="InnovikaComModel.FK_ProyArticulos_Proyectos" />
+        <AssociationConnector Association="InnovikaComModel.FK_ProyNotas_Proyecto" />
+        <EntityTypeShape EntityType="InnovikaComModel.MaxMinAcabado" Width="1.5" PointX="12.375" PointY="29.375" />
+        <EntityTypeShape EntityType="InnovikaComModel.MaxMinBaseColor" Width="1.5" PointX="11.875" PointY="0.625" />
+        <EntityTypeShape EntityType="InnovikaComModel.JaladeraColorExcepcione" Width="1.5" PointX="21.375" PointY="13.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

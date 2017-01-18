@@ -1,0 +1,32 @@
+﻿@model PortalInnovika.Models.LocalPasswordModel
+@{
+    ViewBag.Title = "Administración de cuenta";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+</hgroup>
+
+<p class="message-success">@ViewBag.StatusMessage</p>
+
+<p>Usted esta registrado como: <strong>@User.Identity.Name</strong>.</p>
+
+@if (ViewBag.HasLocalPassword)
+{
+    @Html.Partial("_ChangePasswordPartial")
+}
+else
+{ 
+    @Html.Partial("_SetPasswordPartial")
+}
+
+<section id="externalLogins">
+    @Html.Action("RemoveExternalLogins")
+
+@*    <h3>Add an external login</h3>
+    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })*@
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,1677 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="InnovikaComModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="InnovikaComEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="ArtADNCodigos" EntityType="InnovikaComModel.ArtADNCodigo" />
+    <EntitySet Name="ArtBases" EntityType="InnovikaComModel.ArtBas" />
+    <EntitySet Name="ArtColores" EntityType="InnovikaComModel.ArtColore" />
+    <EntitySet Name="ArtColoresExclusivos" EntityType="InnovikaComModel.ArtColoresExclusivo" />
+    <EntitySet Name="ArtCubrecantos" EntityType="InnovikaComModel.ArtCubrecanto" />
+    <EntitySet Name="ArticulosAdjuntos" EntityType="InnovikaComModel.ArticulosAdjunto" />
+    <EntitySet Name="ArticulosFavs" EntityType="InnovikaComModel.ArticulosFav" />
+    <EntitySet Name="ArtJaladeraPos" EntityType="InnovikaComModel.ArtJaladeraPos" />
+    <EntitySet Name="ArtJaladeras" EntityType="InnovikaComModel.ArtJaladera" />
+    <EntitySet Name="ArtLineas" EntityType="InnovikaComModel.ArtLinea" />
+    <EntitySet Name="ArtSubLineas" EntityType="InnovikaComModel.ArtSubLinea" />
+    <EntitySet Name="ArtTipos" EntityType="InnovikaComModel.ArtTipos" />
+    <EntitySet Name="ArtVariantes" EntityType="InnovikaComModel.ArtVariante" />
+    <EntitySet Name="ArtVetas" EntityType="InnovikaComModel.ArtVeta" />
+    <EntitySet Name="BasesJaladeras" EntityType="InnovikaComModel.BasesJaladera" />
+    <EntitySet Name="CapturasPagos" EntityType="InnovikaComModel.CapturasPago" />
+    <EntitySet Name="CatalogoCiudades" EntityType="InnovikaComModel.CatalogoCiudade" />
+    <EntitySet Name="CatalogoEstados" EntityType="InnovikaComModel.CatalogoEstado" />
+    <EntitySet Name="Documentos" EntityType="InnovikaComModel.Documento" />
+    <EntitySet Name="EstatusCatalogos" EntityType="InnovikaComModel.EstatusCatalogo" />
+    <EntitySet Name="EstatusProcesos" EntityType="InnovikaComModel.EstatusProceso" />
+    <EntitySet Name="EstatusProyectos" EntityType="InnovikaComModel.EstatusProyecto" />
+    <EntitySet Name="Exclusividades" EntityType="InnovikaComModel.Exclusividade" />
+    <EntitySet Name="FavArticulos" EntityType="InnovikaComModel.FavArticulo" />
+    <EntitySet Name="Favoritos" EntityType="InnovikaComModel.Favorito" />
+    <EntitySet Name="Fleteras" EntityType="InnovikaComModel.Fletera" />
+    <EntitySet Name="LineasUsuarios" EntityType="InnovikaComModel.LineasUsuario" />
+    <EntitySet Name="MatrizFletes" EntityType="InnovikaComModel.MatrizFlete" />
+    <EntitySet Name="MatrizFletes2" EntityType="InnovikaComModel.MatrizFletes2" />
+    <EntitySet Name="MaxMinColors" EntityType="InnovikaComModel.MaxMinColor" />
+    <EntitySet Name="MedidaReglas" EntityType="InnovikaComModel.MedidaRegla" />
+    <EntitySet Name="Noticias" EntityType="InnovikaComModel.Noticia" />
+    <EntitySet Name="Oportunidades" EntityType="InnovikaComModel.Oportunidade" />
+    <EntitySet Name="Parametros" EntityType="InnovikaComModel.Parametro" />
+    <EntitySet Name="PaseHists" EntityType="InnovikaComModel.PaseHist" />
+    <EntitySet Name="ProyArticulos" EntityType="InnovikaComModel.ProyArticulo" />
+    <EntitySet Name="ProyNotas" EntityType="InnovikaComModel.ProyNota" />
+    <EntitySet Name="Roles" EntityType="InnovikaComModel.Role" />
+    <EntitySet Name="Users" EntityType="InnovikaComModel.User" />
+    <EntitySet Name="UsersInRoles" EntityType="InnovikaComModel.UsersInRole" />
+    <EntitySet Name="vArticulosFavoritos" EntityType="InnovikaComModel.vArticulosFavorito" />
+    <EntitySet Name="vArticulosResumen" EntityType="InnovikaComModel.vArticulosResuman" />
+    <EntitySet Name="vExclusividades" EntityType="InnovikaComModel.vExclusividade" />
+    <EntitySet Name="vMatrizFleteras" EntityType="InnovikaComModel.vMatrizFletera" />
+    <EntitySet Name="vNotasProyectoes" EntityType="InnovikaComModel.vNotasProyecto" />
+    <EntitySet Name="vOportunidades" EntityType="InnovikaComModel.vOportunidade" />
+    <EntitySet Name="vProyectosAprobados" EntityType="InnovikaComModel.vProyectosAprobado" />
+    <EntitySet Name="vProyectosPorRevisars" EntityType="InnovikaComModel.vProyectosPorRevisar" />
+    <EntitySet Name="vProyectosRegistrados" EntityType="InnovikaComModel.vProyectosRegistrado" />
+    <EntitySet Name="vProyectosSolicitados" EntityType="InnovikaComModel.vProyectosSolicitado" />
+    <EntitySet Name="vUsuarios" EntityType="InnovikaComModel.vUsuario" />
+    <AssociationSet Name="FK_ArtBases_EstatusCatalogos" Association="InnovikaComModel.FK_ArtBases_EstatusCatalogos">
+      <End Role="EstatusCatalogos" EntitySet="EstatusCatalogos" />
+      <End Role="ArtBases" EntitySet="ArtBases" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArtColores_ArtSubLinea" Association="InnovikaComModel.FK_ArtColores_ArtSubLinea">
+      <End Role="ArtSubLinea" EntitySet="ArtSubLineas" />
+      <End Role="ArtColores" EntitySet="ArtColores" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArtColores_EstatusCatalogos" Association="InnovikaComModel.FK_ArtColores_EstatusCatalogos">
+      <End Role="EstatusCatalogos" EntitySet="EstatusCatalogos" />
+      <End Role="ArtColores" EntitySet="ArtColores" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArtColores_Exclusividades" Association="InnovikaComModel.FK_ArtColores_Exclusividades">
+      <End Role="Exclusividades" EntitySet="Exclusividades" />
+      <End Role="ArtColores" EntitySet="ArtColores" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArtColoresExclusivos_Users" Association="InnovikaComModel.FK_ArtColoresExclusivos_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="ArtColoresExclusivos" EntitySet="ArtColoresExclusivos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArtCubrecantos_EstatusCatalogos" Association="InnovikaComModel.FK_ArtCubrecantos_EstatusCatalogos">
+      <End Role="EstatusCatalogos" EntitySet="EstatusCatalogos" />
+      <End Role="ArtCubrecantos" EntitySet="ArtCubrecantos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArticulosFavoritos_Articulos" Association="InnovikaComModel.FK_ArticulosFavoritos_Articulos">
+      <End Role="ProyArticulos" EntitySet="ProyArticulos" />
+      <End Role="ArticulosFav" EntitySet="ArticulosFavs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArticulosFavoritos_Users" Association="InnovikaComModel.FK_ArticulosFavoritos_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="ArticulosFav" EntitySet="ArticulosFavs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArtJaladeraPos_EstatusCatalogos" Association="InnovikaComModel.FK_ArtJaladeraPos_EstatusCatalogos">
+      <End Role="EstatusCatalogos" EntitySet="EstatusCatalogos" />
+      <End Role="ArtJaladeraPos" EntitySet="ArtJaladeraPos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArtJaladeras_EstatusCatalogos" Association="InnovikaComModel.FK_ArtJaladeras_EstatusCatalogos">
+      <End Role="EstatusCatalogos" EntitySet="EstatusCatalogos" />
+      <End Role="ArtJaladeras" EntitySet="ArtJaladeras" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArtLineas_EstatusCatalogos" Association="InnovikaComModel.FK_ArtLineas_EstatusCatalogos">
+      <End Role="EstatusCatalogos" EntitySet="EstatusCatalogos" />
+      <End Role="ArtLineas" EntitySet="ArtLineas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArtSubLinea_EstatusCatalogos" Association="InnovikaComModel.FK_ArtSubLinea_EstatusCatalogos">
+      <End Role="EstatusCatalogos" EntitySet="EstatusCatalogos" />
+      <End Role="ArtSubLinea" EntitySet="ArtSubLineas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArtTipos_EstatusCatalogos" Association="InnovikaComModel.FK_ArtTipos_EstatusCatalogos">
+      <End Role="EstatusCatalogos" EntitySet="EstatusCatalogos" />
+      <End Role="ArtTipos" EntitySet="ArtTipos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArtVariantes_EstatusCatalogos" Association="InnovikaComModel.FK_ArtVariantes_EstatusCatalogos">
+      <End Role="EstatusCatalogos" EntitySet="EstatusCatalogos" />
+      <End Role="ArtVariantes" EntitySet="ArtVariantes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArtVetas_EstatusCatalogos" Association="InnovikaComModel.FK_ArtVetas_EstatusCatalogos">
+      <End Role="EstatusCatalogos" EntitySet="EstatusCatalogos" />
+      <End Role="ArtVetas" EntitySet="ArtVetas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CatalogoCiudades_CatalogoEstados" Association="InnovikaComModel.FK_CatalogoCiudades_CatalogoEstados">
+      <End Role="CatalogoEstados" EntitySet="CatalogoEstados" />
+      <End Role="CatalogoCiudades" EntitySet="CatalogoCiudades" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MatrizFletes_CatalogoCiudades1" Association="InnovikaComModel.FK_MatrizFletes_CatalogoCiudades1">
+      <End Role="CatalogoCiudades" EntitySet="CatalogoCiudades" />
+      <End Role="MatrizFletes" EntitySet="MatrizFletes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MatrizFletes2_CatalogoCiudades" Association="InnovikaComModel.FK_MatrizFletes2_CatalogoCiudades">
+      <End Role="CatalogoCiudades" EntitySet="CatalogoCiudades" />
+      <End Role="MatrizFletes2" EntitySet="MatrizFletes2" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Exclusividades_Users" Association="InnovikaComModel.FK_Exclusividades_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Exclusividades" EntitySet="Exclusividades" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FavArticulos_Favoritos" Association="InnovikaComModel.FK_FavArticulos_Favoritos">
+      <End Role="Favoritos" EntitySet="Favoritos" />
+      <End Role="FavArticulos" EntitySet="FavArticulos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Favoritos_Usuarios" Association="InnovikaComModel.FK_Favoritos_Usuarios">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Favoritos" EntitySet="Favoritos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MatrizFletes_Fleteras" Association="InnovikaComModel.FK_MatrizFletes_Fleteras">
+      <End Role="Fleteras" EntitySet="Fleteras" />
+      <End Role="MatrizFletes" EntitySet="MatrizFletes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MatrizFletes2_Fleteras" Association="InnovikaComModel.FK_MatrizFletes2_Fleteras">
+      <End Role="Fleteras" EntitySet="Fleteras" />
+      <End Role="MatrizFletes2" EntitySet="MatrizFletes2" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Fleteras" Association="InnovikaComModel.FK_Users_Fleteras">
+      <End Role="Fleteras" EntitySet="Fleteras" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LineasUsuario_Users" Association="InnovikaComModel.FK_LineasUsuario_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="LineasUsuario" EntitySet="LineasUsuarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Oportunidades_Users" Association="InnovikaComModel.FK_Oportunidades_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Oportunidades" EntitySet="Oportunidades" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PaseHist_Users" Association="InnovikaComModel.FK_PaseHist_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="PaseHist" EntitySet="PaseHists" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProyNotas_usuario" Association="InnovikaComModel.FK_ProyNotas_usuario">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="ProyNotas" EntitySet="ProyNotas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UsersInRoles_Roles" Association="InnovikaComModel.FK_UsersInRoles_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="UsersInRoles" EntitySet="UsersInRoles" />
+    </AssociationSet>
+    <FunctionImport Name="spAltaCotizacion">
+      <Parameter Name="iProyecto" Mode="In" Type="Int32" />
+      <Parameter Name="iUsuarioAprueba" Mode="In" Type="Int32" />
+      <Parameter Name="bCorrecto" Mode="InOut" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="spCalculaPreciosProyecto">
+      <Parameter Name="IdProyecto" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="spClienteSolicitaProyecto">
+      <Parameter Name="IDUSUARIO" Mode="In" Type="Int32" />
+      <Parameter Name="IDPROYECTO" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="spClonaProyecto" ReturnType="Collection(InnovikaComModel.spClonaProyecto_Result)">
+      <Parameter Name="iProyecto" Mode="In" Type="Int32" />
+      <Parameter Name="iProyectoClonado" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="spCreaFavoritodesdeProyecto" ReturnType="Collection(Int32)">
+      <Parameter Name="iProyecto" Mode="In" Type="Int32" />
+      <Parameter Name="nvcNombre" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="spCreaProyectodesdeFavorito" ReturnType="Collection(InnovikaComModel.spCreaProyectodesdeFavorito_Result)">
+      <Parameter Name="iFavorito" Mode="In" Type="Int32" />
+      <Parameter Name="iProyecto" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="spDatosEmbarquexProyecto">
+      <Parameter Name="iProyecto" Mode="In" Type="Int32" />
+      <Parameter Name="iPiezas" Mode="InOut" Type="Int32" />
+      <Parameter Name="iBultos" Mode="InOut" Type="Int32" />
+      <Parameter Name="mMonto" Mode="InOut" Type="Decimal" />
+      <Parameter Name="dtFechaEnvio" Mode="InOut" Type="DateTime" />
+      <Parameter Name="dtFechaEntrega" Mode="InOut" Type="DateTime" />
+      <Parameter Name="dtFechaForma" Mode="InOut" Type="DateTime" />
+      <Parameter Name="vcFormaEmbarque" Mode="InOut" Type="String" />
+      <Parameter Name="vcObservaciones" Mode="InOut" Type="String" />
+      <Parameter Name="vcNumGuia" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="spEliminaCancelaProyecto" ReturnType="Collection(Boolean)">
+      <Parameter Name="iProyecto" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="spEliminaFavorito" ReturnType="Collection(Boolean)">
+      <Parameter Name="iFavorito" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="spEstatusProyectoxCliente" ReturnType="Collection(Boolean)">
+      <Parameter Name="cCliente" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="spEstatusProyectoxProyecto" ReturnType="Collection(Boolean)">
+      <Parameter Name="iProyecto" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="spEstatusTodosProyectos" ReturnType="Collection(Boolean)" />
+    <FunctionImport Name="spExcepcionDescuentoHeCa">
+      <Parameter Name="iProyecto" Mode="In" Type="Int32" />
+      <Parameter Name="bAplicaDescPuertas" Mode="InOut" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="spGeneraSubCodigosArt">
+      <Parameter Name="bCorrecto" Mode="InOut" Type="Boolean" />
+    </FunctionImport>
+    <EntitySet Name="webpages_Membership" EntityType="InnovikaComModel.webpages_Membership" />
+    <EntitySet Name="webpages_OAuthMembership" EntityType="InnovikaComModel.webpages_OAuthMembership" />
+    <EntitySet Name="vAcumuladosColor" EntityType="InnovikaComModel.vAcumuladosColor" />
+    <EntitySet Name="vMetraje" EntityType="InnovikaComModel.vMetraje" />
+    <EntitySet Name="vMetrajeEquivalencia" EntityType="InnovikaComModel.vMetrajeEquivalencia" />
+    <EntitySet Name="Multiplos" EntityType="InnovikaComModel.Multiplos" />
+    <EntitySet Name="MedidasFijas" EntityType="InnovikaComModel.MedidasFija" />
+    <EntitySet Name="Proyectos" EntityType="InnovikaComModel.Proyecto" />
+    <AssociationSet Name="FK_CapturasPagos_Proyectos" Association="InnovikaComModel.FK_CapturasPagos_Proyectos">
+      <End Role="Proyecto" EntitySet="Proyectos" />
+      <End Role="CapturasPago" EntitySet="CapturasPagos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProyArticulos_Proyectos" Association="InnovikaComModel.FK_ProyArticulos_Proyectos">
+      <End Role="Proyecto" EntitySet="Proyectos" />
+      <End Role="ProyArticulo" EntitySet="ProyArticulos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProyNotas_Proyecto" Association="InnovikaComModel.FK_ProyNotas_Proyecto">
+      <End Role="Proyecto" EntitySet="Proyectos" />
+      <End Role="ProyNota" EntitySet="ProyNotas" />
+    </AssociationSet>
+    <EntitySet Name="MaxMinAcabados" EntityType="InnovikaComModel.MaxMinAcabado" />
+    <EntitySet Name="MaxMinBaseColors" EntityType="InnovikaComModel.MaxMinBaseColor" />
+    <EntitySet Name="JaladeraColorExcepciones" EntityType="InnovikaComModel.JaladeraColorExcepcione" />
+  </EntityContainer>
+  <EntityType Name="ArtADNCodigo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Tipo" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="Base" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="Color" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="Veta" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="Cubrecanto" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="Jaladera" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="PosicionJaladera" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="Variante" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="Codigo" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+    <Property Name="Descripcion1" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="Descripcion2" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="Impuesto1" Type="Double" />
+    <Property Name="Unidad" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="PrecioLista" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Precio2" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Precio3" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Precio4" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Precio5" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Precio6" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Precio7" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Precio8" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Precio9" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Precio10" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Factor" Type="Double" />
+    <Property Name="Estatus" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="PrecioAdjuntos" Type="Decimal" Precision="19" Scale="4" />
+  </EntityType>
+  <EntityType Name="ArtBas">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Estatus" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="Linea" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+    <Property Name="RutaImagen" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
+    <Property Name="Orden" Type="Int32" />
+    <NavigationProperty Name="EstatusCatalogo" Relationship="InnovikaComModel.FK_ArtBases_EstatusCatalogos" FromRole="ArtBases" ToRole="EstatusCatalogos" />
+  </EntityType>
+  <EntityType Name="ArtColore">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Estatus" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="RutaImagen" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
+    <Property Name="Linea" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+    <Property Name="Orden" Type="Int32" />
+    <Property Name="SubLinea" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+    <Property Name="Exclusividad" Type="Int64" />
+    <Property Name="Intercambiable" Type="Boolean" Nullable="false" />
+    <Property Name="tieneVeta" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="ArtSubLinea" Relationship="InnovikaComModel.FK_ArtColores_ArtSubLinea" FromRole="ArtColores" ToRole="ArtSubLinea" />
+    <NavigationProperty Name="EstatusCatalogo" Relationship="InnovikaComModel.FK_ArtColores_EstatusCatalogos" FromRole="ArtColores" ToRole="EstatusCatalogos" />
+    <NavigationProperty Name="Exclusividade" Relationship="InnovikaComModel.FK_ArtColores_Exclusividades" FromRole="ArtColores" ToRole="Exclusividades" />
+  </EntityType>
+  <EntityType Name="ArtColoresExclusivo">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="String" Nullable="false" MaxLength="6" Unicode="false" FixedLength="true" />
+    <Property Name="Nombre" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="RutaImagen" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
+    <Property Name="Orden" Type="Int32" />
+    <Property Name="tieneVeta" Type="Boolean" Nullable="false" />
+    <Property Name="Usuario" Type="Int32" Nullable="false" />
+    <Property Name="Estatus" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="InnovikaComModel.FK_ArtColoresExclusivos_Users" FromRole="ArtColoresExclusivos" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="ArtCubrecanto">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Estatus" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="Linea" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+    <Property Name="RutaImagen" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
+    <Property Name="Orden" Type="Int32" />
+    <NavigationProperty Name="EstatusCatalogo" Relationship="InnovikaComModel.FK_ArtCubrecantos_EstatusCatalogos" FromRole="ArtCubrecantos" ToRole="EstatusCatalogos" />
+  </EntityType>
+  <EntityType Name="ArticulosAdjunto">
+    <Key>
+      <PropertyRef Name="IdArticuloAdjunto" />
+    </Key>
+    <Property Name="IdArticuloAdjunto" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="CodigoADN" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="CodigoADNAdjunto" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="Cantidad" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ArticulosFav">
+    <Key>
+      <PropertyRef Name="IdArtFavorito" />
+    </Key>
+    <Property Name="IdArtFavorito" Type="Int64" Nullable="false" />
+    <Property Name="Usuario" Type="Int32" Nullable="false" />
+    <Property Name="Articulo" Type="Int64" Nullable="false" />
+    <Property Name="FechaFavorito" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="ProyArticulo" Relationship="InnovikaComModel.FK_ArticulosFavoritos_Articulos" FromRole="ArticulosFav" ToRole="ProyArticulos" />
+    <NavigationProperty Name="User" Relationship="InnovikaComModel.FK_ArticulosFavoritos_Users" FromRole="ArticulosFav" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="ArtJaladeraPos">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Estatus" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="Orden" Type="Int32" />
+    <Property Name="RutaImagen" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="EstatusCatalogo" Relationship="InnovikaComModel.FK_ArtJaladeraPos_EstatusCatalogos" FromRole="ArtJaladeraPos" ToRole="EstatusCatalogos" />
+  </EntityType>
+  <EntityType Name="ArtJaladera">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Estatus" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="Linea" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+    <Property Name="RutaImagen" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
+    <Property Name="Orden" Type="Int32" />
+    <Property Name="PuertaAnchoMin" Type="Int32" />
+    <Property Name="PuertaAltoMin" Type="Int32" />
+    <Property Name="FrenteAnchoMin" Type="Int32" />
+    <Property Name="FrenteAltoMin" Type="Int32" />
+    <NavigationProperty Name="EstatusCatalogo" Relationship="InnovikaComModel.FK_ArtJaladeras_EstatusCatalogos" FromRole="ArtJaladeras" ToRole="EstatusCatalogos" />
+  </EntityType>
+  <EntityType Name="ArtLinea">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+    <Property Name="Estatus" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="Nombre" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="RutaImagen" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
+    <Property Name="Orden" Type="Int32" />
+    <Property Name="Escalado" Type="Boolean" />
+    <Property Name="NivelEscalado" Type="Int32" />
+    <NavigationProperty Name="EstatusCatalogo" Relationship="InnovikaComModel.FK_ArtLineas_EstatusCatalogos" FromRole="ArtLineas" ToRole="EstatusCatalogos" />
+  </EntityType>
+  <EntityType Name="ArtSubLinea">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Estatus" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="RutaImagen" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
+    <Property Name="Orden" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ArtColores" Relationship="InnovikaComModel.FK_ArtColores_ArtSubLinea" FromRole="ArtSubLinea" ToRole="ArtColores" />
+    <NavigationProperty Name="EstatusCatalogo" Relationship="InnovikaComModel.FK_ArtSubLinea_EstatusCatalogos" FromRole="ArtSubLinea" ToRole="EstatusCatalogos" />
+  </EntityType>
+  <EntityType Name="ArtTipos">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Estatus" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="Orden" Type="Int32" />
+    <Property Name="RutaImagen" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
+    <Property Name="tieneVidrio" Type="Boolean" Nullable="false" />
+    <Property Name="EquivalenteM2" Type="Boolean" Nullable="false" />
+    <Property Name="MinimoCompra" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="EstatusCatalogo" Relationship="InnovikaComModel.FK_ArtTipos_EstatusCatalogos" FromRole="ArtTipos" ToRole="EstatusCatalogos" />
+    <Property Type="Decimal" Name="EquivalenciaM2" Precision="12" Scale="2" />
+  </EntityType>
+  <EntityType Name="ArtVariante">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Estatus" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="Orden" Type="Int32" />
+    <Property Name="RutaImagen" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="EstatusCatalogo" Relationship="InnovikaComModel.FK_ArtVariantes_EstatusCatalogos" FromRole="ArtVariantes" ToRole="EstatusCatalogos" />
+  </EntityType>
+  <EntityType Name="ArtVeta">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Estatus" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="Orden" Type="Int32" />
+    <Property Name="RutaImagen" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="EstatusCatalogo" Relationship="InnovikaComModel.FK_ArtVetas_EstatusCatalogos" FromRole="ArtVetas" ToRole="EstatusCatalogos" />
+  </EntityType>
+  <EntityType Name="BasesJaladera">
+    <Key>
+      <PropertyRef Name="IdBaseJaladera" />
+    </Key>
+    <Property Name="IdBaseJaladera" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Base" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="Jaladera" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+  </EntityType>
+  <EntityType Name="CapturasPago">
+    <Key>
+      <PropertyRef Name="idCapturaPago" />
+    </Key>
+    <Property Name="idCapturaPago" Type="Guid" Nullable="false" />
+    <Property Name="Proyecto" Type="Int32" Nullable="false" />
+    <Property Name="TmCaptura" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="TmPago" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Folio" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="Monto" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="Observaciones" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Proyecto1" Relationship="InnovikaComModel.FK_CapturasPagos_Proyectos" FromRole="CapturasPago" ToRole="Proyecto" />
+  </EntityType>
+  <EntityType Name="CatalogoCiudade">
+    <Key>
+      <PropertyRef Name="CatalogoCiudadId" />
+    </Key>
+    <Property Name="CatalogoCiudadId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Estado" Type="String" Nullable="false" MaxLength="2" Unicode="true" FixedLength="false" />
+    <Property Name="Ciudad" Type="String" MaxLength="3" Unicode="true" FixedLength="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="40" Unicode="true" FixedLength="false" />
+    <Property Name="Rango1" Type="String" MaxLength="5" Unicode="true" FixedLength="false" />
+    <Property Name="Rango2" Type="String" MaxLength="5" Unicode="true" FixedLength="false" />
+    <Property Name="Rango3" Type="String" MaxLength="5" Unicode="true" FixedLength="false" />
+    <Property Name="Rango4" Type="String" MaxLength="5" Unicode="true" FixedLength="false" />
+    <Property Name="Especial" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+    <Property Name="Marcado" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="CatalogoEstado" Relationship="InnovikaComModel.FK_CatalogoCiudades_CatalogoEstados" FromRole="CatalogoCiudades" ToRole="CatalogoEstados" />
+    <NavigationProperty Name="MatrizFletes" Relationship="InnovikaComModel.FK_MatrizFletes_CatalogoCiudades1" FromRole="CatalogoCiudades" ToRole="MatrizFletes" />
+    <NavigationProperty Name="MatrizFletes2" Relationship="InnovikaComModel.FK_MatrizFletes2_CatalogoCiudades" FromRole="CatalogoCiudades" ToRole="MatrizFletes2" />
+  </EntityType>
+  <EntityType Name="CatalogoEstado">
+    <Key>
+      <PropertyRef Name="Estado" />
+    </Key>
+    <Property Name="Estado" Type="String" Nullable="false" MaxLength="2" Unicode="true" FixedLength="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="Abreviacion" Type="String" MaxLength="7" Unicode="true" FixedLength="false" />
+    <Property Name="Especial" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+    <Property Name="Marcado" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="CatalogoCiudades" Relationship="InnovikaComModel.FK_CatalogoCiudades_CatalogoEstados" FromRole="CatalogoEstados" ToRole="CatalogoCiudades" />
+  </EntityType>
+  <EntityType Name="Documento">
+    <Key>
+      <PropertyRef Name="IdDocumento" />
+    </Key>
+    <Property Name="IdDocumento" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="Nombre" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="Linea" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+    <Property Name="Fecha" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="EstatusCatalogo">
+    <Key>
+      <PropertyRef Name="IdEstatus" />
+    </Key>
+    <Property Name="IdEstatus" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="15" Unicode="true" FixedLength="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="ArtBases" Relationship="InnovikaComModel.FK_ArtBases_EstatusCatalogos" FromRole="EstatusCatalogos" ToRole="ArtBases" />
+    <NavigationProperty Name="ArtColores" Relationship="InnovikaComModel.FK_ArtColores_EstatusCatalogos" FromRole="EstatusCatalogos" ToRole="ArtColores" />
+    <NavigationProperty Name="ArtCubrecantos" Relationship="InnovikaComModel.FK_ArtCubrecantos_EstatusCatalogos" FromRole="EstatusCatalogos" ToRole="ArtCubrecantos" />
+    <NavigationProperty Name="ArtJaladeraPos" Relationship="InnovikaComModel.FK_ArtJaladeraPos_EstatusCatalogos" FromRole="EstatusCatalogos" ToRole="ArtJaladeraPos" />
+    <NavigationProperty Name="ArtJaladeras" Relationship="InnovikaComModel.FK_ArtJaladeras_EstatusCatalogos" FromRole="EstatusCatalogos" ToRole="ArtJaladeras" />
+    <NavigationProperty Name="ArtLineas" Relationship="InnovikaComModel.FK_ArtLineas_EstatusCatalogos" FromRole="EstatusCatalogos" ToRole="ArtLineas" />
+    <NavigationProperty Name="ArtSubLineas" Relationship="InnovikaComModel.FK_ArtSubLinea_EstatusCatalogos" FromRole="EstatusCatalogos" ToRole="ArtSubLinea" />
+    <NavigationProperty Name="ArtTipos" Relationship="InnovikaComModel.FK_ArtTipos_EstatusCatalogos" FromRole="EstatusCatalogos" ToRole="ArtTipos" />
+    <NavigationProperty Name="ArtVariantes" Relationship="InnovikaComModel.FK_ArtVariantes_EstatusCatalogos" FromRole="EstatusCatalogos" ToRole="ArtVariantes" />
+    <NavigationProperty Name="ArtVetas" Relationship="InnovikaComModel.FK_ArtVetas_EstatusCatalogos" FromRole="EstatusCatalogos" ToRole="ArtVetas" />
+  </EntityType>
+  <EntityType Name="EstatusProceso">
+    <Key>
+      <PropertyRef Name="IdEstatus" />
+    </Key>
+    <Property Name="IdEstatus" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="EstatusProyecto">
+    <Key>
+      <PropertyRef Name="IdEstatusProy" />
+    </Key>
+    <Property Name="IdEstatusProy" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="40" Unicode="true" FixedLength="false" />
+    <Property Name="Orden" Type="Int32" />
+    <Property Name="Descripcion" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="NombreCliente" Type="String" MaxLength="40" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Exclusividade">
+    <Key>
+      <PropertyRef Name="IdExclusividad" />
+    </Key>
+    <Property Name="IdExclusividad" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Usuario" Type="Int32" Nullable="false" />
+    <Property Name="Caducidad" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="LineaExclusiva" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+    <Property Name="BaseExclusiva" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="ColorExclusivo" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="CubrecantoExclusivo" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="JaladeraExclusiva" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <NavigationProperty Name="ArtColores" Relationship="InnovikaComModel.FK_ArtColores_Exclusividades" FromRole="Exclusividades" ToRole="ArtColores" />
+    <NavigationProperty Name="User" Relationship="InnovikaComModel.FK_Exclusividades_Users" FromRole="Exclusividades" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="FavArticulo">
+    <Key>
+      <PropertyRef Name="IdArticulo" />
+    </Key>
+    <Property Name="IdArticulo" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Favorito" Type="Int32" Nullable="false" />
+    <Property Name="Cantidad" Type="Int32" Nullable="false" />
+    <Property Name="Unidad" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="ADNTipo" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="ADNBase" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="ADNColor" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="ADNCubrecanto" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="ADNVeta" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="ADNVariante" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="CodigoADNBase" Type="String" MaxLength="13" Unicode="false" FixedLength="false" p1:StoreGeneratedPattern="Computed" />
+    <Property Name="CodigoADNInterno" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+    <Property Name="tieneJaladera" Type="Boolean" Nullable="false" />
+    <Property Name="tieneVidrio" Type="Boolean" Nullable="false" />
+    <Property Name="tieneProtecta" Type="Boolean" Nullable="false" />
+    <Property Name="tieneOrificios" Type="Boolean" Nullable="false" />
+    <Property Name="UnidadJaladera" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="ADNJaladeraBase" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="ADNJaladera" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="ADNJaladeraOpcion" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="CodigoADNJaladera" Type="String" MaxLength="7" Unicode="false" FixedLength="false" p1:StoreGeneratedPattern="Computed" />
+    <Property Name="ADNPosicionJaladera" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="ADNVidrioBase" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="ADNVidrioColor" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="CodigoADNVidrio" Type="String" MaxLength="6" Unicode="false" FixedLength="false" p1:StoreGeneratedPattern="Computed" />
+    <Property Name="ADNProtectaBase" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="ADNProtectaColor" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="CodigoADNProtecta" Type="String" MaxLength="6" Unicode="false" FixedLength="false" p1:StoreGeneratedPattern="Computed" />
+    <Property Name="ADNOrificios" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="OrificiosDistCanto" Type="Int16" />
+    <Property Name="OrificiosCuantos" Type="Byte" />
+    <Property Name="CodigoADNOrificios" Type="String" MaxLength="6" Unicode="false" FixedLength="true" p1:StoreGeneratedPattern="Computed" />
+    <Property Name="Alto" Type="Int32" />
+    <Property Name="Ancho" Type="Int32" />
+    <NavigationProperty Name="Favorito1" Relationship="InnovikaComModel.FK_FavArticulos_Favoritos" FromRole="FavArticulos" ToRole="Favoritos" />
+  </EntityType>
+  <EntityType Name="Favorito">
+    <Key>
+      <PropertyRef Name="IdFavorito" />
+    </Key>
+    <Property Name="IdFavorito" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Usuario" Type="Int32" Nullable="false" />
+    <Property Name="ClienteERP" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
+    <Property Name="FechaFavorito" Type="DateTime" Precision="0" />
+    <Property Name="Exhibicion" Type="Boolean" />
+    <Property Name="Observaciones" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Proyecto" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="FavArticulos" Relationship="InnovikaComModel.FK_FavArticulos_Favoritos" FromRole="Favoritos" ToRole="FavArticulos" />
+    <NavigationProperty Name="User" Relationship="InnovikaComModel.FK_Favoritos_Usuarios" FromRole="Favoritos" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Fletera">
+    <Key>
+      <PropertyRef Name="FleteraId" />
+    </Key>
+    <Property Name="FleteraId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="MatrizFletes" Relationship="InnovikaComModel.FK_MatrizFletes_Fleteras" FromRole="Fleteras" ToRole="MatrizFletes" />
+    <NavigationProperty Name="MatrizFletes2" Relationship="InnovikaComModel.FK_MatrizFletes2_Fleteras" FromRole="Fleteras" ToRole="MatrizFletes2" />
+    <NavigationProperty Name="Users" Relationship="InnovikaComModel.FK_Users_Fleteras" FromRole="Fleteras" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="LineasUsuario">
+    <Key>
+      <PropertyRef Name="Usuario" />
+      <PropertyRef Name="Linea" />
+    </Key>
+    <Property Name="Usuario" Type="Int32" Nullable="false" />
+    <Property Name="Linea" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="User" Relationship="InnovikaComModel.FK_LineasUsuario_Users" FromRole="LineasUsuario" ToRole="Users" />
+    <Property Type="Int32" Name="UserProfile" />
+  </EntityType>
+  <EntityType Name="MatrizFlete">
+    <Key>
+      <PropertyRef Name="ElementoMatrizId" />
+    </Key>
+    <Property Name="ElementoMatrizId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="FleteraId" Type="Int32" Nullable="false" />
+    <Property Name="CatalogoCiudadId" Type="Int32" Nullable="false" />
+    <Property Name="PaqChicoM2" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="PaqMedioM2" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="PaqGrandeM2" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <NavigationProperty Name="CatalogoCiudade" Relationship="InnovikaComModel.FK_MatrizFletes_CatalogoCiudades1" FromRole="MatrizFletes" ToRole="CatalogoCiudades" />
+    <NavigationProperty Name="Fletera" Relationship="InnovikaComModel.FK_MatrizFletes_Fleteras" FromRole="MatrizFletes" ToRole="Fleteras" />
+  </EntityType>
+  <EntityType Name="MatrizFletes2">
+    <Key>
+      <PropertyRef Name="ElementoMatrizId" />
+    </Key>
+    <Property Name="ElementoMatrizId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="FleteraId" Type="Int32" Nullable="false" />
+    <Property Name="CatalogoCiudadId" Type="Int32" Nullable="false" />
+    <Property Name="Caj_1_3" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="Caj_4_10" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="Caj_11_20" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="Caj_21up" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="Paq_1_3" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="Paq_4_10" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="Paq_11_20" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="Paq_21up" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <NavigationProperty Name="CatalogoCiudade" Relationship="InnovikaComModel.FK_MatrizFletes2_CatalogoCiudades" FromRole="MatrizFletes2" ToRole="CatalogoCiudades" />
+    <NavigationProperty Name="Fletera" Relationship="InnovikaComModel.FK_MatrizFletes2_Fleteras" FromRole="MatrizFletes2" ToRole="Fleteras" />
+    <Property Type="Decimal" Name="CostoM2" Nullable="false" Precision="19" Scale="4" />
+  </EntityType>
+  <EntityType Name="MaxMinColor">
+    <Key>
+      <PropertyRef Name="idRestriccionColor" />
+    </Key>
+    <Property Name="idRestriccionColor" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Color" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="AnchoMax" Type="Int32" />
+    <Property Name="AnchoMin" Type="Int32" />
+    <Property Name="AltoMax" Type="Int32" />
+    <Property Name="AltoMin" Type="Int32" />
+  </EntityType>
+  <EntityType Name="MedidaRegla">
+    <Key>
+      <PropertyRef Name="idReglaMedida" />
+    </Key>
+    <Property Name="idReglaMedida" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Tipo" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="Base" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="AnchoMax" Type="Int32" />
+    <Property Name="AnchoMin" Type="Int32" />
+    <Property Name="AltoMax" Type="Int32" />
+    <Property Name="AltoMin" Type="Int32" />
+    <Property Name="Multiplo70" Type="Decimal" Precision="12" Scale="2" />
+    <Property Name="Multiplo72" Type="Decimal" Precision="12" Scale="2" />
+    <Property Name="Multiplo76" Type="Decimal" Precision="12" Scale="2" />
+    <Property Name="Multiplo80" Type="Decimal" Precision="12" Scale="2" />
+    <Property Name="PosicionJaladeras" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="EquivalenciaM2" Type="Decimal" Precision="12" Scale="4" />
+    <Property Name="SubLinea" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Noticia">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Titulo" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Mensaje" Type="String" Nullable="false" MaxLength="300" Unicode="true" FixedLength="false" />
+    <Property Name="Referencias" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="URL" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="Alta" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Vencimiento" Type="DateTime" Precision="3" />
+    <Property Name="Tipo" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="ClienteERP" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
+    <Property Name="Leida" Type="Boolean" Nullable="false" />
+    <Property Name="Estatus" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+  </EntityType>
+  <EntityType Name="Oportunidade">
+    <Key>
+      <PropertyRef Name="IdOportunidad" />
+    </Key>
+    <Property Name="IdOportunidad" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Usuario" Type="Int32" Nullable="false" />
+    <Property Name="Caducidad" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="LineaAbierta" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+    <Property Name="BaseAbierta" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="ColorAbierto" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="CubrecantoAbierto" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="JaladeraAbierta" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <NavigationProperty Name="User" Relationship="InnovikaComModel.FK_Oportunidades_Users" FromRole="Oportunidades" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Parametro">
+    <Key>
+      <PropertyRef Name="NombreParametro" />
+    </Key>
+    <Property Name="NombreParametro" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="ValorCadena" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="ValorEntero" Type="Int32" />
+    <Property Name="ValorDecimal" Type="Decimal" Precision="14" Scale="6" />
+    <Property Name="ValorDoble" Type="Double" />
+    <Property Name="ValorTiempo" Type="DateTime" Precision="3" />
+    <Property Name="ValorBooleano" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="PaseHist">
+    <Key>
+      <PropertyRef Name="idPaseGuardado" />
+    </Key>
+    <Property Name="idPaseGuardado" Type="Guid" Nullable="false" />
+    <Property Name="Usuario" Type="Int32" Nullable="false" />
+    <Property Name="TmAlta" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PaseHash" Type="String" Nullable="false" MaxLength="86" Unicode="false" FixedLength="true" />
+    <Property Name="PaseSalt" Type="String" Nullable="false" MaxLength="5" Unicode="false" FixedLength="true" />
+    <NavigationProperty Name="User" Relationship="InnovikaComModel.FK_PaseHist_Users" FromRole="PaseHist" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="ProyArticulo">
+    <Key>
+      <PropertyRef Name="IdArticulo" />
+    </Key>
+    <Property Name="IdArticulo" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Proyecto" Type="Int32" Nullable="false" />
+    <Property Name="Cantidad" Type="Int32" Nullable="false" />
+    <Property Name="Unidad" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="ADNTipo" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="ADNBase" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="ADNColor" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="ADNCubrecanto" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="ADNVeta" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="ADNVariante" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="CodigoADNBase" Type="String" MaxLength="12" Unicode="false" FixedLength="false" p1:StoreGeneratedPattern="Computed" />
+    <Property Name="CodigoADNInterno" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+    <Property Name="tieneJaladera" Type="Boolean" Nullable="false" />
+    <Property Name="tieneVidrio" Type="Boolean" Nullable="false" />
+    <Property Name="tieneProtecta" Type="Boolean" Nullable="false" />
+    <Property Name="tieneOrificios" Type="Boolean" Nullable="false" />
+    <Property Name="UnidadJaladera" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="ADNJaladeraBase" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="ADNJaladera" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="ADNJaladeraOpcion" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="ADNPosicionJaladera" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="ADNVidrioBase" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="ADNVidrioColor" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="CodigoADNVidrio" Type="String" MaxLength="6" Unicode="false" FixedLength="false" p1:StoreGeneratedPattern="Computed" />
+    <Property Name="ADNProtectaBase" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="ADNProtectaColor" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="CodigoADNProtecta" Type="String" MaxLength="6" Unicode="false" FixedLength="false" p1:StoreGeneratedPattern="Computed" />
+    <Property Name="ADNOrificios" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="OrificiosDistCanto" Type="Int16" />
+    <Property Name="OrificiosCuantos" Type="Byte" />
+    <Property Name="CodigoADNOrificios" Type="String" MaxLength="6" Unicode="false" FixedLength="false" p1:StoreGeneratedPattern="Computed" />
+    <Property Name="Alto" Type="Int32" />
+    <Property Name="Ancho" Type="Int32" />
+    <Property Name="AltoEstandar" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="PrecioUnitario" Type="Decimal" Precision="19" Scale="4" p1:StoreGeneratedPattern="Computed" />
+    <Property Name="DescuentoUnitario" Type="Decimal" Precision="19" Scale="4" p1:StoreGeneratedPattern="Computed" />
+    <Property Name="IVAUnitario" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Importe" Type="Decimal" Precision="19" Scale="4" p1:StoreGeneratedPattern="Computed" />
+    <Property Name="PrecioPrincipal" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="PrecioJaladera" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="PrecioVidrio" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="PrecioProtecta" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="PrecioServicios" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="DescuentoPrincipal" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="DescuentoJaladera" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="DescuentoProtecta" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="DescuentoVidrio" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="DescuentoServicios" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="PrecioListaPrincipal" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="PrecioListaJaladera" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="PrecioListaVidrio" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="PrecioListaPelicula" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="PrecioListaServicios" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="ArticuloPatron" Type="Int64" />
+    <Property Name="InstruccionesExtra" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="DescuentoLineal" Type="Decimal" Precision="12" Scale="2" />
+    <Property Name="MAIdEmpaque" Type="Int64" />
+    <Property Name="MAIdArmado" Type="Int64" />
+    <Property Name="TmUltimoCambio" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PrecioAdjuntos" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="EsConceptoDeProyecto" Type="Boolean" Nullable="false" />
+    <Property Name="TipoEmpaque" Type="String" MaxLength="3" Unicode="true" FixedLength="false" />
+    <Property Name="tieneColorExclusivo" Type="Boolean" Nullable="false" />
+    <Property Name="ADNColorExclusivo" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
+    <Property Name="PrecioColorExclusivo" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="PrecioListaColorExclusivo" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="ArticulosFavs" Relationship="InnovikaComModel.FK_ArticulosFavoritos_Articulos" FromRole="ProyArticulos" ToRole="ArticulosFav" />
+    <Property Type="String" Name="CodigoADNJaladera" MaxLength="6" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="Proyecto1" Relationship="InnovikaComModel.FK_ProyArticulos_Proyectos" FromRole="ProyArticulo" ToRole="Proyecto" />
+  </EntityType>
+  <EntityType Name="ProyNota">
+    <Key>
+      <PropertyRef Name="IdNotaProyecto" />
+    </Key>
+    <Property Name="IdNotaProyecto" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Proyecto" Type="Int32" Nullable="false" />
+    <Property Name="Usuario" Type="Int32" Nullable="false" />
+    <Property Name="TmNota" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Texto" Type="String" Nullable="false" MaxLength="2000" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="User" Relationship="InnovikaComModel.FK_ProyNotas_usuario" FromRole="ProyNotas" ToRole="Users" />
+    <NavigationProperty Name="Proyecto1" Relationship="InnovikaComModel.FK_ProyNotas_Proyecto" FromRole="ProyNota" ToRole="Proyecto" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleName" />
+    </Key>
+    <Property Name="RoleName" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="UsersInRoles" Relationship="InnovikaComModel.FK_UsersInRoles_Roles" FromRole="Roles" ToRole="UsersInRoles" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="NombreCompleto" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="PasswordHash" Type="String" Nullable="false" MaxLength="86" Unicode="false" FixedLength="true" />
+    <Property Name="PasswordSalt" Type="String" Nullable="false" MaxLength="5" Unicode="false" FixedLength="true" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="Comment" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="Enabled" Type="Boolean" Nullable="false" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateLastLogin" Type="DateTime" Precision="3" />
+    <Property Name="DateLastActivity" Type="DateTime" Precision="3" />
+    <Property Name="DateLastPasswordChange" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastUpdate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ClienteERP" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="true" />
+    <Property Name="AgenteServicio" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
+    <Property Name="PuedeExpress" Type="Boolean" />
+    <Property Name="FleteraId" Type="Int32" />
+    <Property Name="FleteAutomatico" Type="Boolean" />
+    <Property Name="UltimaVisitaDocumentos" Type="DateTime" Precision="3" />
+    <Property Name="ClienteMuebles" Type="Boolean" />
+    <Property Name="ZonaImpuesto" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="ListaPreciosEsp" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="ArtColoresExclusivos" Relationship="InnovikaComModel.FK_ArtColoresExclusivos_Users" FromRole="Users" ToRole="ArtColoresExclusivos" />
+    <NavigationProperty Name="ArticulosFavs" Relationship="InnovikaComModel.FK_ArticulosFavoritos_Users" FromRole="Users" ToRole="ArticulosFav" />
+    <NavigationProperty Name="Exclusividades" Relationship="InnovikaComModel.FK_Exclusividades_Users" FromRole="Users" ToRole="Exclusividades" />
+    <NavigationProperty Name="Favoritos" Relationship="InnovikaComModel.FK_Favoritos_Usuarios" FromRole="Users" ToRole="Favoritos" />
+    <NavigationProperty Name="Fletera" Relationship="InnovikaComModel.FK_Users_Fleteras" FromRole="Users" ToRole="Fleteras" />
+    <NavigationProperty Name="LineasUsuarios" Relationship="InnovikaComModel.FK_LineasUsuario_Users" FromRole="Users" ToRole="LineasUsuario" />
+    <NavigationProperty Name="Oportunidades" Relationship="InnovikaComModel.FK_Oportunidades_Users" FromRole="Users" ToRole="Oportunidades" />
+    <NavigationProperty Name="PaseHists" Relationship="InnovikaComModel.FK_PaseHist_Users" FromRole="Users" ToRole="PaseHist" />
+    <NavigationProperty Name="ProyNotas" Relationship="InnovikaComModel.FK_ProyNotas_usuario" FromRole="Users" ToRole="ProyNotas" />
+  </EntityType>
+  <EntityType Name="UsersInRole">
+    <Key>
+      <PropertyRef Name="HashId" />
+    </Key>
+    <Property Name="HashId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="RoleName" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Role" Relationship="InnovikaComModel.FK_UsersInRoles_Roles" FromRole="UsersInRoles" ToRole="Roles" />
+  </EntityType>
+  <EntityType Name="vArticulosFavorito">
+    <Key>
+      <PropertyRef Name="IdArticulo" />
+      <PropertyRef Name="Favorito" />
+      <PropertyRef Name="Cantidad" />
+      <PropertyRef Name="Descripcion" />
+    </Key>
+    <Property Name="IdArticulo" Type="Int64" Nullable="false" />
+    <Property Name="Favorito" Type="Int32" Nullable="false" />
+    <Property Name="Cantidad" Type="Int32" Nullable="false" />
+    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="152" Unicode="true" FixedLength="false" />
+    <Property Name="Ancho" Type="Int32" />
+    <Property Name="Alto" Type="Int32" />
+  </EntityType>
+  <EntityType Name="vArticulosResuman">
+    <Key>
+      <PropertyRef Name="IdArticulo" />
+      <PropertyRef Name="Proyecto" />
+      <PropertyRef Name="Cantidad" />
+      <PropertyRef Name="Descripcion" />
+    </Key>
+    <Property Name="IdArticulo" Type="Int64" Nullable="false" />
+    <Property Name="Proyecto" Type="Int32" Nullable="false" />
+    <Property Name="Cantidad" Type="Int32" Nullable="false" />
+    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="218" Unicode="true" FixedLength="false" />
+    <Property Name="PrecioUnitario" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Precio" Type="Decimal" Precision="38" Scale="6" />
+  </EntityType>
+  <EntityType Name="vExclusividade">
+    <Key>
+      <PropertyRef Name="IdExclusividad" />
+      <PropertyRef Name="Usuario" />
+      <PropertyRef Name="Caducidad" />
+      <PropertyRef Name="TipoComponente" />
+    </Key>
+    <Property Name="IdExclusividad" Type="Int64" Nullable="false" />
+    <Property Name="Usuario" Type="Int32" Nullable="false" />
+    <Property Name="Caducidad" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="TipoComponente" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="Codigo" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="Nombre" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="RutaImagen" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="vMatrizFletera">
+    <Key>
+      <PropertyRef Name="FleteraId" />
+      <PropertyRef Name="PaqChicoM2" />
+      <PropertyRef Name="PaqMedioM2" />
+      <PropertyRef Name="PaqGrandeM2" />
+      <PropertyRef Name="ElementoMatrizId" />
+      <PropertyRef Name="CatalogoCiudadId" />
+    </Key>
+    <Property Name="Estado" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="Ciudad" Type="String" MaxLength="40" Unicode="true" FixedLength="false" />
+    <Property Name="FleteraId" Type="Int32" Nullable="false" />
+    <Property Name="PaqChicoM2" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="PaqMedioM2" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="PaqGrandeM2" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="ElementoMatrizId" Type="Int32" Nullable="false" />
+    <Property Name="CatalogoCiudadId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vNotasProyecto">
+    <Key>
+      <PropertyRef Name="IdNotaProyecto" />
+      <PropertyRef Name="Proyecto" />
+      <PropertyRef Name="Usuario" />
+      <PropertyRef Name="NombreCompleto" />
+      <PropertyRef Name="UserName" />
+      <PropertyRef Name="TmNota" />
+      <PropertyRef Name="esNueva" />
+      <PropertyRef Name="Texto" />
+    </Key>
+    <Property Name="IdNotaProyecto" Type="Int64" Nullable="false" />
+    <Property Name="Proyecto" Type="Int32" Nullable="false" />
+    <Property Name="Usuario" Type="Int32" Nullable="false" />
+    <Property Name="NombreCompleto" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="TmNota" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="esNueva" Type="Int32" Nullable="false" />
+    <Property Name="Texto" Type="String" Nullable="false" MaxLength="2000" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="vOportunidade">
+    <Key>
+      <PropertyRef Name="IdOportunidad" />
+      <PropertyRef Name="Usuario" />
+      <PropertyRef Name="Caducidad" />
+      <PropertyRef Name="TipoComponente" />
+    </Key>
+    <Property Name="IdOportunidad" Type="Int64" Nullable="false" />
+    <Property Name="Usuario" Type="Int32" Nullable="false" />
+    <Property Name="Caducidad" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="TipoComponente" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="Codigo" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="Nombre" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="RutaImagen" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="vProyectosAprobado">
+    <Key>
+      <PropertyRef Name="IdProyecto" />
+      <PropertyRef Name="Usuario" />
+    </Key>
+    <Property Name="IdProyecto" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Usuario" Type="Int32" Nullable="false" />
+    <Property Name="TmRegistrado" Type="DateTime" Precision="3" />
+    <Property Name="TmSolicitado" Type="DateTime" Precision="3" />
+    <Property Name="ReferenciaCliente" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="NumArticulos" Type="Int32" />
+  </EntityType>
+  <EntityType Name="vProyectosPorRevisar">
+    <Key>
+      <PropertyRef Name="NomEstatus" />
+      <PropertyRef Name="IdProyecto" />
+      <PropertyRef Name="Usuario" />
+    </Key>
+    <Property Name="NomEstatus" Type="String" Nullable="false" MaxLength="40" Unicode="true" FixedLength="false" />
+    <Property Name="Estatus" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="IdProyecto" Type="Int32" Nullable="false" />
+    <Property Name="TmSolicitado" Type="DateTime" Precision="3" />
+    <Property Name="NombreCliente" Type="String" MaxLength="213" Unicode="false" FixedLength="false" />
+    <Property Name="PrecioTotal" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="NumArticulos" Type="Int32" />
+    <Property Name="ReferenciaCliente" Type="String" MaxLength="73" Unicode="true" FixedLength="false" />
+    <Property Name="Revisado" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="UserAprobado" Type="Int32" />
+    <Property Name="UserRevisado" Type="Int32" />
+    <Property Name="Usuario" Type="Int32" Nullable="false" />
+    <Property Name="TmRegistrado" Type="DateTime" Precision="3" />
+    <Property Name="TmEntregaTentativa" Type="DateTime" Precision="3" />
+    <Property Name="CodigoInterno" Type="Int32" />
+    <Property Name="PedidoInterno" Type="Int32" />
+    <Property Name="OrdenProdInterna" Type="Int32" />
+    <Property Name="FacturaInterna" Type="Int32" />
+    <Property Name="LoteProdInterno" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="GuiaEmbarque" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="EsExpress" Type="Boolean" />
+    <Property Name="FleteAutomatico" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="vProyectosRegistrado">
+    <Key>
+      <PropertyRef Name="IdProyecto" />
+      <PropertyRef Name="Usuario" />
+    </Key>
+    <Property Name="IdProyecto" Type="Int32" Nullable="false" />
+    <Property Name="Usuario" Type="Int32" Nullable="false" />
+    <Property Name="TmRegistrado" Type="DateTime" Precision="3" />
+    <Property Name="ReferenciaCliente" Type="String" MaxLength="73" Unicode="true" FixedLength="false" />
+    <Property Name="numArt" Type="Int32" />
+    <Property Name="PrecioTotal" Type="Decimal" Precision="38" Scale="6" />
+    <Property Name="Estatus" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="NomEstatus" Type="String" MaxLength="40" Unicode="true" FixedLength="false" />
+    <Property Name="Direccion" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="EnvioOcurre" Type="Boolean" />
+    <Property Name="Telefono" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="Pais" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="Estado" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="CodigoPostal" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="Colonia" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="Poblacion" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="EnvioAsegurado" Type="Boolean" />
+    <Property Name="FormaDeEnvio" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="TmEntregaTentativa" Type="DateTime" Precision="3" />
+    <Property Name="GuiaEmbarque" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="EntregaEnPlanta" Type="Boolean" />
+    <Property Name="EnvioCobrado" Type="Boolean" />
+    <Property Name="LoteProdInterno" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="EsExpress" Type="Boolean" />
+    <Property Name="FleteAutomatico" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="vProyectosSolicitado">
+    <Key>
+      <PropertyRef Name="IdProyecto" />
+      <PropertyRef Name="Usuario" />
+    </Key>
+    <Property Name="IdProyecto" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Usuario" Type="Int32" Nullable="false" />
+    <Property Name="TmRegistrado" Type="DateTime" Precision="3" />
+    <Property Name="TmSolicitado" Type="DateTime" Precision="3" />
+    <Property Name="ReferenciaCliente" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Estatus" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="NumArticulos" Type="Int32" />
+    <Property Name="EsExpress" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="vUsuario">
+    <Key>
+      <PropertyRef Name="RoleName" />
+      <PropertyRef Name="UserName" />
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="NombreCompleto" />
+      <PropertyRef Name="Email" />
+      <PropertyRef Name="Enabled" />
+      <PropertyRef Name="DateCreated" />
+      <PropertyRef Name="DateLastPasswordChange" />
+      <PropertyRef Name="LastUpdate" />
+      <PropertyRef Name="ClienteERP" />
+    </Key>
+    <Property Name="RoleName" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="NombreCompleto" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="Comment" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="Enabled" Type="Boolean" Nullable="false" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateLastLogin" Type="DateTime" Precision="3" />
+    <Property Name="DateLastActivity" Type="DateTime" Precision="3" />
+    <Property Name="DateLastPasswordChange" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastUpdate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ClienteERP" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="true" />
+    <Property Name="PasswordHash" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="PerfilCompra" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="CambiarPase" Type="Boolean" />
+    <Property Name="PuedeExpress" Type="Boolean" />
+    <Property Name="FleteAutomatico" Type="Boolean" />
+    <Property Name="FleteraId" Type="Int32" />
+    <Property Name="ClienteMuebles" Type="Boolean" />
+  </EntityType>
+  <Association Name="FK_ArtBases_EstatusCatalogos">
+    <End Role="EstatusCatalogos" Type="InnovikaComModel.EstatusCatalogo" Multiplicity="1" />
+    <End Role="ArtBases" Type="InnovikaComModel.ArtBas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstatusCatalogos">
+        <PropertyRef Name="IdEstatus" />
+      </Principal>
+      <Dependent Role="ArtBases">
+        <PropertyRef Name="Estatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArtColores_ArtSubLinea">
+    <End Role="ArtSubLinea" Type="InnovikaComModel.ArtSubLinea" Multiplicity="1" />
+    <End Role="ArtColores" Type="InnovikaComModel.ArtColore" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ArtSubLinea">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="ArtColores">
+        <PropertyRef Name="SubLinea" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArtColores_EstatusCatalogos">
+    <End Role="EstatusCatalogos" Type="InnovikaComModel.EstatusCatalogo" Multiplicity="1" />
+    <End Role="ArtColores" Type="InnovikaComModel.ArtColore" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstatusCatalogos">
+        <PropertyRef Name="IdEstatus" />
+      </Principal>
+      <Dependent Role="ArtColores">
+        <PropertyRef Name="Estatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArtColores_Exclusividades">
+    <End Role="Exclusividades" Type="InnovikaComModel.Exclusividade" Multiplicity="0..1" />
+    <End Role="ArtColores" Type="InnovikaComModel.ArtColore" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Exclusividades">
+        <PropertyRef Name="IdExclusividad" />
+      </Principal>
+      <Dependent Role="ArtColores">
+        <PropertyRef Name="Exclusividad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArtColoresExclusivos_Users">
+    <End Role="Users" Type="InnovikaComModel.User" Multiplicity="1" />
+    <End Role="ArtColoresExclusivos" Type="InnovikaComModel.ArtColoresExclusivo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="ArtColoresExclusivos">
+        <PropertyRef Name="Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArtCubrecantos_EstatusCatalogos">
+    <End Role="EstatusCatalogos" Type="InnovikaComModel.EstatusCatalogo" Multiplicity="1" />
+    <End Role="ArtCubrecantos" Type="InnovikaComModel.ArtCubrecanto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstatusCatalogos">
+        <PropertyRef Name="IdEstatus" />
+      </Principal>
+      <Dependent Role="ArtCubrecantos">
+        <PropertyRef Name="Estatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArticulosFavoritos_Articulos">
+    <End Role="ProyArticulos" Type="InnovikaComModel.ProyArticulo" Multiplicity="1" />
+    <End Role="ArticulosFav" Type="InnovikaComModel.ArticulosFav" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProyArticulos">
+        <PropertyRef Name="IdArticulo" />
+      </Principal>
+      <Dependent Role="ArticulosFav">
+        <PropertyRef Name="Articulo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArticulosFavoritos_Users">
+    <End Role="Users" Type="InnovikaComModel.User" Multiplicity="1" />
+    <End Role="ArticulosFav" Type="InnovikaComModel.ArticulosFav" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="ArticulosFav">
+        <PropertyRef Name="Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArtJaladeraPos_EstatusCatalogos">
+    <End Role="EstatusCatalogos" Type="InnovikaComModel.EstatusCatalogo" Multiplicity="1" />
+    <End Role="ArtJaladeraPos" Type="InnovikaComModel.ArtJaladeraPos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstatusCatalogos">
+        <PropertyRef Name="IdEstatus" />
+      </Principal>
+      <Dependent Role="ArtJaladeraPos">
+        <PropertyRef Name="Estatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArtJaladeras_EstatusCatalogos">
+    <End Role="EstatusCatalogos" Type="InnovikaComModel.EstatusCatalogo" Multiplicity="1" />
+    <End Role="ArtJaladeras" Type="InnovikaComModel.ArtJaladera" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstatusCatalogos">
+        <PropertyRef Name="IdEstatus" />
+      </Principal>
+      <Dependent Role="ArtJaladeras">
+        <PropertyRef Name="Estatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArtLineas_EstatusCatalogos">
+    <End Role="EstatusCatalogos" Type="InnovikaComModel.EstatusCatalogo" Multiplicity="1" />
+    <End Role="ArtLineas" Type="InnovikaComModel.ArtLinea" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstatusCatalogos">
+        <PropertyRef Name="IdEstatus" />
+      </Principal>
+      <Dependent Role="ArtLineas">
+        <PropertyRef Name="Estatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArtSubLinea_EstatusCatalogos">
+    <End Role="EstatusCatalogos" Type="InnovikaComModel.EstatusCatalogo" Multiplicity="1" />
+    <End Role="ArtSubLinea" Type="InnovikaComModel.ArtSubLinea" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstatusCatalogos">
+        <PropertyRef Name="IdEstatus" />
+      </Principal>
+      <Dependent Role="ArtSubLinea">
+        <PropertyRef Name="Estatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArtTipos_EstatusCatalogos">
+    <End Role="EstatusCatalogos" Type="InnovikaComModel.EstatusCatalogo" Multiplicity="1" />
+    <End Role="ArtTipos" Type="InnovikaComModel.ArtTipos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstatusCatalogos">
+        <PropertyRef Name="IdEstatus" />
+      </Principal>
+      <Dependent Role="ArtTipos">
+        <PropertyRef Name="Estatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArtVariantes_EstatusCatalogos">
+    <End Role="EstatusCatalogos" Type="InnovikaComModel.EstatusCatalogo" Multiplicity="1" />
+    <End Role="ArtVariantes" Type="InnovikaComModel.ArtVariante" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstatusCatalogos">
+        <PropertyRef Name="IdEstatus" />
+      </Principal>
+      <Dependent Role="ArtVariantes">
+        <PropertyRef Name="Estatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArtVetas_EstatusCatalogos">
+    <End Role="EstatusCatalogos" Type="InnovikaComModel.EstatusCatalogo" Multiplicity="1" />
+    <End Role="ArtVetas" Type="InnovikaComModel.ArtVeta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstatusCatalogos">
+        <PropertyRef Name="IdEstatus" />
+      </Principal>
+      <Dependent Role="ArtVetas">
+        <PropertyRef Name="Estatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CatalogoCiudades_CatalogoEstados">
+    <End Role="CatalogoEstados" Type="InnovikaComModel.CatalogoEstado" Multiplicity="1" />
+    <End Role="CatalogoCiudades" Type="InnovikaComModel.CatalogoCiudade" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CatalogoEstados">
+        <PropertyRef Name="Estado" />
+      </Principal>
+      <Dependent Role="CatalogoCiudades">
+        <PropertyRef Name="Estado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MatrizFletes_CatalogoCiudades1">
+    <End Role="CatalogoCiudades" Type="InnovikaComModel.CatalogoCiudade" Multiplicity="1" />
+    <End Role="MatrizFletes" Type="InnovikaComModel.MatrizFlete" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CatalogoCiudades">
+        <PropertyRef Name="CatalogoCiudadId" />
+      </Principal>
+      <Dependent Role="MatrizFletes">
+        <PropertyRef Name="CatalogoCiudadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MatrizFletes2_CatalogoCiudades">
+    <End Role="CatalogoCiudades" Type="InnovikaComModel.CatalogoCiudade" Multiplicity="1" />
+    <End Role="MatrizFletes2" Type="InnovikaComModel.MatrizFletes2" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CatalogoCiudades">
+        <PropertyRef Name="CatalogoCiudadId" />
+      </Principal>
+      <Dependent Role="MatrizFletes2">
+        <PropertyRef Name="CatalogoCiudadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Exclusividades_Users">
+    <End Role="Users" Type="InnovikaComModel.User" Multiplicity="1" />
+    <End Role="Exclusividades" Type="InnovikaComModel.Exclusividade" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Exclusividades">
+        <PropertyRef Name="Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FavArticulos_Favoritos">
+    <End Role="Favoritos" Type="InnovikaComModel.Favorito" Multiplicity="1" />
+    <End Role="FavArticulos" Type="InnovikaComModel.FavArticulo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Favoritos">
+        <PropertyRef Name="IdFavorito" />
+      </Principal>
+      <Dependent Role="FavArticulos">
+        <PropertyRef Name="Favorito" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Favoritos_Usuarios">
+    <End Role="Users" Type="InnovikaComModel.User" Multiplicity="1" />
+    <End Role="Favoritos" Type="InnovikaComModel.Favorito" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Favoritos">
+        <PropertyRef Name="Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MatrizFletes_Fleteras">
+    <End Role="Fleteras" Type="InnovikaComModel.Fletera" Multiplicity="1" />
+    <End Role="MatrizFletes" Type="InnovikaComModel.MatrizFlete" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fleteras">
+        <PropertyRef Name="FleteraId" />
+      </Principal>
+      <Dependent Role="MatrizFletes">
+        <PropertyRef Name="FleteraId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MatrizFletes2_Fleteras">
+    <End Role="Fleteras" Type="InnovikaComModel.Fletera" Multiplicity="1" />
+    <End Role="MatrizFletes2" Type="InnovikaComModel.MatrizFletes2" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fleteras">
+        <PropertyRef Name="FleteraId" />
+      </Principal>
+      <Dependent Role="MatrizFletes2">
+        <PropertyRef Name="FleteraId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Fleteras">
+    <End Role="Fleteras" Type="InnovikaComModel.Fletera" Multiplicity="0..1" />
+    <End Role="Users" Type="InnovikaComModel.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fleteras">
+        <PropertyRef Name="FleteraId" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="FleteraId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LineasUsuario_Users">
+    <End Role="Users" Type="InnovikaComModel.User" Multiplicity="1" />
+    <End Role="LineasUsuario" Type="InnovikaComModel.LineasUsuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="LineasUsuario">
+        <PropertyRef Name="Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Oportunidades_Users">
+    <End Role="Users" Type="InnovikaComModel.User" Multiplicity="1" />
+    <End Role="Oportunidades" Type="InnovikaComModel.Oportunidade" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Oportunidades">
+        <PropertyRef Name="Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PaseHist_Users">
+    <End Role="Users" Type="InnovikaComModel.User" Multiplicity="1" />
+    <End Role="PaseHist" Type="InnovikaComModel.PaseHist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="PaseHist">
+        <PropertyRef Name="Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProyNotas_usuario">
+    <End Role="Users" Type="InnovikaComModel.User" Multiplicity="1" />
+    <End Role="ProyNotas" Type="InnovikaComModel.ProyNota" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="ProyNotas">
+        <PropertyRef Name="Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UsersInRoles_Roles">
+    <End Role="Roles" Type="InnovikaComModel.Role" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UsersInRoles" Type="InnovikaComModel.UsersInRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleName" />
+      </Principal>
+      <Dependent Role="UsersInRoles">
+        <PropertyRef Name="RoleName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="spClonaProyecto_Result">
+    <Property Type="Int32" Name="Proyecto" Nullable="true" />
+    <Property Type="Int32" Name="Proyecto1" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="spCreaProyectodesdeFavorito_Result">
+    <Property Type="Int32" Name="Proyecto" Nullable="true" />
+    <Property Type="Int32" Name="iProyecto" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="webpages_Membership">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="DateTime" Name="CreateDate" Precision="3" />
+    <Property Type="String" Name="ConfirmationToken" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="IsConfirmed" />
+    <Property Type="DateTime" Name="LastPasswordFailureDate" Precision="3" />
+    <Property Type="Int32" Name="PasswordFailuresSinceLastSuccess" Nullable="false" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="PasswordChangedDate" Precision="3" />
+    <Property Type="String" Name="PasswordSalt" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="PasswordVerificationToken" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="PasswordVerificationTokenExpirationDate" Precision="3" />
+  </EntityType>
+  <EntityType Name="webpages_OAuthMembership">
+    <Key>
+      <PropertyRef Name="Provider" />
+      <PropertyRef Name="ProviderUserId" />
+    </Key>
+    <Property Type="String" Name="Provider" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ProviderUserId" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vAcumuladosColor">
+    <Key>
+      <PropertyRef Name="Nombre" />
+      <PropertyRef Name="Proyecto" />
+    </Key>
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="Piezas" />
+    <Property Type="Decimal" Name="Importe" Precision="19" Scale="4" />
+    <Property Type="Decimal" Name="Metraje" Precision="38" Scale="6" />
+    <Property Type="Int32" Name="Proyecto" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vMetraje">
+    <Key>
+      <PropertyRef Name="Proyecto" />
+      <PropertyRef Name="Metraje" />
+    </Key>
+    <Property Type="Int32" Name="Proyecto" Nullable="false" />
+    <Property Type="Decimal" Name="Metraje" Nullable="false" Precision="38" Scale="6" />
+  </EntityType>
+  <EntityType Name="vMetrajeEquivalencia">
+    <Key>
+      <PropertyRef Name="Proyecto" />
+      <PropertyRef Name="Metraje" />
+    </Key>
+    <Property Type="Int32" Name="Proyecto" Nullable="false" />
+    <Property Type="Decimal" Name="Metraje" Nullable="false" Precision="38" Scale="2" />
+  </EntityType>
+  <EntityType Name="Multiplos">
+    <Key>
+      <PropertyRef Name="IdMultiplo" />
+    </Key>
+    <Property Type="Int32" Name="IdMultiplo" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Tipo" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Base" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Estandar" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="Medida" Nullable="false" />
+    <Property Type="String" Name="Linea" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Sublinea" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="MedidasFija">
+    <Key>
+      <PropertyRef Name="IdMedidaFija" />
+    </Key>
+    <Property Type="Int32" Name="IdMedidaFija" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Tipo" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="Base" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="Color" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="Veta" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="Cubrecanto" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="Variante" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Type="Int32" Name="Ancho" Nullable="false" />
+    <Property Type="Int32" Name="Alto" Nullable="false" />
+    <Property Type="String" Name="Estatus" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="Medida" MaxLength="61" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="Proyecto">
+    <Key>
+      <PropertyRef Name="IdProyecto" />
+    </Key>
+    <Property Type="Int32" Name="IdProyecto" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="Usuario" Nullable="false" />
+    <Property Type="String" Name="ClienteERP" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="Estatus" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="DateTime" Name="TmRegistrado" Precision="3" />
+    <Property Type="DateTime" Name="TmSolicitado" Precision="3" />
+    <Property Type="DateTime" Name="TmAprobado" Precision="3" />
+    <Property Type="DateTime" Name="TmCerrado" Precision="3" />
+    <Property Type="DateTime" Name="TmEntregaTentativa" Precision="3" />
+    <Property Type="DateTime" Name="FechaRequerida" Precision="3" />
+    <Property Type="Int32" Name="CodigoInterno" />
+    <Property Type="Int32" Name="PedidoInterno" />
+    <Property Type="Int32" Name="OrdenProdInterna" />
+    <Property Type="Int32" Name="FacturaInterna" />
+    <Property Type="String" Name="ReferenciaCliente" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="Exhibicion" Nullable="false" />
+    <Property Type="String" Name="Observaciones" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="UserRevisado" />
+    <Property Type="Int32" Name="UserAprobado" />
+    <Property Type="Decimal" Name="Subtotal" Precision="19" Scale="4" />
+    <Property Type="DateTime" Name="UltimoSeguimiento" Precision="3" />
+    <Property Type="Decimal" Name="PctDescuento" Precision="8" Scale="4" />
+    <Property Type="String" Name="Direccion" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Poblacion" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Colonia" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CodigoPostal" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Estado" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Pais" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Telefono" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="EnvioOcurre" />
+    <Property Type="Boolean" Name="EnvioAsegurado" />
+    <Property Type="Boolean" Name="EntregaEnPlanta" />
+    <Property Type="Boolean" Name="EnvioCobrado" />
+    <Property Type="String" Name="FormaDeEnvio" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="GuiaEmbarque" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="ExhibicionAprobado" />
+    <Property Type="String" Name="LoteProdInterno" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="SubLinea" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="EsExpress" Nullable="false" />
+    <Property Type="Int64" Name="ArticuloFlete" />
+    <Property Type="Int64" Name="ArticuloSeguro" />
+    <Property Type="Decimal" Name="CostoPaqueteChico" Precision="19" Scale="4" />
+    <Property Type="Decimal" Name="CostoPaqueteMediano" Precision="19" Scale="4" />
+    <Property Type="Decimal" Name="CostoPaqueteGrande" Precision="19" Scale="4" />
+    <Property Type="Int32" Name="FleteraId" />
+    <Property Type="Decimal" Name="Costo_1_3_c" Precision="19" Scale="4" />
+    <Property Type="Decimal" Name="Costo_4_10_c" Precision="19" Scale="4" />
+    <Property Type="Decimal" Name="Costo_11_20_c" Precision="19" Scale="4" />
+    <Property Type="Decimal" Name="Costo_21up_c" Precision="19" Scale="4" />
+    <Property Type="Decimal" Name="Costo_1_3_p" Precision="19" Scale="4" />
+    <Property Type="Decimal" Name="Costo_4_10_p" Precision="19" Scale="4" />
+    <Property Type="Decimal" Name="Costo_11_20_p" Precision="19" Scale="4" />
+    <Property Type="Decimal" Name="Costo_21up_p" Precision="19" Scale="4" />
+    <Property Type="Int32" Name="CajasChicas" />
+    <Property Type="Int32" Name="CajasMedianas" />
+    <Property Type="Int32" Name="Paquetes" />
+    <Property Type="Int32" Name="Cilindros" />
+    <Property Type="Boolean" Name="TieneMuebles" Nullable="false" />
+    <Property Type="Int32" Name="Vendedor" />
+    <Property Type="DateTime" Name="TmValidado" Precision="3" />
+    <Property Type="Boolean" Name="ValidaTiempsEntrega" Nullable="false" />
+    <NavigationProperty Name="CapturasPagos" Relationship="InnovikaComModel.FK_CapturasPagos_Proyectos" FromRole="Proyecto" ToRole="CapturasPago" />
+    <NavigationProperty Name="ProyArticulos" Relationship="InnovikaComModel.FK_ProyArticulos_Proyectos" FromRole="Proyecto" ToRole="ProyArticulo" />
+    <NavigationProperty Name="ProyNotas" Relationship="InnovikaComModel.FK_ProyNotas_Proyecto" FromRole="Proyecto" ToRole="ProyNota" />
+  </EntityType>
+  <Association Name="FK_CapturasPagos_Proyectos">
+    <End Type="InnovikaComModel.Proyecto" Role="Proyecto" Multiplicity="1" />
+    <End Type="InnovikaComModel.CapturasPago" Role="CapturasPago" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proyecto">
+        <PropertyRef Name="IdProyecto" />
+      </Principal>
+      <Dependent Role="CapturasPago">
+        <PropertyRef Name="Proyecto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProyArticulos_Proyectos">
+    <End Type="InnovikaComModel.Proyecto" Role="Proyecto" Multiplicity="1" />
+    <End Type="InnovikaComModel.ProyArticulo" Role="ProyArticulo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proyecto">
+        <PropertyRef Name="IdProyecto" />
+      </Principal>
+      <Dependent Role="ProyArticulo">
+        <PropertyRef Name="Proyecto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProyNotas_Proyecto">
+    <End Type="InnovikaComModel.Proyecto" Role="Proyecto" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="InnovikaComModel.ProyNota" Role="ProyNota" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proyecto">
+        <PropertyRef Name="IdProyecto" />
+      </Principal>
+      <Dependent Role="ProyNota">
+        <PropertyRef Name="Proyecto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="MaxMinAcabado">
+    <Key>
+      <PropertyRef Name="IdMaxMin" />
+    </Key>
+    <Property Type="Int32" Name="IdMaxMin" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Color" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="AnchoMax" Nullable="false" />
+    <Property Type="Int32" Name="AnchoMin" Nullable="false" />
+    <Property Type="Int32" Name="AltoMax" Nullable="false" />
+    <Property Type="Int32" Name="AltoMin" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MaxMinBaseColor">
+    <Key>
+      <PropertyRef Name="IdMaxMin" />
+    </Key>
+    <Property Type="Int32" Name="IdMaxMin" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Base" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Color" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="AnchoMax" Nullable="false" />
+    <Property Type="Int32" Name="AnchoMin" Nullable="false" />
+    <Property Type="Int32" Name="AltoMax" Nullable="false" />
+    <Property Type="Int32" Name="AltoMin" Nullable="false" />
+  </EntityType>
+  <EntityType Name="JaladeraColorExcepcione">
+    <Key>
+      <PropertyRef Name="idJaladeraColor" />
+    </Key>
+    <Property Name="idJaladeraColor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Jaladera" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="Color" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+  </EntityType>
+</Schema>

@@ -1,0 +1,1018 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="InnovikaComModelStoreContainer" CdmEntityContainer="InnovikaComEntities">
+    <EntitySetMapping Name="ArtADNCodigos">
+      <EntityTypeMapping TypeName="InnovikaComModel.ArtADNCodigo">
+        <MappingFragment StoreEntitySet="ArtADNCodigos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="Base" ColumnName="Base" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="Veta" ColumnName="Veta" />
+          <ScalarProperty Name="Cubrecanto" ColumnName="Cubrecanto" />
+          <ScalarProperty Name="Jaladera" ColumnName="Jaladera" />
+          <ScalarProperty Name="PosicionJaladera" ColumnName="PosicionJaladera" />
+          <ScalarProperty Name="Variante" ColumnName="Variante" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Descripcion1" ColumnName="Descripcion1" />
+          <ScalarProperty Name="Descripcion2" ColumnName="Descripcion2" />
+          <ScalarProperty Name="Impuesto1" ColumnName="Impuesto1" />
+          <ScalarProperty Name="Unidad" ColumnName="Unidad" />
+          <ScalarProperty Name="PrecioLista" ColumnName="PrecioLista" />
+          <ScalarProperty Name="Precio2" ColumnName="Precio2" />
+          <ScalarProperty Name="Precio3" ColumnName="Precio3" />
+          <ScalarProperty Name="Precio4" ColumnName="Precio4" />
+          <ScalarProperty Name="Precio5" ColumnName="Precio5" />
+          <ScalarProperty Name="Precio6" ColumnName="Precio6" />
+          <ScalarProperty Name="Precio7" ColumnName="Precio7" />
+          <ScalarProperty Name="Precio8" ColumnName="Precio8" />
+          <ScalarProperty Name="Precio9" ColumnName="Precio9" />
+          <ScalarProperty Name="Precio10" ColumnName="Precio10" />
+          <ScalarProperty Name="Factor" ColumnName="Factor" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="PrecioAdjuntos" ColumnName="PrecioAdjuntos" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ArtBases">
+      <EntityTypeMapping TypeName="InnovikaComModel.ArtBas">
+        <MappingFragment StoreEntitySet="ArtBases">
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="Linea" ColumnName="Linea" />
+          <ScalarProperty Name="RutaImagen" ColumnName="RutaImagen" />
+          <ScalarProperty Name="Orden" ColumnName="Orden" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ArtColores">
+      <EntityTypeMapping TypeName="InnovikaComModel.ArtColore">
+        <MappingFragment StoreEntitySet="ArtColores">
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="RutaImagen" ColumnName="RutaImagen" />
+          <ScalarProperty Name="Linea" ColumnName="Linea" />
+          <ScalarProperty Name="Orden" ColumnName="Orden" />
+          <ScalarProperty Name="SubLinea" ColumnName="SubLinea" />
+          <ScalarProperty Name="Exclusividad" ColumnName="Exclusividad" />
+          <ScalarProperty Name="Intercambiable" ColumnName="Intercambiable" />
+          <ScalarProperty Name="tieneVeta" ColumnName="tieneVeta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ArtColoresExclusivos">
+      <EntityTypeMapping TypeName="InnovikaComModel.ArtColoresExclusivo">
+        <MappingFragment StoreEntitySet="ArtColoresExclusivos">
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="RutaImagen" ColumnName="RutaImagen" />
+          <ScalarProperty Name="Orden" ColumnName="Orden" />
+          <ScalarProperty Name="tieneVeta" ColumnName="tieneVeta" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ArtCubrecantos">
+      <EntityTypeMapping TypeName="InnovikaComModel.ArtCubrecanto">
+        <MappingFragment StoreEntitySet="ArtCubrecantos">
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="Linea" ColumnName="Linea" />
+          <ScalarProperty Name="RutaImagen" ColumnName="RutaImagen" />
+          <ScalarProperty Name="Orden" ColumnName="Orden" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ArticulosAdjuntos">
+      <EntityTypeMapping TypeName="InnovikaComModel.ArticulosAdjunto">
+        <MappingFragment StoreEntitySet="ArticulosAdjuntos">
+          <ScalarProperty Name="IdArticuloAdjunto" ColumnName="IdArticuloAdjunto" />
+          <ScalarProperty Name="CodigoADN" ColumnName="CodigoADN" />
+          <ScalarProperty Name="CodigoADNAdjunto" ColumnName="CodigoADNAdjunto" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ArticulosFavs">
+      <EntityTypeMapping TypeName="InnovikaComModel.ArticulosFav">
+        <MappingFragment StoreEntitySet="ArticulosFav">
+          <ScalarProperty Name="IdArtFavorito" ColumnName="IdArtFavorito" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+          <ScalarProperty Name="Articulo" ColumnName="Articulo" />
+          <ScalarProperty Name="FechaFavorito" ColumnName="FechaFavorito" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ArtJaladeraPos">
+      <EntityTypeMapping TypeName="InnovikaComModel.ArtJaladeraPos">
+        <MappingFragment StoreEntitySet="ArtJaladeraPos">
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="Orden" ColumnName="Orden" />
+          <ScalarProperty Name="RutaImagen" ColumnName="RutaImagen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ArtJaladeras">
+      <EntityTypeMapping TypeName="InnovikaComModel.ArtJaladera">
+        <MappingFragment StoreEntitySet="ArtJaladeras">
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="Linea" ColumnName="Linea" />
+          <ScalarProperty Name="RutaImagen" ColumnName="RutaImagen" />
+          <ScalarProperty Name="Orden" ColumnName="Orden" />
+          <ScalarProperty Name="PuertaAnchoMin" ColumnName="PuertaAnchoMin" />
+          <ScalarProperty Name="PuertaAltoMin" ColumnName="PuertaAltoMin" />
+          <ScalarProperty Name="FrenteAnchoMin" ColumnName="FrenteAnchoMin" />
+          <ScalarProperty Name="FrenteAltoMin" ColumnName="FrenteAltoMin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ArtLineas">
+      <EntityTypeMapping TypeName="InnovikaComModel.ArtLinea">
+        <MappingFragment StoreEntitySet="ArtLineas">
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="RutaImagen" ColumnName="RutaImagen" />
+          <ScalarProperty Name="Orden" ColumnName="Orden" />
+          <ScalarProperty Name="Escalado" ColumnName="Escalado" />
+          <ScalarProperty Name="NivelEscalado" ColumnName="NivelEscalado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ArtSubLineas">
+      <EntityTypeMapping TypeName="InnovikaComModel.ArtSubLinea">
+        <MappingFragment StoreEntitySet="ArtSubLinea">
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="RutaImagen" ColumnName="RutaImagen" />
+          <ScalarProperty Name="Orden" ColumnName="Orden" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ArtTipos">
+      <EntityTypeMapping TypeName="InnovikaComModel.ArtTipos">
+        <MappingFragment StoreEntitySet="ArtTipos">
+          <ScalarProperty Name="EquivalenciaM2" ColumnName="EquivalenciaM2" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="Orden" ColumnName="Orden" />
+          <ScalarProperty Name="RutaImagen" ColumnName="RutaImagen" />
+          <ScalarProperty Name="tieneVidrio" ColumnName="tieneVidrio" />
+          <ScalarProperty Name="EquivalenteM2" ColumnName="EquivalenteM2" />
+          <ScalarProperty Name="MinimoCompra" ColumnName="MinimoCompra" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ArtVariantes">
+      <EntityTypeMapping TypeName="InnovikaComModel.ArtVariante">
+        <MappingFragment StoreEntitySet="ArtVariantes">
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="Orden" ColumnName="Orden" />
+          <ScalarProperty Name="RutaImagen" ColumnName="RutaImagen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ArtVetas">
+      <EntityTypeMapping TypeName="InnovikaComModel.ArtVeta">
+        <MappingFragment StoreEntitySet="ArtVetas">
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="Orden" ColumnName="Orden" />
+          <ScalarProperty Name="RutaImagen" ColumnName="RutaImagen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BasesJaladeras">
+      <EntityTypeMapping TypeName="InnovikaComModel.BasesJaladera">
+        <MappingFragment StoreEntitySet="BasesJaladeras">
+          <ScalarProperty Name="IdBaseJaladera" ColumnName="IdBaseJaladera" />
+          <ScalarProperty Name="Base" ColumnName="Base" />
+          <ScalarProperty Name="Jaladera" ColumnName="Jaladera" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CapturasPagos">
+      <EntityTypeMapping TypeName="InnovikaComModel.CapturasPago">
+        <MappingFragment StoreEntitySet="CapturasPagos">
+          <ScalarProperty Name="idCapturaPago" ColumnName="idCapturaPago" />
+          <ScalarProperty Name="Proyecto" ColumnName="Proyecto" />
+          <ScalarProperty Name="TmCaptura" ColumnName="TmCaptura" />
+          <ScalarProperty Name="TmPago" ColumnName="TmPago" />
+          <ScalarProperty Name="Folio" ColumnName="Folio" />
+          <ScalarProperty Name="Monto" ColumnName="Monto" />
+          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CatalogoCiudades">
+      <EntityTypeMapping TypeName="InnovikaComModel.CatalogoCiudade">
+        <MappingFragment StoreEntitySet="CatalogoCiudades">
+          <ScalarProperty Name="CatalogoCiudadId" ColumnName="CatalogoCiudadId" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Rango1" ColumnName="Rango1" />
+          <ScalarProperty Name="Rango2" ColumnName="Rango2" />
+          <ScalarProperty Name="Rango3" ColumnName="Rango3" />
+          <ScalarProperty Name="Rango4" ColumnName="Rango4" />
+          <ScalarProperty Name="Especial" ColumnName="Especial" />
+          <ScalarProperty Name="Marcado" ColumnName="Marcado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CatalogoEstados">
+      <EntityTypeMapping TypeName="InnovikaComModel.CatalogoEstado">
+        <MappingFragment StoreEntitySet="CatalogoEstados">
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Abreviacion" ColumnName="Abreviacion" />
+          <ScalarProperty Name="Especial" ColumnName="Especial" />
+          <ScalarProperty Name="Marcado" ColumnName="Marcado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Documentos">
+      <EntityTypeMapping TypeName="InnovikaComModel.Documento">
+        <MappingFragment StoreEntitySet="Documentos">
+          <ScalarProperty Name="IdDocumento" ColumnName="IdDocumento" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Linea" ColumnName="Linea" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EstatusCatalogos">
+      <EntityTypeMapping TypeName="InnovikaComModel.EstatusCatalogo">
+        <MappingFragment StoreEntitySet="EstatusCatalogos">
+          <ScalarProperty Name="IdEstatus" ColumnName="IdEstatus" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EstatusProcesos">
+      <EntityTypeMapping TypeName="InnovikaComModel.EstatusProceso">
+        <MappingFragment StoreEntitySet="EstatusProcesos">
+          <ScalarProperty Name="IdEstatus" ColumnName="IdEstatus" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EstatusProyectos">
+      <EntityTypeMapping TypeName="InnovikaComModel.EstatusProyecto">
+        <MappingFragment StoreEntitySet="EstatusProyectos">
+          <ScalarProperty Name="IdEstatusProy" ColumnName="IdEstatusProy" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Orden" ColumnName="Orden" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="NombreCliente" ColumnName="NombreCliente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Exclusividades">
+      <EntityTypeMapping TypeName="InnovikaComModel.Exclusividade">
+        <MappingFragment StoreEntitySet="Exclusividades">
+          <ScalarProperty Name="IdExclusividad" ColumnName="IdExclusividad" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+          <ScalarProperty Name="Caducidad" ColumnName="Caducidad" />
+          <ScalarProperty Name="LineaExclusiva" ColumnName="LineaExclusiva" />
+          <ScalarProperty Name="BaseExclusiva" ColumnName="BaseExclusiva" />
+          <ScalarProperty Name="ColorExclusivo" ColumnName="ColorExclusivo" />
+          <ScalarProperty Name="CubrecantoExclusivo" ColumnName="CubrecantoExclusivo" />
+          <ScalarProperty Name="JaladeraExclusiva" ColumnName="JaladeraExclusiva" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FavArticulos">
+      <EntityTypeMapping TypeName="InnovikaComModel.FavArticulo">
+        <MappingFragment StoreEntitySet="FavArticulos">
+          <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
+          <ScalarProperty Name="Favorito" ColumnName="Favorito" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+          <ScalarProperty Name="Unidad" ColumnName="Unidad" />
+          <ScalarProperty Name="ADNTipo" ColumnName="ADNTipo" />
+          <ScalarProperty Name="ADNBase" ColumnName="ADNBase" />
+          <ScalarProperty Name="ADNColor" ColumnName="ADNColor" />
+          <ScalarProperty Name="ADNCubrecanto" ColumnName="ADNCubrecanto" />
+          <ScalarProperty Name="ADNVeta" ColumnName="ADNVeta" />
+          <ScalarProperty Name="ADNVariante" ColumnName="ADNVariante" />
+          <ScalarProperty Name="CodigoADNBase" ColumnName="CodigoADNBase" />
+          <ScalarProperty Name="CodigoADNInterno" ColumnName="CodigoADNInterno" />
+          <ScalarProperty Name="tieneJaladera" ColumnName="tieneJaladera" />
+          <ScalarProperty Name="tieneVidrio" ColumnName="tieneVidrio" />
+          <ScalarProperty Name="tieneProtecta" ColumnName="tieneProtecta" />
+          <ScalarProperty Name="tieneOrificios" ColumnName="tieneOrificios" />
+          <ScalarProperty Name="UnidadJaladera" ColumnName="UnidadJaladera" />
+          <ScalarProperty Name="ADNJaladeraBase" ColumnName="ADNJaladeraBase" />
+          <ScalarProperty Name="ADNJaladera" ColumnName="ADNJaladera" />
+          <ScalarProperty Name="ADNJaladeraOpcion" ColumnName="ADNJaladeraOpcion" />
+          <ScalarProperty Name="CodigoADNJaladera" ColumnName="CodigoADNJaladera" />
+          <ScalarProperty Name="ADNPosicionJaladera" ColumnName="ADNPosicionJaladera" />
+          <ScalarProperty Name="ADNVidrioBase" ColumnName="ADNVidrioBase" />
+          <ScalarProperty Name="ADNVidrioColor" ColumnName="ADNVidrioColor" />
+          <ScalarProperty Name="CodigoADNVidrio" ColumnName="CodigoADNVidrio" />
+          <ScalarProperty Name="ADNProtectaBase" ColumnName="ADNProtectaBase" />
+          <ScalarProperty Name="ADNProtectaColor" ColumnName="ADNProtectaColor" />
+          <ScalarProperty Name="CodigoADNProtecta" ColumnName="CodigoADNProtecta" />
+          <ScalarProperty Name="ADNOrificios" ColumnName="ADNOrificios" />
+          <ScalarProperty Name="OrificiosDistCanto" ColumnName="OrificiosDistCanto" />
+          <ScalarProperty Name="OrificiosCuantos" ColumnName="OrificiosCuantos" />
+          <ScalarProperty Name="CodigoADNOrificios" ColumnName="CodigoADNOrificios" />
+          <ScalarProperty Name="Alto" ColumnName="Alto" />
+          <ScalarProperty Name="Ancho" ColumnName="Ancho" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Favoritos">
+      <EntityTypeMapping TypeName="InnovikaComModel.Favorito">
+        <MappingFragment StoreEntitySet="Favoritos">
+          <ScalarProperty Name="IdFavorito" ColumnName="IdFavorito" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+          <ScalarProperty Name="ClienteERP" ColumnName="ClienteERP" />
+          <ScalarProperty Name="FechaFavorito" ColumnName="FechaFavorito" />
+          <ScalarProperty Name="Exhibicion" ColumnName="Exhibicion" />
+          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+          <ScalarProperty Name="Proyecto" ColumnName="Proyecto" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Fleteras">
+      <EntityTypeMapping TypeName="InnovikaComModel.Fletera">
+        <MappingFragment StoreEntitySet="Fleteras">
+          <ScalarProperty Name="FleteraId" ColumnName="FleteraId" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LineasUsuarios">
+      <EntityTypeMapping TypeName="InnovikaComModel.LineasUsuario">
+        <MappingFragment StoreEntitySet="LineasUsuario">
+          <ScalarProperty Name="UserProfile" ColumnName="UserProfile" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+          <ScalarProperty Name="Linea" ColumnName="Linea" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MatrizFletes">
+      <EntityTypeMapping TypeName="InnovikaComModel.MatrizFlete">
+        <MappingFragment StoreEntitySet="MatrizFletes">
+          <ScalarProperty Name="ElementoMatrizId" ColumnName="ElementoMatrizId" />
+          <ScalarProperty Name="FleteraId" ColumnName="FleteraId" />
+          <ScalarProperty Name="CatalogoCiudadId" ColumnName="CatalogoCiudadId" />
+          <ScalarProperty Name="PaqChicoM2" ColumnName="PaqChicoM2" />
+          <ScalarProperty Name="PaqMedioM2" ColumnName="PaqMedioM2" />
+          <ScalarProperty Name="PaqGrandeM2" ColumnName="PaqGrandeM2" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MatrizFletes2">
+      <EntityTypeMapping TypeName="InnovikaComModel.MatrizFletes2">
+        <MappingFragment StoreEntitySet="MatrizFletes2">
+          <ScalarProperty Name="CostoM2" ColumnName="CostoM2" />
+          <ScalarProperty Name="ElementoMatrizId" ColumnName="ElementoMatrizId" />
+          <ScalarProperty Name="FleteraId" ColumnName="FleteraId" />
+          <ScalarProperty Name="CatalogoCiudadId" ColumnName="CatalogoCiudadId" />
+          <ScalarProperty Name="Caj_1_3" ColumnName="Caj_1_3" />
+          <ScalarProperty Name="Caj_4_10" ColumnName="Caj_4_10" />
+          <ScalarProperty Name="Caj_11_20" ColumnName="Caj_11_20" />
+          <ScalarProperty Name="Caj_21up" ColumnName="Caj_21up" />
+          <ScalarProperty Name="Paq_1_3" ColumnName="Paq_1_3" />
+          <ScalarProperty Name="Paq_4_10" ColumnName="Paq_4_10" />
+          <ScalarProperty Name="Paq_11_20" ColumnName="Paq_11_20" />
+          <ScalarProperty Name="Paq_21up" ColumnName="Paq_21up" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MaxMinColors">
+      <EntityTypeMapping TypeName="InnovikaComModel.MaxMinColor">
+        <MappingFragment StoreEntitySet="MaxMinColor">
+          <ScalarProperty Name="idRestriccionColor" ColumnName="idRestriccionColor" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="AnchoMax" ColumnName="AnchoMax" />
+          <ScalarProperty Name="AnchoMin" ColumnName="AnchoMin" />
+          <ScalarProperty Name="AltoMax" ColumnName="AltoMax" />
+          <ScalarProperty Name="AltoMin" ColumnName="AltoMin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MedidaReglas">
+      <EntityTypeMapping TypeName="InnovikaComModel.MedidaRegla">
+        <MappingFragment StoreEntitySet="MedidaReglas">
+          <ScalarProperty Name="idReglaMedida" ColumnName="idReglaMedida" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="Base" ColumnName="Base" />
+          <ScalarProperty Name="AnchoMax" ColumnName="AnchoMax" />
+          <ScalarProperty Name="AnchoMin" ColumnName="AnchoMin" />
+          <ScalarProperty Name="AltoMax" ColumnName="AltoMax" />
+          <ScalarProperty Name="AltoMin" ColumnName="AltoMin" />
+          <ScalarProperty Name="Multiplo70" ColumnName="Multiplo70" />
+          <ScalarProperty Name="Multiplo72" ColumnName="Multiplo72" />
+          <ScalarProperty Name="Multiplo76" ColumnName="Multiplo76" />
+          <ScalarProperty Name="Multiplo80" ColumnName="Multiplo80" />
+          <ScalarProperty Name="PosicionJaladeras" ColumnName="PosicionJaladeras" />
+          <ScalarProperty Name="EquivalenciaM2" ColumnName="EquivalenciaM2" />
+          <ScalarProperty Name="SubLinea" ColumnName="SubLinea" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Noticias">
+      <EntityTypeMapping TypeName="InnovikaComModel.Noticia">
+        <MappingFragment StoreEntitySet="Noticias">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+          <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
+          <ScalarProperty Name="Referencias" ColumnName="Referencias" />
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="Alta" ColumnName="Alta" />
+          <ScalarProperty Name="Vencimiento" ColumnName="Vencimiento" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="ClienteERP" ColumnName="ClienteERP" />
+          <ScalarProperty Name="Leida" ColumnName="Leida" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Oportunidades">
+      <EntityTypeMapping TypeName="InnovikaComModel.Oportunidade">
+        <MappingFragment StoreEntitySet="Oportunidades">
+          <ScalarProperty Name="IdOportunidad" ColumnName="IdOportunidad" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+          <ScalarProperty Name="Caducidad" ColumnName="Caducidad" />
+          <ScalarProperty Name="LineaAbierta" ColumnName="LineaAbierta" />
+          <ScalarProperty Name="BaseAbierta" ColumnName="BaseAbierta" />
+          <ScalarProperty Name="ColorAbierto" ColumnName="ColorAbierto" />
+          <ScalarProperty Name="CubrecantoAbierto" ColumnName="CubrecantoAbierto" />
+          <ScalarProperty Name="JaladeraAbierta" ColumnName="JaladeraAbierta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Parametros">
+      <EntityTypeMapping TypeName="InnovikaComModel.Parametro">
+        <MappingFragment StoreEntitySet="Parametros">
+          <ScalarProperty Name="NombreParametro" ColumnName="NombreParametro" />
+          <ScalarProperty Name="ValorCadena" ColumnName="ValorCadena" />
+          <ScalarProperty Name="ValorEntero" ColumnName="ValorEntero" />
+          <ScalarProperty Name="ValorDecimal" ColumnName="ValorDecimal" />
+          <ScalarProperty Name="ValorDoble" ColumnName="ValorDoble" />
+          <ScalarProperty Name="ValorTiempo" ColumnName="ValorTiempo" />
+          <ScalarProperty Name="ValorBooleano" ColumnName="ValorBooleano" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaseHists">
+      <EntityTypeMapping TypeName="InnovikaComModel.PaseHist">
+        <MappingFragment StoreEntitySet="PaseHist">
+          <ScalarProperty Name="idPaseGuardado" ColumnName="idPaseGuardado" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+          <ScalarProperty Name="TmAlta" ColumnName="TmAlta" />
+          <ScalarProperty Name="PaseHash" ColumnName="PaseHash" />
+          <ScalarProperty Name="PaseSalt" ColumnName="PaseSalt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProyArticulos">
+      <EntityTypeMapping TypeName="InnovikaComModel.ProyArticulo">
+        <MappingFragment StoreEntitySet="ProyArticulos">
+          <ScalarProperty Name="CodigoADNJaladera" ColumnName="CodigoADNJaladera" />
+          <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
+          <ScalarProperty Name="Proyecto" ColumnName="Proyecto" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+          <ScalarProperty Name="Unidad" ColumnName="Unidad" />
+          <ScalarProperty Name="ADNTipo" ColumnName="ADNTipo" />
+          <ScalarProperty Name="ADNBase" ColumnName="ADNBase" />
+          <ScalarProperty Name="ADNColor" ColumnName="ADNColor" />
+          <ScalarProperty Name="ADNCubrecanto" ColumnName="ADNCubrecanto" />
+          <ScalarProperty Name="ADNVeta" ColumnName="ADNVeta" />
+          <ScalarProperty Name="ADNVariante" ColumnName="ADNVariante" />
+          <ScalarProperty Name="CodigoADNBase" ColumnName="CodigoADNBase" />
+          <ScalarProperty Name="CodigoADNInterno" ColumnName="CodigoADNInterno" />
+          <ScalarProperty Name="tieneJaladera" ColumnName="tieneJaladera" />
+          <ScalarProperty Name="tieneVidrio" ColumnName="tieneVidrio" />
+          <ScalarProperty Name="tieneProtecta" ColumnName="tieneProtecta" />
+          <ScalarProperty Name="tieneOrificios" ColumnName="tieneOrificios" />
+          <ScalarProperty Name="UnidadJaladera" ColumnName="UnidadJaladera" />
+          <ScalarProperty Name="ADNJaladeraBase" ColumnName="ADNJaladeraBase" />
+          <ScalarProperty Name="ADNJaladera" ColumnName="ADNJaladera" />
+          <ScalarProperty Name="ADNJaladeraOpcion" ColumnName="ADNJaladeraOpcion" />
+          <ScalarProperty Name="ADNPosicionJaladera" ColumnName="ADNPosicionJaladera" />
+          <ScalarProperty Name="ADNVidrioBase" ColumnName="ADNVidrioBase" />
+          <ScalarProperty Name="ADNVidrioColor" ColumnName="ADNVidrioColor" />
+          <ScalarProperty Name="CodigoADNVidrio" ColumnName="CodigoADNVidrio" />
+          <ScalarProperty Name="ADNProtectaBase" ColumnName="ADNProtectaBase" />
+          <ScalarProperty Name="ADNProtectaColor" ColumnName="ADNProtectaColor" />
+          <ScalarProperty Name="CodigoADNProtecta" ColumnName="CodigoADNProtecta" />
+          <ScalarProperty Name="ADNOrificios" ColumnName="ADNOrificios" />
+          <ScalarProperty Name="OrificiosDistCanto" ColumnName="OrificiosDistCanto" />
+          <ScalarProperty Name="OrificiosCuantos" ColumnName="OrificiosCuantos" />
+          <ScalarProperty Name="CodigoADNOrificios" ColumnName="CodigoADNOrificios" />
+          <ScalarProperty Name="Alto" ColumnName="Alto" />
+          <ScalarProperty Name="Ancho" ColumnName="Ancho" />
+          <ScalarProperty Name="AltoEstandar" ColumnName="AltoEstandar" />
+          <ScalarProperty Name="PrecioUnitario" ColumnName="PrecioUnitario" />
+          <ScalarProperty Name="DescuentoUnitario" ColumnName="DescuentoUnitario" />
+          <ScalarProperty Name="IVAUnitario" ColumnName="IVAUnitario" />
+          <ScalarProperty Name="Importe" ColumnName="Importe" />
+          <ScalarProperty Name="PrecioPrincipal" ColumnName="PrecioPrincipal" />
+          <ScalarProperty Name="PrecioJaladera" ColumnName="PrecioJaladera" />
+          <ScalarProperty Name="PrecioVidrio" ColumnName="PrecioVidrio" />
+          <ScalarProperty Name="PrecioProtecta" ColumnName="PrecioProtecta" />
+          <ScalarProperty Name="PrecioServicios" ColumnName="PrecioServicios" />
+          <ScalarProperty Name="DescuentoPrincipal" ColumnName="DescuentoPrincipal" />
+          <ScalarProperty Name="DescuentoJaladera" ColumnName="DescuentoJaladera" />
+          <ScalarProperty Name="DescuentoProtecta" ColumnName="DescuentoProtecta" />
+          <ScalarProperty Name="DescuentoVidrio" ColumnName="DescuentoVidrio" />
+          <ScalarProperty Name="DescuentoServicios" ColumnName="DescuentoServicios" />
+          <ScalarProperty Name="PrecioListaPrincipal" ColumnName="PrecioListaPrincipal" />
+          <ScalarProperty Name="PrecioListaJaladera" ColumnName="PrecioListaJaladera" />
+          <ScalarProperty Name="PrecioListaVidrio" ColumnName="PrecioListaVidrio" />
+          <ScalarProperty Name="PrecioListaPelicula" ColumnName="PrecioListaPelicula" />
+          <ScalarProperty Name="PrecioListaServicios" ColumnName="PrecioListaServicios" />
+          <ScalarProperty Name="ArticuloPatron" ColumnName="ArticuloPatron" />
+          <ScalarProperty Name="InstruccionesExtra" ColumnName="InstruccionesExtra" />
+          <ScalarProperty Name="DescuentoLineal" ColumnName="DescuentoLineal" />
+          <ScalarProperty Name="MAIdEmpaque" ColumnName="MAIdEmpaque" />
+          <ScalarProperty Name="MAIdArmado" ColumnName="MAIdArmado" />
+          <ScalarProperty Name="TmUltimoCambio" ColumnName="TmUltimoCambio" />
+          <ScalarProperty Name="PrecioAdjuntos" ColumnName="PrecioAdjuntos" />
+          <ScalarProperty Name="EsConceptoDeProyecto" ColumnName="EsConceptoDeProyecto" />
+          <ScalarProperty Name="TipoEmpaque" ColumnName="TipoEmpaque" />
+          <ScalarProperty Name="tieneColorExclusivo" ColumnName="tieneColorExclusivo" />
+          <ScalarProperty Name="ADNColorExclusivo" ColumnName="ADNColorExclusivo" />
+          <ScalarProperty Name="PrecioColorExclusivo" ColumnName="PrecioColorExclusivo" />
+          <ScalarProperty Name="PrecioListaColorExclusivo" ColumnName="PrecioListaColorExclusivo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProyNotas">
+      <EntityTypeMapping TypeName="InnovikaComModel.ProyNota">
+        <MappingFragment StoreEntitySet="ProyNotas">
+          <ScalarProperty Name="IdNotaProyecto" ColumnName="IdNotaProyecto" />
+          <ScalarProperty Name="Proyecto" ColumnName="Proyecto" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+          <ScalarProperty Name="TmNota" ColumnName="TmNota" />
+          <ScalarProperty Name="Texto" ColumnName="Texto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="InnovikaComModel.Role">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="InnovikaComModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="DateLastLogin" ColumnName="DateLastLogin" />
+          <ScalarProperty Name="DateLastActivity" ColumnName="DateLastActivity" />
+          <ScalarProperty Name="DateLastPasswordChange" ColumnName="DateLastPasswordChange" />
+          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+          <ScalarProperty Name="ClienteERP" ColumnName="ClienteERP" />
+          <ScalarProperty Name="AgenteServicio" ColumnName="AgenteServicio" />
+          <ScalarProperty Name="PuedeExpress" ColumnName="PuedeExpress" />
+          <ScalarProperty Name="FleteraId" ColumnName="FleteraId" />
+          <ScalarProperty Name="FleteAutomatico" ColumnName="FleteAutomatico" />
+          <ScalarProperty Name="UltimaVisitaDocumentos" ColumnName="UltimaVisitaDocumentos" />
+          <ScalarProperty Name="ClienteMuebles" ColumnName="ClienteMuebles" />
+          <ScalarProperty Name="ZonaImpuesto" ColumnName="ZonaImpuesto" />
+          <ScalarProperty Name="ListaPreciosEsp" ColumnName="ListaPreciosEsp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UsersInRoles">
+      <EntityTypeMapping TypeName="InnovikaComModel.UsersInRole">
+        <MappingFragment StoreEntitySet="UsersInRoles">
+          <ScalarProperty Name="HashId" ColumnName="HashId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vArticulosFavoritos">
+      <EntityTypeMapping TypeName="InnovikaComModel.vArticulosFavorito">
+        <MappingFragment StoreEntitySet="vArticulosFavoritos">
+          <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
+          <ScalarProperty Name="Favorito" ColumnName="Favorito" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Ancho" ColumnName="Ancho" />
+          <ScalarProperty Name="Alto" ColumnName="Alto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vArticulosResumen">
+      <EntityTypeMapping TypeName="InnovikaComModel.vArticulosResuman">
+        <MappingFragment StoreEntitySet="vArticulosResumen">
+          <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
+          <ScalarProperty Name="Proyecto" ColumnName="Proyecto" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="PrecioUnitario" ColumnName="PrecioUnitario" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vExclusividades">
+      <EntityTypeMapping TypeName="InnovikaComModel.vExclusividade">
+        <MappingFragment StoreEntitySet="vExclusividades">
+          <ScalarProperty Name="IdExclusividad" ColumnName="IdExclusividad" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+          <ScalarProperty Name="Caducidad" ColumnName="Caducidad" />
+          <ScalarProperty Name="TipoComponente" ColumnName="TipoComponente" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="RutaImagen" ColumnName="RutaImagen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vMatrizFleteras">
+      <EntityTypeMapping TypeName="InnovikaComModel.vMatrizFletera">
+        <MappingFragment StoreEntitySet="vMatrizFleteras">
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+          <ScalarProperty Name="FleteraId" ColumnName="FleteraId" />
+          <ScalarProperty Name="PaqChicoM2" ColumnName="PaqChicoM2" />
+          <ScalarProperty Name="PaqMedioM2" ColumnName="PaqMedioM2" />
+          <ScalarProperty Name="PaqGrandeM2" ColumnName="PaqGrandeM2" />
+          <ScalarProperty Name="ElementoMatrizId" ColumnName="ElementoMatrizId" />
+          <ScalarProperty Name="CatalogoCiudadId" ColumnName="CatalogoCiudadId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vNotasProyectoes">
+      <EntityTypeMapping TypeName="InnovikaComModel.vNotasProyecto">
+        <MappingFragment StoreEntitySet="vNotasProyecto">
+          <ScalarProperty Name="IdNotaProyecto" ColumnName="IdNotaProyecto" />
+          <ScalarProperty Name="Proyecto" ColumnName="Proyecto" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+          <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="TmNota" ColumnName="TmNota" />
+          <ScalarProperty Name="esNueva" ColumnName="esNueva" />
+          <ScalarProperty Name="Texto" ColumnName="Texto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vOportunidades">
+      <EntityTypeMapping TypeName="InnovikaComModel.vOportunidade">
+        <MappingFragment StoreEntitySet="vOportunidades">
+          <ScalarProperty Name="IdOportunidad" ColumnName="IdOportunidad" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+          <ScalarProperty Name="Caducidad" ColumnName="Caducidad" />
+          <ScalarProperty Name="TipoComponente" ColumnName="TipoComponente" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="RutaImagen" ColumnName="RutaImagen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vProyectosAprobados">
+      <EntityTypeMapping TypeName="InnovikaComModel.vProyectosAprobado">
+        <MappingFragment StoreEntitySet="vProyectosAprobados">
+          <ScalarProperty Name="IdProyecto" ColumnName="IdProyecto" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+          <ScalarProperty Name="TmRegistrado" ColumnName="TmRegistrado" />
+          <ScalarProperty Name="TmSolicitado" ColumnName="TmSolicitado" />
+          <ScalarProperty Name="ReferenciaCliente" ColumnName="ReferenciaCliente" />
+          <ScalarProperty Name="NumArticulos" ColumnName="NumArticulos" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vProyectosPorRevisars">
+      <EntityTypeMapping TypeName="InnovikaComModel.vProyectosPorRevisar">
+        <MappingFragment StoreEntitySet="vProyectosPorRevisar">
+          <ScalarProperty Name="NomEstatus" ColumnName="NomEstatus" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="IdProyecto" ColumnName="IdProyecto" />
+          <ScalarProperty Name="TmSolicitado" ColumnName="TmSolicitado" />
+          <ScalarProperty Name="NombreCliente" ColumnName="NombreCliente" />
+          <ScalarProperty Name="PrecioTotal" ColumnName="PrecioTotal" />
+          <ScalarProperty Name="NumArticulos" ColumnName="NumArticulos" />
+          <ScalarProperty Name="ReferenciaCliente" ColumnName="ReferenciaCliente" />
+          <ScalarProperty Name="Revisado" ColumnName="Revisado" />
+          <ScalarProperty Name="UserAprobado" ColumnName="UserAprobado" />
+          <ScalarProperty Name="UserRevisado" ColumnName="UserRevisado" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+          <ScalarProperty Name="TmRegistrado" ColumnName="TmRegistrado" />
+          <ScalarProperty Name="TmEntregaTentativa" ColumnName="TmEntregaTentativa" />
+          <ScalarProperty Name="CodigoInterno" ColumnName="CodigoInterno" />
+          <ScalarProperty Name="PedidoInterno" ColumnName="PedidoInterno" />
+          <ScalarProperty Name="OrdenProdInterna" ColumnName="OrdenProdInterna" />
+          <ScalarProperty Name="FacturaInterna" ColumnName="FacturaInterna" />
+          <ScalarProperty Name="LoteProdInterno" ColumnName="LoteProdInterno" />
+          <ScalarProperty Name="GuiaEmbarque" ColumnName="GuiaEmbarque" />
+          <ScalarProperty Name="EsExpress" ColumnName="EsExpress" />
+          <ScalarProperty Name="FleteAutomatico" ColumnName="FleteAutomatico" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vProyectosRegistrados">
+      <EntityTypeMapping TypeName="InnovikaComModel.vProyectosRegistrado">
+        <MappingFragment StoreEntitySet="vProyectosRegistrados">
+          <ScalarProperty Name="IdProyecto" ColumnName="IdProyecto" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+          <ScalarProperty Name="TmRegistrado" ColumnName="TmRegistrado" />
+          <ScalarProperty Name="ReferenciaCliente" ColumnName="ReferenciaCliente" />
+          <ScalarProperty Name="numArt" ColumnName="numArt" />
+          <ScalarProperty Name="PrecioTotal" ColumnName="PrecioTotal" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="NomEstatus" ColumnName="NomEstatus" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="EnvioOcurre" ColumnName="EnvioOcurre" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Pais" ColumnName="Pais" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+          <ScalarProperty Name="Colonia" ColumnName="Colonia" />
+          <ScalarProperty Name="Poblacion" ColumnName="Poblacion" />
+          <ScalarProperty Name="EnvioAsegurado" ColumnName="EnvioAsegurado" />
+          <ScalarProperty Name="FormaDeEnvio" ColumnName="FormaDeEnvio" />
+          <ScalarProperty Name="TmEntregaTentativa" ColumnName="TmEntregaTentativa" />
+          <ScalarProperty Name="GuiaEmbarque" ColumnName="GuiaEmbarque" />
+          <ScalarProperty Name="EntregaEnPlanta" ColumnName="EntregaEnPlanta" />
+          <ScalarProperty Name="EnvioCobrado" ColumnName="EnvioCobrado" />
+          <ScalarProperty Name="LoteProdInterno" ColumnName="LoteProdInterno" />
+          <ScalarProperty Name="EsExpress" ColumnName="EsExpress" />
+          <ScalarProperty Name="FleteAutomatico" ColumnName="FleteAutomatico" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vProyectosSolicitados">
+      <EntityTypeMapping TypeName="InnovikaComModel.vProyectosSolicitado">
+        <MappingFragment StoreEntitySet="vProyectosSolicitados">
+          <ScalarProperty Name="IdProyecto" ColumnName="IdProyecto" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+          <ScalarProperty Name="TmRegistrado" ColumnName="TmRegistrado" />
+          <ScalarProperty Name="TmSolicitado" ColumnName="TmSolicitado" />
+          <ScalarProperty Name="ReferenciaCliente" ColumnName="ReferenciaCliente" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="NumArticulos" ColumnName="NumArticulos" />
+          <ScalarProperty Name="EsExpress" ColumnName="EsExpress" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vUsuarios">
+      <EntityTypeMapping TypeName="InnovikaComModel.vUsuario">
+        <MappingFragment StoreEntitySet="vUsuarios">
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="DateLastLogin" ColumnName="DateLastLogin" />
+          <ScalarProperty Name="DateLastActivity" ColumnName="DateLastActivity" />
+          <ScalarProperty Name="DateLastPasswordChange" ColumnName="DateLastPasswordChange" />
+          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+          <ScalarProperty Name="ClienteERP" ColumnName="ClienteERP" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="PerfilCompra" ColumnName="PerfilCompra" />
+          <ScalarProperty Name="CambiarPase" ColumnName="CambiarPase" />
+          <ScalarProperty Name="PuedeExpress" ColumnName="PuedeExpress" />
+          <ScalarProperty Name="FleteAutomatico" ColumnName="FleteAutomatico" />
+          <ScalarProperty Name="FleteraId" ColumnName="FleteraId" />
+          <ScalarProperty Name="ClienteMuebles" ColumnName="ClienteMuebles" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="spAltaCotizacion" FunctionName="InnovikaComModel.Store.spAltaCotizacion" />
+    <FunctionImportMapping FunctionImportName="spCalculaPreciosProyecto" FunctionName="InnovikaComModel.Store.spCalculaPreciosProyecto" />
+    <FunctionImportMapping FunctionImportName="spClienteSolicitaProyecto" FunctionName="InnovikaComModel.Store.spClienteSolicitaProyecto" />
+    <FunctionImportMapping FunctionImportName="spClonaProyecto" FunctionName="InnovikaComModel.Store.spClonaProyecto">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="InnovikaComModel.spClonaProyecto_Result">
+          <ScalarProperty Name="Proyecto" ColumnName="Proyecto" />
+          <ScalarProperty Name="Proyecto1" ColumnName="Proyecto1" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spCreaFavoritodesdeProyecto" FunctionName="InnovikaComModel.Store.spCreaFavoritodesdeProyecto" />
+    <FunctionImportMapping FunctionImportName="spCreaProyectodesdeFavorito" FunctionName="InnovikaComModel.Store.spCreaProyectodesdeFavorito">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="InnovikaComModel.spCreaProyectodesdeFavorito_Result">
+          <ScalarProperty Name="Proyecto" ColumnName="Proyecto" />
+          <ScalarProperty Name="iProyecto" ColumnName="iProyecto" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spDatosEmbarquexProyecto" FunctionName="InnovikaComModel.Store.spDatosEmbarquexProyecto" />
+    <FunctionImportMapping FunctionImportName="spEliminaCancelaProyecto" FunctionName="InnovikaComModel.Store.spEliminaCancelaProyecto" />
+    <FunctionImportMapping FunctionImportName="spEliminaFavorito" FunctionName="InnovikaComModel.Store.spEliminaFavorito" />
+    <FunctionImportMapping FunctionImportName="spEstatusProyectoxCliente" FunctionName="InnovikaComModel.Store.spEstatusProyectoxCliente" />
+    <FunctionImportMapping FunctionImportName="spEstatusProyectoxProyecto" FunctionName="InnovikaComModel.Store.spEstatusProyectoxProyecto" />
+    <FunctionImportMapping FunctionImportName="spEstatusTodosProyectos" FunctionName="InnovikaComModel.Store.spEstatusTodosProyectos" />
+    <FunctionImportMapping FunctionImportName="spExcepcionDescuentoHeCa" FunctionName="InnovikaComModel.Store.spExcepcionDescuentoHeCa" />
+    <FunctionImportMapping FunctionImportName="spGeneraSubCodigosArt" FunctionName="InnovikaComModel.Store.spGeneraSubCodigosArt" />
+    <EntitySetMapping Name="webpages_Membership">
+      <EntityTypeMapping TypeName="InnovikaComModel.webpages_Membership">
+        <MappingFragment StoreEntitySet="webpages_Membership">
+          <ScalarProperty Name="PasswordVerificationTokenExpirationDate" ColumnName="PasswordVerificationTokenExpirationDate" />
+          <ScalarProperty Name="PasswordVerificationToken" ColumnName="PasswordVerificationToken" />
+          <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+          <ScalarProperty Name="PasswordChangedDate" ColumnName="PasswordChangedDate" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="PasswordFailuresSinceLastSuccess" ColumnName="PasswordFailuresSinceLastSuccess" />
+          <ScalarProperty Name="LastPasswordFailureDate" ColumnName="LastPasswordFailureDate" />
+          <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+          <ScalarProperty Name="ConfirmationToken" ColumnName="ConfirmationToken" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="webpages_OAuthMembership">
+      <EntityTypeMapping TypeName="InnovikaComModel.webpages_OAuthMembership">
+        <MappingFragment StoreEntitySet="webpages_OAuthMembership">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ProviderUserId" ColumnName="ProviderUserId" />
+          <ScalarProperty Name="Provider" ColumnName="Provider" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vAcumuladosColor">
+      <EntityTypeMapping TypeName="InnovikaComModel.vAcumuladosColor">
+        <MappingFragment StoreEntitySet="vAcumuladosColor">
+          <ScalarProperty Name="Proyecto" ColumnName="Proyecto" />
+          <ScalarProperty Name="Metraje" ColumnName="Metraje" />
+          <ScalarProperty Name="Importe" ColumnName="Importe" />
+          <ScalarProperty Name="Piezas" ColumnName="Piezas" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vMetraje">
+      <EntityTypeMapping TypeName="InnovikaComModel.vMetraje">
+        <MappingFragment StoreEntitySet="vMetraje">
+          <ScalarProperty Name="Metraje" ColumnName="Metraje" />
+          <ScalarProperty Name="Proyecto" ColumnName="Proyecto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vMetrajeEquivalencia">
+      <EntityTypeMapping TypeName="InnovikaComModel.vMetrajeEquivalencia">
+        <MappingFragment StoreEntitySet="vMetrajeEquivalencia">
+          <ScalarProperty Name="Metraje" ColumnName="Metraje" />
+          <ScalarProperty Name="Proyecto" ColumnName="Proyecto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Multiplos">
+      <EntityTypeMapping TypeName="InnovikaComModel.Multiplos">
+        <MappingFragment StoreEntitySet="Multiplos">
+          <ScalarProperty Name="Sublinea" ColumnName="Sublinea" />
+          <ScalarProperty Name="Linea" ColumnName="Linea" />
+          <ScalarProperty Name="Medida" ColumnName="Medida" />
+          <ScalarProperty Name="Estandar" ColumnName="Estandar" />
+          <ScalarProperty Name="Base" ColumnName="Base" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="IdMultiplo" ColumnName="IdMultiplo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MedidasFijas">
+      <EntityTypeMapping TypeName="InnovikaComModel.MedidasFija">
+        <MappingFragment StoreEntitySet="MedidasFijas">
+          <ScalarProperty Name="Medida" ColumnName="Medida" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="Alto" ColumnName="Alto" />
+          <ScalarProperty Name="Ancho" ColumnName="Ancho" />
+          <ScalarProperty Name="Variante" ColumnName="Variante" />
+          <ScalarProperty Name="Cubrecanto" ColumnName="Cubrecanto" />
+          <ScalarProperty Name="Veta" ColumnName="Veta" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="Base" ColumnName="Base" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="IdMedidaFija" ColumnName="IdMedidaFija" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Proyectos">
+      <EntityTypeMapping TypeName="InnovikaComModel.Proyecto">
+        <MappingFragment StoreEntitySet="Proyectos">
+          <ScalarProperty Name="ValidaTiempsEntrega" ColumnName="ValidaTiempsEntrega" />
+          <ScalarProperty Name="TmValidado" ColumnName="TmValidado" />
+          <ScalarProperty Name="Vendedor" ColumnName="Vendedor" />
+          <ScalarProperty Name="TieneMuebles" ColumnName="TieneMuebles" />
+          <ScalarProperty Name="Cilindros" ColumnName="Cilindros" />
+          <ScalarProperty Name="Paquetes" ColumnName="Paquetes" />
+          <ScalarProperty Name="CajasMedianas" ColumnName="CajasMedianas" />
+          <ScalarProperty Name="CajasChicas" ColumnName="CajasChicas" />
+          <ScalarProperty Name="Costo_21up_p" ColumnName="Costo_21up_p" />
+          <ScalarProperty Name="Costo_11_20_p" ColumnName="Costo_11_20_p" />
+          <ScalarProperty Name="Costo_4_10_p" ColumnName="Costo_4_10_p" />
+          <ScalarProperty Name="Costo_1_3_p" ColumnName="Costo_1_3_p" />
+          <ScalarProperty Name="Costo_21up_c" ColumnName="Costo_21up_c" />
+          <ScalarProperty Name="Costo_11_20_c" ColumnName="Costo_11_20_c" />
+          <ScalarProperty Name="Costo_4_10_c" ColumnName="Costo_4_10_c" />
+          <ScalarProperty Name="Costo_1_3_c" ColumnName="Costo_1_3_c" />
+          <ScalarProperty Name="FleteraId" ColumnName="FleteraId" />
+          <ScalarProperty Name="CostoPaqueteGrande" ColumnName="CostoPaqueteGrande" />
+          <ScalarProperty Name="CostoPaqueteMediano" ColumnName="CostoPaqueteMediano" />
+          <ScalarProperty Name="CostoPaqueteChico" ColumnName="CostoPaqueteChico" />
+          <ScalarProperty Name="ArticuloSeguro" ColumnName="ArticuloSeguro" />
+          <ScalarProperty Name="ArticuloFlete" ColumnName="ArticuloFlete" />
+          <ScalarProperty Name="EsExpress" ColumnName="EsExpress" />
+          <ScalarProperty Name="SubLinea" ColumnName="SubLinea" />
+          <ScalarProperty Name="LoteProdInterno" ColumnName="LoteProdInterno" />
+          <ScalarProperty Name="ExhibicionAprobado" ColumnName="ExhibicionAprobado" />
+          <ScalarProperty Name="GuiaEmbarque" ColumnName="GuiaEmbarque" />
+          <ScalarProperty Name="FormaDeEnvio" ColumnName="FormaDeEnvio" />
+          <ScalarProperty Name="EnvioCobrado" ColumnName="EnvioCobrado" />
+          <ScalarProperty Name="EntregaEnPlanta" ColumnName="EntregaEnPlanta" />
+          <ScalarProperty Name="EnvioAsegurado" ColumnName="EnvioAsegurado" />
+          <ScalarProperty Name="EnvioOcurre" ColumnName="EnvioOcurre" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Pais" ColumnName="Pais" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+          <ScalarProperty Name="Colonia" ColumnName="Colonia" />
+          <ScalarProperty Name="Poblacion" ColumnName="Poblacion" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="PctDescuento" ColumnName="PctDescuento" />
+          <ScalarProperty Name="UltimoSeguimiento" ColumnName="UltimoSeguimiento" />
+          <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+          <ScalarProperty Name="UserAprobado" ColumnName="UserAprobado" />
+          <ScalarProperty Name="UserRevisado" ColumnName="UserRevisado" />
+          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+          <ScalarProperty Name="Exhibicion" ColumnName="Exhibicion" />
+          <ScalarProperty Name="ReferenciaCliente" ColumnName="ReferenciaCliente" />
+          <ScalarProperty Name="FacturaInterna" ColumnName="FacturaInterna" />
+          <ScalarProperty Name="OrdenProdInterna" ColumnName="OrdenProdInterna" />
+          <ScalarProperty Name="PedidoInterno" ColumnName="PedidoInterno" />
+          <ScalarProperty Name="CodigoInterno" ColumnName="CodigoInterno" />
+          <ScalarProperty Name="FechaRequerida" ColumnName="FechaRequerida" />
+          <ScalarProperty Name="TmEntregaTentativa" ColumnName="TmEntregaTentativa" />
+          <ScalarProperty Name="TmCerrado" ColumnName="TmCerrado" />
+          <ScalarProperty Name="TmAprobado" ColumnName="TmAprobado" />
+          <ScalarProperty Name="TmSolicitado" ColumnName="TmSolicitado" />
+          <ScalarProperty Name="TmRegistrado" ColumnName="TmRegistrado" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="ClienteERP" ColumnName="ClienteERP" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+          <ScalarProperty Name="IdProyecto" ColumnName="IdProyecto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MaxMinAcabados">
+      <EntityTypeMapping TypeName="InnovikaComModel.MaxMinAcabado">
+        <MappingFragment StoreEntitySet="MaxMinAcabados">
+          <ScalarProperty Name="AltoMin" ColumnName="AltoMin" />
+          <ScalarProperty Name="AltoMax" ColumnName="AltoMax" />
+          <ScalarProperty Name="AnchoMin" ColumnName="AnchoMin" />
+          <ScalarProperty Name="AnchoMax" ColumnName="AnchoMax" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="IdMaxMin" ColumnName="IdMaxMin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MaxMinBaseColors">
+      <EntityTypeMapping TypeName="InnovikaComModel.MaxMinBaseColor">
+        <MappingFragment StoreEntitySet="MaxMinBaseColor">
+          <ScalarProperty Name="AltoMin" ColumnName="AltoMin" />
+          <ScalarProperty Name="AltoMax" ColumnName="AltoMax" />
+          <ScalarProperty Name="AnchoMin" ColumnName="AnchoMin" />
+          <ScalarProperty Name="AnchoMax" ColumnName="AnchoMax" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="Base" ColumnName="Base" />
+          <ScalarProperty Name="IdMaxMin" ColumnName="IdMaxMin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JaladeraColorExcepciones">
+      <EntityTypeMapping TypeName="InnovikaComModel.JaladeraColorExcepcione">
+        <MappingFragment StoreEntitySet="JaladeraColorExcepciones">
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="Jaladera" ColumnName="Jaladera" />
+          <ScalarProperty Name="idJaladeraColor" ColumnName="idJaladeraColor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

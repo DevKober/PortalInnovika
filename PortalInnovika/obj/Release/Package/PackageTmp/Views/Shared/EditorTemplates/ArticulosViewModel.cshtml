@@ -1,0 +1,62 @@
+@model PortalInnovika.Models.ArticulosViewModel
+
+<div style="padding:4px">
+    @Html.HiddenFor(x => x.Proyecto)
+    @Html.HiddenFor(x => x.IdArticulo)
+
+    @Html.HiddenFor(x => x.Unidad)
+    @Html.HiddenFor(x => x.ADNTipo)
+    @Html.HiddenFor(x => x.ADNBase)
+    @Html.HiddenFor(x => x.ADNColor)
+    @Html.HiddenFor(x => x.ADNCubrecanto)
+    @Html.HiddenFor(x => x.ADNVeta)
+    @Html.HiddenFor(x => x.ADNVariante)
+    @Html.HiddenFor(x => x.CodigoADNInterno)
+    @Html.HiddenFor(x => x.tieneJaladera)
+    @Html.HiddenFor(x => x.tieneVidrio)
+    @Html.HiddenFor(x => x.tieneProtecta)
+    @Html.HiddenFor(x => x.tieneOrificios)
+    @Html.HiddenFor(x => x.ADNJaladeraBase)
+    @Html.HiddenFor(x => x.ADNJaladera)
+    @Html.HiddenFor(x => x.ADNJaladeraOpcion)
+    @Html.HiddenFor(x => x.ADNPosicionJaladera)
+    @Html.HiddenFor(x => x.ADNProtectaBase)
+    @Html.HiddenFor(x => x.ADNProtectaColor)
+    @Html.HiddenFor(x => x.ADNOrificios)
+    @Html.HiddenFor(x => x.TmUltimoCambio)
+    @Html.HiddenFor(x => x.EsConceptoDeProyecto)
+    @Html.HiddenFor(x => x.tieneColorExclusivo)      
+
+@*    <p>
+        @Html.LabelFor(x => x.Alto) : @Html.EditorFor(x => x.Alto) 
+        @Html.LabelFor(x => x.Ancho): @Html.EditorFor(x => x.Ancho) 
+        @Html.LabelFor(x => x.Cantidad): @Html.EditorFor(x => x.Cantidad)
+    </p>*@
+
+@*    <table>
+        <tr>
+            <td>Alto: </td>
+            <td>@Html.EditorFor(x => x.Alto)</td>
+            <td>Ancho: </td>
+            <td>@Html.EditorFor(x => x.Ancho)</td>
+            <td>Cantidad: </td>
+            <td>@Html.EditorFor(x => x.Cantidad)</td>
+        </tr>
+    </table>*@
+
+    <div style="overflow:auto;">
+        <div style="float:left; margin-left:5px">@Html.ActionLink("Borrar", "BorraArticulo", new { IdArticulo = Model.IdArticulo, Proyecto = Model.Proyecto }, new { @class="delete", @id=Model.IdArticulo })</div>        
+        @*<div style="float:left; margin-left:5px"><a href="#" id="lnkBorrar">Borrar</a></div>*@
+        <div style="float:left; margin-left:15px">Cantidad: </div>
+        <div style="float:left; margin-left:5px;">@Html.TextBoxFor(x => x.Cantidad, new { Style = "width:40px;" })</div>
+
+        <div style="float:left; margin-left:15px">Alto: </div>
+        <div style="float:left; margin-left:5px">@Html.TextBoxFor(x => x.Alto, new { Style = "width:45px;" })</div>
+
+        <div style="float:left; margin-left:15px"">Ancho: </div>
+        <div style="float:left; margin-left:5px">@Html.TextBoxFor(x => x.Ancho, new { Style = "width:45px;" })</div>     
+                      
+        <div style="font-size:x-small; float:left; margin-left:5px">@Html.DisplayFor(x => x.Descripcion)</div>     
+        <div style="font-size:x-small; float:right; margin-left:5px">@Html.DisplayFor(x => x.Importe)</div>
+    </div>
+</div>
