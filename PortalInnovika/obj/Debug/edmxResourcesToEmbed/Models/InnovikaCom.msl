@@ -1014,5 +1014,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="JaladerasExtras">
+      <EntityTypeMapping TypeName="InnovikaComModel.JaladerasExtra">
+        <MappingFragment StoreEntitySet="JaladerasExtra">
+          <ScalarProperty Name="Jaladera" ColumnName="Jaladera" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="Base" ColumnName="Base" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="IdJaladeraExtra" ColumnName="IdJaladeraExtra" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

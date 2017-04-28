@@ -686,7 +686,7 @@ namespace PortalInnovika.Controllers
             return Json(maxmin, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetJaladeras(string codigo, string color)
+        public JsonResult GetJaladeras(string tipo, string codigo, string color)
         {
             //string codigoResultante = "";
             string lineas = "";
@@ -722,16 +722,22 @@ namespace PortalInnovika.Controllers
                              select i.Jaladera).Distinct();
 
             var codes = (from i in db.ArtJaladeras
-                         join basesjaladeras in db.BasesJaladeras on i.Codigo equals basesjaladeras.Jaladera
-                         where i.Estatus == "A" && basesjaladeras.Base == codigo
-                         select i.Codigo).Distinct();                      
+                         join basesjaladeras in db.BasesJaladeras on i.Codigo equals basesjaladeras.Jaladera                                                   
+                         where i.Estatus == "A" && basesjaladeras.Base == codigo                               
+                         select i.Codigo).Distinct().ToList();                      
 
             if (color != "")
             {
                 codes = (from i in db.ArtJaladeras
                          join basesjaladeras in db.BasesJaladeras on i.Codigo equals basesjaladeras.Jaladera
                          where i.Estatus == "A" && basesjaladeras.Base == codigo
-                         select i.Codigo).Except(exepCodes).Distinct();
+                         select i.Codigo).Except(exepCodes).Distinct().ToList();
+
+                var extras = (from i in db.JaladerasExtras
+                              where i.Tipo == tipo && i.Base == codigo && i.Color == color
+                              select i.Jaladera).Distinct().ToList();
+
+                foreach (string i in extras) { codes.Add(i); };
             }
 
             var jaladeras = (from i in db.ArtJaladeras
@@ -899,7 +905,7 @@ namespace PortalInnovika.Controllers
             }
             else if (tipo == "jaladera")
             {
-                var jaladeras = GetJaladeras(codigo, "");
+                var jaladeras = GetJaladeras("", codigo, "");
                 return jaladeras;
             }
             else if (tipo == "variante")

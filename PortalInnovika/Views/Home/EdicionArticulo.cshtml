@@ -998,7 +998,7 @@
             });
             function ObtieneJaladeras(b, c) {
                 return $.ajax({
-                    url: "/Editor/GetJaladeras?codigo=" + b + "&color=" + c,
+                    url: "/Editor/GetJaladeras?tipo=" + adn.substring(0,2) + "&codigo=" + b + "&color=" + c,
                     success: function (data) {
                         dataJaladeras = data.Elementos;
                         hayJaladerasDisponibles = data.JaladerasDisponibles;

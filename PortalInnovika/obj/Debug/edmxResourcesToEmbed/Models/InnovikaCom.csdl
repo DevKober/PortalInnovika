@@ -247,6 +247,7 @@
     <EntitySet Name="MaxMinAcabados" EntityType="InnovikaComModel.MaxMinAcabado" />
     <EntitySet Name="MaxMinBaseColors" EntityType="InnovikaComModel.MaxMinBaseColor" />
     <EntitySet Name="JaladeraColorExcepciones" EntityType="InnovikaComModel.JaladeraColorExcepcione" />
+    <EntitySet Name="JaladerasExtras" EntityType="InnovikaComModel.JaladerasExtra" />
   </EntityContainer>
   <EntityType Name="ArtADNCodigo">
     <Key>
@@ -1673,5 +1674,15 @@
     <Property Name="idJaladeraColor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Jaladera" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
     <Property Name="Color" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="JaladerasExtra">
+    <Key>
+      <PropertyRef Name="IdJaladeraExtra" />
+    </Key>
+    <Property Name="IdJaladeraExtra" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Tipo" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Name="Base" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Name="Color" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Name="Jaladera" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
   </EntityType>
 </Schema>

@@ -114,8 +114,8 @@
           <Property Name="Orden" Type="int" />
           <Property Name="RutaImagen" Type="nvarchar" MaxLength="300" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'InnovikaCom.dbo.ArtJaladeras' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'InnovikaCom.dbo.ArtJaladeras' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ArtJaladeras">
           <Key>
             
@@ -349,6 +349,16 @@ warning 6002: The table/view 'InnovikaCom.dbo.ArtJaladeras' does not have a prim
           <Property Name="idJaladeraColor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Jaladera" Type="varchar" MaxLength="2" Nullable="false" />
           <Property Name="Color" Type="varchar" MaxLength="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JaladerasExtra">
+          <Key>
+            <PropertyRef Name="IdJaladeraExtra" />
+          </Key>
+          <Property Name="IdJaladeraExtra" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tipo" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="Base" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="Color" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="Jaladera" Type="char" MaxLength="2" Nullable="false" />
         </EntityType>
         <EntityType Name="LineasUsuario">
           <Key>
@@ -733,8 +743,8 @@ warning 6002: The table/view 'InnovikaCom.dbo.ArtJaladeras' does not have a prim
           <Property Name="ProviderUserId" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'InnovikaCom.dbo.vAcumuladosColor' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'InnovikaCom.dbo.vAcumuladosColor' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vAcumuladosColor">
           <Key>
             <PropertyRef Name="Nombre" />
@@ -746,8 +756,8 @@ warning 6002: The table/view 'InnovikaCom.dbo.vAcumuladosColor' does not have a 
           <Property Name="Metraje" Type="decimal" Precision="38" Scale="6" />
           <Property Name="Proyecto" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'InnovikaCom.dbo.vArticulosFavoritos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'InnovikaCom.dbo.vArticulosFavoritos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vArticulosFavoritos">
           <Key>
             <PropertyRef Name="IdArticulo" />
@@ -762,8 +772,8 @@ warning 6002: The table/view 'InnovikaCom.dbo.vArticulosFavoritos' does not have
           <Property Name="Ancho" Type="int" />
           <Property Name="Alto" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'InnovikaCom.dbo.vArticulosResumen' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'InnovikaCom.dbo.vArticulosResumen' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vArticulosResumen">
           <Key>
             <PropertyRef Name="IdArticulo" />
@@ -778,8 +788,8 @@ warning 6002: The table/view 'InnovikaCom.dbo.vArticulosResumen' does not have a
           <Property Name="PrecioUnitario" Type="money" />
           <Property Name="Precio" Type="decimal" Precision="38" Scale="6" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'InnovikaCom.dbo.vExclusividades' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'InnovikaCom.dbo.vExclusividades' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vExclusividades">
           <Key>
             <PropertyRef Name="IdExclusividad" />
@@ -795,8 +805,8 @@ warning 6002: The table/view 'InnovikaCom.dbo.vExclusividades' does not have a p
           <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
           <Property Name="RutaImagen" Type="nvarchar" MaxLength="300" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'InnovikaCom.dbo.vMatrizFleteras' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'InnovikaCom.dbo.vMatrizFleteras' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vMatrizFleteras">
           <Key>
             <PropertyRef Name="FleteraId" />
@@ -815,8 +825,8 @@ warning 6002: The table/view 'InnovikaCom.dbo.vMatrizFleteras' does not have a p
           <Property Name="ElementoMatrizId" Type="int" Nullable="false" />
           <Property Name="CatalogoCiudadId" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'InnovikaCom.dbo.vMetraje' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'InnovikaCom.dbo.vMetraje' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vMetraje">
           <Key>
             <PropertyRef Name="Proyecto" />
@@ -825,8 +835,8 @@ warning 6002: The table/view 'InnovikaCom.dbo.vMetraje' does not have a primary 
           <Property Name="Proyecto" Type="int" Nullable="false" />
           <Property Name="Metraje" Type="decimal" Precision="38" Scale="6" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'InnovikaCom.dbo.vMetrajeEquivalencia' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'InnovikaCom.dbo.vMetrajeEquivalencia' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vMetrajeEquivalencia">
           <Key>
             <PropertyRef Name="Proyecto" />
@@ -835,8 +845,8 @@ warning 6002: The table/view 'InnovikaCom.dbo.vMetrajeEquivalencia' does not hav
           <Property Name="Proyecto" Type="int" Nullable="false" />
           <Property Name="Metraje" Type="decimal" Precision="38" Scale="2" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'InnovikaCom.dbo.vNotasProyecto' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'InnovikaCom.dbo.vNotasProyecto' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vNotasProyecto">
           <Key>
             <PropertyRef Name="IdNotaProyecto" />
@@ -857,8 +867,8 @@ warning 6002: The table/view 'InnovikaCom.dbo.vNotasProyecto' does not have a pr
           <Property Name="esNueva" Type="int" Nullable="false" />
           <Property Name="Texto" Type="nvarchar" MaxLength="2000" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'InnovikaCom.dbo.vOportunidades' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'InnovikaCom.dbo.vOportunidades' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vOportunidades">
           <Key>
             <PropertyRef Name="IdOportunidad" />
@@ -874,8 +884,8 @@ warning 6002: The table/view 'InnovikaCom.dbo.vOportunidades' does not have a pr
           <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
           <Property Name="RutaImagen" Type="nvarchar" MaxLength="300" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'InnovikaCom.dbo.vProyectosAprobados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'InnovikaCom.dbo.vProyectosAprobados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vProyectosAprobados">
           <Key>
             <PropertyRef Name="IdProyecto" />
@@ -888,8 +898,8 @@ warning 6002: The table/view 'InnovikaCom.dbo.vProyectosAprobados' does not have
           <Property Name="ReferenciaCliente" Type="nvarchar" MaxLength="50" />
           <Property Name="NumArticulos" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'InnovikaCom.dbo.vProyectosPorRevisar' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'InnovikaCom.dbo.vProyectosPorRevisar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vProyectosPorRevisar">
           <Key>
             <PropertyRef Name="NomEstatus" />
@@ -919,8 +929,8 @@ warning 6002: The table/view 'InnovikaCom.dbo.vProyectosPorRevisar' does not hav
           <Property Name="EsExpress" Type="bit" />
           <Property Name="FleteAutomatico" Type="bit" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'InnovikaCom.dbo.vProyectosRegistrados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'InnovikaCom.dbo.vProyectosRegistrados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vProyectosRegistrados">
           <Key>
             <PropertyRef Name="IdProyecto" />
@@ -952,8 +962,8 @@ warning 6002: The table/view 'InnovikaCom.dbo.vProyectosRegistrados' does not ha
           <Property Name="EsExpress" Type="bit" />
           <Property Name="FleteAutomatico" Type="bit" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'InnovikaCom.dbo.vProyectosSolicitados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'InnovikaCom.dbo.vProyectosSolicitados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vProyectosSolicitados">
           <Key>
             <PropertyRef Name="IdProyecto" />
@@ -968,8 +978,8 @@ warning 6002: The table/view 'InnovikaCom.dbo.vProyectosSolicitados' does not ha
           <Property Name="NumArticulos" Type="int" />
           <Property Name="EsExpress" Type="bit" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'InnovikaCom.dbo.vUsuarios' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'InnovikaCom.dbo.vUsuarios' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vUsuarios">
           <Key>
             <PropertyRef Name="RoleName" />
@@ -1392,8 +1402,8 @@ warning 6002: The table/view 'InnovikaCom.dbo.vUsuarios' does not have a primary
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errors Found During Generation:
-warning 6035: The relationship 'FK_UsersInRoles_Users' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK_UsersInRoles_Users' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
         <Association Name="FK_UsersInRoles_Users" />-->
         <Function Name="spAltaCotizacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="iProyecto" Type="int" Mode="In" />
@@ -1478,6 +1488,7 @@ warning 6035: The relationship 'FK_UsersInRoles_Users' has columns that are not 
           <EntitySet Name="Favoritos" EntityType="Self.Favoritos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Fleteras" EntityType="Self.Fleteras" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="JaladeraColorExcepciones" EntityType="Self.JaladeraColorExcepciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JaladerasExtra" EntityType="Self.JaladerasExtra" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LineasUsuario" EntityType="Self.LineasUsuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MatrizFletes" EntityType="Self.MatrizFletes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MatrizFletes2" EntityType="Self.MatrizFletes2" Schema="dbo" store:Type="Tables" />
@@ -2081,6 +2092,7 @@ FROM [dbo].[vUsuarios] AS [vUsuarios]</DefiningQuery>
           <EntitySet Name="MaxMinAcabados" EntityType="InnovikaComModel.MaxMinAcabado" />
           <EntitySet Name="MaxMinBaseColors" EntityType="InnovikaComModel.MaxMinBaseColor" />
           <EntitySet Name="JaladeraColorExcepciones" EntityType="InnovikaComModel.JaladeraColorExcepcione" />
+          <EntitySet Name="JaladerasExtras" EntityType="InnovikaComModel.JaladerasExtra" />
         </EntityContainer>
         <EntityType Name="ArtADNCodigo">
           <Key>
@@ -3508,6 +3520,16 @@ FROM [dbo].[vUsuarios] AS [vUsuarios]</DefiningQuery>
           <Property Name="Jaladera" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="Color" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="JaladerasExtra">
+          <Key>
+            <PropertyRef Name="IdJaladeraExtra" />
+          </Key>
+          <Property Name="IdJaladeraExtra" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tipo" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="Base" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="Color" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="Jaladera" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4524,6 +4546,17 @@ FROM [dbo].[vUsuarios] AS [vUsuarios]</DefiningQuery>
                 <ScalarProperty Name="Color" ColumnName="Color" />
                 <ScalarProperty Name="Jaladera" ColumnName="Jaladera" />
                 <ScalarProperty Name="idJaladeraColor" ColumnName="idJaladeraColor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JaladerasExtras">
+            <EntityTypeMapping TypeName="InnovikaComModel.JaladerasExtra">
+              <MappingFragment StoreEntitySet="JaladerasExtra">
+                <ScalarProperty Name="Jaladera" ColumnName="Jaladera" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Base" ColumnName="Base" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="IdJaladeraExtra" ColumnName="IdJaladeraExtra" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -304,6 +304,9 @@
     <Compile Include="Models\JaladeraColorExcepcione.cs">
       <DependentUpon>InnovikaCom.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\JaladerasExtra.cs">
+      <DependentUpon>InnovikaCom.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\LineasUsuario.cs">
       <DependentUpon>InnovikaCom.tt</DependentUpon>
     </Compile>

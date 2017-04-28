@@ -759,7 +759,7 @@
             var dsTipoJal = new kendo.data.DataSource({});
             var dsPosJal = new kendo.data.DataSource({});
 
-            alert("RefrescaJaladeras: " + base + " - " + color);
+            //alert("RefrescaJaladeras: " + base + " - " + color);
 
             $.when(ObtieneJaladeras(base, color)).done(function (a) {
                 dsj = new kendo.data.DataSource({
@@ -1142,7 +1142,7 @@
                     tipo = "veta";
                    
                     //alert(adn);
-                    alert(adn.substring(2, 4));
+                    //alert(adn.substring(2, 4));
                     RefrescaJaladeras(adn.substring(2,4), codigo);
 
                     document.getElementById("tipo").value = "veta";
