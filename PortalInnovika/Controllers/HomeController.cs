@@ -523,12 +523,15 @@ namespace PortalInnovika.Controllers
                 }
             }
 
+            db.SaveChanges();
+
             //FLETE            
             var grupo = (from i in db_intelisis.Ctes
                          where i.Cliente == usuario.ClienteERP.Trim()
                          select i.Grupo).FirstOrDefault();
             ProyArticulo af = null;
-            ProyArticulo artFlete = null;
+            ProyArticulo artFlete = null;            
+
             if (grupo == "FORANEO")
             {
                 af = (from i in db.ProyArticulos
@@ -594,6 +597,101 @@ namespace PortalInnovika.Controllers
                 artArmado.EsConceptoDeProyecto = false;
                 artArmado.tieneColorExclusivo = false;
                 db.ProyArticulos.Add(artArmado);
+
+                //SI HAY MARCOS DE ALUMINIO O VIDRIO SUELTO AGREGA EL COSTO DE EMPAQUE DE MARCOS Y VIDRIOS
+                var vidrios = (from i in db.ProyArticulos
+                               where i.Proyecto == proyecto.IdProyecto && ((i.ADNTipo == "VD") || (i.ADNTipo == "VB") || ((i.ADNTipo == "VU") && (i.ADNVidrioBase != null)))
+                               select i);
+                int cantV = vidrios.Count();
+                if ((cantV > 0) || (cantArmados > 0))
+                {
+                    ProyArticulo costoEmpVidMarco = (from i in db.ProyArticulos
+                                                     where i.Proyecto == proyecto.IdProyecto && i.CodigoADNInterno == "CEEIXX"
+                                                     select i).FirstOrDefault();
+
+                    decimal precioEmp = GetPrecioLista((from c in db.ArtADNCodigos where c.Codigo == "CEEIXX" select c).FirstOrDefault(), usuario);
+                    /*decimal metrajeVidrios = (from i in db.ProyArticulos
+                                              where i.Proyecto == IdProyecto && ((i.CodigoADNInterno.Substring(0, 2) == "VD") || (i.CodigoADNInterno.Substring(0, 2) == "VB") || (i.tieneVidrio))
+                                              select i).Distinct().Sum((a => ((a.Alto * a.Ancho) / 1000000) * a.Cantidad)) ?? 0;
+                    */
+
+                    var mv = (from i in db.ProyArticulos
+                              where i.Proyecto == proyecto.IdProyecto && ((i.CodigoADNInterno.Substring(0, 2) == "VD") || (i.CodigoADNInterno.Substring(0, 2) == "VB") || (i.tieneVidrio))
+                              select i).Distinct();
+                    decimal metrajeVidrios = mv.Sum(m => (((decimal)m.Alto * (decimal)m.Ancho) / 1000000) * m.Cantidad);
+
+
+                    if (costoEmpVidMarco == null)
+                    {
+                        ProyArticulo costEmpVidMa = new ProyArticulo();
+                        costEmpVidMa.Proyecto = proyecto.IdProyecto;
+                        costEmpVidMa.PrecioPrincipal = metrajeVidrios * precioEmp;
+                        costEmpVidMa.PrecioListaPrincipal = metrajeVidrios * precioEmp; //GetPrecioLista((from c in db.ArtADNCodigos where c.Codigo == "CEEIXX" select c).FirstOrDefault(), usuario);
+                        costEmpVidMa.Cantidad = 1;
+                        costEmpVidMa.ADNTipo = "CE";
+                        costEmpVidMa.ADNBase = "EI";
+                        costEmpVidMa.ADNColor = "XX";
+                        costEmpVidMa.CodigoADNInterno = "CEEIXX";
+                        costEmpVidMa.Unidad = "PZA";
+                        costEmpVidMa.TmUltimoCambio = DateTime.Today;
+                        costEmpVidMa.EsConceptoDeProyecto = true;
+                        costEmpVidMa.tieneColorExclusivo = false;
+                        db.ProyArticulos.Add(costEmpVidMa);
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        ProyArticulo cost = (from i in db.ProyArticulos
+                                             where i.Proyecto == proyecto.IdProyecto && i.CodigoADNInterno == "CEEIXX"
+                                             select i).FirstOrDefault();
+                        cost.PrecioPrincipal = metrajeVidrios * precioEmp;
+                        cost.PrecioListaPrincipal = metrajeVidrios * precioEmp;
+                        db.Entry(cost).State = EntityState.Modified;
+                    }
+                }
+            }
+
+            //SEGURO
+            //if ((grupo == "FORANEO") && (usuario.FleteraId != 5))
+            if (usuario.FleteraId != 5)
+            {
+                ProyArticulo artSeg = (from i in db.ProyArticulos
+                                       where i.Proyecto == proyecto.IdProyecto && i.CodigoADNInterno == "CESEEX"
+                                       select i).FirstOrDefault();
+                if (artSeg is ProyArticulo)
+                {
+                    //ya existe un seguro. 
+                    decimal subt = GetSubtotal(proyecto.IdProyecto);
+                    artSeg.PrecioPrincipal = decimal.Multiply(subt, 0.01M);
+                    artSeg.PrecioListaPrincipal = decimal.Multiply(subt, 0.01M);
+                    db.Entry(artSeg).State = EntityState.Modified;
+                }
+                else
+                {
+                    artSeg = new ProyArticulo();
+                    artSeg.Proyecto = proyecto.IdProyecto;
+                    artSeg.ADNTipo = "CE";
+                    artSeg.ADNBase = "SE";
+                    artSeg.ADNColor = "EX";
+                    artSeg.CodigoADNInterno = "CESEEX";
+                    artSeg.CodigoADNBase = "CESEEX";
+                    artSeg.TmUltimoCambio = DateTime.Today;
+                    artSeg.Cantidad = 1;
+                    artSeg.Unidad = "PZA";
+                    artSeg.tieneJaladera = false;
+                    artSeg.tieneVidrio = false;
+                    artSeg.tieneProtecta = false;
+                    artSeg.tieneOrificios = false;
+                    artSeg.EsConceptoDeProyecto = true;
+                    artSeg.tieneColorExclusivo = false;
+
+                    var tots = GetTotales(proyecto.IdProyecto);
+                    decimal subt = ((TotalesViewModel)tots.Data).Subtotal; //GetSubtotal(IdProyecto);
+                    artSeg.PrecioPrincipal = decimal.Multiply(subt, 0.01M);
+                    artSeg.PrecioListaPrincipal = artSeg.PrecioPrincipal;
+                    db.ProyArticulos.Add(artSeg);
+                }
+
             }
 
             db.SaveChanges();
@@ -1235,6 +1333,78 @@ namespace PortalInnovika.Controllers
             return File(bytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
             //
         }
-        
+
+        public JsonResult GetTotales(int proyecto)
+        {
+            var t = (from i in db.ProyArticulos
+                     where i.Proyecto == proyecto
+                     select i).Distinct();
+
+            decimal Imp = t.Sum(i => i.PrecioUnitario * i.Cantidad) ?? 0;
+            decimal Desc = t.Sum(i => i.DescuentoUnitario * i.Cantidad) ?? 0;
+            decimal Sub = Imp - Desc;
+            decimal Iva = Sub * (decimal)0.16;
+            decimal Tot = Sub + Iva;
+            TotalesViewModel total = new TotalesViewModel
+            {
+                Importe = decimal.Round(Imp, 2),
+                Descuento = decimal.Round(Desc, 2),
+                Subtotal = decimal.Round(Sub, 2),
+                IVA = decimal.Round(Iva, 2),
+                Total = decimal.Round(Tot, 2)
+            };
+
+            return Json(total, JsonRequestBehavior.AllowGet);
+        }
+
+        //METODO PARA OBTENER EL PRECIO DE LISTA DE UN ARTICULO
+        public decimal GetPrecioLista(ArtADNCodigo adn, UserProfile usuario = null)
+        {
+            if (usuario == null)
+            {
+                usuario = UsuarioActual();
+            }
+
+            decimal precio = 0;
+
+            switch (usuario.ListaPreciosEsp)
+            {
+                case "(Precio Lista)":
+                    precio = adn.PrecioLista ?? 0;
+                    break;
+                case "(Precio 2)":
+                    precio = adn.Precio2 ?? 0;
+                    break;
+                case "(Precio 3)":
+                    precio = adn.Precio3 ?? 0;
+                    break;
+                case "(Precio 4)":
+                    precio = adn.Precio4 ?? 0;
+                    break;
+                case "(Precio 5)":
+                    precio = adn.Precio5 ?? 0;
+                    break;
+                case "(Precio 6)":
+                    precio = adn.Precio6 ?? 0;
+                    break;
+                case "(Precio 7)":
+                    precio = adn.Precio7 ?? 0;
+                    break;
+                case "(Precio 8)":
+                    precio = adn.Precio8 ?? 0;
+                    break;
+                case "(Precio 9)":
+                    precio = adn.Precio9 ?? 0;
+                    break;
+                case "(Precio 10)":
+                    precio = adn.Precio10 ?? 0;
+                    break;
+                default:
+                    precio = adn.PrecioLista ?? 0;
+                    break;
+            }
+            return precio;
+        }
+
     }
 }
