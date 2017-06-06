@@ -1,0 +1,185 @@
+﻿@model PortalInnovika.Models.ProyectoDetalle
+@using GridMvc.Html
+
+@{
+    if (!User.Identity.IsAuthenticated)
+    {
+        Response.Redirect("~/Home/NoAutorizado");
+    }
+}
+
+@{
+    ViewBag.Title = "ConsultaProyecto";
+}
+
+<link href="~/Content/kendo/2013.1.319/kendo.common.min.css" rel="stylesheet" />
+<link href="~/Content/kendo/2013.1.319/kendo.blueopal.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.9.1.min.js"></script>
+<script src="~/Scripts/kendo/2013.1.319/kendo.web.min.js"></script>
+
+<h3>Proyectos</h3>
+
+<div id="costo">
+
+</div>
+
+<fieldset>
+    <legend>ConsultaProyecto</legend>
+</fieldset>
+
+@Html.Hidden("Cliente", Model.Cliente.Trim())
+
+<div id="edicion">
+    @using (Html.BeginForm("EdicionProyecto", "Home"))
+    {
+        <input type="submit" value="Nuevo" />
+    }
+
+</div>
+
+<div id="proyectos" class="float-left-inn">
+
+</div>
+
+<div id="articulos" class="float-right-inn">
+
+</div>
+
+<div id="detalle">
+
+</div>
+
+<script>
+    $(function () {
+        //var apiUrl = "api/Fletes";
+
+        //$.getJSON(apiUrl).done(function (data) {
+        //    alert(data);
+        //    $("#costo").html("<h3>" + data.Costo + "</h3>");
+        //});
+
+        var proyecto;
+
+        var ds = new kendo.data.DataSource({
+            transport: {
+                read: { 
+                    url: "/Home/GetArticulosProyecto",
+                    data: {proyecto: proyecto}
+                }
+            }
+        });
+
+        function refresca(proy) {
+
+            //GRID ARTICULOS
+            ////////////////
+            $("#articulos").kendoGrid({
+                selectable: "single",
+                pageable: {
+                    buttonCount: 5,
+                    messages: {
+                        display: "{0} - {1} de {2} elementos", //{0} is the index of the first record on the page, {1} - index of the last record on the page, {2} is the total amount of records
+                        empty: "No hay elementos para mostrar",
+                        page: "Página",
+                        of: "de {0}", //{0} is total amount of pages
+                        itemsPerPage: "elementos por página",
+                        first: "Ir a la primer página",
+                        previous: "Ir a la página anterior",
+                        next: "Ir a la siguiente página",
+                        last: "Ir a la utlima página",
+                        refresh: "Refrescar"
+                    }
+                },
+                scrollable: true,
+                navigatable: true,
+                columns: [
+                    { field: "Descripcion", title: "Articulo", width: 200 },
+                    { field: "Alto", title: "Alto", width: 60 },
+                    { field: "Ancho", title: "Ancho", width: 60 }
+                ],
+                dataSource: new kendo.data.DataSource({
+                    pageSize: 20,
+                    transport: {
+                        cahce: true,
+                        read: {
+                            url: "/Home/GetArticulosProyecto",
+                            data: { proyecto: proy },
+                            type: "GET",
+                            dataType: "json"
+                        }
+                    }
+                })
+            });
+
+            //ds.read();
+            //var grid = $("#articulos").data("kendoGrid");
+            //grid.read();
+        }
+
+        function onChange(arg) {
+            //alert("Proyecto " + this.dataItem(this.select()).Proyecto);
+            p = this.dataItem(this.select()).Proyecto;
+            //alert(p);
+            refresca(p);           
+
+        }
+
+        //GRID PROYECTOS
+        ////////////////
+        $("#proyectos").kendoGrid({
+            selectable: "single",
+            pageable: {
+                buttonCount: 5,
+                messages: {
+                    display: "{0} - {1} de {2} elementos", //{0} is the index of the first record on the page, {1} - index of the last record on the page, {2} is the total amount of records
+                    empty: "No hay elementos para mostrar",
+                    page: "Página",
+                    of: "de {0}", //{0} is total amount of pages
+                    itemsPerPage: "elementos por página",
+                    first: "Ir a la primer página",
+                    previous: "Ir a la página anterior",
+                    next: "Ir a la siguiente página",
+                    last: "Ir a la utlima página",
+                    refresh: "Refrescar"
+                }
+            },
+            scrollable: true,
+            navigatable: true,
+            change: onChange,
+            columns: [
+                { field: "Proyecto", title: "Proyecto", width: 100 },
+                { field: "Identificador", title: "Identificador", width: 200 },
+                { field: "Estatus", title: "Estatus", width: 100 }
+            ],
+            dataSource: new kendo.data.DataSource({
+                pageSize: 15,
+                transport: {
+                    read: {
+                        url: "/Home/Get",
+                        data: { cliente: "3" }
+                    }
+                }
+            })
+        });
+
+
+
+        
+    });
+</script>
+
+@*<script>    
+    pageGrids.gridProyectos.onRowSelect(function (row) {
+        var proy = JSON.stringify(row.Proyecto);
+
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "/Home/ConsultaProyecto",
+                data: { cliente: 3, proyecto: row.Proyecto },
+                success: function (result) {},
+                error: function (xhrobj, status, message) { alert(message); }
+            });
+        });
+</script>*@
+

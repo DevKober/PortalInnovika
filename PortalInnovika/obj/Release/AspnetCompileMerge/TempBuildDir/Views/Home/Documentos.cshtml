@@ -1,0 +1,29 @@
+﻿@model PortalInnovika.Models.Docs
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+    <link href="~/Content/kendo/2013.1.319/kendo.common.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2013.1.319/kendo.blueopal.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+    <script src="~/Scripts/kendo/2013.1.319/kendo.web.min.js"></script>
+    <link href="~/Content/bootstrap/bootstrap.css" rel="stylesheet" />
+
+    <title>Documentos</title>
+</head>
+<body>
+    <div>
+        <h3>Documentos</h3>
+    </div>
+
+    @Html.DisplayFor(x => x.Documentos)
+
+</body>
+</html>

@@ -99,6 +99,7 @@
         <EntityTypeShape EntityType="InnovikaComModel.MaxMinAcabado" Width="1.5" PointX="12.375" PointY="29.375" />
         <EntityTypeShape EntityType="InnovikaComModel.MaxMinBaseColor" Width="1.5" PointX="11.875" PointY="0.625" />
         <EntityTypeShape EntityType="InnovikaComModel.JaladeraColorExcepcione" Width="1.5" PointX="21.375" PointY="13.75" />
+        <EntityTypeShape EntityType="InnovikaComModel.JaladerasExtra" Width="1.5" PointX="21.375" PointY="16.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

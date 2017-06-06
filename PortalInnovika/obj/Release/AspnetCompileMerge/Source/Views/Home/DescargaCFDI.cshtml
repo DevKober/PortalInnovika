@@ -1,0 +1,51 @@
+﻿@model PortalInnovika.Models.UserProfile
+
+<link href="~/Content/kendo/2013.1.319/kendo.common.min.css" rel="stylesheet" />
+<link href="~/Content/kendo/2013.1.319/kendo.blueopal.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.9.1.min.js"></script>
+<script src="~/Scripts/kendo/2013.1.319/kendo.web.min.js"></script>
+<script src="~/Content/jquery.formatCurrency-1.4.0.js"></script>
+<link href="~/Content/bootstrap/bootstrap.css" rel="stylesheet" />
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Descarga de CFDI</title>
+</head>
+<body>
+    <div id="cfdis" style="padding:5px;">
+        
+    </div>
+</body>
+</html>
+<script>
+    $(function () {
+        var cte = "@Model.ClienteERP";
+        //var periodo = "2014";        
+
+        var d = new Date();
+        var m = d.getMonth() + 1;
+        var periodo = d.getFullYear();
+        //alert(periodo);
+
+        var mes = m;
+        $.ajax({
+            url: "/Home/CFDIs?cte=" + cte + "&periodo=" + periodo + "&mes=" + mes,
+            success: function (data) {
+                //alert("ya esta por procesar la lista");
+                $("#cfdis").append("<h4>Facturas del cliente: " + cte + "</h4>");
+                data.forEach(function (i) {
+                    
+                    $("#cfdis").append("<div><a href='/Home/GetCfdi?carpetaCfdi=" + i.Carpeta + "&periodo=" + i.Periodo + "&empresa=Innovika" + "&mes=" + i.Mes + "&archivo=" + i.Archivo + "'>" + i.Nombre + "</a></div>");
+                    
+                });
+            }
+        });
+    });
+</script>

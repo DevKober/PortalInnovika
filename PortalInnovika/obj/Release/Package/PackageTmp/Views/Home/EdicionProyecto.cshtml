@@ -393,6 +393,20 @@
             $("#lblEsExpress").html("<h5>Proyecto Express</h5>");
         }
 
+        // Proyectos Express [mayo 2017]
+        $("#Proyecto_EsExpress").change(function () {
+            var $this = $(this);
+            if ($this.is(":checked")) {
+                //$this.prop("checked", checkExpress());
+            }
+            
+        });
+
+        function checkExpress() {
+            return false;
+        }
+        // 
+
         var dsArts = new kendo.data.DataSource({
             pageSize: 20,
             transport: {
@@ -801,7 +815,8 @@
                         postData.jArticulo = jArt;
                         postData.EsEdicion = edicion;
                         postData = JSON.stringify(postData);
-                        //alert("EsEdicion: " + postData.EsEdicion + " jArticulo: " + jArt);
+                        //alert("EsEdicion: " + postData.EsEdicion + " jArticulo: " + jArt);+
+                        console.log(postData);
                         $.ajax({
                             url: "/Editor/AgregarArticulo",
                             data: postData,
@@ -811,7 +826,7 @@
                                 win.close();                                
                             },
                             error: function (e) {
-                                alert("error al guardar el proyecto: " + proy);
+                                alert("error al guardar el proyecto A: " + proy);
                             }
                         });
                     });
@@ -1042,7 +1057,7 @@
                             },
                             error: function (e) {
                                 $("#loader").hide();
-                                alert("error al guardar el proyecto: " + proy);
+                                alert("error al guardar el proyecto B: " + proy);
                             }
                         });
                     });

@@ -12,6 +12,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>04/04/2016 18:48:22</publishTime>
     </File>
+    <File Include="bin/App_global.asax.compiled">
+      <publishTime>06/02/2017 11:40:09</publishTime>
+    </File>
+    <File Include="bin/App_global.asax.dll">
+      <publishTime>06/02/2017 11:40:09</publishTime>
+    </File>
     <File Include="bin/DotNetOpenAuth.AspNet.dll">
       <publishTime>04/04/2016 18:48:20</publishTime>
     </File>
@@ -61,7 +67,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/04/2016 18:48:28</publishTime>
     </File>
     <File Include="bin/PortalInnovika.dll">
-      <publishTime>02/02/2017 15:45:12</publishTime>
+      <publishTime>06/02/2017 11:38:03</publishTime>
     </File>
     <File Include="bin/PortalInnovika.pdb">
       <publishTime>01/01/0001 00:00:00</publishTime>
@@ -703,13 +709,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/04/2016 18:48:00</publishTime>
     </File>
     <File Include="Models/InnovikaCom.edmx.diagram">
-      <publishTime>12/19/2016 18:39:56</publishTime>
+      <publishTime>05/05/2017 17:37:47</publishTime>
     </File>
     <File Include="Models/Intelisis.dbml">
       <publishTime>04/04/2016 18:48:02</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>04/04/2016 18:48:20</publishTime>
+      <publishTime>06/02/2017 10:59:55</publishTime>
+    </File>
+    <File Include="PrecompiledApp.config">
+      <publishTime>06/02/2017 11:40:05</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>04/04/2016 18:48:02</publishTime>
@@ -2035,7 +2044,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/04/2016 18:48:04</publishTime>
     </File>
     <File Include="Views/Home/Dashboard.cshtml">
-      <publishTime>04/04/2016 18:48:04</publishTime>
+      <publishTime>06/02/2017 11:00:38</publishTime>
     </File>
     <File Include="Views/Home/DatosEmbarque.cshtml">
       <publishTime>04/04/2016 18:48:04</publishTime>
@@ -2053,13 +2062,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/04/2016 18:48:04</publishTime>
     </File>
     <File Include="Views/Home/EdicionArticulo.cshtml">
-      <publishTime>01/06/2017 16:52:50</publishTime>
+      <publishTime>05/04/2017 18:44:03</publishTime>
     </File>
     <File Include="Views/Home/EdicionJaladera.cshtml">
       <publishTime>04/04/2016 18:48:04</publishTime>
     </File>
     <File Include="Views/Home/EdicionProyecto.cshtml">
-      <publishTime>11/17/2016 17:41:56</publishTime>
+      <publishTime>06/02/2017 11:39:29</publishTime>
     </File>
     <File Include="Views/Home/EdicionProyecto_.cshtml">
       <publishTime>04/04/2016 18:48:04</publishTime>
@@ -2143,7 +2152,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/04/2016 18:48:04</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>02/02/2017 15:46:39</publishTime>
+      <publishTime>06/02/2017 10:38:36</publishTime>
     </File>
   </ItemGroup>
 </Project>

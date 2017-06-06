@@ -2379,7 +2379,7 @@ namespace PortalInnovika.Controllers
 
                 int entregaArt = 0;
 
-                string e5 = "ABS|SIC|FOIL 3D|MEL|HPL|MKT|MUEBLES|ACR";
+                string e5 = "ABS|SIC|FOIL 3D|MEL|HPL|MKT|MUEBLES|ACR|DEC";
                 string e8 = "VIDRIO|CERAMICA||ALU";
                 string e20 = "MADERA|LACA|PI";
 

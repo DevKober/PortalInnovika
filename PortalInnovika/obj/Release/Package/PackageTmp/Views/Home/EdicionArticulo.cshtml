@@ -378,7 +378,8 @@
         function ActivaSelVidrio() {
             var tstrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
             tstrip.append([{
-                text: "Selección de vidrio para ventana"
+                //text: "Selección de vidrio para ventana"
+                text: "Color de Vidrio" // POLH [04May2017]
             }]);
             $("#tabstrip-3").attr("aria-expanded", "false");
             $("#tabstrip-3").css("display", "none");
@@ -998,7 +999,7 @@
             });
             function ObtieneJaladeras(b, c) {
                 return $.ajax({
-                    url: "/Editor/GetJaladeras?codigo=" + b + "&color=" + c,
+                    url: "/Editor/GetJaladeras?tipo=" + adn.substring(0,2) + "&codigo=" + b + "&color=" + c,
                     success: function (data) {
                         dataJaladeras = data.Elementos;
                         hayJaladerasDisponibles = data.JaladerasDisponibles;
@@ -2168,7 +2169,8 @@
     function tsOnSelect(e) {
         //alert("'" + $(e.item).find("> .k-link").text().trim() + "'");
         var i = $(e.item).find("> .k-link").text().trim();
-        if (i != "Selección de vidrio para ventana") {                  
+        //if (i != "Selección de vidrio para ventana") {
+        if (i != "Color de Vidrio") {
             //alert("no es");
             $("#tabstrip-3").attr("aria-expanded", "false");
             $("#tabstrip-3").css("display", "none");

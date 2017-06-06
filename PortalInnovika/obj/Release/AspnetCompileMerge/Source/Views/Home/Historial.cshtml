@@ -1,0 +1,61 @@
+﻿@model  int
+
+@{
+    Layout = null;
+}
+
+@{
+    ViewBag.Title = "Historial";
+}
+
+@Html.Hidden("proyecto", Model.ToString())
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+    <script src="~/Scripts/kendo/2013.1.319/kendo.web.min.js"></script>
+    @*<link href="~/Content/bootstrap/bootstrap.css" rel="stylesheet" />*@
+    <link href="~/Content/kendo/2013.1.319/kendo.all.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2013.1.319/kendo.common.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2013.1.319/kendo.blueopal.min.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+
+    <meta name="viewport" content="width=device-width" />
+    <title>Historial</title>
+</head>
+<body>
+    <h3>Proyecto: @Model.ToString()</h3>
+
+    <div id="historial">
+
+    </div>
+</body>
+</html>
+
+<script>
+    $(function () {    
+        var dsHistorial = new kendo.data.DataSource({
+            pageSize: 15,
+            transport: {
+                read: {
+                    cache: false,
+                    url: "/Editor/GetHistorial",
+                    data: { proyecto: document.getElementById("proyecto").value },
+                    type: "GET",
+                    dataType: "json"
+                }
+            }
+        });
+        $("#historial").kendoGrid({
+            selectable: "single",
+            navigatable: true,
+            scrollable: { virtual: true },
+            columns: [
+            { field: "item", title: "Elemento", width: 125 }
+            ],
+            dataSource: dsHistorial
+        });
+    });
+</script>
