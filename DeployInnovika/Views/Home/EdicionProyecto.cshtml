@@ -26,7 +26,7 @@
 
 @Html.Hidden("Proyecto", Model.IdProyecto)
 @Html.Hidden("Articulos", Model.Articulos)
-@Html.Hidden("EsExpress", Model.Proyecto.EsExpress)
+@*@Html.Hidden("EsExpress", Model.Proyecto.EsExpress)*@
 @Html.Hidden("ValidaTiempsEntrega", Model.Proyecto.ValidaTiempsEntrega)
 @Html.Hidden("ProyArtic", 0)
 @*@Html.Hidden("ReferenciaCliente", Model.Proyecto.ReferenciaCliente)*@
@@ -142,7 +142,8 @@
                 </div>
                     
                 <div style="float:left; margin:5px; width:200px">
-                    @Html.EditorFor(m => m.Proyecto.EsExpress)
+                    @*Html.EditorFor(m => m.Proyecto.EsExpress, new { data = "EsExpress2"})*@
+                    <input type="checkbox" name="EsExpress" id="Proyecto_EsExpress_2" value="@Model.Proyecto.EsExpress"  @(Model.Proyecto.EsExpress?"checked":"")/>
                     Pedido express
                 </div>
 
@@ -374,10 +375,11 @@
         $.when(GetTotales(proyecto)).done(function(a) {
             //alert("ya estan los totales");
         });
+
         function GetTotales(proyecto) {
             return $.ajax({
                 url: "/Editor/GetTotales?proyecto=" + proyecto,
-                success: function (data) {
+                success: function(data) {
                     $("#valorImporte").html(data.Importe).formatCurrency();
                     $("#valorDescuento").html(data.Descuento).formatCurrency();
                     $("#valorIva").html(data.IVA).formatCurrency();
@@ -385,26 +387,34 @@
                     $("#valorTotal").html(data.Total).formatCurrency();
                 }
             });
-        }        
+        }
 
-        var esExpress = document.getElementById("EsExpress").value;
-        //alert(esExpress);
-        if (esExpress == "True") {
+        var esExpress = @(Model.Proyecto.EsExpress?1:0);
+        if (esExpress) {
             $("#lblEsExpress").html("<h5>Proyecto Express</h5>");
+            $("#Proyecto_EsExpress_2").prop("checked", true);
+            $("#Proyecto_EsExpress_2").val(true);
         }
 
         // Proyectos Express [mayo 2017]
-        $("#Proyecto_EsExpress").change(function () {
+        $("#Proyecto_EsExpress_2").change(function() {
             var $this = $(this);
-            if ($this.is(":checked")) {
-                //$this.prop("checked", checkExpress());
-            }
-            
+            //console.log($this.is(":checked"));
+            checkExpress();
+
         });
 
         function checkExpress() {
-            return false;
+            $.get("/Editor/CheckExpress?proyecto=" + proyecto + "&express=" + $("#Proyecto_EsExpress_2").is(":checked"))
+                .done(function (data) {
+                    console.log(data)
+                    $("#Proyecto_EsExpress_2").prop("checked", data.Ok);
+                    $("#Proyecto_EsExpress_2").val(data.Ok);
+                    //$("#EsExpress").val(data.Ok);
+                    GetTotales(proyecto);
+                });
         }
+
         // 
 
         var dsArts = new kendo.data.DataSource({
@@ -424,7 +434,8 @@
                 buttonCount: 10,
                 pageSizes: [20, 30, 40],
                 messages: {
-                    display: "{0} - {1} de {2} elementos", //{0} is the index of the first record on the page, {1} - index of the last record on the page, {2} is the total amount of records
+                    display:
+                        "{0} - {1} de {2} elementos", //{0} is the index of the first record on the page, {1} - index of the last record on the page, {2} is the total amount of records
                     empty: "No hay elementos para mostrar",
                     page: "Página",
                     of: "de {0}", //{0} is total amount of pages
@@ -442,34 +453,65 @@
             navigatable: true,
             //scrollable: { virtual: true },
             columns: [
-                { field: "Cantidad", title: "Cantidad", width: 25, attributes: { style: "text-align: right;" }, headerAttributes: { style: "text-align: center;" } },
-                { field: "Ancho", title: "Ancho", width: 25, attributes: { style: "text-align: right;" }, headerAttributes: { style: "text-align: center;" } },
-                { field: "Alto", title: "Alto", width: 25, attributes: { style: "text-align: right;" }, headerAttributes: { style: "text-align: center;" } },
-                { field: "Descripcion", title: "Descripcion", width: 200, headerAttributes: { style: "text-align: center;" } },
-                { field: "Importe", title: "Importe", format: "{0:c}", width: 40, attributes: { style: "text-align: right;" }, headerAttributes: { style: "text-align: center;" } }
+                {
+                    field: "Cantidad",
+                    title: "Cantidad",
+                    width: 25,
+                    attributes: { style: "text-align: right;" },
+                    headerAttributes: { style: "text-align: center;" }
+                },
+                {
+                    field: "Ancho",
+                    title: "Ancho",
+                    width: 25,
+                    attributes: { style: "text-align: right;" },
+                    headerAttributes: { style: "text-align: center;" }
+                },
+                {
+                    field: "Alto",
+                    title: "Alto",
+                    width: 25,
+                    attributes: { style: "text-align: right;" },
+                    headerAttributes: { style: "text-align: center;" }
+                },
+                {
+                    field: "Descripcion",
+                    title: "Descripcion",
+                    width: 200,
+                    headerAttributes: { style: "text-align: center;" }
+                },
+                {
+                    field: "Importe",
+                    title: "Importe",
+                    format: "{0:c}",
+                    width: 40,
+                    attributes: { style: "text-align: right;" },
+                    headerAttributes: { style: "text-align: center;" }
+                }
             ],
             //heigth: 500,
             resizable: true,
             dataSource: dsArts,
             //pageSize: 10,
             change: onChangeArts,
-            dataBound: function (e) {
+            dataBound: function(e) {
                 var grid = $("#listaArticulos").data("kendoGrid");
                 grid.select("tr:eq(1)");
                 return false;
             }
         });
 
-        function onChangeArts()
-        {
+        function onChangeArts() {
             var data = dsArts.view();
-            idArticulo = $.map(this.select(), function (item) {
-                return data[$(item).index()].IdArticulo;
-            });
-            var cadenaCosto = $.map(this.select(), function (item) {
-                return data[$(item).index()].Descripcion.substring(0,5);
-            });
-            
+            idArticulo = $.map(this.select(),
+                function(item) {
+                    return data[$(item).index()].IdArticulo;
+                });
+            var cadenaCosto = $.map(this.select(),
+                function(item) {
+                    return data[$(item).index()].Descripcion.substring(0, 5);
+                });
+
             //alert(cadenaCosto);
             if (cadenaCosto == "COSTO" || (esEditable == false)) {
                 $("#btnModificar").attr("disabled", "disabled");
@@ -493,7 +535,7 @@
                 $("input[name='Proyecto.Vendedor']").removeAttr("disabled");
             }
 
-            document.getElementById("ProyArtic").value = idArticulo;            
+            document.getElementById("ProyArtic").value = idArticulo;
         }
 
         //$("#btnNuevo").click(function () {
@@ -506,7 +548,7 @@
         //    win.open();            
         //    return false;
         //});
-        $("#btnNuevo").click(function () {
+        $("#btnNuevo").click(function() {
             //$("#edicionArticulo").kendoWindow({
             //    actions: ["Close"],
             //    modal: false,
@@ -530,14 +572,14 @@
             var win = $("#edicionArticulo").data("kendoWindow");
             win.refresh({
                 url: "/Home/EdicionArticulo?proy=" + proyecto + "&articulo=0"
-            });            
+            });
             win.center();
-            win.open();            
-            
+            win.open();
+
             return false;
         });
 
-        $("#btnModificar").click(function () {           
+        $("#btnModificar").click(function() {
             var win = $("#edicionArticulo").data("kendoWindow");
             win.refresh({
                 url: "/Home/EdicionArticulo?proy=" + proyecto + "&articulo=" + idArticulo
@@ -548,29 +590,33 @@
             return false;
         });
 
-        $("#btnDuplicar").click(function () {
+        $("#btnDuplicar").click(function() {
             //DUPLICAR EL ARTICULO
             $.ajax({
                 url: "/Editor/DuplicarArticulo?articulo=" + idArticulo,
                 success: function (data) {
+                    if ($("#Proyecto_EsExpress_2").is(":checked")) {
+                        checkExpress();
+                    }
                     document.location.reload();
                 },
-                error: function (data) {
+                error: function(data) {
                     //alert("Error al duplicar el articulo seleccionado");
                 }
             });
             return false;
         });
 
-        $("#btnEliminar").click(function () {
+        $("#btnEliminar").click(function() {
             var r = confirm("¿Esta seguro de eliminar el articulo seleccionado?");
             if (r == true) {
                 $.ajax({
                     url: "/Home/BorraArticulo?IdArticulo=" + idArticulo + "&Proyecto=" + proyecto,
-                    success: function (data) {
+                    success: function(data) {
+                        console.log("Articulo eliminado " + data.Ok);
                         document.location.reload(); //href = '/Home/Dashboard';
                     },
-                    error: function (data) {
+                    error: function(data) {
                         alert("Error al eliminar el articulo seleccionado");
                     }
                 });
@@ -604,8 +650,8 @@
             columns: [
                 { field: "Descripcion", title: "Descripción", width: 210 },
                 { field: "Total", title: "Total", width: 55 },
-                { field: "Importe", title: "Importe", format: "{0:c}",  width: 50 },
-                { field: "Piezas", title: "Piezas", width: 50}
+                { field: "Importe", title: "Importe", format: "{0:c}", width: 50 },
+                { field: "Piezas", title: "Piezas", width: 50 }
             ],
             //heigth: 500,
             resizable: true,
@@ -626,7 +672,7 @@
             //content: "/Home/EdicionArticulo?proy=" + proyecto,
             //title: "Proyecto: " + proyecto,
             visible: false,
-            close: function (e) {
+            close: function(e) {
                 @*var d = JSON.stringify("@Model");
                 var p = JSON.stringify("@Model.Proyecto");
                 //alert(p);
@@ -642,7 +688,7 @@
                         alert("error");
                     }
                 });*@
-                location.reload();
+                window.location.href = "/Home/EdicionProyecto?proy=" + proyecto;
                 //dsArts.read();                
             }
         });        
@@ -666,6 +712,8 @@
                 win.close();
             });
 
+        
+            
             $("#btnGuardar").click(function () {
                 //alert("ya entro a GuardaArticulo()");
                 var proy = document.getElementById("Proyecto").value;
@@ -720,127 +768,149 @@
                     cADNJaladera = "JA" + cJaladeraBase + cJaladera; //esta version es para jaladeras con dos caracteres
                 }
                 //alert("adn: " + document.getElementById("adn").value + " jaladera: " + document.getElementById("jaladeraSel").value);
-                $.when(getDatosArt()).done(function (a) {
-                    $.when(getUnidadJaladera()).done(function (a) {
-                        //alert("unidad de jaladera: " + cUnidadJaladera);
-                        var hoy = new Date();
-                        var mes = hoy.getMonth();
-                        var dia = hoy.getDay();
-                        var anio = hoy.getFullYear();
+                
+                //INICIA VALIDACION DE APERTURAS, ABATIBLES Y AJUSTES
+                var vte = document.getElementById("adn").value.substring(10, 12);
+                var adntipo = document.getElementById("adn").value.substring(0, 2);
+                if ((vte == "A3") && (cPosicionJaladera == "H")) {
+                    alert("En caso de elegir abatible lateral la jaladera solo puede ir en orientación vertical");
+                } else if ((vte == "S3") && (cPosicionJaladera == "V")) {
+                    alert("En caso de elegir apertura superior la jaladera solo puede ir en orientación horizontal");
+                } else if (adntipo == "AJ" && ((vAncho > 0) || (vAlto > 0))){
+                    alert("Los ajustes no pueden tener medidas mayores a 0 en ancho o alto");
+                }else {
+                    $.when(getDatosArt()).done(function(a) {
+                        $.when(getUnidadJaladera()).done(function(a) {
+                            //alert("unidad de jaladera: " + cUnidadJaladera);
+                            var hoy = new Date();
+                            var mes = hoy.getMonth();
+                            var dia = hoy.getDay();
+                            var anio = hoy.getFullYear();
 
-                        //LOGICA PARA ORIFICIOS DE MARCO DE ALUMINIO
-                        if (cTipo == "MA") {
-                            cTieneOrificios = 1;
-                            cOrificiosDistCanto = 74;
-                            cADNOrificios = cVariante;
+                            //LOGICA PARA ORIFICIOS DE MARCO DE ALUMINIO
+                            if (cTipo == "MA") {
+                                cTieneOrificios = 1;
+                                cOrificiosDistCanto = 74;
+                                cADNOrificios = cVariante;
 
-                            if (cVeta == "H") {
-                                if (vAncho <= 900) {
-                                    cOrificiosCuantos = 2;
-                                } else if (vAncho <= 1600) {
-                                    cOrificiosCuantos = 3;
-                                } else if (vAncho <= 2000) {
-                                    cOrificiosCuantos = 4;
-                                } else if (vAncho <= 2400) {
-                                    cOrificiosCuantos = 5;
-                                } else {
-                                    cOrificiosCuantos = 5;
+                                if (cVeta == "H") {
+                                    if (vAncho <= 900) {
+                                        cOrificiosCuantos = 2;
+                                    } else if (vAncho <= 1600) {
+                                        cOrificiosCuantos = 3;
+                                    } else if (vAncho <= 2000) {
+                                        cOrificiosCuantos = 4;
+                                    } else if (vAncho <= 2400) {
+                                        cOrificiosCuantos = 5;
+                                    } else {
+                                        cOrificiosCuantos = 5;
+                                    }
+                                } else if ((cVeta == "V") || (cVeta == "X")) {
+                                    if (vAlto <= 900) {
+                                        cOrificiosCuantos = 2;
+                                    } else if (vAlto <= 1600) {
+                                        cOrificiosCuantos = 3;
+                                    } else if (vAlto <= 2000) {
+                                        cOrificiosCuantos = 4;
+                                    } else if (vAlto <= 2400) {
+                                        cOrificiosCuantos = 5;
+                                    } else {
+                                        cOrificiosCuantos = 5;
+                                    }
                                 }
-                            } else if ((cVeta == "V") || (cVeta == "X")) {
-                                if (vAlto <= 900) {
-                                    cOrificiosCuantos = 2;
-                                } else if (vAlto <= 1600) {
-                                    cOrificiosCuantos = 3;
-                                } else if (vAlto <= 2000) {
-                                    cOrificiosCuantos = 4;
-                                } else if (vAlto <= 2400) {
-                                    cOrificiosCuantos = 5;
-                                } else {
-                                    cOrificiosCuantos = 5;
+                                //alert("veta: "+ cVeta + " vAlto: " + vAlto + " vAncho: " + vAncho + " orificios: " + cOrificiosCuantos);
+                                cCodigoADNOrificios = cADNOrificios +
+                                    cOrificiosDistCanto.toString() +
+                                    "X" +
+                                    cOrificiosCuantos;
+                            }
+                            var jArt = {
+                                //"IdArticulo": 0,                            
+                                "Proyecto": proy,
+                                "CodigoADNInterno": document.getElementById("adn").value,
+                                "Descripcion": vDescripcion,
+                                "Alto": vAlto,
+                                "Ancho": vAncho,
+                                "Cantidad": vCantidad,
+                                "Unidad": vUnidad,
+                                "PrecioListaPrincipal": vPrecio,
+                                "ADNTipo": cTipo,
+                                "ADNBase": cBase,
+                                "ADNColor": cColor,
+                                "ADNVeta": cVeta,
+                                "ADNCubrecanto": cCubrecanto,
+                                "ADNVariante": cVariante,
+                                "tieneJaladera": cTieneJaladera,
+                                "ADNJaladera": cJaladera,
+                                "UnidadJaladera": cUnidadJaladera,
+                                "ADNJaladeraBase": cJaladeraBase,
+                                "ADNJaladeraOpcion": cJaladeraOpcion,
+                                "ADNPosicionJaladera": cPosicionJaladera,
+                                //"CodigoADNJaladera": cADNJaladera,
+                                "tieneVidrio": 0,
+                                "tieneProtecta": 0,
+                                "tieneOrificios": cTieneOrificios,
+                                "ADNOrificios": cADNOrificios,
+                                "OrificiosDistCanto": cOrificiosDistCanto,
+                                "OrificiosCuantos": cOrificiosCuantos,
+                                //"CodigoADNOrificios": cCodigoADNOrificios,
+                                "EsConceptoDeProyecto": 0,
+                                "TmUltimoCambio": anio.toString() + "-" + mes.toString() + "-" + dia.toString(),
+                                "ADNVidrioBase": "",
+                                "ADNVidrioColor": ""
+                            };
+                            //jArt = JSON.stringify(jArt);
+                            var vidVent = document.getElementById("vidrioSel").value;
+                            if (vidVent.length > 1) {
+                                jArt.tieneVidrio = 1;
+                                jArt.ADNVidrioBase = "VD";
+                                jArt.ADNVidrioColor = vidVent;
+                                //alert("VD" + jArt.ADNVidrioBase + jArt.ADNVidrioColor);
+                            }
+
+                            var edicion = document.getElementById("EsEdicion").value;
+                            if (edicion == 1) {
+                                jArt.IdArticulo = document.getElementById("IdArticulo").value;
+                            }
+
+                            var postData = {};
+                            postData.jArticulo = jArt;
+                            postData.EsEdicion = edicion;
+                            postData = JSON.stringify(postData);
+                            //alert("EsEdicion: " + postData.EsEdicion + " jArticulo: " + jArt);+
+                            console.log(postData);
+                            $.ajax({
+                                url: "/Editor/AgregarArticulo",
+                                data: postData,
+                                type: "POST",
+                                contentType: "application/json",
+                                success: function() {
+                                    if ($("#Proyecto_EsExpress_2").is(":checked")) {
+                                        checkExpress();
+                                    }
+                                    win.close();
+                                },
+                                error: function(e) {
+                                    alert("error al guardar el proyecto A: " + proy);
                                 }
-                            }
-                            //alert("veta: "+ cVeta + " vAlto: " + vAlto + " vAncho: " + vAncho + " orificios: " + cOrificiosCuantos);
-                            cCodigoADNOrificios = cADNOrificios + cOrificiosDistCanto.toString() + "X" + cOrificiosCuantos;
-                        }
-                        var jArt = {
-                            //"IdArticulo": 0,                            
-                            "Proyecto": proy,
-                            "CodigoADNInterno": document.getElementById("adn").value,
-                            "Descripcion": vDescripcion,
-                            "Alto": vAlto,
-                            "Ancho": vAncho,
-                            "Cantidad": vCantidad,
-                            "Unidad": vUnidad,
-                            "PrecioListaPrincipal": vPrecio,
-                            "ADNTipo": cTipo,
-                            "ADNBase": cBase,
-                            "ADNColor": cColor,
-                            "ADNVeta": cVeta,
-                            "ADNCubrecanto": cCubrecanto,
-                            "ADNVariante": cVariante,
-                            "tieneJaladera": cTieneJaladera,
-                            "ADNJaladera": cJaladera,
-                            "UnidadJaladera": cUnidadJaladera,
-                            "ADNJaladeraBase": cJaladeraBase,
-                            "ADNJaladeraOpcion": cJaladeraOpcion,
-                            "ADNPosicionJaladera": cPosicionJaladera,
-                            //"CodigoADNJaladera": cADNJaladera,
-                            "tieneVidrio": 0,
-                            "tieneProtecta": 0,
-                            "tieneOrificios": cTieneOrificios,
-                            "ADNOrificios": cADNOrificios,
-                            "OrificiosDistCanto": cOrificiosDistCanto,
-                            "OrificiosCuantos": cOrificiosCuantos,
-                            //"CodigoADNOrificios": cCodigoADNOrificios,
-                            "EsConceptoDeProyecto": 0,
-                            "TmUltimoCambio": anio.toString() + "-" + mes.toString() + "-" + dia.toString(),
-                            "ADNVidrioBase": "",
-                            "ADNVidrioColor": ""
-                        };
-                        //jArt = JSON.stringify(jArt);
-                        var vidVent = document.getElementById("vidrioSel").value;
-                        if (vidVent.length > 1) {
-                            jArt.tieneVidrio = 1;
-                            jArt.ADNVidrioBase = "VD";
-                            jArt.ADNVidrioColor = vidVent;
-                            //alert("VD" + jArt.ADNVidrioBase + jArt.ADNVidrioColor);
-                        }
-
-                        var edicion = document.getElementById("EsEdicion").value;
-                        if (edicion == 1) {
-                            jArt.IdArticulo = document.getElementById("IdArticulo").value;
-                        }
-
-                        var postData = {};
-                        postData.jArticulo = jArt;
-                        postData.EsEdicion = edicion;
-                        postData = JSON.stringify(postData);
-                        //alert("EsEdicion: " + postData.EsEdicion + " jArticulo: " + jArt);+
-                        console.log(postData);
-                        $.ajax({
-                            url: "/Editor/AgregarArticulo",
-                            data: postData,
-                            type: "POST",
-                            contentType: "application/json",
-                            success: function () {
-                                win.close();                                
-                            },
-                            error: function (e) {
-                                alert("error al guardar el proyecto A: " + proy);
-                            }
+                            });
                         });
-                    });
-                    function getUnidadJaladera() {
-                        return $.ajax({
-                            url: "/Editor/GetUnidadJaladera?codigo=" + cADNJaladera,
-                            success: function (data) {
-                                cUnidadJaladera = data;
-                                //alert(data);
-                            }
-                        });
-                    }
 
-                });
+                        function getUnidadJaladera() {
+                            return $.ajax({
+                                url: "/Editor/GetUnidadJaladera?codigo=" + cADNJaladera,
+                                success: function(data) {
+                                    cUnidadJaladera = data;
+                                    //alert(data);
+                                }
+                            });
+                        }
+
+                    }); 
+                }
+                
+                //TERMINA VALIDACION DE APERTURAS, ABATIBLES Y AJUSTES
+                    
                 function getDatosArt() {
                                             //alert($("#adn").val);
                     return $.ajax({
@@ -876,6 +946,8 @@
                 }
                 
             });
+  
+            
             $("#btnGuardarDuplicar").click(function () {
                 //alert(document.getElementById("adn").value + "&jaladera=" + document.getElementById("jaladeraSel").value);
                 //alert($("#CodigoADNInterno").val() + "&jaladera=" + $("#CodigoADNJaladera").val());
@@ -919,161 +991,182 @@
                     cADNJaladera = "JA" + cJaladeraBase + cJaladera; //esta version es para jaladeras con dos caracteres
                 }
                 //alert("adn: " + document.getElementById("adn").value + " jaladera: " + document.getElementById("jaladeraSel").value);                                     
-                //alert("va a entrar a getDatosArt");
-                $.when(getDatosArt()).done(function (a) {
-                    //alert("ya hizo getDatosArt()");
-                    $.when(getUnidadJaladera()).done(function (a) {
-                        //alert("unidad de jaladera: " + cUnidadJaladera);
-                        var hoy = new Date();
-                        var mes = hoy.getMonth();
-                        var dia = hoy.getDay();
-                        var anio = hoy.getFullYear();
+                
+                //INICIA VALIDACION DE ABATIBLES, APERTURAS Y AJUSTES
+                var vte = document.getElementById("adn").value.substring(10, 12);
+                var adntipo = document.getElementById("adn").value.substring(0, 2);
+                if ((vte == "A3") && (cPosicionJaladera == "H")) {
+                    alert("En caso de elegir abatible lateral la jaladera solo puede ir en orientación vertical");
+                } else if ((vte == "S3") && (cPosicionJaladera == "V")) {
+                    alert("En caso de elegir apertura superior la jaladera solo puede ir en orientación horizontal");
+                } else if (adntipo == "AJ" && ((vAncho > 0) || (vAlto > 0))){
+                    alert("Los ajustes no pueden tener medidas mayores a 0 en ancho o alto");
+                }else {
+                    $.when(getDatosArt()).done(function(a) {
+                        //alert("ya hizo getDatosArt()");
+                        $.when(getUnidadJaladera()).done(function(a) {
+                            //alert("unidad de jaladera: " + cUnidadJaladera);
+                            var hoy = new Date();
+                            var mes = hoy.getMonth();
+                            var dia = hoy.getDay();
+                            var anio = hoy.getFullYear();
 
-                        //LOGICA PARA ORIFICIOS DE MARCO DE ALUMINIO
-                        if (cTipo == "MA") {
-                            cTieneOrificios = 1;
-                            cOrificiosDistCanto = 74;
-                            cADNOrificios = cVariante;
+                            //LOGICA PARA ORIFICIOS DE MARCO DE ALUMINIO
+                            if (cTipo == "MA") {
+                                cTieneOrificios = 1;
+                                cOrificiosDistCanto = 74;
+                                cADNOrificios = cVariante;
 
-                            if (cVeta == "H") {
-                                if (vAncho <= 900) {
-                                    cOrificiosCuantos = 2;
-                                } else if (vAncho <= 1600) {
-                                    cOrificiosCuantos = 3;
-                                } else if (vAncho <= 2000) {
-                                    cOrificiosCuantos = 4;
-                                } else if (vAncho <= 2400) {
-                                    cOrificiosCuantos = 5;
-                                } else {
-                                    cOrificiosCuantos = 5;
-                                }
-                            } else if ((cVeta == "V") || (cVeta == "X")) {
-                                if (vAlto <= 900) {
-                                    cOrificiosCuantos = 2;
-                                } else if (vAlto <= 1600) {
-                                    cOrificiosCuantos = 3;
-                                } else if (vAlto <= 2000) {
-                                    cOrificiosCuantos = 4;
-                                } else if (vAlto <= 2400) {
-                                    cOrificiosCuantos = 5;
-                                } else {
-                                    cOrificiosCuantos = 5;
-                                }
-                            }
-                            //alert("veta: "+ cVeta + " vAlto: " + vAlto + " vAncho: " + vAncho + " orificios: " + cOrificiosCuantos);
-                            cCodigoADNOrificios = cADNOrificios + cOrificiosDistCanto.toString() + "X" + cOrificiosCuantos;
-                        }
-
-                        var jArt = {
-                            //"IdArticulo": 0,
-                            "Proyecto": proy,
-                            "CodigoADNInterno": document.getElementById("adn").value,
-                            "Descripcion": vDescripcion,
-                            "Alto": vAlto,
-                            "Ancho": vAncho,
-                            "Cantidad": vCantidad,
-                            "Unidad": vUnidad,
-                            "PrecioListaPrincipal": vPrecio,
-                            "ADNTipo": cTipo,
-                            "ADNBase": cBase,
-                            "ADNColor": cColor,
-                            "ADNVeta": cVeta,
-                            "ADNCubrecanto": cCubrecanto,
-                            "ADNVariante": cVariante,
-                            "tieneJaladera": cTieneJaladera,
-                            "ADNJaladera": cJaladera,
-                            "UnidadJaladera": cUnidadJaladera,
-                            "ADNJaladeraBase": cJaladeraBase,
-                            "ADNJaladeraOpcion": cJaladeraOpcion,
-                            "ADNPosicionJaladera": cPosicionJaladera,
-                            //"CodigoADNJaladera": cADNJaladera,
-                            "tieneVidrio": 0,
-                            "tieneProtecta": 0,
-                            "tieneOrificios": cTieneOrificios,
-                            "ADNOrificios": cADNOrificios,
-                            "OrificiosDistCanto": cOrificiosDistCanto,
-                            "OrificiosCuantos": cOrificiosCuantos,
-                            //"CodigoADNOrificios": cCodigoADNOrificios,
-                            "EsConceptoDeProyecto": 0,
-                            "TmUltimoCambio": anio.toString() + "-" + mes.toString() + "-" + dia.toString(),
-                            "ADNVidrioBase": "",
-                            "ADNVidrioColor": ""
-                        };
-                        //jArt = JSON.stringify(jArt);
-                        var vidVent = document.getElementById("vidrioSel").value;
-                        if (vidVent.length > 1) {
-                            jArt.tieneVidrio = 1;
-                            jArt.ADNVidrioBase = "VD";
-                            jArt.ADNVidrioColor = vidVent;
-                            //alert("VD" + jArt.ADNVidrioBase + jArt.ADNVidrioColor);
-                        }
-
-                        var edicion = document.getElementById("EsEdicion").value;
-                        if (edicion == 1) {
-                            jArt.IdArticulo = document.getElementById("IdArticulo").value;
-                        }
-
-                        var postData = {};
-                        postData.jArticulo = jArt;
-                        postData.EsEdicion = edicion;
-                        postData = JSON.stringify(postData);
-                        //alert("guardado 1:   " + postData);
-                        $.ajax({
-                            url: "/Editor/AgregarArticulo",
-                            data: postData,
-                            type: "POST",
-                            contentType: "application/json",
-                            success: function () {
-                                //alert("ya hizo el guardado normal");
-                                
-                                postData = JSON.parse(postData);
-                                postData.jArticulo = jArt;
-                                postData.EsEdicion = 1;
-                                postData = JSON.stringify(postData);
-                                //postData = JSON.stringify(postData);
-                                //alert("EsEdicion: " + postData.EsEdicion);
-                                //alert("guardado 2:   " + postData);
-                                $.ajax({
-                                    url: "/Editor/AgregarArticulo", //Aqui duplica
-                                    data: postData,
-                                    type: "POST",
-                                    contentType: "application/json",
-                                    success: function () {          //Aqui actualiza la edicion con el nuevo
-                                        //alert("ya duplicó");
-                                        $.ajax({
-                                            url: "/Editor/GetUltimoArticulo?proy=" + proyecto,
-                                            success: function (data) {
-                                                alert("el nuevo articulo es: " + data);
-                                                $("#loader").hide();
-                                                alert("Ahora puede capturar los datos del articulo copiado");
-                                            }
-                                        });
-                                    },
-                                    error: function (e) {
-                                        $("#loader").hide();
-                                        //alert("error al duplicar el articulo");
+                                if (cVeta == "H") {
+                                    if (vAncho <= 900) {
+                                        cOrificiosCuantos = 2;
+                                    } else if (vAncho <= 1600) {
+                                        cOrificiosCuantos = 3;
+                                    } else if (vAncho <= 2000) {
+                                        cOrificiosCuantos = 4;
+                                    } else if (vAncho <= 2400) {
+                                        cOrificiosCuantos = 5;
+                                    } else {
+                                        cOrificiosCuantos = 5;
                                     }
-                                });
-                            },
-                            error: function (e) {
-                                $("#loader").hide();
-                                alert("error al guardar el proyecto B: " + proy);
+                                } else if ((cVeta == "V") || (cVeta == "X")) {
+                                    if (vAlto <= 900) {
+                                        cOrificiosCuantos = 2;
+                                    } else if (vAlto <= 1600) {
+                                        cOrificiosCuantos = 3;
+                                    } else if (vAlto <= 2000) {
+                                        cOrificiosCuantos = 4;
+                                    } else if (vAlto <= 2400) {
+                                        cOrificiosCuantos = 5;
+                                    } else {
+                                        cOrificiosCuantos = 5;
+                                    }
+                                }
+                                //alert("veta: "+ cVeta + " vAlto: " + vAlto + " vAncho: " + vAncho + " orificios: " + cOrificiosCuantos);
+                                cCodigoADNOrificios = cADNOrificios +
+                                    cOrificiosDistCanto.toString() +
+                                    "X" +
+                                    cOrificiosCuantos;
                             }
+
+                            var jArt = {
+                                //"IdArticulo": 0,
+                                "Proyecto": proy,
+                                "CodigoADNInterno": document.getElementById("adn").value,
+                                "Descripcion": vDescripcion,
+                                "Alto": vAlto,
+                                "Ancho": vAncho,
+                                "Cantidad": vCantidad,
+                                "Unidad": vUnidad,
+                                "PrecioListaPrincipal": vPrecio,
+                                "ADNTipo": cTipo,
+                                "ADNBase": cBase,
+                                "ADNColor": cColor,
+                                "ADNVeta": cVeta,
+                                "ADNCubrecanto": cCubrecanto,
+                                "ADNVariante": cVariante,
+                                "tieneJaladera": cTieneJaladera,
+                                "ADNJaladera": cJaladera,
+                                "UnidadJaladera": cUnidadJaladera,
+                                "ADNJaladeraBase": cJaladeraBase,
+                                "ADNJaladeraOpcion": cJaladeraOpcion,
+                                "ADNPosicionJaladera": cPosicionJaladera,
+                                //"CodigoADNJaladera": cADNJaladera,
+                                "tieneVidrio": 0,
+                                "tieneProtecta": 0,
+                                "tieneOrificios": cTieneOrificios,
+                                "ADNOrificios": cADNOrificios,
+                                "OrificiosDistCanto": cOrificiosDistCanto,
+                                "OrificiosCuantos": cOrificiosCuantos,
+                                //"CodigoADNOrificios": cCodigoADNOrificios,
+                                "EsConceptoDeProyecto": 0,
+                                "TmUltimoCambio": anio.toString() + "-" + mes.toString() + "-" + dia.toString(),
+                                "ADNVidrioBase": "",
+                                "ADNVidrioColor": ""
+                            };
+                            //jArt = JSON.stringify(jArt);
+                            var vidVent = document.getElementById("vidrioSel").value;
+                            if (vidVent.length > 1) {
+                                jArt.tieneVidrio = 1;
+                                jArt.ADNVidrioBase = "VD";
+                                jArt.ADNVidrioColor = vidVent;
+                                //alert("VD" + jArt.ADNVidrioBase + jArt.ADNVidrioColor);
+                            }
+
+                            var edicion = document.getElementById("EsEdicion").value;
+                            if (edicion == 1) {
+                                jArt.IdArticulo = document.getElementById("IdArticulo").value;
+                            }
+
+                            var postData = {};
+                            postData.jArticulo = jArt;
+                            postData.EsEdicion = edicion;
+                            postData = JSON.stringify(postData);
+                            //alert("guardado 1:   " + postData);
+                            $.ajax({
+                                url: "/Editor/AgregarArticulo",
+                                data: postData,
+                                type: "POST",
+                                contentType: "application/json",
+                                success: function() {
+                                    //alert("ya hizo el guardado normal");
+
+                                    postData = JSON.parse(postData);
+                                    postData.jArticulo = jArt;
+                                    postData.EsEdicion = 1;
+                                    postData = JSON.stringify(postData);
+                                    //postData = JSON.stringify(postData);
+                                    //alert("EsEdicion: " + postData.EsEdicion);
+                                    //alert("guardado 2:   " + postData);
+                                    $.ajax({
+                                        url: "/Editor/AgregarArticulo", //Aqui duplica
+                                        data: postData,
+                                        type: "POST",
+                                        contentType: "application/json",
+                                        success: function() { //Aqui actualiza la edicion con el nuevo
+                                            //alert("ya duplicó");
+                                            $.ajax({
+                                                url: "/Editor/GetUltimoArticulo?proy=" + proyecto,
+                                                success: function(data) {
+                                                    alert("el nuevo articulo es: " + data);
+                                                    $("#loader").hide();
+                                                    alert("Ahora puede capturar los datos del articulo copiado");
+                                                }
+                                            });
+                                        },
+                                        error: function(e) {
+                                            $("#loader").hide();
+                                            //alert("error al duplicar el articulo");
+                                        }
+                                    });
+                                    if ($("#Proyecto_EsExpress_2").is(":checked")) {
+                                        checkExpress();
+                                    }
+
+                                },
+                                error: function(e) {
+                                    $("#loader").hide();
+                                    alert("error al guardar el proyecto B: " + proy);
+                                }
+                            });
                         });
+
+                        function getUnidadJaladera() {
+                            return $.ajax({
+                                url: "/Editor/GetUnidadJaladera?codigo=" + cADNJaladera,
+                                success: function(data) {
+                                    cUnidadJaladera = data;
+                                    //alert(data);
+                                }
+                            });
+                        }
+
+
                     });
-                    function getUnidadJaladera() {
-                        return $.ajax({
-                            url: "/Editor/GetUnidadJaladera?codigo=" + cADNJaladera,
-                            success: function (data) {
-                                cUnidadJaladera = data;
-                                //alert(data);
-                            }
-                        });
-                    }
-
-
-
-                });
+                }
+                //TERMINA VALIDACION DE APERTURAS, ABATIBLES Y AJUSTES
+                
+                
                 var getDatosArtURL = "";
                 if ($("#edicion").val() == 1)
                 {

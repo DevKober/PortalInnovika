@@ -1251,12 +1251,12 @@ namespace PortalInnovika.Controllers
             Proyecto pr = (from i in db.Proyectos
                            where i.IdProyecto == art.Proyecto
                            select i).FirstOrDefault();
-            pr.EsExpress = EsExpress(art.Proyecto);
+            //pr.EsExpress = EsExpress(art.Proyecto);
             pr.Observaciones += "#" + DateTime.Now.ToString() + " Se eliminó el artículo: " + art.CodigoADNInterno.Trim();
             db.Entry(pr).State = EntityState.Modified;
             db.SaveChanges();
 
-            return Json("Registro eliminado con exito", JsonRequestBehavior.AllowGet);
+            return Json(new {Ok = true}, JsonRequestBehavior.AllowGet);
             //EdicionProyecto(Proyecto);
 
             //return new EmptyResult();

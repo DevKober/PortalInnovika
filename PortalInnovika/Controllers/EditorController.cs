@@ -15,6 +15,13 @@ using iTextSharp.text.pdf;
 
 namespace PortalInnovika.Controllers
 {
+    public struct ResponseObj
+    {
+        public bool Ok;
+        public string Error;
+        public int Data;
+    }
+
     public class EditorController : Controller
     {
         //
@@ -27,20 +34,34 @@ namespace PortalInnovika.Controllers
             return View();
         }
 
+        public JsonResult CheckExpress(int proyecto, bool express)
+        {
+            var proy = db.Proyectos.FirstOrDefault(p => p.IdProyecto == proyecto); //(from p in db.Proyectos where p.IdProyecto == proyecto select p).Count();
+            if (proy == null)
+            {
+                return Json(new ResponseObj {Ok = false}, JsonRequestBehavior.AllowGet);
+            }
+
+            var tipo = new[] {"CE", "CA", "HE", "CM", "BO", "CL", "MU", "PM", "CO", "PB", "MM", "GI"};
+            var area = db.ProyArticulos.Where(a => a.Proyecto == proyecto).Where(a => !tipo.Contains(a.ADNTipo))
+                .GroupBy(a => a.Proyecto)
+                .Select(b => new {total = b.Sum(a => (a.Alto * a.Ancho * a.Cantidad))}).FirstOrDefault();
+
+            proy.EsExpress = express && area?.total <= 1300000;
+            
+            db.Entry(proy).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return Json(new ResponseObj {Ok = proy.EsExpress}, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult DespliegaAvisoAdventa(int proyecto)
         {
             string c = "";
             Proyecto p = (from i in db.Proyectos
                           where i.IdProyecto == proyecto
                           select i).FirstOrDefault();
-            if (p.Vendedor > 0)
-            {
-                c = "no despliega";
-            }
-            else
-            {
-                c = "despliega";
-            }
+            c = p != null && p.Vendedor > 0 ? "no despliega" : "despliega";
 
             return Json(c, JsonRequestBehavior.AllowGet);
         }
@@ -945,7 +966,7 @@ namespace PortalInnovika.Controllers
             Proyecto pr = (from i in db.Proyectos
                            where i.IdProyecto == art.Proyecto
                            select i).FirstOrDefault();
-            pr.EsExpress = EsExpress(art.Proyecto);
+            //pr.EsExpress = EsExpress(art.Proyecto);
             pr.Observaciones += "#" + DateTime.Today.ToString() + "Articulo agregado: " + art.CodigoADNInterno;
             db.Entry(pr).State = EntityState.Modified;
 
@@ -1464,7 +1485,7 @@ namespace PortalInnovika.Controllers
         //METODO PARA APLICAR DESCUENTO DE EXHIBICION A LOS ARTICULOS DE UN PROYECTO
         public JsonResult AplicarDescExhibicion(int proyecto)
         {
-            Proyecto pr = (from p in db.Proyectos
+            var pr = (from p in db.Proyectos
                            where p.IdProyecto == proyecto
                            select p).FirstOrDefault();
             pr.Exhibicion = true;
@@ -1886,7 +1907,7 @@ namespace PortalInnovika.Controllers
             Proyecto pr = (from i in db.Proyectos
                            where i.IdProyecto == art.Proyecto
                            select i).FirstOrDefault();
-            pr.EsExpress = EsExpress(art.Proyecto);
+            //pr.EsExpress = EsExpress(art.Proyecto);
             pr.Observaciones += "#" + DateTime.Today.ToString() + "Articulo agregado: " + art.CodigoADNInterno;
             db.Entry(pr).State = EntityState.Modified;
 
@@ -2261,12 +2282,14 @@ namespace PortalInnovika.Controllers
 
         public JsonResult GetTotales(int proyecto)
         {
+
+            var p = db.Proyectos.FirstOrDefault(i => i.IdProyecto == proyecto);
             var t = (from i in db.ProyArticulos
                      where i.Proyecto == proyecto
                      select i).Distinct();
 
             decimal Imp = t.Sum(i => i.PrecioUnitario * i.Cantidad) ?? 0;
-            decimal Desc = t.Sum(i => i.DescuentoUnitario * i.Cantidad) ?? 0;
+            decimal Desc = !p.EsExpress ? (t.Sum(i => i.DescuentoUnitario * i.Cantidad) ?? 0):0;
             decimal Sub = Imp - Desc;
             decimal Iva = Sub * (decimal)0.16;
             decimal Tot = Sub + Iva;
@@ -2284,12 +2307,13 @@ namespace PortalInnovika.Controllers
 
         public TotalesViewModel GetTotalesC(int proyecto) //SOBRECARGA DE GetTotales PARA USAR DENTRO DE ESTE MISMO CONTROLLER
         {
+            var p = db.Proyectos.FirstOrDefault(i => i.IdProyecto == proyecto);
             var t = (from i in db.ProyArticulos
                      where i.Proyecto == proyecto
                      select i).Distinct();
 
             decimal Imp = t.Sum(i => i.PrecioUnitario * i.Cantidad) ?? 0;
-            decimal Desc = t.Sum(i => i.DescuentoUnitario * i.Cantidad) ?? 0;
+            decimal Desc = p != null && p.EsExpress ? (t.Sum(i => i.DescuentoUnitario * i.Cantidad) ?? 0) : 0;
             decimal Sub = Imp - Desc;
             decimal Iva = Sub * (decimal)0.16;
             decimal Tot = Sub + Iva;
