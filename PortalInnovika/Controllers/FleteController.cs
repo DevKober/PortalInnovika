@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -82,6 +83,7 @@ namespace PortalInnovika.Controllers
                          select m).FirstOrDefault();
 
             //CALCULA EL COSTO DE FLETE EN FUNCION DEL METRAJE TOTAL DEL PROYECTO
+            Debug.Assert(infoFlete != null, "infoFlete != null");
             decimal costoFlete = metraje * infoFlete.CostoM2;
 
             //db.Entry(pro).State = System.Data.EntityState.Modified;

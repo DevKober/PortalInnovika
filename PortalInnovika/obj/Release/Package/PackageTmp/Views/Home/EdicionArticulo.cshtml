@@ -102,9 +102,9 @@
                 Seleccion de jaladera
             </li>
             <li></li>
-            <li id="vidVentanasLi">
+            @*<li id="vidVentanasLi">
                 Selección de vidrio para ventana
-            </li>
+            </li>*@
         </ul>
         <div>
             <div id="medidas" style="max-height:250px;">                                
@@ -144,7 +144,6 @@
                         <div style="float:left; width:65px; padding:5px 0px 0px 0px">Medida: </div>
                         <div style="float:left; width:105px"><input id="comboMedidasFijas" data-type="number" style="width:100px;" /> </div>                        
                     </div>
-
                     @*--*@
                 </div>
                 <div id="divImagen" style="width:345px; height:200px; float:right; padding: 3px; border: thin solid; border-color: cadetblue; border-radius: 3px;">
@@ -318,7 +317,7 @@
         var tipo = document.getElementById("tipo").value;
         template = $("#templateTipos").html();
         templateVidVent = $("#templateVidrioVentana").html();
-        $("#etiquetaPaso").html("<h4>Selección de " + tipo + "</h4>");
+        $("#etiquetaPaso").html("<h4>Selección de " + (tipo != null?tipo:'...') + "</h4>");
         $("#alto").width(90).kendoNumericTextBox();
         $("#ancho").width(90).kendoNumericTextBox();
         $("#cantidad").width(90).kendoNumericTextBox({ format: "#", min: 1, value: 1 });
@@ -375,53 +374,38 @@
         var selVentanaActive = true;
         
         function ActivaSelVidrio() {
-            var tstrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
-            tstrip.append([{
-                //text: "Selección de vidrio para ventana"
-                text: "Color de Vidrio" // POLH [04May2017]
-            }]);
-            $("#tabstrip-3").attr("aria-expanded", "false");
-            $("#tabstrip-3").css("display", "none");
-            selVentanaActive = true;
-            tstrip.select = tsOnSelect;
-            
-            //$("#lvSelVidrio").kendoListView({
-            //    navigatable: true,
-            //    selectable: true,
-            //    template: "<li>${FirstName} ${LastName}</li>",
-            //    dataSource: {
-            //        data: [
-            //            {
-            //                FirstName: "Joe",
-            //                LastName: "Smith"
-            //            },
-            //            {
-            //                FirstName: "Jane",
-            //                LastName: "Smith"
-            //            }]
-            //    }
-            //});
+            if ($("span:contains('Color de Vidrio')").length > 0) {
+                DesactivaSelVidrio();
+            }else{
+                var tstrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+                tstrip.append([{
+                    //text: "Selección de vidrio para ventana"
+                    text: "Color de Vidrio" // POLH [04May2017]
+                }]);
+                $("#tabstrip-3").attr("aria-expanded", "false");
+                $("#tabstrip-3").css("display", "none");
+                tstrip.select = tsOnSelect;
+            }
         }
 
         function DesactivaSelVidrio() {
-            var tstrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
-            tstrip.remove("#vidVentanasLi");
-            tstrip.remove("li:last");
-            selVentanaActive = false;
-        }
-         
-        function toggleSelVentana() {
-            if (selVentanaActive == true) {                
+            if ($("span:contains('Color de Vidrio')").length > 0) {
                 var tstrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
                 tstrip.remove("#vidVentanasLi");
                 tstrip.remove("li:last");
+            }
+        }
+         
+        function toggleSelVentana() {
+            var tstrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+            if (selVentanaActive == true) {                
+                tstrip.remove("#vidVentanasLi");
+                tstrip.remove("li:last");
                 selVentanaActive = false;
-                
             }
             else {
-                var tstrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
                 tstrip.append([{
-                    text: "Selección de vidro para ventana",
+                    text: "Color de Vidrio",
                     content: "<div id='vidVentanasLi'>Vidrios</div>"
                 }]);
                 selVentanaActive = true;
@@ -429,11 +413,12 @@
         }
 
         $("#btnToggleVentanas").click(function () {
-            toggleSelVentana();
+            //toggleSelVentana();
         });
 
         //INICIALIZA EL TAB DESACTIVADO
-        toggleSelVentana();
+        DesactivaSelVidrio();
+        //toggleSelVentana();
 
         var combobox = $("#comboMultiplo").data("kendoComboBox");
         combobox.select(combobox.ul.children().eq(0));       
@@ -597,6 +582,9 @@
                 //mAncho.value(1);
                 
                 //alert("altoMin= " + $("#alto").data("kendoNumericTextBox").min() + " altoMax= " + $("#alto").data("kendoNumericTextBox").max() + " anchoMin= " + $("#ancho").data("kendoNumericTextBox").min() + " anchoMax= " + $("#ancho").data("kendoNumericTextBox").max());                
+
+                DesactivaSelVidrio();
+                
                 $.when(ElementosIniciales()).done(function (a) {
                     $("#loader").hide();
                     template = $("#templateTipos").html();
@@ -613,6 +601,7 @@
                     document.getElementById("capturaAltoMultiplo").value = 0;
                 });
             });
+
             $("#btnBase").click(function () {
                 $("#divBase").remove();
                 $("#divColor").remove();
@@ -648,6 +637,8 @@
 
                 });
             });
+            
+            
             $("#btnColor").click(function () {
                 $("#divColor").remove();
                 $("#divVeta").remove();
@@ -1137,6 +1128,8 @@
                     $("#divImagenResultante").html(rutaimg);
 
                 } else if (tipo == "color") {
+                    //console.log("adn: " + adn + "  codigo: " + codigo +" tipo: "+ tipo);
+
                     //$("#loader").attr("style", "position:absolute; top:50%; left:50%; z-index:1000; width:69px; height:69px; border:solid; border-radius:3px; border-width:2px; border-color:cadetblue;");
                     //$("#loader").show();
                     tipo = "veta";
@@ -1245,7 +1238,7 @@
                     $("#pasos").append("<div id='divJaladera'><button style='width:100px'>Jaladera: " + nombreElemento + "</button></div>");                    
                 }
                 
-                //alert("adn: " + adn + "  codigo: " + codigo);
+                //console.log("adn: " + adn + "  codigo: " + codigo);
                 if (adn.length < 12) {
                     adn += codigo;
                 }
@@ -1471,7 +1464,7 @@
                     adn = data.Adn;
                     document.getElementById("adn").value = adn;
                     $("#etiqueta").text("Código de articulo: " + adn);
-                    $("#etiquetaPaso").html("<h4>Selección de " + data.NombrePaso + "</h4>");
+                    $("#etiquetaPaso").html("<h4>Selección de " + (data.NombrePaso != null ? data.NombrePaso : '...') + "</h4>");
                     tipo = data.NombrePaso;
                     if (data.UltimoPaso == 1) {
                         UltimoPaso = 1;
@@ -1962,6 +1955,15 @@
                     });
                 }
                 
+                if ((adn.substring(0, 2) == "VC") || (adn.substring(0, 2) == "VO") || (adn.substring(0, 2) == "VS") || (adn.substring(0, 2) == "VU")) {
+                    console.log("llego aqui 1");
+
+                    $("#tabstrip").append("<div id='vidVentanasContainer' style='overflow:auto;'><div id='lvSelVidrio' style='z-index:auto; min-height:100px;'></div></div>");
+
+                    ActivaSelVidrio();
+
+                    RefrescaSelVidrio();
+                }
 
             });
 

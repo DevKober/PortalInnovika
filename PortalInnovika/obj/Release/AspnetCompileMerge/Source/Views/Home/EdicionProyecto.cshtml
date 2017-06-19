@@ -142,8 +142,8 @@
                 </div>
                     
                 <div style="float:left; margin:5px; width:200px">
-                    @*Html.EditorFor(m => m.Proyecto.EsExpress, new { data = "EsExpress2"})*@
-                    <input type="checkbox" name="EsExpress" id="Proyecto_EsExpress_2" value="@Model.Proyecto.EsExpress"  @(Model.Proyecto.EsExpress?"checked":"")/>
+                    @*@Html.EditorFor(m => m.Proyecto.EsExpress, new { data = "EsExpress2"})*@
+                    <input type="checkbox" name="Proyecto.EsExpress" id="Proyecto_EsExpress_2" value="@Model.Proyecto.EsExpress"  @(Model.Proyecto.EsExpress?"checked":"")/>
                     Pedido express
                 </div>
 
@@ -879,21 +879,25 @@
                             postData = JSON.stringify(postData);
                             //alert("EsEdicion: " + postData.EsEdicion + " jArticulo: " + jArt);+
                             console.log(postData);
-                            $.ajax({
-                                url: "/Editor/AgregarArticulo",
-                                data: postData,
-                                type: "POST",
-                                contentType: "application/json",
-                                success: function() {
-                                    if ($("#Proyecto_EsExpress_2").is(":checked")) {
-                                        checkExpress();
+                            if(jArt.CodigoADNInterno.substring(0,2) == "VU" && jArt.ADNVidrioColor.length < 2) {
+                                alert("En VIDRIO UNO debes elegir un color para el vidrio");
+                            }else {
+                                $.ajax({
+                                    url: "/Editor/AgregarArticulo",
+                                    data: postData,
+                                    type: "POST",
+                                    contentType: "application/json",
+                                    success: function() {
+                                        if ($("#Proyecto_EsExpress_2").is(":checked")) {
+                                            checkExpress();
+                                        }
+                                        win.close();
+                                    },
+                                    error: function(e) {
+                                        alert("error al guardar el proyecto A: " + proy);
                                     }
-                                    win.close();
-                                },
-                                error: function(e) {
-                                    alert("error al guardar el proyecto A: " + proy);
-                                }
-                            });
+                                });
+                            }
                         });
 
                         function getUnidadJaladera() {

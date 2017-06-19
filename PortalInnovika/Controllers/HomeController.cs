@@ -71,25 +71,6 @@ namespace PortalInnovika.Controllers
 
         public ActionResult ConsultaProyecto(string cliente = "3", int proyecto = 0)
         {
-            //var proyectosVm = new List<ProyectosViewModel>();
-
-            //foreach(var i in db.Proyectos.Where(p => p.ClienteERP == cliente))
-            //{
-            //    EstatusProyecto ep = (from e in db.EstatusProyectos where e.IdEstatusProy == i.Estatus select e).FirstOrDefault();
-
-            //    proyectosVm.Add(new ProyectosViewModel {
-            //            Proyecto = i.IdProyecto,
-            //            Identificador = i.ReferenciaCliente,
-            //            Estatus = ep.Nombre,
-            //            ClienteERP = i.ClienteERP.Trim()
-            //        });
-            //}
-
-            //var proy = (from i in proyectosVm
-            //            where i.ClienteERP.Trim() == cliente
-            //            orderby i.Proyecto
-            //            select i);
-
             var proy = (from i in db.Proyectos
                         join estatus in db.EstatusProyectos on i.Estatus equals estatus.IdEstatusProy
                         where i.ClienteERP.Trim() == cliente
@@ -122,6 +103,13 @@ namespace PortalInnovika.Controllers
             detail.Cliente = cliente; //((Proyecto)proy.FirstOrDefault()).ClienteERP.Trim();
 
             return View(detail);
+        }
+
+        public JsonResult GetProjectField(int idProyecto, string column)
+        {
+            var proyecto = db.Proyectos.FirstOrDefault(p => p.IdProyecto == idProyecto);
+            object c = proyecto?.GetType().GetProperty(column)?.GetValue(proyecto, null);
+            return Json(new {result = c}, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetProyectosCliente(string cliente)
@@ -1071,6 +1059,7 @@ namespace PortalInnovika.Controllers
             //var proyecto = db.Proyectos.Single(p => p.IdProyecto == IdProyecto);
             if (ModelState.IsValid)
             {
+                pd.Proyecto.EsExpress = pd.Proyecto.EsExpress;
                 //UpdateModel(pd.Proyecto, "Proyecto");}
                 if (RefCte != null)
                 {

@@ -68,19 +68,19 @@ namespace PortalInnovika.Controllers
         public ActionResult Login(LoginModel model, string returnUrl)
         {
             //OBTENCION DE DATOS DE CLIENTE PARA VALIDAR QUE ESTÉ ACTIVO EN INTELISIS
-            var cte = (from i in db_intelisis.Ctes where i.Cliente == model.UserName select i).FirstOrDefault();
-            
+            var cliente = db_intelisis.Ctes.FirstOrDefault(i => i.Cliente == model.UserName.Trim());
+
             //TRUCO PARA QUE LA VALIDACION DE CLIENTE ACTIVO EN INTELISIS FUNCIONE CORRECTAMENTE CON USUARIOS DE "SUBCUENTAS"
             User cErp = null;
-            if (cte == null)
+            if (cliente == null)
             {
                 cErp = (from c in db.Users where c.UserName == model.UserName select c).FirstOrDefault();
 
-                cte = (from i in db_intelisis.Ctes where i.Cliente == cErp.ClienteERP select i).FirstOrDefault();
+                cliente = (from i in db_intelisis.Ctes where i.Cliente == cErp.ClienteERP select i).FirstOrDefault();
 
             }
 
-            if (cte.Estatus.Trim() == "ALTA")
+            if (cliente != null && cliente.Estatus.Trim() == "ALTA")
             {
                 if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
                 {

@@ -1720,7 +1720,8 @@ namespace PortalInnovika.Controllers
             if ((art.ADNTipo == "VU") && (art.ADNVidrioBase != null))
             {
                 Art a = GetPrecioPieza(art.ADNVidrioBase + "XX" + art.ADNVidrioColor);
-                decimal precioPieza = GetPrecioLista((from c in db.ArtADNCodigos where c.Codigo == a.Articulo select c).FirstOrDefault()); //ESTO ES PARA HACERLO COMPATIBLE CON PRECIOS EN DOLAR Y OTRAS LISTAS
+                //ESTO ES PARA HACERLO COMPATIBLE CON PRECIOS EN DOLAR Y OTRAS LISTAS
+                var precioPieza = GetPrecioLista((from c in db.ArtADNCodigos where c.Codigo == a.Articulo select c).FirstOrDefault()); 
                 //art.PrecioListaVidrio = a.PrecioLista;
                 art.PrecioListaVidrio = precioPieza;
                 art.PrecioVidrio = ((decimal)(((float)art.Alto * (float)art.Ancho) / 1000000)) * art.PrecioListaVidrio;

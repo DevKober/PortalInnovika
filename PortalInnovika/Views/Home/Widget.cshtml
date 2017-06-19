@@ -132,6 +132,8 @@
         //    }
         //});
 
+        var detalle;
+
         function refresca(proy) {
             //GRID ARTICULOS
             ////////////////                                         
@@ -176,25 +178,36 @@
             }
             //alert(proy["TmEntregaTentativa"]);
 
-            var detalle = "<div style='overflow: auto; border: solid 1px; padding: 5px; border-color: #94c0d2;'>";
+            detalle = "<div style='overflow: auto; border: solid 1px; padding: 5px; border-color: #94c0d2;'>";
             detalle += "<div class='float-left-inn' style='width:50%;'><h6><b>Proyecto: </b>" + proy["Proyecto"] + "</h6>";            
             detalle += "<h6><b>Identificador: </b>" + identificador + "</h6>";
 
             if ((proy["Estatus"] == "Facturado") || (proy["Estatus"] == "Embarcado")) {
-                //detalle += "<h6><b>Lote: </b>" + lote + "</h6>";
                 detalle += "<button id='btnEmbarque' onclick='DatosEmbarque(" + proy["Proyecto"] + ");' style='width:130px; height:22px; font-size: 10px; padding:4px;'>Datos de embarque</button>";
             }
 
             detalle += "</div>";
             detalle += "<div style='margin: 2px'><h6><b>Fecha de validación: </b>" + fechaValidado + "</h6>";
-            detalle += "<h6><b>Entrega proyectada:</b> " + entregaTentativa + "</h6>";
+            detalle += "<h6><b>Entrega proyectada:</b> " + '<span style="font-weight: bold; color: #06b106 !important;">' + entregaTentativa + "</span></h6>";
             if (proy["TieneMuebles"]) {
                 detalle += "<h6><b>PROYECTO DE MODULOS</b></h6>";
+            }
+            
+            if ((proy["Estatus"] == "Facturado") || (proy["Estatus"] == "Embarcado")) {
+                detalle += '<h6 id="GuiaEmbarque"></h6>';
             }
             detalle += "</div>";
             
             detalle += "</div>";
             $("#datosproy").html(detalle);
+            
+            if ((proy["Estatus"] == "Facturado") || (proy["Estatus"] == "Embarcado")) {
+                $.get('/Home/GetProjectField?idProyecto=' + proy["Proyecto"] + "&column=GuiaEmbarque")
+                    .done(function (data) {
+                        $("#GuiaEmbarque").html("<b>Guia: </b> " + data.result);
+                    });
+                console.log(detalle);
+            }
 
             $("#articulos").kendoGrid({
                 selectable: "single",                
