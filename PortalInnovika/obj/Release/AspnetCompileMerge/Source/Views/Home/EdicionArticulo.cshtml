@@ -1497,26 +1497,7 @@
                         if ((adn.substring(0, 2) == "VC") || (adn.substring(0, 2) == "VO") || (adn.substring(0, 2) == "VS") || (adn.substring(0, 2) == "VU")) {
 
                             $("#tabstrip").append("<div id='vidVentanasContainer' style='overflow:auto;'><div id='lvSelVidrio' style='z-index:auto; min-height:100px;'></div></div>");
-                            //$("#vidVentanasContainer").append("<div id='lvSelVidrio' style='z-index:auto; min-height:100px;'></div>");
-
-                            //$("#lvSelVidrio").kendoListView({
-                            //    navigatable: true,
-                            //    selectable: true,
-                            //    template: templateVidrioVentana
-                            //    //dataSource: {
-                            //    //    data: [
-                            //    //        {
-                            //    //            Codigo: "Joe",
-                            //    //            Nomre: "Smith"
-                            //    //        },
-                            //    //        {
-                            //    //            Codigo: "Jane",
-                            //    //            Nombre: "Smith"
-                            //    //        }]
-                            //    //}
-                            //});
-
-                            //$("#vidVentanasContainer").hide();
+                            
                             ActivaSelVidrio();
 
                             RefrescaSelVidrio();
@@ -1525,11 +1506,11 @@
                         else {
                             var ts = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
                             var c = countProperties(ts.items());
-                            //alert(c);
+                            
                             if (c > 3) {
                                 $("#tabstrip-3").attr("aria-expanded", "false");
                                 $("#tabstrip-3").css("display", "none");
-                                //$("#vidVentanasLi").remove();
+                                
                                 DesactivaSelVidrio();
                             }                            
                         }
@@ -1539,8 +1520,6 @@
                             url: "/Editor/GetUnidadMedida?codigo=" + adn.substring(0, 2),
                             success: function (data) {
                                 if (data == "PZA") {
-                                    //$("#alto").attr("disabled", "disabled");
-                                    //$("#ancho").attr("disabled", "disabled");
                                     $("#alto").data("kendoNumericTextBox").value(0);
                                     $("#ancho").data("kendoNumericTextBox").value(0);
 
@@ -1637,9 +1616,9 @@
                                 else {
                                     incrementoMultiplo = 1;                                    
                                 }
-                                //alert("incremento antes de RefrescaMedidas(): " + incrementoMultiplo);
+
                                 if ((adn.substring(0, 2) != "AJ") && (adn.substring(0, 2) != "AR")) {
-                                    RefrescaMedidas(codigo); //alert("Ln: 1153");
+                                    RefrescaMedidas(codigo);
                                 }
                                 
                             }
@@ -1690,7 +1669,7 @@
                                                 incrementoMultiplo = 1;
                                             }
                                             if ((adn.substring(0, 2) != "AJ") && (adn.substring(0, 2) != "AR")) {
-                                                RefrescaMedidas(codigo); //alert("Ln: 1199");
+                                                RefrescaMedidas(codigo);
                                             }
                                         }
                                     });
@@ -1722,10 +1701,9 @@
                                     $.ajax({
                                         url: "/Editor/GetMaxMin?codigo=" + adn + "&posicion=" + adn.substring(6, 7),
                                         success: function (data) {
-                                            //alert("posicion: " + adn.substring(6,7));
                                             var ps = adn.substring(6, 7);
                                             if (ps == "H") {
-                                                //alert("va a voltear max y min");
+
                                                 altoMin = data.AnchoMin;
                                                 altoMax = data.AnchoMax;
                                                 anchoMin = data.AltoMin;
@@ -1768,14 +1746,13 @@
                                                 incrementoMultiplo = 1;
                                             }
                                             if (adn.substring(0, 2) != "AJ") {
-                                                //alert("Va a refrescar medidas de " + codigo + " anchoMax: " + data.AnchoMax + " altoMax: " + data.AltoMax);                                    
-                                                RefrescaMedidas(codigo); //alert("Ln: 1256 " + " anchoMax: " + anchoMax + " altoMax: " + altoMax);
+                                                RefrescaMedidas(codigo);
                                             }
                                         }
                                     });
 
                                     if ((adn.substring(0, 2) != "AJ") && (adn.substring(0, 2) != "AR")) {
-                                        RefrescaMedidas(codigo); //alert("Ln: 1262" + " anchoMax: " + anchoMax + " altoMax: " + altoMax);
+                                        RefrescaMedidas(codigo); 
                                     }
                                 }
                                 else {
@@ -1786,9 +1763,7 @@
                         });
 
                         
-                    }
-
-                    //alert("Va saliendo de ElementosSiguientes()   adn: " + adn + " tipo: " + tipo + " codigo: " + codigo);                    
+                    }                 
 
                 },
                 error: function (e) {
@@ -1805,7 +1780,6 @@
                     url: "/Editor/GetElementos?codigo=" + adn + "&tipo=" + tipo + "&sublinea=" + "&posicion=",
                     success: function (data) {
                         elementos = data.Elementos;
-                        //alert("ya cargo el primer set de tipos");
                     }
                 });
             }
@@ -1853,18 +1827,15 @@
                     return $.ajax({
                         url: accion,
                         success: function (data) {
-                            //alert("al-max: " + data.AltoMax + "  al-min: " + data.AltoMin + "  an-max: " + data.AnchoMax + "  an-min: " + data.AnchoMin);
                             $("#lblAltoMaxMin").empty();
                             $("#lblAltoMaxMin").html("<div style='font-size:9px; z-index:100'>Alto máximo: " + data.AltoMax + "<br />Alto minimo: " + data.AltoMin + "</div>");
                             var alto = $("#alto").data("kendoNumericTextBox");
-                            //alto.value(data.AltoMin);
                             alto.min(data.AltoMin);
                             alto.max(data.AltoMax);
 
                             $("#lblAnchoMaxMin").empty();
                             $("#lblAnchoMaxMin").html("<div style='font-size:9px; z-index:100'>Ancho máximo: " + data.AnchoMax + "<br />Ancho minimo: " + data.AnchoMin + "</div>");
                             var ancho = $("#ancho").data("kendoNumericTextBox");
-                            //ancho.value(data.AnchoMin);
                             ancho.max(data.AnchoMax);
                             ancho.min(data.AnchoMin);
                         },
@@ -1987,7 +1958,6 @@
 
                     var alcb = $("#alto").data("kendoNumericTextBox").value();
                     var ancb = $("#ancho").data("kendoNumericTextBox").value();
-                    //alert("alto: " + alcb + " ancho: " + ancb);
 
                     $("#altoContn").empty();
                     $("#altoContn").append('<input id="alto" type="number" style="width:90px" />');
@@ -2023,10 +1993,6 @@
                     $.ajax({
                         url: "/Editor/GetMaxMin?codigo=" + adn + "&posicion=" + adn.substring(6, 7),
                         success: function (data) {
-                            //altoMin = data.AltoMin;
-                            //altoMax = data.AltoMax;
-                            //anchoMin = data.AnchoMin; 
-                            //anchoMax = data.AnchoMax;
                             sublinea = data.Sublinea;
                             posicion = data.Posicion;
                             multiplo70 = data.Multiplo70;
@@ -2034,13 +2000,9 @@
                             multiplo76 = data.Multiplo76;
                             multiplo80 = data.Multiplo80;
 
-                            //alert("punto 1");
-
                             var combobox = $("#comboMultiplo").data("kendoComboBox");
                             combobox.select(combobox.ul.children().eq(0));
                             var estSel = $("#comboMultiplo").data("kendoComboBox");
-
-                            //alert("punto 2");
 
                             $("#comboAltoMultiplo").kendoDropDownList({
                                 dataSource: {
@@ -2051,38 +2013,29 @@
                                         }
                                     }
                                 }
-                                //index: 0
                             });
 
-                            //var cb = $("#comboAltoMultiplo").data("kendoComboBox");
-                            //cb.datasource.read();
-                            //alert("punto 3");
                             if (data.Multiplo70 > 0) {
-                                //alert("data.Multiplo70 > 0");
                                 $("#divMultiplo").show();
                                 $("#divAltoMultiplo").show();
                                 document.getElementById("capturaAltoMultiplo").value = 1;
                                 $("#altoEspacio").hide();
                             }
                             else {
-                                //alert("data.Multiplo70 > 0 ELSE");
                                 $("#divMultiplo").hide();
                                 $("#divAltoMultiplo").hide();
                                 $("#altoEspacio").show();
                                 document.getElementById("capturaAltoMultiplo").value = 0;
                             }
-                            //alert("punto 4");
                         }
                     });
                 }
             });
         }
 
-        //var vidVentanasItems = {};
         function RefrescaSelVidrio() {
 
             $.when(GetVidVentanas()).done(function () {
-                //alert("ya termino getvidventanas()");
                 var vDs = new kendo.data.DataSource({
                     data: vidVentanasItems
                 });
@@ -2091,26 +2044,19 @@
                     navigatable: true,
                     selectable: true,
                     pageSize: 5,
-                    //template: templateVidVent,                    
-                    //dataSource: {
-                    //    data: vDs
-                    //},
                     template: kendo.template($("#templateVidrioVentana").html()),
                     change: function () {
                         //handle event
                         var index = this.select().index(),
                         dataItem = this.dataSource.view()[index];
-                        //log("id: " + dataItem.id + ", text: " + dataItem.text);
-                        //alert(dataItem.Codigo);
+                        
                         document.getElementById("vidrioSel").value = dataItem.Codigo;
 
                         document.getElementById("tieneVidrio").value = true;
                         document.getElementById("ADNVidrioBase").value = "VD";
                         document.getElementById("ADNVidrioColor").value = dataItem.Codigo;
-                        //alert(document.getElementById("ADNVidrioColor").value);
                     }
                 });
-                //vDs.read();
                 var lvv = $("#lvSelVidrio").data("kendoListView");
                 lvv.setDataSource(vDs);
             });                                 
@@ -2120,10 +2066,7 @@
             return $.ajax({
                 url: "/Editor/GetVidriosVentana",
                 success: function (datos) {
-                    //document.getElementById("vidVentanasItems").value = JSON.stringify(datos.Elementos);
-                    //vidVentanasItems = JSON.stringify(datos.Elementos);
                     vidVentanasItems = datos.Elementos;
-                    //alert("vidVentanasItems" + vidVentanasItems);
                 },
                 error: function () {
                     alert("error al cargar vidrios");
@@ -2142,13 +2085,11 @@
                         dataSource: medidasFijas,
                         select: function (e) {
                             var item = e.item;
-                            document.getElementById("medidaFijaSel").value = item.text();
-                            //alert(document.getElementById("medidaFijaSel").value);                            
+                            document.getElementById("medidaFijaSel").value = item.text();                          
                         },
                         dataBound: function (e) {  //SELECCIONA LA PRIMERA MEDIDA DEL COMBO EN FORMA PROGRAMATICA AL OBTENER LOS DATOS
                             var item = e.item;
                             document.getElementById("medidaFijaSel").value = medidasFijas[0];
-                            //alert(medidasFijas[0]);
                         }
                     });
                 },
@@ -2160,7 +2101,6 @@
 
         function CargaMedidasFijas() {
             $("#divMedidasFijas").show();
-            //alert("va a cargar medidas fijas");
             leeMedidasFijas();                       
         }
         
@@ -2168,7 +2108,6 @@
     });
 
     function tsOnSelect(e) {
-        //alert("'" + $(e.item).find("> .k-link").text().trim() + "'");
         var i = $(e.item).find("> .k-link").text().trim();
         //if (i != "Selección de vidrio para ventana") {
         if (i != "Color de Vidrio") {
@@ -2187,26 +2126,6 @@
             $("#tabstrip-1").attr("aria-hidden", "true");
             $("#tabstrip-3").removeAttr("aria-hidden");
 
-            //$("#tabstrip").append("<div id='vidVentanasContainer' style='overflow:auto;'><div id='lvSelVidrio' style='z-index:auto; min-width:100px; min-height:100px;'></div></div>");
-            //$("#vidrioVentanas").append("<div id='lvSelVidrio'></div>");
-
-            //$("#lvSelVidrio").kendoListView({
-            //    navigatable: true,
-            //    selectable: true,
-            //    //template: "<li>${FirstName} ${LastName}</li>",
-            //    template: templateVidrioVentana,
-            //    dataSource: {
-            //        data: [
-            //            {
-            //                Codigo: "Joe",
-            //                Nomre: "Smith"
-            //            },
-            //            {
-            //                Codigo: "Jane",
-            //                Nombre: "Smith"
-            //            }]
-            //    }
-            //});
         }
     }    
 
@@ -2218,29 +2137,6 @@
         },
         select: tsOnSelect
     });
-
-    //$("#btnSelJaladera").click(function () {
-    //    var win = $("#test", window.parent.document).data("kendoWindow");
-    //    win.refresh({
-    //        url: "/Home/EdicionJaladera"
-    //    });
-    //    win.center();
-    //    win.open();
-    //    return false;
-    //});
-
-    //$("#test", window.parent.document).kendoWindow({
-    //    actions: ["Close", "Minimize"],
-    //    modal: false,
-    //    pinned: false,
-    //    position: {
-    //        top: 150,
-    //        left: 200
-    //    },
-    //    width: "500px",
-    //    height: "400px",
-    //    visible: false
-    //});
     
 </script>
 

@@ -47,7 +47,7 @@ namespace PortalInnovika.Controllers
                 .GroupBy(a => a.Proyecto)
                 .Select(b => new {total = b.Sum(a => (a.Alto * a.Ancho * a.Cantidad))}).FirstOrDefault();
 
-            proy.EsExpress = express && area?.total <= 1300000;
+            proy.EsExpress = express /*&& area?.total <= 1300000*/;
             
             db.Entry(proy).State = EntityState.Modified;
             db.SaveChanges();

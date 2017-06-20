@@ -675,6 +675,16 @@ advertencia 6002: La tabla o vista 'InnovikaCom.dbo.ArtJaladeras' no tiene defin
     </Key>
     <Property Name="RoleName" Type="varchar" MaxLength="100" Nullable="false" />
   </EntityType>
+  <!--Errores durante la generación:
+advertencia 6013: La tabla o vista 'InnovikaCom.dbo.TiempoRamas' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+        <EntityType Name="TiempoRamas">
+          <Property Name="rama" Type="varchar" MaxLength="100" />
+          <Property Name="color" Type="varchar" MaxLength="10" />
+          <Property Name="tiempo_normal" Type="int" />
+          <Property Name="tiempo_express" Type="int" />
+          <Property Name="created_at" Type="datetime" />
+          <Property Name="updated_at" Type="datetime" />
+        </EntityType>-->
   <EntityType Name="Users">
     <Key>
       <PropertyRef Name="UserId" />
