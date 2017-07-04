@@ -24,7 +24,6 @@ namespace PortalInnovika.Controllers
 
     public class EditorController : Controller
     {
-        //
         // GET: /Editor/
         private InnovikaComEntities db = new InnovikaComEntities();
         private IntelisisDataContext db_intelisis = new IntelisisDataContext();
@@ -1345,8 +1344,6 @@ namespace PortalInnovika.Controllers
             //Response.End();
         }
 
-
-
         //EXPORTAR PROYECTO A PDF
         public void ExportaProyectoPdf(int proyecto)
         {
@@ -2223,43 +2220,45 @@ namespace PortalInnovika.Controllers
                          select i).FirstOrDefault();
 
             //EN CASO DE DOLARES SE CAMBIA EL PRECIO DE LISTA A PRECIO3 
-            if (u.ListaPreciosEsp == "(Precio 3)")
+            switch (u.ListaPreciosEsp)
             {
-                datos.PrecioLista = datos.Precio3;
+                case "(Precio Lista)":
+                    datos.PrecioLista = datos.PrecioLista ?? 0;
+                    break;
+                case "(Precio 2)":
+                    datos.PrecioLista = datos.Precio2 ?? 0;
+                    break;
+                case "(Precio 3)":
+                    datos.PrecioLista = datos.Precio3 ?? 0;
+                    break;
+                case "(Precio 4)":
+                    datos.PrecioLista = datos.Precio4 ?? 0;
+                    break;
+                case "(Precio 5)":
+                    datos.PrecioLista = datos.Precio5 ?? 0;
+                    break;
+                case "(Precio 6)":
+                    datos.PrecioLista = datos.Precio6 ?? 0;
+                    break;
+                case "(Precio 7)":
+                    datos.PrecioLista = datos.Precio7 ?? 0;
+                    break;
+                case "(Precio 8)":
+                    datos.PrecioLista = datos.Precio8 ?? 0;
+                    break;
+                case "(Precio 9)":
+                    datos.PrecioLista = datos.Precio9 ?? 0;
+                    break;
+                case "(Precio 10)":
+                    datos.PrecioLista = datos.Precio10 ?? 0;
+                    break;
+                default:
+                    datos.PrecioLista = datos.PrecioLista ?? 0;
+                    break;
             }
 
             return Json(datos, JsonRequestBehavior.AllowGet);
 
-            //ArticulosViewModel art = new ArticulosViewModel();
-
-            //var datos = (from i in db.ArtADNCodigos
-            //             where i.Codigo == codigo
-            //             select i).FirstOrDefault();
-
-            //art.Unidad = datos.Unidad;
-            //art.PrecioPrincipal = datos.PrecioLista;
-            //art.ADNTipo = datos.Tipo;
-            //art.ADNBase = datos.Base;
-            //art.ADNColor = datos.Color;
-            //art.ADNVeta = datos.Veta;
-            //art.ADNCubrecanto = datos.Cubrecanto;
-            //art.ADNVariante = datos.Variante;
-            //art.Descripcion = datos.Descripcion1;
-
-            ////OBTIENE DATOS DE LA JALADERA EN CASO DE QUE EXISTA
-            //var jal = (from i in db.ArtADNCodigos
-            //           where i.Codigo == jaladera
-            //               select i).FirstOrDefault();
-
-            //if (jal != null)
-            //{
-            //    art.ADNJaladera = jal.Codigo;
-            //    art.ADNJaladeraBase = jal.Jaladera.Substring(2, 2);
-            //    art.PrecioJaladera = jal.PrecioLista;
-                
-            //}
-
-            //return Json(art, JsonRequestBehavior.AllowGet);
         }
 
         public Art GetPrecioPieza(string codigo)
@@ -2502,6 +2501,12 @@ namespace PortalInnovika.Controllers
                        select i).FirstOrDefault();
 
             return Json(med, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetTiempoRamas(string color)
+        {
+            var tiempoRama = db.TiempoRamas.FirstOrDefault(t => t.color == color);
+            return Json(new {tiempo = tiempoRama.tiempo_normal}, JsonRequestBehavior.AllowGet);
         }
     }
 }

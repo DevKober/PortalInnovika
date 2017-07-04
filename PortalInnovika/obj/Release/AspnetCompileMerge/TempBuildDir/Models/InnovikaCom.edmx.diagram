@@ -100,6 +100,15 @@
         <EntityTypeShape EntityType="InnovikaComModel.MaxMinBaseColor" Width="1.5" PointX="11.875" PointY="0.625" />
         <EntityTypeShape EntityType="InnovikaComModel.JaladeraColorExcepcione" Width="1.5" PointX="21.375" PointY="13.75" />
         <EntityTypeShape EntityType="InnovikaComModel.JaladerasExtra" Width="1.5" PointX="21.375" PointY="16.75" />
+        <EntityTypeShape EntityType="InnovikaComModel.DetalleGrupos" Width="1.5" PointX="25.625" PointY="1" />
+        <EntityTypeShape EntityType="InnovikaComModel.Grupos" Width="1.5" PointX="23.375" PointY="1.5" />
+        <EntityTypeShape EntityType="InnovikaComModel.UserProfile" Width="1.875" PointX="24.625" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="InnovikaComModel.Vendedore" Width="1.5" PointX="3" PointY="68.25" />
+        <EntityTypeShape EntityType="InnovikaComModel.webpages_Roles" Width="1.5" PointX="22.375" PointY="21.25" />
+        <AssociationConnector Association="InnovikaComModel.FK_DetalleGrupos_DetalleGrupos" />
+        <AssociationConnector Association="InnovikaComModel.FK_Vendedores_Users" />
+        <AssociationConnector Association="InnovikaComModel.webpages_UsersInRoles" />
+        <EntityTypeShape EntityType="InnovikaComModel.TiempoRama" Width="1.5" PointX="13" PointY="21.125" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

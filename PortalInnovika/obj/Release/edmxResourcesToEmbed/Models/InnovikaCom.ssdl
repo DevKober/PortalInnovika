@@ -227,6 +227,19 @@ advertencia 6002: La tabla o vista 'InnovikaCom.dbo.ArtJaladeras' no tiene defin
     <Property Name="Especial" Type="nvarchar" MaxLength="10" />
     <Property Name="Marcado" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="DetalleGrupos">
+    <Key>
+      <PropertyRef Name="IdDetalleGrupo" />
+    </Key>
+    <Property Name="IdDetalleGrupo" Type="int" Nullable="false" />
+    <Property Name="Tipo" Type="char" MaxLength="5" Nullable="false" />
+    <Property Name="Base" Type="char" MaxLength="5" Nullable="false" />
+    <Property Name="Color" Type="char" MaxLength="5" Nullable="false" />
+    <Property Name="Cubrecanto" Type="char" MaxLength="5" />
+    <Property Name="Grupo" Type="int" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+    <Property Name="Estatus" Type="char" MaxLength="1" Nullable="false" />
+  </EntityType>
   <EntityType Name="Documentos">
     <Key>
       <PropertyRef Name="IdDocumento" />
@@ -333,6 +346,14 @@ advertencia 6002: La tabla o vista 'InnovikaCom.dbo.ArtJaladeras' no tiene defin
     </Key>
     <Property Name="FleteraId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nombre" Type="nvarchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Grupos">
+    <Key>
+      <PropertyRef Name="IdGrupo" />
+    </Key>
+    <Property Name="IdGrupo" Type="int" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Estatus" Type="char" MaxLength="1" Nullable="false" />
   </EntityType>
   <EntityType Name="JaladeraColorExcepciones">
     <Key>
@@ -675,16 +696,38 @@ advertencia 6002: La tabla o vista 'InnovikaCom.dbo.ArtJaladeras' no tiene defin
     </Key>
     <Property Name="RoleName" Type="varchar" MaxLength="100" Nullable="false" />
   </EntityType>
-  <!--Errores durante la generación:
-advertencia 6013: La tabla o vista 'InnovikaCom.dbo.TiempoRamas' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
-        <EntityType Name="TiempoRamas">
-          <Property Name="rama" Type="varchar" MaxLength="100" />
-          <Property Name="color" Type="varchar" MaxLength="10" />
-          <Property Name="tiempo_normal" Type="int" />
-          <Property Name="tiempo_express" Type="int" />
-          <Property Name="created_at" Type="datetime" />
-          <Property Name="updated_at" Type="datetime" />
-        </EntityType>-->
+  <EntityType Name="TiempoRamas">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="rama" Type="varchar" MaxLength="100" />
+    <Property Name="color" Type="varchar" MaxLength="10" />
+    <Property Name="tiempo_normal" Type="int" />
+    <Property Name="tiempo_express" Type="int" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserProfile">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="56" Nullable="false" />
+    <Property Name="ClienteERP" Type="nvarchar" MaxLength="50" />
+    <Property Name="NombreCompleto" Type="varchar" MaxLength="200" />
+    <Property Name="Email" Type="varchar" MaxLength="100" />
+    <Property Name="AgenteServicio" Type="char" MaxLength="10" />
+    <Property Name="PuedeExpress" Type="bit" />
+    <Property Name="FleteraId" Type="int" />
+    <Property Name="FleteAutomatico" Type="bit" />
+    <Property Name="UltimaVistaDocumentos" Type="datetime" />
+    <Property Name="ClienteMuebles" Type="bit" />
+    <Property Name="ZonaImpuesto" Type="varchar" MaxLength="30" />
+    <Property Name="ListaPreciosEsp" Type="varchar" MaxLength="20" />
+    <Property Name="UserOld" Type="int" />
+    <Property Name="Estatus" Type="bit" Nullable="false" />
+  </EntityType>
   <EntityType Name="Users">
     <Key>
       <PropertyRef Name="UserId" />
@@ -720,6 +763,16 @@ advertencia 6013: La tabla o vista 'InnovikaCom.dbo.TiempoRamas' no tiene defini
     <Property Name="UserName" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="RoleName" Type="varchar" MaxLength="100" Nullable="false" />
   </EntityType>
+  <EntityType Name="Vendedores">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="fecha_reg" Type="datetime" />
+    <Property Name="estado" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="cliente" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="webpages_Membership">
     <Key>
       <PropertyRef Name="UserId" />
@@ -744,6 +797,21 @@ advertencia 6013: La tabla o vista 'InnovikaCom.dbo.TiempoRamas' no tiene defini
     <Property Name="Provider" Type="nvarchar" MaxLength="30" Nullable="false" />
     <Property Name="ProviderUserId" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="webpages_Roles">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="webpages_UsersInRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
   </EntityType>
   <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'InnovikaCom.dbo.vAcumuladosColor' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -1220,6 +1288,18 @@ advertencia 6002: La tabla o vista 'InnovikaCom.dbo.vUsuarios' no tiene definida
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_DetalleGrupos_DetalleGrupos">
+    <End Role="Grupos" Type="Self.Grupos" Multiplicity="1" />
+    <End Role="DetalleGrupos" Type="Self.DetalleGrupos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Grupos">
+        <PropertyRef Name="IdGrupo" />
+      </Principal>
+      <Dependent Role="DetalleGrupos">
+        <PropertyRef Name="Grupo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Exclusividades_Users">
     <End Role="Users" Type="Self.Users" Multiplicity="1" />
     <End Role="Exclusividades" Type="Self.Exclusividades" Multiplicity="*" />
@@ -1378,6 +1458,30 @@ advertencia 6002: La tabla o vista 'InnovikaCom.dbo.vUsuarios' no tiene definida
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="fk_RoleId">
+    <End Role="webpages_Roles" Type="Self.webpages_Roles" Multiplicity="1" />
+    <End Role="webpages_UsersInRoles" Type="Self.webpages_UsersInRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="webpages_Roles">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="webpages_UsersInRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_UserId">
+    <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
+    <End Role="webpages_UsersInRoles" Type="Self.webpages_UsersInRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfile">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="webpages_UsersInRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Users_Fleteras">
     <End Role="Fleteras" Type="Self.Fleteras" Multiplicity="0..1" />
     <End Role="Users" Type="Self.Users" Multiplicity="*" />
@@ -1407,6 +1511,18 @@ advertencia 6002: La tabla o vista 'InnovikaCom.dbo.vUsuarios' no tiene definida
   <!--Errores durante la generación:
 advertencia 6035: La relación 'FK_UsersInRoles_Users' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
         <Association Name="FK_UsersInRoles_Users" />-->
+  <Association Name="FK_Vendedores_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Vendedores" Type="Self.Vendedores" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Vendedores">
+        <PropertyRef Name="cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Function Name="spAltaCotizacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="iProyecto" Type="int" Mode="In" />
     <Parameter Name="iUsuarioAprueba" Type="int" Mode="In" />
@@ -1481,6 +1597,7 @@ advertencia 6035: La relación 'FK_UsersInRoles_Users' tiene columnas que no for
     <EntitySet Name="CapturasPagos" EntityType="Self.CapturasPagos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CatalogoCiudades" EntityType="Self.CatalogoCiudades" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CatalogoEstados" EntityType="Self.CatalogoEstados" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DetalleGrupos" EntityType="Self.DetalleGrupos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Documentos" EntityType="Self.Documentos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EstatusCatalogos" EntityType="Self.EstatusCatalogos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EstatusProcesos" EntityType="Self.EstatusProcesos" Schema="dbo" store:Type="Tables" />
@@ -1489,6 +1606,7 @@ advertencia 6035: La relación 'FK_UsersInRoles_Users' tiene columnas que no for
     <EntitySet Name="FavArticulos" EntityType="Self.FavArticulos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Favoritos" EntityType="Self.Favoritos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Fleteras" EntityType="Self.Fleteras" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Grupos" EntityType="Self.Grupos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="JaladeraColorExcepciones" EntityType="Self.JaladeraColorExcepciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="JaladerasExtra" EntityType="Self.JaladerasExtra" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LineasUsuario" EntityType="Self.LineasUsuario" Schema="dbo" store:Type="Tables" />
@@ -1508,10 +1626,15 @@ advertencia 6035: La relación 'FK_UsersInRoles_Users' tiene columnas que no for
     <EntitySet Name="Proyectos" EntityType="Self.Proyectos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProyNotas" EntityType="Self.ProyNotas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TiempoRamas" EntityType="Self.TiempoRamas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UsersInRoles" EntityType="Self.UsersInRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Vendedores" EntityType="Self.Vendedores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="webpages_Membership" EntityType="Self.webpages_Membership" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="webpages_OAuthMembership" EntityType="Self.webpages_OAuthMembership" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="webpages_Roles" EntityType="Self.webpages_Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="webpages_UsersInRoles" EntityType="Self.webpages_UsersInRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ArtJaladeras" EntityType="Self.ArtJaladeras" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
 [ArtJaladeras].[Codigo] AS [Codigo], 
@@ -1782,6 +1905,10 @@ FROM [dbo].[vUsuarios] AS [vUsuarios]</DefiningQuery>
       <End Role="CatalogoEstados" EntitySet="CatalogoEstados" />
       <End Role="CatalogoCiudades" EntitySet="CatalogoCiudades" />
     </AssociationSet>
+    <AssociationSet Name="FK_DetalleGrupos_DetalleGrupos" Association="Self.FK_DetalleGrupos_DetalleGrupos">
+      <End Role="Grupos" EntitySet="Grupos" />
+      <End Role="DetalleGrupos" EntitySet="DetalleGrupos" />
+    </AssociationSet>
     <AssociationSet Name="FK_Exclusividades_Users" Association="Self.FK_Exclusividades_Users">
       <End Role="Users" EntitySet="Users" />
       <End Role="Exclusividades" EntitySet="Exclusividades" />
@@ -1834,6 +1961,14 @@ FROM [dbo].[vUsuarios] AS [vUsuarios]</DefiningQuery>
       <End Role="Users" EntitySet="Users" />
       <End Role="ProyNotas" EntitySet="ProyNotas" />
     </AssociationSet>
+    <AssociationSet Name="fk_RoleId" Association="Self.fk_RoleId">
+      <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+      <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+    </AssociationSet>
+    <AssociationSet Name="fk_UserId" Association="Self.fk_UserId">
+      <End Role="UserProfile" EntitySet="UserProfile" />
+      <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+    </AssociationSet>
     <AssociationSet Name="FK_Users_Fleteras" Association="Self.FK_Users_Fleteras">
       <End Role="Fleteras" EntitySet="Fleteras" />
       <End Role="Users" EntitySet="Users" />
@@ -1841,6 +1976,10 @@ FROM [dbo].[vUsuarios] AS [vUsuarios]</DefiningQuery>
     <AssociationSet Name="FK_UsersInRoles_Roles" Association="Self.FK_UsersInRoles_Roles">
       <End Role="Roles" EntitySet="Roles" />
       <End Role="UsersInRoles" EntitySet="UsersInRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Vendedores_Users" Association="Self.FK_Vendedores_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Vendedores" EntitySet="Vendedores" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

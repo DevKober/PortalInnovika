@@ -18,7 +18,7 @@ namespace PortalInnovika.Models
         public DbSet<UserProfile> UserProfiles { get; set; }
     }
 
-    [Table("UserProfile")]
+    /*[Table("UserProfile")]
     public class UserProfile
     {
         [Key]
@@ -32,12 +32,13 @@ namespace PortalInnovika.Models
         public Nullable<bool> PuedeExpress { get; set; }
         public Nullable<int> FleteraId { get; set; }
         public Nullable<bool> FleteAutomatico { get; set; }
-        public Nullable<DateTime> UltimaVistaDocumentos { get; set; }
+        public Nullable<System.DateTime> UltimaVistaDocumentos { get; set; }
         public Nullable<bool> ClienteMuebles { get; set; }
         public string ZonaImpuesto { get; set; }
         public string ListaPreciosEsp { get; set; }
         public Nullable<int> UserOld { get; set; }
-    }
+        public bool Estatus { get; set; }
+    }*/
 
     public class RegisterExternalLoginModel
     {

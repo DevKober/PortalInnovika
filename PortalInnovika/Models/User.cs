@@ -24,6 +24,7 @@ namespace PortalInnovika.Models
             this.Oportunidades = new HashSet<Oportunidade>();
             this.PaseHists = new HashSet<PaseHist>();
             this.ProyNotas = new HashSet<ProyNota>();
+            this.Vendedores = new HashSet<Vendedore>();
         }
     
         public int UserId { get; set; }
@@ -58,5 +59,6 @@ namespace PortalInnovika.Models
         public virtual ICollection<Oportunidade> Oportunidades { get; set; }
         public virtual ICollection<PaseHist> PaseHists { get; set; }
         public virtual ICollection<ProyNota> ProyNotas { get; set; }
+        public virtual ICollection<Vendedore> Vendedores { get; set; }
     }
 }

@@ -192,11 +192,12 @@
     </div>
 </div>
 
-<div style="clear:both;">
-    <div style="padding:5px; border: solid thin; border-color:lightblue; overflow:auto; margin-top:6px;">        
-        <button id="btnCerrar" style="float:right; margin:4px; height:22px">Cerrar</button>
-        <button id="btnGuardar" style="float:right; margin:4px; height:22px">Guardar</button>          
-        <button id="btnGuardarDuplicar" style="float:right; margin:4px; height:22px">Guardar y duplicar</button>
+<div style="clear: both;">
+    <div style="padding: 5px; border: solid thin; border-color: lightblue; overflow: auto; margin-top: 6px;">
+        <b>Tiempo estimado: </b><span id="txtTiempo">---</span> días
+        <button id="btnCerrar" style="float: right; margin: 4px; height: 22px">Cerrar</button>
+        <button id="btnGuardar" style="float: right; margin: 4px; height: 22px">Guardar</button>
+        <button id="btnGuardarDuplicar" style="float: right; margin: 4px; height: 22px">Guardar y duplicar</button>
         @*<div id="msgCompletado" style="float:right; padding:6px; height:27px; border:thin; border-color:darkgreen; background-color:lightgreen">
             Captura de articulo completada
         </div>*@
@@ -231,7 +232,7 @@
             @*<img src="../Images/vetas/#= RutaImagen #" alt="#: Nombre # image" />*@
             <h3>#:Nombre#</h3>            
         </div>
-</script>|
+</script>
 <script type="text/x-kendo-template" id="templateCubrecantos">
         <div class="product">
             <img src="../Images/cubrecantos/#= Codigo #.png" alt="#: Nombre # image" />
@@ -1128,8 +1129,10 @@
                     $("#divImagenResultante").html(rutaimg);
 
                 } else if (tipo == "color") {
-                    //console.log("adn: " + adn + "  codigo: " + codigo +" tipo: "+ tipo);
-
+                    console.log("adn: " + adn + "  codigo: " + codigo +" tipo: "+ tipo);
+                    $.get('/Editor/GetTiempoRamas?color=' + codigo).success(function(data) {
+                        $("#txtTiempo").html(data.tiempo);
+                    });
                     //$("#loader").attr("style", "position:absolute; top:50%; left:50%; z-index:1000; width:69px; height:69px; border:solid; border-radius:3px; border-width:2px; border-color:cadetblue;");
                     //$("#loader").show();
                     tipo = "veta";

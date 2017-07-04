@@ -91,6 +91,12 @@ namespace PortalInnovika.Models
         public DbSet<MaxMinBaseColor> MaxMinBaseColors { get; set; }
         public DbSet<JaladeraColorExcepcione> JaladeraColorExcepciones { get; set; }
         public DbSet<JaladerasExtra> JaladerasExtras { get; set; }
+        public DbSet<DetalleGrupos> DetalleGrupos { get; set; }
+        public DbSet<Grupos> Grupos { get; set; }
+        public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<Vendedore> Vendedores { get; set; }
+        public DbSet<webpages_Roles> webpages_Roles { get; set; }
+        public DbSet<TiempoRama> TiempoRamas { get; set; }
     
         public virtual int spAltaCotizacion(Nullable<int> iProyecto, Nullable<int> iUsuarioAprueba, ObjectParameter bCorrecto)
         {

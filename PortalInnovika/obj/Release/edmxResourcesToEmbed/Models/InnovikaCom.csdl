@@ -248,6 +248,24 @@
     <EntitySet Name="MaxMinBaseColors" EntityType="InnovikaComModel.MaxMinBaseColor" />
     <EntitySet Name="JaladeraColorExcepciones" EntityType="InnovikaComModel.JaladeraColorExcepcione" />
     <EntitySet Name="JaladerasExtras" EntityType="InnovikaComModel.JaladerasExtra" />
+    <EntitySet Name="DetalleGrupos" EntityType="InnovikaComModel.DetalleGrupos" />
+    <EntitySet Name="Grupos" EntityType="InnovikaComModel.Grupos" />
+    <EntitySet Name="UserProfiles" EntityType="InnovikaComModel.UserProfile" />
+    <EntitySet Name="Vendedores" EntityType="InnovikaComModel.Vendedore" />
+    <EntitySet Name="webpages_Roles" EntityType="InnovikaComModel.webpages_Roles" />
+    <AssociationSet Name="FK_DetalleGrupos_DetalleGrupos" Association="InnovikaComModel.FK_DetalleGrupos_DetalleGrupos">
+      <End Role="Grupos" EntitySet="Grupos" />
+      <End Role="DetalleGrupos" EntitySet="DetalleGrupos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Vendedores_Users" Association="InnovikaComModel.FK_Vendedores_Users">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Vendedore" EntitySet="Vendedores" />
+    </AssociationSet>
+    <AssociationSet Name="webpages_UsersInRoles" Association="InnovikaComModel.webpages_UsersInRoles">
+      <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+    </AssociationSet>
+    <EntitySet Name="TiempoRamas" EntityType="InnovikaComModel.TiempoRama" />
   </EntityContainer>
   <EntityType Name="ArtADNCodigo">
     <Key>
@@ -873,6 +891,7 @@
     <NavigationProperty Name="Oportunidades" Relationship="InnovikaComModel.FK_Oportunidades_Users" FromRole="Users" ToRole="Oportunidades" />
     <NavigationProperty Name="PaseHists" Relationship="InnovikaComModel.FK_PaseHist_Users" FromRole="Users" ToRole="PaseHist" />
     <NavigationProperty Name="ProyNotas" Relationship="InnovikaComModel.FK_ProyNotas_usuario" FromRole="Users" ToRole="ProyNotas" />
+    <NavigationProperty Name="Vendedores" Relationship="InnovikaComModel.FK_Vendedores_Users" FromRole="User" ToRole="Vendedore" />
   </EntityType>
   <EntityType Name="UsersInRole">
     <Key>
@@ -1684,5 +1703,108 @@
     <Property Name="Base" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
     <Property Name="Color" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
     <Property Name="Jaladera" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <EntityType Name="DetalleGrupos">
+    <Key>
+      <PropertyRef Name="IdDetalleGrupo" />
+    </Key>
+    <Property Name="IdDetalleGrupo" Type="Int32" Nullable="false" />
+    <Property Name="Tipo" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+    <Property Name="Base" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+    <Property Name="Color" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+    <Property Name="Cubrecanto" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+    <Property Name="Grupo" Type="Int32" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Estatus" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="Grupos" Relationship="InnovikaComModel.FK_DetalleGrupos_DetalleGrupos" FromRole="DetalleGrupos" ToRole="Grupos" />
+  </EntityType>
+  <EntityType Name="Grupos">
+    <Key>
+      <PropertyRef Name="IdGrupo" />
+    </Key>
+    <Property Name="IdGrupo" Type="Int32" Nullable="false" />
+    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Estatus" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="DetalleGrupos" Relationship="InnovikaComModel.FK_DetalleGrupos_DetalleGrupos" FromRole="Grupos" ToRole="DetalleGrupos" />
+  </EntityType>
+  <EntityType Name="UserProfile">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="56" FixedLength="false" Unicode="true" />
+    <Property Name="ClienteERP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NombreCompleto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="AgenteServicio" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="PuedeExpress" Type="Boolean" />
+    <Property Name="FleteraId" Type="Int32" />
+    <Property Name="FleteAutomatico" Type="Boolean" />
+    <Property Name="UltimaVistaDocumentos" Type="DateTime" Precision="3" />
+    <Property Name="ClienteMuebles" Type="Boolean" />
+    <Property Name="ZonaImpuesto" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="ListaPreciosEsp" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="UserOld" Type="Int32" />
+    <Property Name="Estatus" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="webpages_Roles" Relationship="InnovikaComModel.webpages_UsersInRoles" FromRole="UserProfile" ToRole="webpages_Roles" />
+  </EntityType>
+  <EntityType Name="Vendedore">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="fecha_reg" Type="DateTime" Precision="3" />
+    <Property Name="estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="cliente" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="InnovikaComModel.FK_Vendedores_Users" FromRole="Vendedore" ToRole="User" />
+  </EntityType>
+  <EntityType Name="webpages_Roles">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UserProfiles" Relationship="InnovikaComModel.webpages_UsersInRoles" FromRole="webpages_Roles" ToRole="UserProfile" />
+  </EntityType>
+  <Association Name="FK_DetalleGrupos_DetalleGrupos">
+    <End Type="InnovikaComModel.Grupos" Role="Grupos" Multiplicity="1" />
+    <End Type="InnovikaComModel.DetalleGrupos" Role="DetalleGrupos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Grupos">
+        <PropertyRef Name="IdGrupo" />
+      </Principal>
+      <Dependent Role="DetalleGrupos">
+        <PropertyRef Name="Grupo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Vendedores_Users">
+    <End Type="InnovikaComModel.User" Role="User" Multiplicity="1" />
+    <End Type="InnovikaComModel.Vendedore" Role="Vendedore" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Vendedore">
+        <PropertyRef Name="cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="webpages_UsersInRoles">
+    <End Type="InnovikaComModel.webpages_Roles" Role="webpages_Roles" Multiplicity="*" />
+    <End Type="InnovikaComModel.UserProfile" Role="UserProfile" Multiplicity="*" />
+  </Association>
+  <EntityType Name="TiempoRama">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="rama" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="color" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="tiempo_normal" Type="Int32" />
+    <Property Name="tiempo_express" Type="Int32" />
+    <Property Name="created_at" Type="DateTime" Precision="3" />
+    <Property Name="updated_at" Type="DateTime" Precision="3" />
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
   </EntityType>
 </Schema>

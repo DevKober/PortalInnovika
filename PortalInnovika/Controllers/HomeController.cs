@@ -449,6 +449,7 @@ namespace PortalInnovika.Controllers
                 //        db.SaveChanges();
                 //        return this.RedirectToAction("Index");
                 //    }
+                
                 db.Entry(p).State = EntityState.Modified;
                 db.SaveChanges();
                 return Json("Proyecto solicitado", JsonRequestBehavior.AllowGet);
@@ -1031,6 +1032,7 @@ namespace PortalInnovika.Controllers
             dCanto = " " + dCanto;
             return dCanto;
         }
+        
         public string GetDescVariante(string codigo)
         {
             string dVariante = (from i in db.ArtVariantes
@@ -1050,7 +1052,7 @@ namespace PortalInnovika.Controllers
         //        return this.RedirectToAction("Index");
         //    }
         //    return View();
-            
+
         //}
 
         [HttpPost]
@@ -1106,11 +1108,17 @@ namespace PortalInnovika.Controllers
                         articulos.Add(articulo);
                     }
                     pd.Articulos = articulos;
-                    
+
                     foreach (ProyArticulo a in pd.Articulos)
                     {
                         db.Entry((ProyArticulo)a).State = EntityState.Modified;
-                    }                    
+                    }
+
+                    // ----
+                    
+                    
+                    
+                    // ----
                 }
                                 
                 db.Entry((Proyecto)pd.Proyecto).State = EntityState.Modified;

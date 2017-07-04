@@ -1025,5 +1025,89 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="DetalleGrupos">
+      <EntityTypeMapping TypeName="InnovikaComModel.DetalleGrupos">
+        <MappingFragment StoreEntitySet="DetalleGrupos">
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Grupo" ColumnName="Grupo" />
+          <ScalarProperty Name="Cubrecanto" ColumnName="Cubrecanto" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="Base" ColumnName="Base" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="IdDetalleGrupo" ColumnName="IdDetalleGrupo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Grupos">
+      <EntityTypeMapping TypeName="InnovikaComModel.Grupos">
+        <MappingFragment StoreEntitySet="Grupos">
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="IdGrupo" ColumnName="IdGrupo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserProfiles">
+      <EntityTypeMapping TypeName="InnovikaComModel.UserProfile">
+        <MappingFragment StoreEntitySet="UserProfile">
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="UserOld" ColumnName="UserOld" />
+          <ScalarProperty Name="ListaPreciosEsp" ColumnName="ListaPreciosEsp" />
+          <ScalarProperty Name="ZonaImpuesto" ColumnName="ZonaImpuesto" />
+          <ScalarProperty Name="ClienteMuebles" ColumnName="ClienteMuebles" />
+          <ScalarProperty Name="UltimaVistaDocumentos" ColumnName="UltimaVistaDocumentos" />
+          <ScalarProperty Name="FleteAutomatico" ColumnName="FleteAutomatico" />
+          <ScalarProperty Name="FleteraId" ColumnName="FleteraId" />
+          <ScalarProperty Name="PuedeExpress" ColumnName="PuedeExpress" />
+          <ScalarProperty Name="AgenteServicio" ColumnName="AgenteServicio" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
+          <ScalarProperty Name="ClienteERP" ColumnName="ClienteERP" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vendedores">
+      <EntityTypeMapping TypeName="InnovikaComModel.Vendedore">
+        <MappingFragment StoreEntitySet="Vendedores">
+          <ScalarProperty Name="cliente" ColumnName="cliente" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="fecha_reg" ColumnName="fecha_reg" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="webpages_Roles">
+      <EntityTypeMapping TypeName="InnovikaComModel.webpages_Roles">
+        <MappingFragment StoreEntitySet="webpages_Roles">
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="webpages_UsersInRoles" TypeName="InnovikaComModel.webpages_UsersInRoles" StoreEntitySet="webpages_UsersInRoles">
+      <EndProperty Name="UserProfile">
+        <ScalarProperty Name="UserId" ColumnName="UserId" />
+      </EndProperty>
+      <EndProperty Name="webpages_Roles">
+        <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="TiempoRamas">
+      <EntityTypeMapping TypeName="InnovikaComModel.TiempoRama">
+        <MappingFragment StoreEntitySet="TiempoRamas">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="tiempo_express" ColumnName="tiempo_express" />
+          <ScalarProperty Name="tiempo_normal" ColumnName="tiempo_normal" />
+          <ScalarProperty Name="color" ColumnName="color" />
+          <ScalarProperty Name="rama" ColumnName="rama" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

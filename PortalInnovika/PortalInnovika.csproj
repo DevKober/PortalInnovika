@@ -252,6 +252,9 @@
       <DependentUpon>InnovikaCom.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CostoFlete.cs" />
+    <Compile Include="Models\DetalleGrupos.cs">
+      <DependentUpon>InnovikaCom.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Docs.cs" />
     <Compile Include="Models\Documento.cs">
       <DependentUpon>InnovikaCom.tt</DependentUpon>
@@ -278,6 +281,9 @@
       <DependentUpon>InnovikaCom.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Fletera.cs">
+      <DependentUpon>InnovikaCom.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Grupos.cs">
       <DependentUpon>InnovikaCom.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HistorialItems.cs" />
@@ -370,10 +376,16 @@
     <Compile Include="Models\spCreaProyectodesdeFavorito_Result.cs">
       <DependentUpon>InnovikaCom.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TiempoRama.cs">
+      <DependentUpon>InnovikaCom.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TipoJaladeraViewModel.cs" />
     <Compile Include="Models\TiposViewModel.cs" />
     <Compile Include="Models\TotalesViewModel.cs" />
     <Compile Include="Models\User.cs">
+      <DependentUpon>InnovikaCom.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserProfile.cs">
       <DependentUpon>InnovikaCom.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UsersInRole.cs">
@@ -386,6 +398,9 @@
       <DependentUpon>InnovikaCom.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\vArticulosResuman.cs">
+      <DependentUpon>InnovikaCom.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Vendedore.cs">
       <DependentUpon>InnovikaCom.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\vExclusividade.cs">
@@ -425,6 +440,9 @@
       <DependentUpon>InnovikaCom.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\webpages_OAuthMembership.cs">
+      <DependentUpon>InnovikaCom.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\webpages_Roles.cs">
       <DependentUpon>InnovikaCom.tt</DependentUpon>
     </Compile>
     <Compile Include="NavigationRoutes\INavigationRouteFilter.cs" />
