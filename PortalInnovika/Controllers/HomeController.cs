@@ -366,15 +366,13 @@ namespace PortalInnovika.Controllers
             proyecto.Usuario = user.UserId;
 
             proyecto.ClienteERP = user.ClienteERP.Trim();
-            proyecto.Observaciones = "#" + DateTime.Today.ToString() + " Proyecto creado ";
+            proyecto.Observaciones = "#" + DateTime.Today.ToString(CultureInfo.CurrentCulture) + " Proyecto creado ";
             proyecto.TmRegistrado = DateTime.Today;
             proyecto.UltimoSeguimiento = DateTime.Today;
             proyecto.Estatus = "C";
 
             //OBTENCION DE DATOS DE CLIENTE
-            Cte cliente = (from i in db_intelisis.Ctes
-                                where i.Cliente.Trim() == user.ClienteERP
-                                select i).FirstOrDefault();
+            var cliente = db_intelisis.Ctes.FirstOrDefault(i => i.Cliente.Trim() == user.ClienteERP);
 
             proyecto.Direccion = cliente.Descripcion1;
             proyecto.Poblacion = cliente.Descripcion3;
@@ -386,10 +384,8 @@ namespace PortalInnovika.Controllers
             proyecto.FormaDeEnvio = cliente.FormaEnvio;
             proyecto.ValidaTiempsEntrega = true;
             
-            var cteIntelisis = (from i in db_intelisis.Ctes
-                                where i.Cliente.Trim() == user.ClienteERP.Trim()
-                                select i).FirstOrDefault();
-            string formaEnvio = "";
+            var cteIntelisis = db_intelisis.Ctes.FirstOrDefault(i => i.Cliente.Trim() == user.ClienteERP.Trim());
+            var formaEnvio = "";
             if (cteIntelisis.FormaEnvio.Trim() == "NINGUNO")
             {
                 //formaEnvio = "SIN FLETERA ASIGNADA";

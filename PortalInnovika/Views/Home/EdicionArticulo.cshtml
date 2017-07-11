@@ -1097,6 +1097,8 @@
             $("#cambiaDs").click(function () {
                 $("#cambiaDs").attr("disabled", "disabled");
                 
+                console.log(tipo);
+                
                 if (tipo == "tipos") {
                     //$("#loader").attr("style","position:absolute; top:50%; left:50%; z-index:1000; width:69px; height:69px; border:solid; border-radius:3px; border-width:2px; border-color:cadetblue;");
                     //$("#loader").show();
@@ -1443,25 +1445,6 @@
                         template = $("#templateVariantes").html();
                         //alert("NombrePaso: " + data.NombrePaso);
                     }
-                    //switch (data.NombrePaso) {
-                    //    //case "base":
-                    //    //    template = $("#templateBases").html();
-                    //    //    alert("NombrePaso: " + data.NombrePaso);
-                    //    //case "color":
-                    //    //    template = $("#templateColores").html();
-                    //    //    alert("NombrePaso: " + data.NombrePaso);
-                    //    case "veta":
-                    //        template = $("#templateVetas").html();
-                    //        alert("NombrePaso: " + data.NombrePaso);
-                    //    case "cubrecanto":
-                    //        template = $("#templateCubrecantos").html();
-                    //        alert("NombrePaso: " + data.NombrePaso);
-                    //    case "variante":
-                    //        template = $("#templateVariantes").html();
-                    //        alert("NombrePaso: " + data.NombrePaso);
-                    //    default:
-                    //        alert("NombrePaso: " + data.NombrePaso);
-                    //}
 
                     elementos = data.Elementos;
                     adn = data.Adn;
@@ -1802,16 +1785,19 @@
             codigo = document.getElementById("CodigoADNInterno").value;
             var codigoBK = codigo;
             var base = codigo.substring(2, 4);
+            
+            var nomTipo = "";
+            var nomBase = "";
+            var nomColor = "";
+            var nomVeta = "";
+            var nomCubrecanto = "";
+            var nomVariante = "";
+            
             codigo = codigo.substring(0, 6);
             $.when(RefrescaJaladeras(base, "")).done(function () {
                 codigo = codigoBK;                
 
-                var nomTipo = "";
-                var nomBase = "";
-                var nomColor = "";
-                var nomVeta = "";
-                var nomCubrecanto = "";
-                var nomVariante = "";
+                //----
 
                 var tieneJal = document.getElementById("tieneJaladera").value;
                 if (tieneJal) {
@@ -1965,9 +1951,9 @@
                     $("#altoContn").empty();
                     $("#altoContn").append('<input id="alto" type="number" style="width:90px" />');
                     $("#alto").width(90).kendoNumericTextBox({
-                        value: alcb,
-                        min: altoMin,
-                        max: altoMax,
+                        value: document.getElementById("CodigoADNInterno").value.substring(0, 2) == "AJ" ? 0 : alcb,
+                        min: document.getElementById("CodigoADNInterno").value.substring(0, 2) == "AJ" ? 0 : altoMin,
+                        max: document.getElementById("CodigoADNInterno").value.substring(0, 2) == "AJ" ? 0 : altoMax,
                         step: incrementoMultiplo,
                         format: "#",
                         options: {
@@ -1978,9 +1964,9 @@
                     $("#anchoContn").empty();
                     $("#anchoContn").append('<input id="ancho" type="number" style="width:90px" />');
                     $("#ancho").width(90).kendoNumericTextBox({
-                        min: anchoMin,
-                        max: anchoMax,
-                        value: ancb,
+                        min: document.getElementById("CodigoADNInterno").value.substring(0,2) == "AJ" ? 0: anchoMin,
+                        max: document.getElementById("CodigoADNInterno").value.substring(0,2) == "AJ" ? 0: anchoMax,
+                        value: document.getElementById("CodigoADNInterno").value.substring(0,2) == "AJ" ? 0: ancb,
                         step: 1,
                         format: "#",
                         options: {
