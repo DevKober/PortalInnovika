@@ -46,8 +46,13 @@ namespace PortalInnovika.Controllers
                 .GroupBy(a => a.Proyecto)
                 .Select(b => new {total = b.Sum(a => (a.Alto * a.Ancho * a.Cantidad))}).FirstOrDefault();
 
-            proy.EsExpress = express /*&& area?.total <= 1300000*/;
-            
+            var items = db.ProyArticulos.Where(item => item.Proyecto == proyecto && !tipo.Contains(item.ADNTipo))
+                .Select(item => item.CodigoADNInterno.Substring(0, 6)).ToArray();
+
+            var lignova = db_intelisis.Arts.Count(art => art.Rama == "MADERA" && items.Contains(art.Articulo.Substring(0, 6)));
+
+            proy.EsExpress = (express && (lignova == 0)) /*&& area?.total <= 1300000*/;
+
             db.Entry(proy).State = EntityState.Modified;
             db.SaveChanges();
 
@@ -1302,46 +1307,6 @@ namespace PortalInnovika.Controllers
                 Response.Write(sw.ToString());
                 Response.Flush();
                 Response.End();
-            //}
-
-            //Response.ClearContent();
-            //Response.Buffer = true;
-            //Response.AddHeader("content-disposition", "attachment; filename=Proyecto-" + proyecto.ToString() + ".xls");
-            //Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-
-            ////Response.ContentType = "application/excel";
-            ////Response.ContentType = "application/ms-excel";
-            //Response.Charset = "";
-
-            //// Create an instance of the object that exports the Excel file, having one sheet
-            //ExcelDocument xls = new ExcelDocument(1);
-
-            //// Set the sheet name
-            //xls.easy_getSheetAt(0).setSheetName("Exported data");
-
-            //// Get the table of the worksheet that will keep the data
-            //ExcelTable xlsTable = ((ExcelWorksheet)xls.easy_getSheetAt(0)).easy_getExcelTable();
-
-            //// Add data to cells
-            //for (int row = 0; row < 100; row++)
-            //{
-            //    for (int column = 0; column < 5; column++)
-            //    {
-            //        xlsTable.easy_getCell(row, column).setValue("Data " + (row + 1) + ", " + (column + 1));
-            //    }
-            //}
-
-            //// Export Excel file           
-            //string NombreArchivo = "Proyecto " + proyecto.ToString();
-            //FileStream st = new FileStream(NombreArchivo, FileMode.CreateNew);
-            //xls.easy_WriteXLSFile(st);            
-
-            //// Dispose memory
-            //xls.Dispose();
-
-            //Response.Write(st);
-            //Response.Flush();
-            //Response.End();
         }
 
         //EXPORTAR PROYECTO A PDF
@@ -1627,10 +1592,6 @@ namespace PortalInnovika.Controllers
 
             art.TmUltimoCambio = DateTime.Today;
             usuario = UsuarioActual();
-            //if (usuario == null)
-            //{
-            //    usuario = UsuarioActual();
-            //}
 
             ArtADNCodigo artcod = (from c in db.ArtADNCodigos where c.Codigo == art.CodigoADNInterno select c).FirstOrDefault();
             decimal precioCorrecto = GetPrecioLista(artcod, usuario);
@@ -1724,25 +1685,6 @@ namespace PortalInnovika.Controllers
                 art.PrecioVidrio = ((decimal)(((float)art.Alto * (float)art.Ancho) / 1000000)) * art.PrecioListaVidrio;
             }
             //
-
-            ////REGLAS PARA PROTECTA
-            //if (("VO|VS|VU".Contains(art.ADNTipo)) || (("CH|GR".Contains(art.ADNBase)) && ("MA".Contains(art.ADNTipo))))
-            //{
-            //    if ("PG|PS|PW".Contains(art.ADNColor))
-            //    {
-            //        string ADNProtectaBase = "PP";
-            //        string ADNProtectaColor = art.ADNColor;
-            //        string CodigoADNProtecta = ADNProtectaBase + "XX" + ADNProtectaColor;
-            //        art.tieneProtecta = true;
-            //        art.ADNProtectaBase = ADNProtectaBase;
-            //        art.ADNProtectaColor = ADNProtectaColor;
-            //        art.CodigoADNProtecta = CodigoADNProtecta;
-
-            //        Art a = GetPrecioPieza(CodigoADNProtecta);
-            //        art.PrecioListaPelicula = a.PrecioLista;
-            //        art.PrecioProtecta = ((decimal)(((float)art.Alto * (float)art.Ancho) / 1000000)) * art.PrecioListaPelicula;
-            //    }
-            //}
             
             //PONE PRECIO DE PERFORACIONES SI APLICA      
             if ((art.ADNOrificios != null) && (art.ADNOrificios != "XX"))
@@ -2043,31 +1985,9 @@ namespace PortalInnovika.Controllers
                             //i.DescuentoServicios = i.PrecioServicios * (Convert.ToDecimal(porcent)) / 100;
                         }                        
                     }
-
-                    //EN CASO DE SER UN PROYECTO DE EXHIBICION SE AÑADE UN 50% ADICIONAL AL PRECIO
-                    //if (pr.Exhibicion)
-                    //{
-                    //    i.PrecioPrincipal -= (i.PrecioPrincipal * 0.5M);
-                    //    if (i.tieneJaladera)
-                    //    {
-                    //        i.PrecioJaladera -= (i.PrecioJaladera * 0.5M);
-                    //    }
-                    //    if (i.tieneVidrio)
-                    //    {
-                    //        i.PrecioVidrio -= (i.PrecioVidrio * 0.5M);
-                    //    }
-                    //    if (i.tieneProtecta)
-                    //    {
-                    //        i.PrecioProtecta -= (i.PrecioProtecta * 0.5M);
-                    //    }
-                    //}
+                    
                     db.Entry(i).State = EntityState.Modified;
                 }
-
-                //art.DescuentoLineal = Convert.ToDecimal(porcent);
-                //art.DescuentoPrincipal = art.PrecioPrincipal * (Convert.ToDecimal(porcent)) / 100;
-                //art.DescuentoJaladera = art.PrecioListaJaladera * (Convert.ToDecimal(porcent)) / 100;
-                //art.PrecioJaladera = art.PrecioListaJaladera - art.DescuentoJaladera;
             }
 
             //db.Entry(art).State = EntityState.Modified;

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data;
+using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using PortalInnovika.Models;
 
@@ -390,7 +392,8 @@ namespace PortalInnovika.Controllers
             string formaEnvio = "";
             if (cteIntelisis.FormaEnvio.Trim() == "NINGUNO")
             {
-                formaEnvio = "SIN FLETERA ASIGNADA";
+                //formaEnvio = "SIN FLETERA ASIGNADA";
+                formaEnvio = "NINGUNO";
             }
             else
             {
@@ -1041,20 +1044,6 @@ namespace PortalInnovika.Controllers
             return dVariante;
         }
 
-        //[System.Web.Mvc.HttpPost]
-        //public ActionResult Edit(Proyecto proyecto)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        //TryUpdateModel(proyecto);
-        //        db.Entry(proyecto).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return this.RedirectToAction("Index");
-        //    }
-        //    return View();
-
-        //}
-
         [HttpPost]
         public ActionResult ModificaProyecto(ProyectoDetalle pd, string RefCte)        
         {
@@ -1099,11 +1088,103 @@ namespace PortalInnovika.Controllers
                         articulo.tieneOrificios = a.tieneOrificios;
                         articulo.TmUltimoCambio = a.TmUltimoCambio;
                         articulo.EsConceptoDeProyecto = a.EsConceptoDeProyecto;
-                        //SI ES EXHIBICION LLEVA 50% DE DESCUENTO
-                        //if (pd.Proyecto.Exhibicion)
-                        //{
-                        //    articulo.DescuentoLineal = 50;
-                        //}
+
+                        // ----------
+                        //REVISA SI ES EXPRESS
+                        var pr = (from i in db.Proyectos
+                            where i.IdProyecto == articulo.Proyecto
+                            select i).FirstOrDefault();
+
+                        //ASIGNAR DESCUENTO
+                        var cte = (from i in db.Proyectos
+                            where i.IdProyecto == articulo.Proyecto
+                            select i.ClienteERP).FirstOrDefault();
+                        var desc = (from i in db_intelisis.Ctes
+                            where i.Cliente == cte
+                            select i.Descuento).FirstOrDefault();
+                        var porcent = (from i in db_intelisis.Descuentos
+                                             where i.Descuento1 == desc
+                                             select i.Porcentaje).FirstOrDefault() ?? 0;
+                        if (pr.EsExpress)
+                        {
+                            //DISCRIMINAR PRODUCTOS DE LACA Y LIGNOVA
+                            var artic = (from x in db_intelisis.Arts
+                                where x.Articulo.Substring(0, 6) == articulo.CodigoADNInterno.Substring(0, 6)
+                                select x).FirstOrDefault();
+
+                            if ((articulo.ADNTipo == "PM") || ("MADERA".Contains(artic.Rama)))
+                            {
+                                articulo.DescuentoLineal = Convert.ToDecimal(porcent);
+                                articulo.DescuentoPrincipal = articulo.PrecioPrincipal * (Convert.ToDecimal(porcent)) / 100;
+
+                                pr.EsExpress = false;
+                            }
+                            else
+                            {
+                                articulo.DescuentoLineal = 0;
+                                articulo.DescuentoPrincipal = 0;
+                                articulo.DescuentoJaladera = 0;
+                                articulo.DescuentoVidrio = 0;
+                                articulo.DescuentoServicios = 0;
+
+                                //DETERMINA SI LA JALADERA ES ML O PZA Y CALCULA EL PRECIO CORRECTO
+                                var unidadJal = (from j in db.ArtADNCodigos
+                                    where j.Codigo == articulo.CodigoADNJaladera
+                                    select j.Unidad).FirstOrDefault();
+                                if (unidadJal == "ML")
+                                {
+                                    articulo.PrecioJaladera = (Convert.ToDecimal(articulo.ADNPosicionJaladera == "H"? articulo.Ancho : articulo.Alto) / 1000) * articulo.PrecioListaJaladera;
+                                }
+                                else
+                                {
+                                    articulo.PrecioJaladera = articulo.PrecioListaJaladera;
+                                }
+                            }
+                            db.Entry(articulo).State = EntityState.Modified;
+
+                        }
+                        else
+                        {
+
+                            if ((articulo.CodigoADNInterno.Substring(0, 6) != "CEEEXX") &&
+                                (articulo.CodigoADNInterno.Substring(0, 6) != "CESEEX")
+                            ) //NO LLEVA DESCUENTO EN NINGUN SERVICIO (solo en flete y seguro)
+                            {
+                                articulo.DescuentoLineal = Convert.ToDecimal(porcent);
+                                articulo.DescuentoPrincipal = articulo.PrecioPrincipal * (Convert.ToDecimal(porcent)) / 100;
+                                articulo.DescuentoJaladera = articulo.PrecioListaJaladera * (Convert.ToDecimal(porcent)) / 100;
+                                articulo.PrecioJaladera = articulo.PrecioListaJaladera - articulo.DescuentoJaladera;
+                                articulo.DescuentoVidrio = articulo.PrecioListaVidrio * (Convert.ToDecimal(porcent)) / 100;
+                                //i.DescuentoServicios = i.PrecioListaServicios * (Convert.ToDecimal(porcent)) / 100;
+
+                                //DETERMINA SI LA JALADERA ES ML O PZA Y CALCULA EL PRECIO CORRECTO
+                                var unidadJal = (from j in db.ArtADNCodigos
+                                    where j.Codigo == articulo.CodigoADNJaladera
+                                    select j.Unidad).FirstOrDefault();
+
+                                var descJaladera = Convert.ToDecimal(porcent) / 100;
+
+
+                                if (unidadJal == "ML")
+                                {
+                                    articulo.PrecioJaladera = ((Convert.ToDecimal(articulo.ADNPosicionJaladera == "H"? articulo.Ancho : articulo.Alto) / 1000) * (articulo.PrecioListaJaladera ?? 0));
+                                    articulo.DescuentoJaladera = articulo.PrecioJaladera * descJaladera;
+                                }
+                                else
+                                {
+                                    articulo.PrecioJaladera = articulo.PrecioListaJaladera;
+                                }
+
+                                if (articulo.ADNTipo == "MA")
+                                {
+                                    //i.DescuentoServicios = i.PrecioServicios * (Convert.ToDecimal(porcent)) / 100;
+                                }
+                            }
+
+                            db.Entry(articulo).State = EntityState.Modified;
+
+                        }
+                        // ----------
 
                         articulos.Add(articulo);
                     }
@@ -1111,16 +1192,10 @@ namespace PortalInnovika.Controllers
 
                     foreach (ProyArticulo a in pd.Articulos)
                     {
-                        db.Entry((ProyArticulo)a).State = EntityState.Modified;
+                        db.Entry((ProyArticulo) a).State = EntityState.Modified;
                     }
 
-                    // ----
-                    
-                    
-                    
-                    // ----
                 }
-                                
                 db.Entry((Proyecto)pd.Proyecto).State = EntityState.Modified;
                 db.SaveChanges();
                 return this.RedirectToAction("Dashboard");                
@@ -1324,13 +1399,6 @@ namespace PortalInnovika.Controllers
 
             return Json(acu, JsonRequestBehavior.AllowGet);
         }
-
-        //public JsonResult EsExpress(int proy)
-        //{
-        //    var es = (from i in db.Proyectos
-        //                  where i.IdProyecto == proy
-        //                  select i.EsExpress);
-        //}        
 
         public ActionResult Art()
         {
