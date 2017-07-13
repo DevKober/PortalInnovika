@@ -52,7 +52,8 @@ namespace PortalInnovika.Controllers
             //    cantCA = countCanto;
             //}
             decimal metraje = sinEq + conEq + countCanto;
-            
+            //0.673170 + 0 + 0
+
 
             //OBTIENE DATOS DE CLIENTE Y FLETERA
             pro = (from p in db.Proyectos
@@ -84,7 +85,7 @@ namespace PortalInnovika.Controllers
 
             //CALCULA EL COSTO DE FLETE EN FUNCION DEL METRAJE TOTAL DEL PROYECTO
             Debug.Assert(infoFlete != null, "infoFlete != null");
-            decimal costoFlete = metraje * infoFlete.CostoM2;
+            decimal costoFlete = (metraje < (decimal)1.3 ? (decimal)1.3 : metraje) * infoFlete.CostoM2;
 
             //db.Entry(pro).State = System.Data.EntityState.Modified;
             //db.SaveChanges(); 

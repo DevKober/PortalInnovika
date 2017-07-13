@@ -13,10 +13,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/04/2016 18:48:22</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>07/11/2017 09:59:02</publishTime>
+      <publishTime>07/13/2017 16:45:50</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>07/11/2017 09:59:02</publishTime>
+      <publishTime>07/13/2017 16:45:50</publishTime>
     </File>
     <File Include="bin/DotNetOpenAuth.AspNet.dll">
       <publishTime>04/04/2016 18:48:20</publishTime>
@@ -67,7 +67,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/04/2016 18:48:28</publishTime>
     </File>
     <File Include="bin/PortalInnovika.dll">
-      <publishTime>07/11/2017 09:58:50</publishTime>
+      <publishTime>07/13/2017 16:45:33</publishTime>
     </File>
     <File Include="bin/PortalInnovika.pdb">
       <publishTime>01/01/0001 00:00:00</publishTime>
@@ -709,7 +709,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/04/2016 18:48:00</publishTime>
     </File>
     <File Include="Models/InnovikaCom.edmx.diagram">
-      <publishTime>06/22/2017 13:33:08</publishTime>
+      <publishTime>07/12/2017 12:25:13</publishTime>
     </File>
     <File Include="Models/Intelisis.dbml">
       <publishTime>04/04/2016 18:48:02</publishTime>
@@ -718,7 +718,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/09/2017 19:50:35</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>07/11/2017 09:58:58</publishTime>
+      <publishTime>07/13/2017 16:45:41</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>04/04/2016 18:48:02</publishTime>
@@ -2062,7 +2062,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/04/2016 18:48:04</publishTime>
     </File>
     <File Include="Views/Home/EdicionArticulo.cshtml">
-      <publishTime>06/23/2017 12:27:45</publishTime>
+      <publishTime>07/13/2017 15:30:25</publishTime>
     </File>
     <File Include="Views/Home/EdicionJaladera.cshtml">
       <publishTime>04/04/2016 18:48:04</publishTime>

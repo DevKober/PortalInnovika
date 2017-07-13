@@ -1097,6 +1097,8 @@
             $("#cambiaDs").click(function () {
                 $("#cambiaDs").attr("disabled", "disabled");
                 
+                console.log(tipo);
+                
                 if (tipo == "tipos") {
                     //$("#loader").attr("style","position:absolute; top:50%; left:50%; z-index:1000; width:69px; height:69px; border:solid; border-radius:3px; border-width:2px; border-color:cadetblue;");
                     //$("#loader").show();
@@ -1443,25 +1445,6 @@
                         template = $("#templateVariantes").html();
                         //alert("NombrePaso: " + data.NombrePaso);
                     }
-                    //switch (data.NombrePaso) {
-                    //    //case "base":
-                    //    //    template = $("#templateBases").html();
-                    //    //    alert("NombrePaso: " + data.NombrePaso);
-                    //    //case "color":
-                    //    //    template = $("#templateColores").html();
-                    //    //    alert("NombrePaso: " + data.NombrePaso);
-                    //    case "veta":
-                    //        template = $("#templateVetas").html();
-                    //        alert("NombrePaso: " + data.NombrePaso);
-                    //    case "cubrecanto":
-                    //        template = $("#templateCubrecantos").html();
-                    //        alert("NombrePaso: " + data.NombrePaso);
-                    //    case "variante":
-                    //        template = $("#templateVariantes").html();
-                    //        alert("NombrePaso: " + data.NombrePaso);
-                    //    default:
-                    //        alert("NombrePaso: " + data.NombrePaso);
-                    //}
 
                     elementos = data.Elementos;
                     adn = data.Adn;
@@ -1802,16 +1785,19 @@
             codigo = document.getElementById("CodigoADNInterno").value;
             var codigoBK = codigo;
             var base = codigo.substring(2, 4);
+            
+            var nomTipo = "";
+            var nomBase = "";
+            var nomColor = "";
+            var nomVeta = "";
+            var nomCubrecanto = "";
+            var nomVariante = "";
+            
             codigo = codigo.substring(0, 6);
             $.when(RefrescaJaladeras(base, "")).done(function () {
                 codigo = codigoBK;                
 
-                var nomTipo = "";
-                var nomBase = "";
-                var nomColor = "";
-                var nomVeta = "";
-                var nomCubrecanto = "";
-                var nomVariante = "";
+                //----
 
                 var tieneJal = document.getElementById("tieneJaladera").value;
                 if (tieneJal) {
@@ -1962,25 +1948,30 @@
                     var alcb = $("#alto").data("kendoNumericTextBox").value();
                     var ancb = $("#ancho").data("kendoNumericTextBox").value();
 
+                    var ajTipo = document.getElementById("CodigoADNInterno").value.substring(0, 2);
+                    var ajCheck = $.inArray(ajTipo, ["AJ", "AR"]) > -1;
+                    var ajAlto = ajCheck > -1 && ajTipo != "AR" ? [0, 0] : [altoMin, altoMax];
+                    var ajAncho = ajCheck > -1 ? [0, 0] : [anchoMin, anchoMax];
+
                     $("#altoContn").empty();
                     $("#altoContn").append('<input id="alto" type="number" style="width:90px" />');
                     $("#alto").width(90).kendoNumericTextBox({
                         value: alcb,
-                        min: altoMin,
-                        max: altoMax,
+                        min: ajAlto[0],
+                        max: ajAlto[1],
                         step: incrementoMultiplo,
                         format: "#",
                         options: {
                             enabled: true
                         }
                     });
-
+                    
                     $("#anchoContn").empty();
                     $("#anchoContn").append('<input id="ancho" type="number" style="width:90px" />');
                     $("#ancho").width(90).kendoNumericTextBox({
-                        min: anchoMin,
-                        max: anchoMax,
                         value: ancb,
+                        min: ajAncho[0],
+                        max: ajAncho[1],
                         step: 1,
                         format: "#",
                         options: {

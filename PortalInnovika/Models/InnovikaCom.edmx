@@ -86,6 +86,17 @@
           <Property Name="RutaImagen" Type="nvarchar" MaxLength="300" />
           <Property Name="Orden" Type="int" />
         </EntityType>
+        <EntityType Name="ArtDescuento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cliente" Type="int" Nullable="false" />
+          <Property Name="color" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="descuento" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="created_at" Type="datetime" Nullable="false" />
+          <Property Name="updated_at" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="ArticulosAdjuntos">
           <Key>
             <PropertyRef Name="IdArticuloAdjunto" />
@@ -1593,6 +1604,7 @@ advertencia 6035: La relación 'FK_UsersInRoles_Users' tiene columnas que no for
           <EntitySet Name="ArtColores" EntityType="Self.ArtColores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ArtColoresExclusivos" EntityType="Self.ArtColoresExclusivos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ArtCubrecantos" EntityType="Self.ArtCubrecantos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ArtDescuento" EntityType="Self.ArtDescuento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ArticulosAdjuntos" EntityType="Self.ArticulosAdjuntos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ArticulosFav" EntityType="Self.ArticulosFav" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ArtJaladeraPos" EntityType="Self.ArtJaladeraPos" Schema="dbo" store:Type="Tables" />
@@ -2260,6 +2272,7 @@ FROM [dbo].[vUsuarios] AS [vUsuarios]</DefiningQuery>
             <End Role="UserProfile" EntitySet="UserProfiles" />
           </AssociationSet>
           <EntitySet Name="TiempoRamas" EntityType="InnovikaComModel.TiempoRama" />
+          <EntitySet Name="ArtDescuentoes" EntityType="InnovikaComModel.ArtDescuento" />
         </EntityContainer>
         <EntityType Name="ArtADNCodigo">
           <Key>
@@ -3801,6 +3814,17 @@ FROM [dbo].[vUsuarios] AS [vUsuarios]</DefiningQuery>
           <Property Name="updated_at" Type="DateTime" Precision="3" />
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
+        <EntityType Name="ArtDescuento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cliente" Type="Int32" Nullable="false" />
+          <Property Name="color" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="descuento" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="created_at" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="updated_at" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4912,6 +4936,18 @@ FROM [dbo].[vUsuarios] AS [vUsuarios]</DefiningQuery>
                 <ScalarProperty Name="tiempo_normal" ColumnName="tiempo_normal" />
                 <ScalarProperty Name="color" ColumnName="color" />
                 <ScalarProperty Name="rama" ColumnName="rama" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ArtDescuentoes">
+            <EntityTypeMapping TypeName="InnovikaComModel.ArtDescuento">
+              <MappingFragment StoreEntitySet="ArtDescuento">
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="descuento" ColumnName="descuento" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="cliente" ColumnName="cliente" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

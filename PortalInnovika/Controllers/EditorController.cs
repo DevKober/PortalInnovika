@@ -1893,57 +1893,18 @@ namespace PortalInnovika.Controllers
                                             where j.Codigo == i.CodigoADNJaladera
                                             select j.Unidad).FirstOrDefault();
                         if (unidadJal == "ML")
-                        {                            
-                            if (i.ADNPosicionJaladera == "H")
-                            {
-                                i.PrecioJaladera = ((Convert.ToDecimal(i.Ancho) / 1000) * i.PrecioListaJaladera);
-                            }
-                            else
-                            {
-                                i.PrecioJaladera = ((Convert.ToDecimal(i.Alto) / 1000) * i.PrecioListaJaladera);
-                            }
+                        {
+                            i.PrecioJaladera = ((Convert.ToDecimal((int) (i.ADNPosicionJaladera == "H"? i.Ancho:i.Alto)) / 1000) * i.PrecioListaJaladera);
                         }
                         else
                         {
                             i.PrecioJaladera = i.PrecioListaJaladera;
                         }
                     }
-
-                    //EN CASO DE SER UN PROYECTO DE EXHIBICION SE AÑADE UN 50% ADICIONAL AL PRECIO
-                    //if (pr.Exhibicion)
-                    //{
-                    //    i.PrecioPrincipal -= (i.PrecioPrincipal * 0.5M);
-                    //    if (i.tieneJaladera)
-                    //    {
-                    //        i.PrecioJaladera -= (i.PrecioJaladera * 0.5M);
-                    //    }
-                    //    if (i.tieneVidrio)
-                    //    {
-                    //        i.PrecioVidrio -= (i.PrecioVidrio * 0.5M);
-                    //    }
-                    //    if (i.tieneProtecta)
-                    //    {
-                    //        i.PrecioProtecta -= (i.PrecioProtecta * 0.5M);
-                    //    }
-                    //}
+                    
                     db.Entry(i).State = EntityState.Modified;
                 }
-                
-                //if ((art.ADNTipo == "CA") || (art.ADNTipo == "HE"))
-                //{
-                //    art.DescuentoLineal = Convert.ToDecimal(porcent);
-                //    art.DescuentoPrincipal = art.PrecioPrincipal * (Convert.ToDecimal(porcent)) / 100;
-                //    art.DescuentoJaladera = art.PrecioListaJaladera * (Convert.ToDecimal(porcent)) / 100;
-                //    art.PrecioJaladera = art.PrecioListaJaladera - art.DescuentoJaladera;
-                //    //db.Entry(art).State = EntityState.Modified;
-                //}
-                //else
-                //{
-                //    art.DescuentoLineal = 0;
-                //    art.DescuentoPrincipal = 0;
-                //    art.DescuentoJaladera = 0;
-                //    art.PrecioJaladera = art.PrecioListaJaladera - art.DescuentoJaladera;
-                //}
+               
             }
             else
             {
@@ -1951,29 +1912,29 @@ namespace PortalInnovika.Controllers
                 {
                     if ((i.CodigoADNInterno.Substring(0, 6) != "CEEEXX") && (i.CodigoADNInterno.Substring(0, 6) != "CESEEX")) //NO LLEVA DESCUENTO EN NINGUN SERVICIO (solo en flete y seguro)
                     {
-                        i.DescuentoLineal = Convert.ToDecimal(porcent);
-                        i.DescuentoPrincipal = i.PrecioPrincipal * (Convert.ToDecimal(porcent)) / 100;
-                        i.DescuentoJaladera = i.PrecioListaJaladera * (Convert.ToDecimal(porcent)) / 100;
+                        var cteInt = int.Parse(cte);
+                        var descArticulo = db.ArtDescuentoes.Where(d => d.color == i.ADNColor && d.cliente == cteInt).Select(d => d.descuento).FirstOrDefault();
+
+                        // ReSharper disable once PossibleLossOfFraction
+                        i.DescuentoLineal = Convert.ToDecimal(porcent) + (Convert.ToDecimal(100 - porcent) * (descArticulo/100));
+                        i.DescuentoPrincipal = i.PrecioPrincipal * (i.DescuentoLineal / 100);
+                        i.DescuentoJaladera = i.PrecioListaJaladera * (Convert.ToDecimal(porcent) / 100);
                         i.PrecioJaladera = i.PrecioListaJaladera - i.DescuentoJaladera;
-                        i.DescuentoVidrio = i.PrecioListaVidrio * (Convert.ToDecimal(porcent)) / 100;
+                        i.DescuentoVidrio = i.PrecioListaVidrio * (Convert.ToDecimal(porcent) / 100);
                         //i.DescuentoServicios = i.PrecioListaServicios * (Convert.ToDecimal(porcent)) / 100;
 
                         //DETERMINA SI LA JALADERA ES ML O PZA Y CALCULA EL PRECIO CORRECTO
                         string unidadJal = (from j in db.ArtADNCodigos
                                             where j.Codigo == i.CodigoADNJaladera
                                             select j.Unidad).FirstOrDefault();
+
+                        var descJaladera = Convert.ToDecimal(porcent) / 100;
+
+
                         if (unidadJal == "ML")
                         {
-                            i.DescuentoJaladera = ((Convert.ToDecimal(i.Ancho) / 1000) * i.PrecioListaJaladera ?? 0) * Convert.ToDecimal(porcent) / 100;
-                            if (i.ADNPosicionJaladera == "H")
-                            {
-                                i.PrecioJaladera = ((Convert.ToDecimal(i.Ancho) / 1000) * i.PrecioListaJaladera);
-                            }
-                            else
-                            {
-                                i.DescuentoJaladera = ((Convert.ToDecimal(i.Alto) / 1000) * i.PrecioListaJaladera ?? 0) * Convert.ToDecimal(porcent) / 100;
-                                i.PrecioJaladera = ((Convert.ToDecimal(i.Alto) / 1000) * i.PrecioListaJaladera);
-                            }
+                            i.PrecioJaladera = ((Convert.ToDecimal((int) (i.ADNPosicionJaladera == "H" ? i.Ancho : i.Alto)) / 1000) * (i.PrecioListaJaladera ?? 0));
+                            i.DescuentoJaladera = i.PrecioJaladera * descJaladera;
                         }
                         else
                         {
@@ -2001,9 +1962,8 @@ namespace PortalInnovika.Controllers
             ProyArticulo artFlete = null;
             if (grupo == "FORANEO")
             {
-                af = (from i in db.ProyArticulos
-                      where i.Proyecto == IdProyecto && i.ADNTipo == "CE" && i.ADNBase == "EE" && i.ADNColor == "XX"
-                      select i).FirstOrDefault();
+                af = db.ProyArticulos.Where(i => i.Proyecto == IdProyecto && i.ADNTipo == "CE" && i.ADNBase == "EE" && i.ADNColor == "XX").FirstOrDefault();
+                
                 artFlete = new ProyArticulo();
                 if (af != null)
                 {

@@ -97,6 +97,7 @@ namespace PortalInnovika.Models
         public DbSet<Vendedore> Vendedores { get; set; }
         public DbSet<webpages_Roles> webpages_Roles { get; set; }
         public DbSet<TiempoRama> TiempoRamas { get; set; }
+        public DbSet<ArtDescuento> ArtDescuentoes { get; set; }
     
         public virtual int spAltaCotizacion(Nullable<int> iProyecto, Nullable<int> iUsuarioAprueba, ObjectParameter bCorrecto)
         {

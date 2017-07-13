@@ -81,6 +81,17 @@
     <Property Name="RutaImagen" Type="nvarchar" MaxLength="300" />
     <Property Name="Orden" Type="int" />
   </EntityType>
+  <EntityType Name="ArtDescuento">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cliente" Type="int" Nullable="false" />
+    <Property Name="color" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="descuento" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="created_at" Type="datetime" Nullable="false" />
+    <Property Name="updated_at" Type="datetime" Nullable="false" />
+  </EntityType>
   <EntityType Name="ArticulosAdjuntos">
     <Key>
       <PropertyRef Name="IdArticuloAdjunto" />
@@ -1585,6 +1596,7 @@ advertencia 6035: La relación 'FK_UsersInRoles_Users' tiene columnas que no for
     <EntitySet Name="ArtColores" EntityType="Self.ArtColores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ArtColoresExclusivos" EntityType="Self.ArtColoresExclusivos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ArtCubrecantos" EntityType="Self.ArtCubrecantos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ArtDescuento" EntityType="Self.ArtDescuento" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ArticulosAdjuntos" EntityType="Self.ArticulosAdjuntos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ArticulosFav" EntityType="Self.ArticulosFav" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ArtJaladeraPos" EntityType="Self.ArtJaladeraPos" Schema="dbo" store:Type="Tables" />

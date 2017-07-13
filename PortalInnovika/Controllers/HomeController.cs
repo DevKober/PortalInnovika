@@ -344,20 +344,6 @@ namespace PortalInnovika.Controllers
             }
         }
 
-        //public ActionResult NuevoProyecto()
-        //{
-        //    UserProfile user = UsuarioActual();
-
-        //    Proyecto proyecto = new Proyecto();
-        //    proyecto.Usuario = user.UserId; //459;
-        //    proyecto.ClienteERP = user.ClienteERP.Trim();
-        //    proyecto.Observaciones = "#" + DateTime.Today.ToString();
-        //    proyecto.Estatus = "C";
-        //    db.Proyectos.Add(proyecto);
-        //    db.SaveChanges();
-        //    return View(proyecto);
-        //}
-
         public JsonResult NuevoProyecto()
         {
             UserProfile user = UsuarioActual();
@@ -1129,7 +1115,7 @@ namespace PortalInnovika.Controllers
                                     select j.Unidad).FirstOrDefault();
                                 if (unidadJal == "ML")
                                 {
-                                    articulo.PrecioJaladera = (Convert.ToDecimal(articulo.ADNPosicionJaladera == "H"? articulo.Ancho : articulo.Alto) / 1000) * articulo.PrecioListaJaladera;
+                                    articulo.PrecioJaladera = (Convert.ToDecimal((int) (articulo.ADNPosicionJaladera == "H"? articulo.Ancho : articulo.Alto)) / 1000) * articulo.PrecioListaJaladera;
                                 }
                                 else
                                 {
@@ -1142,15 +1128,17 @@ namespace PortalInnovika.Controllers
                         else
                         {
 
-                            if ((articulo.CodigoADNInterno.Substring(0, 6) != "CEEEXX") &&
-                                (articulo.CodigoADNInterno.Substring(0, 6) != "CESEEX")
+                            if ((articulo.CodigoADNInterno.Substring(0, 6) != "CEEEXX") && (articulo.CodigoADNInterno.Substring(0, 6) != "CESEEX")
                             ) //NO LLEVA DESCUENTO EN NINGUN SERVICIO (solo en flete y seguro)
                             {
-                                articulo.DescuentoLineal = Convert.ToDecimal(porcent);
-                                articulo.DescuentoPrincipal = articulo.PrecioPrincipal * (Convert.ToDecimal(porcent)) / 100;
-                                articulo.DescuentoJaladera = articulo.PrecioListaJaladera * (Convert.ToDecimal(porcent)) / 100;
+                                var cteInt = int.Parse(cte);
+                                var descArticulo = db.ArtDescuentoes.Where(d => d.color == articulo.ADNColor && d.cliente == cteInt).Select(d => d.descuento).FirstOrDefault();
+
+                                articulo.DescuentoLineal = Convert.ToDecimal(porcent) + (Convert.ToDecimal(100 - porcent) * (descArticulo / 100)); //articulo.DescuentoLineal = Convert.ToDecimal(porcent);
+                                articulo.DescuentoPrincipal = articulo.PrecioPrincipal * (articulo.DescuentoLineal / 100); //articulo.DescuentoPrincipal = articulo.PrecioPrincipal * (Convert.ToDecimal(porcent) / 100);
+                                articulo.DescuentoJaladera = articulo.PrecioListaJaladera * (Convert.ToDecimal(porcent) / 100);
                                 articulo.PrecioJaladera = articulo.PrecioListaJaladera - articulo.DescuentoJaladera;
-                                articulo.DescuentoVidrio = articulo.PrecioListaVidrio * (Convert.ToDecimal(porcent)) / 100;
+                                articulo.DescuentoVidrio = articulo.PrecioListaVidrio * (Convert.ToDecimal(porcent) / 100);
                                 //i.DescuentoServicios = i.PrecioListaServicios * (Convert.ToDecimal(porcent)) / 100;
 
                                 //DETERMINA SI LA JALADERA ES ML O PZA Y CALCULA EL PRECIO CORRECTO
@@ -1163,7 +1151,7 @@ namespace PortalInnovika.Controllers
 
                                 if (unidadJal == "ML")
                                 {
-                                    articulo.PrecioJaladera = ((Convert.ToDecimal(articulo.ADNPosicionJaladera == "H"? articulo.Ancho : articulo.Alto) / 1000) * (articulo.PrecioListaJaladera ?? 0));
+                                    articulo.PrecioJaladera = ((Convert.ToDecimal((int) (articulo.ADNPosicionJaladera == "H"? articulo.Ancho : articulo.Alto)) / 1000) * (articulo.PrecioListaJaladera ?? 0));
                                     articulo.DescuentoJaladera = articulo.PrecioJaladera * descJaladera;
                                 }
                                 else

@@ -1948,25 +1948,30 @@
                     var alcb = $("#alto").data("kendoNumericTextBox").value();
                     var ancb = $("#ancho").data("kendoNumericTextBox").value();
 
+                    var ajTipo = document.getElementById("CodigoADNInterno").value.substring(0, 2);
+                    var ajCheck = $.inArray(ajTipo, ["AJ", "AR"]) > -1;
+                    var ajAlto = ajCheck > -1 && ajTipo != "AR" ? [0, 0] : [altoMin, altoMax];
+                    var ajAncho = ajCheck > -1 ? [0, 0] : [anchoMin, anchoMax];
+
                     $("#altoContn").empty();
                     $("#altoContn").append('<input id="alto" type="number" style="width:90px" />');
                     $("#alto").width(90).kendoNumericTextBox({
-                        value: document.getElementById("CodigoADNInterno").value.substring(0, 2) == "AJ" ? 0 : alcb,
-                        min: document.getElementById("CodigoADNInterno").value.substring(0, 2) == "AJ" ? 0 : altoMin,
-                        max: document.getElementById("CodigoADNInterno").value.substring(0, 2) == "AJ" ? 0 : altoMax,
+                        value: alcb,
+                        min: ajAlto[0],
+                        max: ajAlto[1],
                         step: incrementoMultiplo,
                         format: "#",
                         options: {
                             enabled: true
                         }
                     });
-
+                    
                     $("#anchoContn").empty();
                     $("#anchoContn").append('<input id="ancho" type="number" style="width:90px" />');
                     $("#ancho").width(90).kendoNumericTextBox({
-                        min: document.getElementById("CodigoADNInterno").value.substring(0,2) == "AJ" ? 0: anchoMin,
-                        max: document.getElementById("CodigoADNInterno").value.substring(0,2) == "AJ" ? 0: anchoMax,
-                        value: document.getElementById("CodigoADNInterno").value.substring(0,2) == "AJ" ? 0: ancb,
+                        value: ancb,
+                        min: ajAncho[0],
+                        max: ajAncho[1],
                         step: 1,
                         format: "#",
                         options: {

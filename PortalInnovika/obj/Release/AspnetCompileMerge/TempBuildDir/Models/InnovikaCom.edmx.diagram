@@ -109,6 +109,7 @@
         <AssociationConnector Association="InnovikaComModel.FK_Vendedores_Users" />
         <AssociationConnector Association="InnovikaComModel.webpages_UsersInRoles" />
         <EntityTypeShape EntityType="InnovikaComModel.TiempoRama" Width="1.5" PointX="13" PointY="21.125" />
+        <EntityTypeShape EntityType="InnovikaComModel.ArtDescuento" Width="1.5" PointX="23.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

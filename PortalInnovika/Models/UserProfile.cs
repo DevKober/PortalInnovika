@@ -23,7 +23,7 @@ namespace PortalInnovika.Models
             this.webpages_Roles = new HashSet<webpages_Roles>();
         }
 
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
         public int UserId { get; set; }
         public string UserName { get; set; }
         public string ClienteERP { get; set; }

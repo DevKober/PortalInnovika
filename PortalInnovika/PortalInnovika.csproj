@@ -210,6 +210,9 @@
     <Compile Include="Models\ArtCubrecanto.cs">
       <DependentUpon>InnovikaCom.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ArtDescuento.cs">
+      <DependentUpon>InnovikaCom.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ArticulosAdjunto.cs">
       <DependentUpon>InnovikaCom.tt</DependentUpon>
     </Compile>
