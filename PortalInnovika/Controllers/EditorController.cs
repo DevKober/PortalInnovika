@@ -1920,7 +1920,7 @@ namespace PortalInnovika.Controllers
                         i.DescuentoPrincipal = i.PrecioPrincipal * (i.DescuentoLineal / 100);
                         i.DescuentoJaladera = i.PrecioListaJaladera * (Convert.ToDecimal(porcent) / 100);
                         i.PrecioJaladera = i.PrecioListaJaladera - i.DescuentoJaladera;
-                        i.DescuentoVidrio = i.PrecioListaVidrio * (Convert.ToDecimal(porcent) / 100);
+                        i.DescuentoVidrio = i.PrecioVidrio * (Convert.ToDecimal(porcent) / 100);
                         //i.DescuentoServicios = i.PrecioListaServicios * (Convert.ToDecimal(porcent)) / 100;
 
                         //DETERMINA SI LA JALADERA ES ML O PZA Y CALCULA EL PRECIO CORRECTO

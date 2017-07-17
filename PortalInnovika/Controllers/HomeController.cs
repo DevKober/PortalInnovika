@@ -372,18 +372,13 @@ namespace PortalInnovika.Controllers
             
             var cteIntelisis = db_intelisis.Ctes.FirstOrDefault(i => i.Cliente.Trim() == user.ClienteERP.Trim());
             var formaEnvio = "";
-            if (cteIntelisis.FormaEnvio.Trim() == "NINGUNO")
-            {
-                //formaEnvio = "SIN FLETERA ASIGNADA";
-                formaEnvio = "NINGUNO";
-            }
-            else
-            {
-                formaEnvio = cteIntelisis.FormaEnvio.Trim();
-            }
+            
+            formaEnvio = cteIntelisis.FormaEnvio.Trim() == "NINGUNO" ? "NINGUNO" : cteIntelisis.FormaEnvio.Trim();
+            
             var fletera = (from i in db.Fleteras
                             where i.Nombre.Trim() == formaEnvio
                             select i).FirstOrDefault();
+            
             var ciudad = (from i in db.CatalogoCiudades
                             where i.Descripcion.Trim() == cteIntelisis.Descripcion3.Trim()
                             select i).FirstOrDefault();
@@ -1138,7 +1133,7 @@ namespace PortalInnovika.Controllers
                                 articulo.DescuentoPrincipal = articulo.PrecioPrincipal * (articulo.DescuentoLineal / 100); //articulo.DescuentoPrincipal = articulo.PrecioPrincipal * (Convert.ToDecimal(porcent) / 100);
                                 articulo.DescuentoJaladera = articulo.PrecioListaJaladera * (Convert.ToDecimal(porcent) / 100);
                                 articulo.PrecioJaladera = articulo.PrecioListaJaladera - articulo.DescuentoJaladera;
-                                articulo.DescuentoVidrio = articulo.PrecioListaVidrio * (Convert.ToDecimal(porcent) / 100);
+                                articulo.DescuentoVidrio = articulo.PrecioVidrio * (Convert.ToDecimal(porcent) / 100);
                                 //i.DescuentoServicios = i.PrecioListaServicios * (Convert.ToDecimal(porcent)) / 100;
 
                                 //DETERMINA SI LA JALADERA ES ML O PZA Y CALCULA EL PRECIO CORRECTO
